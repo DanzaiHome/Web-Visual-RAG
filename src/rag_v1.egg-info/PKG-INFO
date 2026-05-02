@@ -1,6 +1,17 @@
-# RAG V2
+Metadata-Version: 2.4
+Name: rag-v1
+Version: 0.1.0
+Summary: A visual web RAG pipeline.
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy<3,>=1.26
+Requires-Dist: Pillow<13,>=10.0
+Requires-Dist: requests<3,>=2.31
+Requires-Dist: torch>=2.2
+Requires-Dist: transformers<5,>=4.40
+Requires-Dist: sentence-transformers<6,>=3.0
 
-相比 v1，规范了项目结构，简化了运行方式。
+# RAG V1
 
 一个面向图文问答的 Visual Web RAG 项目。
 
@@ -70,14 +81,14 @@ python -m rag_v1.apps.clip_server
 然后在另一个终端启动主流程：
 
 ```powershell
-python -m rag_v1.apps.pipeline --question "What new policies did this person announce recently?" --images pictures/trump.jpg --use-multimodal
+python -m rag_v1.apps.pipeline
 ```
 
 如果已经执行过 `pip install -e .`，也可以直接使用命令行入口：
 
 ```powershell
 rag-clip-server
-rag-pipeline --question "What new policies did this person announce recently?" --images pictures/trump.jpg --use-multimodal
+rag-pipeline
 ```
 
 ### 兼容旧方式
@@ -86,7 +97,7 @@ rag-pipeline --question "What new policies did this person announce recently?" -
 
 ```powershell
 python clip_server.py
-python pipeline.py --question "What new policies did this person announce recently?" --images pictures/trump.jpg --use-multimodal
+python pipeline.py
 ```
 
 这些脚本会自动转发到 `src/rag_v1/` 下的新实现。
@@ -162,17 +173,13 @@ from rag_v1.retrieval.chunk_extractor import ChunkExtractor
 
 ## 示例说明
 
-示例命令会读取：
+默认示例会读取：
 
 ```text
 pictures/trump.jpg
 ```
 
-并通过 CLI 参数传入问题与图片，例如：
-
-```powershell
-rag-pipeline --question "What new policies did this person announce recently?" --images pictures/trump.jpg --use-multimodal
-```
+并在 `pipeline` 的 `main()` 中执行一个演示问题。
 
 ## TODO
 

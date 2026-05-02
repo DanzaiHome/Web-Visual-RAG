@@ -1,0 +1,3 @@
+[console_scripts]
+rag-clip-server = rag_v1.apps.clip_server:main
+rag-pipeline = rag_v1.apps.pipeline:main
