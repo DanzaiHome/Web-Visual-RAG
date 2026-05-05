@@ -136,6 +136,9 @@ def compute_page_image_match_score(
         clip_client=clip_client,
     )
     embeddings_a, embeddings_b = checker.compute_embeddings()
+    if embeddings_a.size == 0 or embeddings_b.size == 0:
+        return default_score
+
     similarity_matrix = checker.compute_similarity_matrix(embeddings_a, embeddings_b)
     matches = checker.match(similarity_matrix)
 

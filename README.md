@@ -2,6 +2,9 @@
 
 相比 v1，规范了项目结构，简化了运行方式。
 
+`2026/5/5`：优化了 prompt，对 clip_server 添加了占位图片过滤功能。
+
+
 一个面向图文问答的 Visual Web RAG 项目。
 
 用户输入一张或多张图片，以及一个问题后，系统会先调用视觉语言模型生成搜索查询，再通过 Web Search 获取候选网页，结合图片相似度过滤和文本/多模态 chunk 检索，最后把聚合后的上下文交给视觉语言模型生成答案。
@@ -173,9 +176,3 @@ pictures/trump.jpg
 ```powershell
 rag-pipeline --question "What new policies did this person announce recently?" --images pictures/trump.jpg --use-multimodal
 ```
-
-## TODO
-
-1. 预先缓存图片 embedding，减少重复计算。
-2. 持续优化 Prompt 设计。
-3. 完善对网页抓取、图片下载和外部接口异常的处理。

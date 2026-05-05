@@ -15,6 +15,7 @@ from rag_v1.services.web_search import WebSearcher
 
 def retrieve_web_context(
     img_paths: Sequence[Union[str, Path]],
+    question: str,
     query: str,
     top_k: int = 5,
     candidate_k: int = 20,
@@ -27,6 +28,7 @@ def retrieve_web_context(
     current_time = datetime.now().astimezone().isoformat(timespec="seconds")
     freshness = choose_search_freshness(
         img_paths=img_paths,
+        question=question,
         query=query,
         current_time=current_time,
     )
@@ -124,6 +126,7 @@ def answer_with_rag(
     print(f"\nquery:\n{query}\n")
     retrieved_docs = retrieve_web_context(
         img_paths=img_paths,
+        question=question,
         query=query,
         top_k=top_k,
         candidate_k=candidate_k,

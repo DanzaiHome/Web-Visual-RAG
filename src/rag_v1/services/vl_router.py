@@ -145,10 +145,15 @@ def generate_search_query(
 
 def choose_search_freshness(
     img_paths: Sequence[Union[str, Path]],
+    question: str,
     query: str,
     current_time: str,
 ) -> str:
-    prompt = PROMPT_FRESHNESS.format(query=query, current_time=current_time)
+    prompt = PROMPT_FRESHNESS.format(
+        question=question,
+        query=query,
+        current_time=current_time,
+    )
     freshness = call_api(prompt=prompt, img_paths=img_paths, temperature=0.0).strip()
 
     if freshness in VALID_FRESHNESS_VALUES:

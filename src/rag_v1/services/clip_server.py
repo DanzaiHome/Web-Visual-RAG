@@ -63,6 +63,11 @@ class ClipEmbeddingService:
         return Image.open(image_address).convert("RGB")
 
     @staticmethod
+    def _is_valid_image(image: Image.Image) -> bool:
+        width, height = image.size
+        return width > 1 and height > 1
+
+    @staticmethod
     def _maybe_project_features(features: torch.Tensor, projection: Any = None) -> torch.Tensor:
         if projection is None:
             return features
@@ -103,7 +108,23 @@ class ClipEmbeddingService:
         if not image_addresses:
             raise ValueError("images must not be empty")
 
-        images = [self.load_image(address) for address in image_addresses]
+        images: List[Image.Image] = []
+        for address in image_addresses:
+            image = self.load_image(address)
+            if not self._is_valid_image(image):
+                LOGGER.warning(
+                    "Skipping invalid image for CLIP embedding: %s (size=%sx%s)",
+                    address,
+                    image.size[0],
+                    image.size[1],
+                )
+                continue
+            images.append(image)
+
+        if not images:
+            LOGGER.warning("All images were invalid for CLIP embedding; returning no embeddings")
+            return []
+
         inputs = self.processor(images=images, return_tensors="pt", padding=True)
         inputs = {key: value.to(self.device) for key, value in inputs.items()}
 

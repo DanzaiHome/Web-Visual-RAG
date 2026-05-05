@@ -15,7 +15,7 @@ def _get_int_env(name: str, default: int) -> int:
 
 @dataclass(frozen=True)
 class BochaConfig:
-    api_key: str = os.getenv("BOCHA_API_KEY", "sk-6622e8a14d4c4169858cae132cb4b6ca")
+    api_key: str = os.getenv("BOCHA_API_KEY", "sk-XXX")
     api_url: str = os.getenv("BOCHA_API_URL", "https://api.bocha.cn/v1/web-search")
     timeout: int = _get_int_env("BOCHA_TIMEOUT", 20)
 
@@ -24,7 +24,7 @@ class BochaConfig:
 class ChatAPIConfig:
     api_key: str = os.getenv(
         "CHAT_API_KEY",
-        os.getenv("DASHSCOPE_API_KEY", "sk-d2e3e0a96dd941eb92555a105a93eab9"),
+        os.getenv("DASHSCOPE_API_KEY", "sk-XXX"),
     )
     api_base: str = os.getenv(
         "CHAT_API_BASE",
