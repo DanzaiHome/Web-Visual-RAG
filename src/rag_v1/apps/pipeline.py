@@ -3,6 +3,7 @@ import time
 from pathlib import Path
 from typing import Sequence
 
+from rag_v1.config import PROJECT_ROOT
 from rag_v1.pipeline.rag_pipeline import answer_with_rag
 from rag_v1.timing import TimingStats, set_active_timing
 
@@ -72,8 +73,22 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def _resolve_image_path(image: str) -> Path:
+    image_path = Path(image).expanduser()
+    candidates = [image_path]
+    if not image_path.is_absolute():
+        candidates.append(PROJECT_ROOT / image_path)
+
+    for candidate in candidates:
+        resolved_path = candidate.resolve()
+        if resolved_path.exists():
+            return resolved_path
+
+    return image_path.resolve()
+
+
 def _resolve_image_paths(images: Sequence[str]) -> list[Path]:
-    resolved_paths = [Path(image).expanduser().resolve() for image in images]
+    resolved_paths = [_resolve_image_path(image) for image in images]
     missing_paths = [str(path) for path in resolved_paths if not path.exists()]
     if missing_paths:
         missing_display = ", ".join(missing_paths)

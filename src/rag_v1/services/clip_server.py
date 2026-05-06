@@ -110,6 +110,11 @@ class ClipEmbeddingService:
     def _normalize_features(features: torch.Tensor) -> torch.Tensor:
         return features / features.norm(dim=-1, keepdim=True).clamp_min(1e-12)
 
+    @staticmethod
+    def _is_valid_image(image: Image.Image) -> bool:
+        width, height = image.size
+        return width > 1 and height > 1
+
     def embed_images(self, image_addresses: Sequence[str]) -> List[List[float]]:
         if not image_addresses:
             raise ValueError("images must not be empty")
