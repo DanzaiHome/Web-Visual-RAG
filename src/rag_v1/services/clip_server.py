@@ -3,6 +3,7 @@ from __future__ import annotations
 import base64
 import json
 import logging
+import os
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from io import BytesIO
 from pathlib import Path
@@ -12,9 +13,14 @@ from urllib.parse import urlparse
 import requests
 import torch
 from PIL import Image
-from transformers import CLIPModel, CLIPProcessor
 
 from rag_v1.config import CLIP_SERVER_CONFIG
+
+
+if CLIP_SERVER_CONFIG.hf_endpoint:
+    os.environ["HF_ENDPOINT"] = CLIP_SERVER_CONFIG.hf_endpoint
+
+from transformers import CLIPModel, CLIPProcessor
 
 
 LOGGER = logging.getLogger("clip_server")
@@ -103,6 +109,11 @@ class ClipEmbeddingService:
     @staticmethod
     def _normalize_features(features: torch.Tensor) -> torch.Tensor:
         return features / features.norm(dim=-1, keepdim=True).clamp_min(1e-12)
+
+    @staticmethod
+    def _is_valid_image(image: Image.Image) -> bool:
+        width, height = image.size
+        return width > 1 and height > 1
 
     def embed_images(self, image_addresses: Sequence[str]) -> List[List[float]]:
         if not image_addresses:
@@ -224,6 +235,7 @@ def create_handler(service: ClipEmbeddingService) -> type[BaseHTTPRequestHandler
 
 def main() -> None:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+    LOGGER.info("Using Hugging Face endpoint: %s", os.environ.get("HF_ENDPOINT", "default"))
     service = ClipEmbeddingService(
         model_id=CLIP_SERVER_CONFIG.model_id,
         local_model_dir=CLIP_SERVER_CONFIG.local_model_dir,

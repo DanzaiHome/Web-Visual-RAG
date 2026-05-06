@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.cache/
+.test_tmp/
+logs/
+models/
+*.egg-info/
+.env
+/rag_v1/

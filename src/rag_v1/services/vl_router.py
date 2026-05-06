@@ -1,5 +1,6 @@
 import base64
 import json
+import re
 import time
 from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Union
@@ -14,6 +15,38 @@ PROMPT_QUERY = prompts.web_prompt_en
 PROMPT_ANSWER = prompts.answer_prompt_en
 PROMPT_FRESHNESS = prompts.freshness_prompt_en
 VALID_FRESHNESS_VALUES = {"oneDay", "oneWeek", "oneMonth", "oneYear", "noLimit"}
+CURRENT_FACTOID_TERMS = (
+    "最近",
+    "最新",
+    "当前",
+    "今日",
+    "今天",
+    "昨天",
+    "最近一场",
+    "最终比分",
+    "得分",
+    "last",
+    "latest",
+    "most recent",
+    "current",
+    "today",
+    "yesterday",
+    "final score",
+    "result",
+)
+SPORT_RESULT_TERMS = (
+    "比分",
+    "得分",
+    "比赛",
+    "正式比赛",
+    "final score",
+    "score",
+    "result",
+    "game",
+    "match",
+)
+PRICE_TERMS = ("价格", "股价", "报价", "price", "stock", "quote")
+RELEASE_TERMS = ("发布", "发行", "release", "released", "launch")
 
 oai_config = {
     "apikey": CHAT_API_CONFIG.api_key,
@@ -26,6 +59,68 @@ oai_config = {
 }
 
 api_session = requests.Session()
+
+
+def _contains_any(text: str, terms: Sequence[str]) -> bool:
+    lowered = text.lower()
+    return any(term.lower() in lowered for term in terms)
+
+
+def _query_contains_cjk(query: str) -> bool:
+    return any("\u4e00" <= char <= "\u9fff" for char in query)
+
+
+def _append_missing_terms(query: str, terms: Sequence[str]) -> str:
+    augmented = query.strip()
+    lowered = augmented.lower()
+    missing_terms = [term for term in terms if term.lower() not in lowered]
+    if missing_terms:
+        augmented = f"{augmented} {' '.join(missing_terms)}".strip()
+    return augmented
+
+
+def _normalize_query_spacing(query: str) -> str:
+    if _query_contains_cjk(query) and not re.search(r"[A-Za-z]", query):
+        return re.sub(r"(?<=[\u4e00-\u9fff])\s+(?=[\u4e00-\u9fff])", "", query)
+    return query
+
+
+def _augment_current_factoid_query(query: str, question: str) -> str:
+    stripped_query = query.strip()
+    if not stripped_query:
+        return stripped_query
+
+    combined_text = f"{question} {stripped_query}"
+    if not _contains_any(combined_text, CURRENT_FACTOID_TERMS):
+        return stripped_query
+
+    use_chinese_terms = _query_contains_cjk(stripped_query)
+    if _contains_any(combined_text, SPORT_RESULT_TERMS):
+        terms = (
+            ("最近一场", "已结束", "最终比分", "赛程", "结果", "战报")
+            if use_chinese_terms
+            else ("latest", "completed", "final score", "schedule", "results", "box score")
+        )
+        return _normalize_query_spacing(_append_missing_terms(stripped_query, terms))
+
+    if _contains_any(combined_text, PRICE_TERMS):
+        terms = (
+            ("当前", "价格", "官方", "行情", "报价")
+            if use_chinese_terms
+            else ("current", "price", "quote", "market data", "official")
+        )
+        return _normalize_query_spacing(_append_missing_terms(stripped_query, terms))
+
+    if _contains_any(combined_text, RELEASE_TERMS):
+        terms = (
+            ("最新", "发布", "官方", "日期")
+            if use_chinese_terms
+            else ("latest", "release", "official", "date")
+        )
+        return _normalize_query_spacing(_append_missing_terms(stripped_query, terms))
+
+    terms = ("最新", "官方") if use_chinese_terms else ("latest", "official")
+    return _normalize_query_spacing(_append_missing_terms(stripped_query, terms))
 
 
 def _encode_image(image_path: Union[str, Path]) -> str:
@@ -140,7 +235,8 @@ def generate_search_query(
     question: str,
 ) -> str:
     prompt = PROMPT_QUERY.format(question=question)
-    return call_api(prompt=prompt, img_paths=img_paths, temperature=0.1)
+    query = call_api(prompt=prompt, img_paths=img_paths, temperature=0.1)
+    return _augment_current_factoid_query(query=query, question=question)
 
 
 def choose_search_freshness(

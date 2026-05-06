@@ -13,6 +13,13 @@ def _get_int_env(name: str, default: int) -> int:
     return int(value)
 
 
+def _get_bool_env(name: str, default: bool) -> bool:
+    value = os.getenv(name)
+    if value is None or value == "":
+        return default
+    return value.strip().lower() in {"1", "true", "yes", "on"}
+
+
 @dataclass(frozen=True)
 class BochaConfig:
     api_key: str = os.getenv("BOCHA_API_KEY", "sk-XXX")
@@ -43,6 +50,11 @@ class ClipServerConfig:
     port: int = _get_int_env("CLIP_SERVER_PORT", 8001)
     request_timeout: int = _get_int_env("CLIP_SERVER_REQUEST_TIMEOUT", 120)
     model_id: str = os.getenv("CLIP_MODEL_ID", "openai/clip-vit-base-patch32")
+    hf_endpoint: str = (
+        os.getenv("CLIP_HF_ENDPOINT")
+        or os.getenv("HF_ENDPOINT")
+        or "https://hf-mirror.com"
+    )
     local_model_dir: Path = Path(
         os.getenv(
             "CLIP_LOCAL_MODEL_DIR",
@@ -56,7 +68,24 @@ class ClipServerConfig:
         return f"http://{self.host}:{self.port}"
 
 
+@dataclass(frozen=True)
+class WebFetchConfig:
+    enabled: bool = _get_bool_env("WEB_FETCH_ENABLED", True)
+    timeout: int = _get_int_env("WEB_FETCH_TIMEOUT", 18)
+    max_retries: int = _get_int_env("WEB_FETCH_MAX_RETRIES", 2)
+    cache_ttl_seconds: int = _get_int_env("WEB_FETCH_CACHE_TTL_SECONDS", 604800)
+    max_bytes: int = _get_int_env("WEB_FETCH_MAX_BYTES", 2_500_000)
+    min_text_chars: int = _get_int_env("WEB_FETCH_MIN_TEXT_CHARS", 300)
+    cache_dir: Path = Path(
+        os.getenv(
+            "WEB_FETCH_CACHE_DIR",
+            str(PROJECT_ROOT / ".cache" / "web_pages"),
+        )
+    )
+
+
 BOCHA_CONFIG = BochaConfig()
 CHAT_API_CONFIG = ChatAPIConfig()
 CLIP_SERVER_CONFIG = ClipServerConfig()
+WEB_FETCH_CONFIG = WebFetchConfig()
 IMAGE_MATCH_THRESHOLD = float(os.getenv("IMAGE_MATCH_THRESHOLD", "0.5"))
