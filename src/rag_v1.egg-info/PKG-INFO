@@ -11,7 +11,12 @@ Requires-Dist: torch>=2.2
 Requires-Dist: transformers<5,>=4.40
 Requires-Dist: sentence-transformers<6,>=3.0
 
-# RAG V1
+# RAG V2
+
+相比 v1，规范了项目结构，简化了运行方式。
+
+`2026/5/5`：优化了 prompt，对 clip_server 添加了占位图片过滤功能。
+
 
 一个面向图文问答的 Visual Web RAG 项目。
 
@@ -81,14 +86,14 @@ python -m rag_v1.apps.clip_server
 然后在另一个终端启动主流程：
 
 ```powershell
-python -m rag_v1.apps.pipeline
+python -m rag_v1.apps.pipeline --question "What new policies did this person announce recently?" --images pictures/trump.jpg --use-multimodal
 ```
 
 如果已经执行过 `pip install -e .`，也可以直接使用命令行入口：
 
 ```powershell
 rag-clip-server
-rag-pipeline
+rag-pipeline --question "What new policies did this person announce recently?" --images pictures/trump.jpg --use-multimodal
 ```
 
 ### 兼容旧方式
@@ -97,7 +102,7 @@ rag-pipeline
 
 ```powershell
 python clip_server.py
-python pipeline.py
+python pipeline.py --question "What new policies did this person announce recently?" --images pictures/trump.jpg --use-multimodal
 ```
 
 这些脚本会自动转发到 `src/rag_v1/` 下的新实现。
@@ -173,16 +178,14 @@ from rag_v1.retrieval.chunk_extractor import ChunkExtractor
 
 ## 示例说明
 
-默认示例会读取：
+示例命令会读取：
 
 ```text
 pictures/trump.jpg
 ```
 
-并在 `pipeline` 的 `main()` 中执行一个演示问题。
+并通过 CLI 参数传入问题与图片，例如：
 
-## TODO
-
-1. 预先缓存图片 embedding，减少重复计算。
-2. 持续优化 Prompt 设计。
-3. 完善对网页抓取、图片下载和外部接口异常的处理。
+```powershell
+rag-pipeline --question "What new activities have these two people been up to lately?" --images pictures/trump.jpg pictures/Biden.jpg --use-multimodal --debug --max-sufficiency-iterations 3 --time
+```

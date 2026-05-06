@@ -4,6 +4,7 @@ from typing import Dict, List, Optional, Sequence, Tuple, Union
 import numpy as np
 
 from rag_v1.clients.clip import ClipClient
+from rag_v1.services.web_page_fetcher import is_valid_page_image_url
 
 
 class ImageChecker:
@@ -111,9 +112,39 @@ def _normalize_image_urls(image_urls: object) -> List[str]:
         return []
     if isinstance(image_urls, str):
         image_url = image_urls.strip()
-        return [image_url] if image_url else []
+        return [image_url] if is_valid_page_image_url(image_url) else []
 
-    return [str(url).strip() for url in image_urls if str(url).strip()]
+    normalized_urls: List[str] = []
+    seen = set()
+    for url in image_urls:
+        image_url = str(url or "").strip()
+        if not image_url or image_url in seen:
+            continue
+        if not is_valid_page_image_url(image_url):
+            continue
+        seen.add(image_url)
+        normalized_urls.append(image_url)
+    return normalized_urls
+
+
+def _embed_images_lenient(
+    clip_client: ClipClient,
+    image_addresses: Sequence[str],
+) -> Tuple[List[np.ndarray], List[Tuple[str, Exception]]]:
+    embeddings: List[np.ndarray] = []
+    failures: List[Tuple[str, Exception]] = []
+
+    for image_address in image_addresses:
+        try:
+            image_embedding = clip_client.embed_images([image_address])
+        except Exception as exc:
+            failures.append((image_address, exc))
+            continue
+
+        if len(image_embedding) > 0:
+            embeddings.append(image_embedding[0])
+
+    return embeddings, failures
 
 
 def compute_page_image_match_score(
@@ -130,22 +161,117 @@ def compute_page_image_match_score(
     if not prompt_images or not page_images:
         return default_score
 
-    checker = ImageChecker(
-        list_a=prompt_images,
-        list_b=page_images,
-        clip_client=clip_client,
+    clip_client = clip_client or ClipClient()
+    prompt_embeddings = clip_client.embed_images(prompt_images)
+    page_embedding_rows, _ = _embed_images_lenient(clip_client, page_images)
+    if not page_embedding_rows:
+        return default_score
+
+    page_embeddings = np.vstack(page_embedding_rows)
+    similarity_matrix = prompt_embeddings @ page_embeddings.T
+    return float(np.max(similarity_matrix))
+
+
+def _image_match_decision(match_status: str, match_score: float, threshold: float) -> str:
+    if match_status != "matched":
+        return match_status
+    if match_score >= threshold:
+        return "strong_match"
+    if match_score >= threshold * 0.7:
+        return "weak_match"
+    return "low_similarity"
+
+
+def score_docs_by_image_match(
+    web_docs: Sequence[Dict[str, object]],
+    prompt_image_paths: Sequence[Union[str, Path]],
+    threshold: float = 0.5,
+    clip_client: Optional[ClipClient] = None,
+) -> List[Dict[str, object]]:
+    if not prompt_image_paths:
+        for doc in web_docs:
+            doc["image_match_status"] = "not_requested"
+            doc["image_match_decision"] = "not_requested"
+            doc["max_image_similarity"] = 0.0
+            doc["image_match_image_count"] = 0
+            doc["image_match_failed_count"] = 0
+        return list(web_docs)
+
+    clip_client = clip_client or ClipClient()
+    scored_docs: List[Dict[str, object]] = []
+    status_counts: Dict[str, int] = {}
+    decision_counts: Dict[str, int] = {}
+    prompt_images = [str(path) for path in prompt_image_paths]
+
+    try:
+        prompt_embeddings = clip_client.embed_images(prompt_images)
+    except Exception as exc:
+        print(f"Image match unavailable: {exc}; keeping all pages as soft evidence")
+        for doc in web_docs:
+            doc["image_match_status"] = "unavailable"
+            doc["image_match_decision"] = "unavailable"
+            doc["max_image_similarity"] = 0.0
+            doc["image_match_image_count"] = 0
+            doc["image_match_failed_count"] = 0
+        return list(web_docs)
+
+    for doc in web_docs:
+        image_urls = _normalize_image_urls(doc.get("image_urls"))
+        match_status = "matched"
+        failed_count = 0
+        matched_image_count = 0
+
+        if not image_urls:
+            match_score = 0.0
+            match_status = "no_images"
+        else:
+            page_embedding_rows, failures = _embed_images_lenient(clip_client, image_urls)
+            failed_count = len(failures)
+            matched_image_count = len(page_embedding_rows)
+            if failures and page_embedding_rows:
+                print(
+                    f"Skipped {len(failures)}/{len(image_urls)} page image(s) "
+                    f"for {doc.get('url', '')}"
+                )
+
+            if not page_embedding_rows:
+                match_score = 0.0
+                match_status = "failed"
+                if failures:
+                    first_error = failures[0][1]
+                    print(
+                        f"Image match skipped for {doc.get('url', '')}: "
+                        f"all {len(failures)} page image(s) failed: {first_error}; "
+                        f"fallback score={match_score}"
+                    )
+            else:
+                page_embeddings = np.vstack(page_embedding_rows)
+                similarity_matrix = prompt_embeddings @ page_embeddings.T
+                match_score = float(np.max(similarity_matrix))
+
+        if not np.isfinite(match_score):
+            match_score = 0.0
+            match_status = "failed"
+            print(
+                f"Image match produced non-finite score for {doc.get('url', '')}; "
+                f"fallback score={match_score}"
+            )
+
+        doc["image_match_status"] = match_status
+        doc["max_image_similarity"] = match_score
+        doc["image_match_image_count"] = matched_image_count
+        doc["image_match_failed_count"] = failed_count
+        decision = _image_match_decision(match_status, match_score, threshold)
+        doc["image_match_decision"] = decision
+        status_counts[match_status] = status_counts.get(match_status, 0) + 1
+        decision_counts[decision] = decision_counts.get(decision, 0) + 1
+        scored_docs.append(doc)
+
+    print(
+        f"Image match scored {len(scored_docs)}/{len(web_docs)} pages "
+        f"(threshold={threshold}, statuses={status_counts}, decisions={decision_counts})"
     )
-    embeddings_a, embeddings_b = checker.compute_embeddings()
-    if embeddings_a.size == 0 or embeddings_b.size == 0:
-        return default_score
-
-    similarity_matrix = checker.compute_similarity_matrix(embeddings_a, embeddings_b)
-    matches = checker.match(similarity_matrix)
-
-    if not matches:
-        return default_score
-
-    return max(score for _, _, score in matches)
+    return scored_docs
 
 
 def filter_docs_by_image_match(
@@ -154,30 +280,17 @@ def filter_docs_by_image_match(
     threshold: float = 0.5,
     default_score: float = 1.0,
 ) -> List[Dict[str, object]]:
-    if not prompt_image_paths:
-        return list(web_docs)
-
-    clip_client = ClipClient()
+    scored_docs = score_docs_by_image_match(
+        web_docs=web_docs,
+        prompt_image_paths=prompt_image_paths,
+        threshold=threshold,
+    )
     filtered_docs: List[Dict[str, object]] = []
 
-    for doc in web_docs:
-        image_urls = _normalize_image_urls(doc.get("image_urls"))
-        try:
-            match_score = compute_page_image_match_score(
-                prompt_image_paths=prompt_image_paths,
-                page_image_urls=image_urls,
-                clip_client=clip_client,
-                default_score=default_score,
-            )
-        except Exception as exc:
-            match_score = 0.0
-            print(
-                f"Image match failed for {doc.get('url', '')}: {exc}; "
-                f"fallback score={match_score}"
-            )
-
-        doc["max_image_similarity"] = match_score
-        if match_score < threshold:
+    for doc in scored_docs:
+        match_status = str(doc.get("image_match_status") or "")
+        match_score = float(doc.get("max_image_similarity") or default_score)
+        if match_status == "matched" and match_score < threshold:
             print(
                 f"Filtered page by image similarity: score={match_score:.4f}, "
                 f"threshold={threshold:.4f}, url={doc.get('url', '')}"
@@ -187,7 +300,7 @@ def filter_docs_by_image_match(
         filtered_docs.append(doc)
 
     print(
-        f"Image match filter kept {len(filtered_docs)}/{len(web_docs)} pages "
+        f"Image match filter kept {len(filtered_docs)}/{len(scored_docs)} pages "
         f"(threshold={threshold})"
     )
     return filtered_docs
