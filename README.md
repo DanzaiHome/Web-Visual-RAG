@@ -77,23 +77,23 @@ pip install -e .
 
 ### 推荐方式
 
+建议在项目根目录运行。
+
 先启动 CLIP 服务：
 
-```powershell
-python -m rag_v1.apps.clip_server
+```bash
+rag-clip-server > "./logs/clip-server.log" 2>&1 &
+```
+
+同时，需要启动 sentence-transformer 服务：
+```bash
+rag-text-retrieval-server > "./logs/text-retrieval.log" 2>&1 &
 ```
 
 然后在另一个终端启动主流程：
 
 ```powershell
-python -m rag_v1.apps.pipeline --question "What new policies did this person announce recently?" --images pictures/trump.jpg --use-multimodal
-```
-
-如果已经执行过 `pip install -e .`，也可以直接使用命令行入口：
-
-```powershell
-rag-clip-server
-rag-pipeline --question "What new policies did this person announce recently?" --images pictures/trump.jpg --use-multimodal
+rag-pipeline --question "What new policies did this person announce recently?" --images pictures/trump.jpg --use-multimodal > "./logs/qa.log" 2>&1 &
 ```
 
 ### 兼容旧方式
@@ -188,9 +188,9 @@ pictures/trump.jpg
 并通过 CLI 参数传入问题与图片，例如：
 
 ```bash
-rag-pipeline --question "What new activities have these two people been up to lately?" --images pictures/trump.jpg pictures/Curry.jpg --use-multimodal --debug --max-sufficiency-iterations 3 --time
+rag-pipeline --question "What new activities have these two people been up to lately?" --images pictures/trump.jpg pictures/Curry.jpg --use-multimodal --debug --max-sufficiency-iterations 3 --time > "./logs/qa.log" 2>&1 &
 
-rag-pipeline --question "Who is this man?" --images pictures/mjq.jpg --use-multimodal --debug --max-sufficiency-iterations 3 --time
+rag-pipeline --question "Who is this man?" --images pictures/mjq.jpg --use-multimodal --debug --max-sufficiency-iterations 3 --time > "./logs/qa.log" 2>&1 &
 ```
 
 RAG requirement 测试：

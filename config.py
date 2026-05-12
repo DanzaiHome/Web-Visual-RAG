@@ -13,6 +13,7 @@ from rag_v1.config import (
     CLIP_SERVER_CONFIG,
     IMAGE_MATCH_THRESHOLD,
     PROJECT_ROOT,
+    TEXT_RETRIEVAL_SERVER_CONFIG,
 )
 
 

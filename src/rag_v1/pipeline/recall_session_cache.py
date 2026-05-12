@@ -11,7 +11,8 @@ from typing import Dict, List, Optional, Sequence, Union
 import numpy as np
 
 from rag_v1.clients.clip import ClipClient
-from rag_v1.config import CLIP_SERVER_CONFIG, PROJECT_ROOT
+from rag_v1.clients.text_retrieval import TextRetrievalClient
+from rag_v1.config import CLIP_SERVER_CONFIG, PROJECT_ROOT, TEXT_RETRIEVAL_SERVER_CONFIG
 from rag_v1.retrieval.chunk_extractor import ChunkExtractor
 from rag_v1.services.web_page_fetcher import is_valid_page_image_url
 from rag_v1.timing import get_active_timing
@@ -53,7 +54,7 @@ def _question_hash(question: str) -> str:
 
 
 def _text_retrieval_model_name() -> str:
-    return "all-MiniLM-L6-v2"
+    return TEXT_RETRIEVAL_SERVER_CONFIG.model_id
 
 
 @dataclass
@@ -61,6 +62,7 @@ class RecallSessionCache:
     session_path: Path
     payload: Dict[str, object]
     clip_client: ClipClient = field(default_factory=ClipClient)
+    text_retrieval_client: TextRetrievalClient = field(default_factory=TextRetrievalClient)
     dirty: bool = False
 
     @classmethod
@@ -202,8 +204,8 @@ class RecallSessionCache:
         if cached.size > 0:
             return cached
 
-        model = ChunkExtractor._get_similarity_model()
-        embedding = np.asarray(model.encode([normalized_query])[0], dtype=np.float32)
+        embedding = self.text_retrieval_client.embed_texts([normalized_query])[0]
+        embedding = np.asarray(embedding, dtype=np.float32)
         query_payload[query_key] = _vector_to_payload(embedding)
         self.mark_dirty()
         return embedding
@@ -431,8 +433,7 @@ class RecallSessionCache:
         }
 
         if chunks:
-            model = ChunkExtractor._get_similarity_model()
-            text_embeddings = model.encode(chunks)
+            text_embeddings = self.text_retrieval_client.embed_texts(chunks)
             profile["text_retrieval_chunk_embeddings"] = _matrix_to_payload(text_embeddings)
 
         if use_multimodal and chunks:

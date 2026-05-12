@@ -200,6 +200,69 @@ pictures/trump.jpg
 
 并通过 CLI 参数传入问题与图片，例如：
 
-```powershell
+```bash
 rag-pipeline --question "What new activities have these two people been up to lately?" --images pictures/trump.jpg pictures/Curry.jpg --use-multimodal --debug --max-sufficiency-iterations 3 --time
+
+rag-pipeline --question "Who is this man?" --images pictures/mjq.jpg --use-multimodal --debug --max-sufficiency-iterations 3 --time
 ```
+
+RAG requirement 测试：
+```bash
+python -m rag_v1.pipeline.rag_requirement --question "Who is this man?" --images pictures/trump.png --debug
+python -m rag_v1.pipeline.rag_requirement --question "What is 1 + 1?" --debug
+```
+
+## Text Retrieval Server Supplement
+
+This project now runs sentence-transformer text retrieval through a dedicated HTTP service, similar to the CLIP server.
+
+Default text retrieval server:
+
+```text
+http://127.0.0.1:8002
+```
+
+Model used by default:
+
+```text
+sentence-transformers/all-MiniLM-L6-v2
+```
+
+Recommended startup order:
+
+```powershell
+python -m rag_v1.apps.clip_server
+python -m rag_v1.apps.text_retrieval_server
+python -m rag_v1.apps.pipeline --question "What new policies did this person announce recently?" --images pictures/trump.jpg --use-multimodal
+```
+
+If you installed the package entry points, you can also use:
+
+```powershell
+rag-clip-server
+rag-text-retrieval-server
+rag-pipeline --question "What new policies did this person announce recently?" --images pictures/trump.jpg --use-multimodal
+```
+
+Legacy compatibility entry points are also available:
+
+```powershell
+python clip_server.py
+python text_retrieval_server.py
+python pipeline.py --question "What new policies did this person announce recently?" --images pictures/trump.jpg --use-multimodal
+```
+
+New environment variables for the text retrieval server:
+
+- `TEXT_RETRIEVAL_SERVER_HOST`: server host, default `127.0.0.1`
+- `TEXT_RETRIEVAL_SERVER_PORT`: server port, default `8002`
+- `TEXT_RETRIEVAL_SERVER_REQUEST_TIMEOUT`: client request timeout in seconds
+- `TEXT_RETRIEVAL_MODEL_ID`: sentence-transformer model id, default `sentence-transformers/all-MiniLM-L6-v2`
+- `TEXT_RETRIEVAL_HF_ENDPOINT`: optional Hugging Face mirror endpoint
+- `TEXT_RETRIEVAL_LOCAL_MODEL_DIR`: local cache directory for the text retrieval model
+- `TEXT_RETRIEVAL_BATCH_SIZE`: encode batch size used by the server
+
+Important behavior change:
+
+- Text chunk retrieval embeddings are no longer computed in-process.
+- Query embeddings and chunk embeddings for text recall now go through the text retrieval server over HTTP.

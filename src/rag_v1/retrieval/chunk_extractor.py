@@ -1,21 +1,17 @@
 import re
 import time
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Sequence, Union
+from typing import Any, Dict, List, Optional, Sequence, Union
 
 import numpy as np
 
 from rag_v1.clients.clip import ClipClient
+from rag_v1.clients.text_retrieval import TextRetrievalClient
 from rag_v1.timing import get_active_timing
-
-if TYPE_CHECKING:
-    from sentence_transformers import SentenceTransformer
-else:
-    SentenceTransformer = Any
 
 
 class ChunkExtractor:
-    _similarity_model: Optional[SentenceTransformer] = None
+    _text_retrieval_client: Optional[TextRetrievalClient] = None
 
     def __init__(
         self,
@@ -42,18 +38,10 @@ class ChunkExtractor:
         return str(document)
 
     @classmethod
-    def _get_similarity_model(cls) -> SentenceTransformer:
-        if cls._similarity_model is None:
-            try:
-                from sentence_transformers import SentenceTransformer as _SentenceTransformer
-            except ModuleNotFoundError as exc:
-                raise RuntimeError(
-                    "sentence-transformers is required for text chunk retrieval. "
-                    "Install project requirements or run inside the cv conda environment."
-                ) from exc
-
-            cls._similarity_model = _SentenceTransformer("all-MiniLM-L6-v2")
-        return cls._similarity_model
+    def _get_text_retrieval_client(cls) -> TextRetrievalClient:
+        if cls._text_retrieval_client is None:
+            cls._text_retrieval_client = TextRetrievalClient()
+        return cls._text_retrieval_client
 
     @staticmethod
     def _split_into_chunks(text: str, chunk_size: int) -> List[str]:
@@ -320,13 +308,12 @@ class ChunkExtractor:
         start_time = time.perf_counter()
         try:
             try:
-                model = self._get_similarity_model()
-            except RuntimeError as exc:
+                client = self._get_text_retrieval_client()
+                query_emb = client.embed_texts([self.question])[0]
+                chunk_embs = client.embed_texts(self.chunks)
+            except Exception as exc:
                 print(f"{exc} Falling back to lexical chunk scoring.")
                 return self._compute_lexical_text_scores()
-
-            query_emb = model.encode([self.question])[0]
-            chunk_embs = model.encode(self.chunks)
 
             return (chunk_embs @ query_emb) / (
                 np.linalg.norm(chunk_embs, axis=1) * np.linalg.norm(query_emb) + 1e-8
@@ -415,13 +402,21 @@ class ChunkExtractor:
         a: float = 0.5,
         prompt_image_embeddings: Optional[np.ndarray] = None,
         chunk_clip_text_embeddings: Optional[np.ndarray] = None,
+        query_text_embedding: Optional[np.ndarray] = None,
+        chunk_text_embeddings: Optional[np.ndarray] = None,
     ) -> List[Dict[str, Any]]:
         if a < 0 or a > 1:
             raise ValueError("a must be between 0 and 1")
         if top_n <= 0 or not self.chunks:
             return []
 
-        text_scores = self._compute_text_scores()
+        if query_text_embedding is not None and chunk_text_embeddings is not None:
+            text_scores = self._compute_text_scores_from_embeddings(
+                query_embedding=query_text_embedding,
+                chunk_embeddings=chunk_text_embeddings,
+            )
+        else:
+            text_scores = self._compute_text_scores()
         image_avg_scores = np.zeros(len(self.chunks), dtype=np.float32)
 
         if self.image_paths:

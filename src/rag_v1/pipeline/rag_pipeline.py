@@ -752,12 +752,16 @@ def _extend_chunk_candidates(
                     top_n=chunks_per_doc,
                     prompt_image_embeddings=prompt_image_embeddings,
                     chunk_clip_text_embeddings=cached_clip_text_embeddings,
+                    query_text_embedding=cached_query_text_embedding,
+                    chunk_text_embeddings=cached_text_retrieval_chunk_embeddings,
                 )
         else:
             chunk_results = extractor.retrieve_multimodal_chunks(
                 top_n=chunks_per_doc,
                 prompt_image_embeddings=prompt_image_embeddings,
                 chunk_clip_text_embeddings=cached_clip_text_embeddings,
+                query_text_embedding=cached_query_text_embedding,
+                chunk_text_embeddings=cached_text_retrieval_chunk_embeddings,
             )
 
     for chunk in chunk_results:

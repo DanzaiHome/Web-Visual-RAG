@@ -70,6 +70,33 @@ class ClipServerConfig:
 
 
 @dataclass(frozen=True)
+class TextRetrievalServerConfig:
+    host: str = os.getenv("TEXT_RETRIEVAL_SERVER_HOST", "127.0.0.1")
+    port: int = _get_int_env("TEXT_RETRIEVAL_SERVER_PORT", 8002)
+    request_timeout: int = _get_int_env("TEXT_RETRIEVAL_SERVER_REQUEST_TIMEOUT", 120)
+    model_id: str = os.getenv(
+        "TEXT_RETRIEVAL_MODEL_ID",
+        "sentence-transformers/all-MiniLM-L6-v2",
+    )
+    hf_endpoint: str = (
+        os.getenv("TEXT_RETRIEVAL_HF_ENDPOINT")
+        or os.getenv("HF_ENDPOINT")
+        or "https://hf-mirror.com"
+    )
+    local_model_dir: Path = Path(
+        os.getenv(
+            "TEXT_RETRIEVAL_LOCAL_MODEL_DIR",
+            str(PROJECT_ROOT / "models" / "all-MiniLM-L6-v2"),
+        )
+    )
+    batch_size: int = _get_int_env("TEXT_RETRIEVAL_BATCH_SIZE", 32)
+
+    @property
+    def base_url(self) -> str:
+        return f"http://{self.host}:{self.port}"
+
+
+@dataclass(frozen=True)
 class WebFetchConfig:
     enabled: bool = _get_bool_env("WEB_FETCH_ENABLED", True)
     timeout: int = _get_int_env("WEB_FETCH_TIMEOUT", 18)
@@ -88,5 +115,6 @@ class WebFetchConfig:
 BOCHA_CONFIG = BochaConfig()
 CHAT_API_CONFIG = ChatAPIConfig()
 CLIP_SERVER_CONFIG = ClipServerConfig()
+TEXT_RETRIEVAL_SERVER_CONFIG = TextRetrievalServerConfig()
 WEB_FETCH_CONFIG = WebFetchConfig()
 IMAGE_MATCH_THRESHOLD = float(os.getenv("IMAGE_MATCH_THRESHOLD", "0.5"))
