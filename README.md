@@ -187,6 +187,14 @@ pictures/trump.jpg
 
 并通过 CLI 参数传入问题与图片，例如：
 
-```powershell
+```bash
 rag-pipeline --question "What new activities have these two people been up to lately?" --images pictures/trump.jpg pictures/Curry.jpg --use-multimodal --debug --max-sufficiency-iterations 3 --time
+
+rag-pipeline --question "Who is this man?" --images pictures/mjq.jpg --use-multimodal --debug --max-sufficiency-iterations 3 --time
+```
+
+RAG requirement 测试：
+```bash
+python -m rag_v1.pipeline.rag_requirement --question "Who is this man?" --images pictures/trump.png --debug
+python -m rag_v1.pipeline.rag_requirement --question "What is 1 + 1?" --debug
 ```

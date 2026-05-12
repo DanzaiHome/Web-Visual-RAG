@@ -5,6 +5,8 @@ from typing import Dict, List, Optional, Sequence, Union
 from urllib.parse import urlsplit
 
 from rag_v1.config import IMAGE_MATCH_THRESHOLD, WEB_FETCH_CONFIG
+from rag_v1.pipeline.rag_requirement import should_use_rag
+from rag_v1.pipeline.recall_session_cache import RecallSessionCache
 from rag_v1.retrieval.chunk_extractor import ChunkExtractor
 from rag_v1.services.image_checker import score_docs_by_image_match
 from rag_v1.services.vl_router import (
@@ -16,6 +18,7 @@ from rag_v1.services.vl_router import (
 )
 from rag_v1.services.web_page_fetcher import canonicalize_url
 from rag_v1.services.web_search import WebSearcher
+from rag_v1.timing import get_active_timing
 
 
 def _canonical_url(url: object) -> str:
@@ -418,108 +421,379 @@ def retrieve_web_context(
     use_multimodal: bool = False,
     debug: bool = False,
     current_time: Optional[str] = None,
+    session_cache: Optional[RecallSessionCache] = None,
 ) -> List[Dict[str, object]]:
+    timing = get_active_timing()
+    if timing is None:
+        return _retrieve_web_context_impl(
+            img_paths=img_paths,
+            question=question,
+            query=query,
+            top_k=top_k,
+            candidate_k=candidate_k,
+            top_n_images=top_n_images,
+            chunk_size=chunk_size,
+            chunks_per_doc=chunks_per_doc,
+            use_multimodal=use_multimodal,
+            debug=debug,
+            current_time=current_time,
+            session_cache=session_cache,
+        )
+
+    with timing.scope("retrieve_web_context", label=f"retrieve_web_context[{query[:60]}]"):
+        return _retrieve_web_context_impl(
+            img_paths=img_paths,
+            question=question,
+            query=query,
+            top_k=top_k,
+            candidate_k=candidate_k,
+            top_n_images=top_n_images,
+            chunk_size=chunk_size,
+            chunks_per_doc=chunks_per_doc,
+            use_multimodal=use_multimodal,
+            debug=debug,
+            current_time=current_time,
+            session_cache=session_cache,
+        )
+
+
+def _retrieve_web_context_impl(
+    img_paths: Sequence[Union[str, Path]],
+    question: str,
+    query: str,
+    top_k: int,
+    candidate_k: int,
+    top_n_images: int,
+    chunk_size: int,
+    chunks_per_doc: int,
+    use_multimodal: bool,
+    debug: bool,
+    current_time: Optional[str],
+    session_cache: Optional[RecallSessionCache],
+) -> List[Dict[str, object]]:
+    timing = get_active_timing()
     web_searcher = WebSearcher()
     if current_time is None:
         current_time = datetime.now().astimezone().isoformat(timespec="seconds")
-    freshness = choose_search_freshness(
-        img_paths=img_paths,
-        question=question,
-        query=query,
-        current_time=current_time,
-        debug=debug,
-    )
+    if timing is not None:
+        with timing.scope("retrieve.choose_search_freshness", label="choose_search_freshness"):
+            freshness = choose_search_freshness(
+                img_paths=img_paths,
+                question=question,
+                query=query,
+                current_time=current_time,
+                debug=debug,
+            )
+    else:
+        freshness = choose_search_freshness(
+            img_paths=img_paths,
+            question=question,
+            query=query,
+            current_time=current_time,
+            debug=debug,
+        )
     if debug:
         print(f"\nSearch freshness: {freshness} (current_time={current_time})\n")
+    if session_cache is not None:
+        if timing is not None:
+            with timing.scope("retrieve.session_cache.record_query", label="record_query"):
+                session_cache.record_query(query=query, freshness=freshness)
+            with timing.scope(
+                "retrieve.session_cache.ensure_query_text_embedding",
+                label="ensure_query_text_retrieval_embedding",
+            ):
+                cached_query_text_embedding = session_cache.ensure_query_text_retrieval_embedding(query)
+            with timing.scope("retrieve.session_cache.flush", label="session_cache.flush(before_search)"):
+                session_cache.flush()
+        else:
+            session_cache.record_query(query=query, freshness=freshness)
+            cached_query_text_embedding = session_cache.ensure_query_text_retrieval_embedding(query)
+            session_cache.flush()
+    else:
+        cached_query_text_embedding = None
 
-    web_docs = web_searcher.search(
-        query=query,
-        candidate_k=candidate_k,
-        summary=True,
-        freshness=freshness,
-        top_n_images=top_n_images,
-        content_preview_len=4000,
-        debug=debug,
-    )
+    if timing is not None:
+        with timing.scope("retrieve.web_search", label="web_searcher.search"):
+            web_docs = web_searcher.search(
+                query=query,
+                candidate_k=candidate_k,
+                summary=True,
+                freshness=freshness,
+                top_n_images=top_n_images,
+                content_preview_len=4000,
+                debug=debug,
+            )
+    else:
+        web_docs = web_searcher.search(
+            query=query,
+            candidate_k=candidate_k,
+            summary=True,
+            freshness=freshness,
+            top_n_images=top_n_images,
+            content_preview_len=4000,
+            debug=debug,
+        )
     if not web_docs:
         return []
 
-    web_docs = deduplicate_web_docs(web_docs)
+    if timing is not None:
+        with timing.scope("retrieve.deduplicate_web_docs", label="deduplicate_web_docs"):
+            web_docs = deduplicate_web_docs(web_docs)
+    else:
+        web_docs = deduplicate_web_docs(web_docs)
     if not web_docs:
         return []
+    if session_cache is not None:
+        if timing is not None:
+            with timing.scope("retrieve.session_cache.register_docs", label="register_docs"):
+                session_cache.register_docs(web_docs)
+            if img_paths:
+                with timing.scope(
+                    "retrieve.session_cache.populate_page_image_embeddings",
+                    label="populate_doc_page_image_embeddings",
+                ):
+                    for doc in web_docs:
+                        session_cache.populate_doc_page_image_embeddings(doc)
+            with timing.scope("retrieve.session_cache.flush", label="session_cache.flush(after_docs)"):
+                session_cache.flush()
+        else:
+            session_cache.register_docs(web_docs)
+            if img_paths:
+                for doc in web_docs:
+                    session_cache.populate_doc_page_image_embeddings(doc)
+            session_cache.flush()
 
-    image_scored_docs = score_docs_by_image_match(
-        web_docs=web_docs,
-        prompt_image_paths=img_paths,
-        threshold=IMAGE_MATCH_THRESHOLD,
-    )
-    web_docs = select_quality_evidence_docs(
-        image_filtered_docs=image_scored_docs,
-        pre_image_filter_docs=web_docs,
-        max_docs=max(top_k * 2, top_k + 2),
-    )
+    prompt_image_embeddings = None
+    if session_cache is not None and img_paths:
+        if timing is not None:
+            with timing.scope(
+                "retrieve.session_cache.ensure_prompt_image_embeddings",
+                label="ensure_prompt_image_embeddings",
+            ):
+                prompt_image_embeddings = session_cache.ensure_prompt_image_embeddings(img_paths)
+        else:
+            prompt_image_embeddings = session_cache.ensure_prompt_image_embeddings(img_paths)
+
+    if timing is not None:
+        with timing.scope("retrieve.image_match", label="score_docs_by_image_match"):
+            image_scored_docs = score_docs_by_image_match(
+                web_docs=web_docs,
+                prompt_image_paths=img_paths,
+                threshold=IMAGE_MATCH_THRESHOLD,
+                prompt_image_embeddings=prompt_image_embeddings,
+            )
+        with timing.scope("retrieve.select_quality_evidence_docs", label="select_quality_evidence_docs"):
+            web_docs = select_quality_evidence_docs(
+                image_filtered_docs=image_scored_docs,
+                pre_image_filter_docs=web_docs,
+                max_docs=max(top_k * 2, top_k + 2),
+            )
+    else:
+        image_scored_docs = score_docs_by_image_match(
+            web_docs=web_docs,
+            prompt_image_paths=img_paths,
+            threshold=IMAGE_MATCH_THRESHOLD,
+            prompt_image_embeddings=prompt_image_embeddings,
+        )
+        web_docs = select_quality_evidence_docs(
+            image_filtered_docs=image_scored_docs,
+            pre_image_filter_docs=web_docs,
+            max_docs=max(top_k * 2, top_k + 2),
+        )
     if not web_docs:
         return []
 
     chunk_candidates: List[Dict[str, object]] = []
-    for doc in web_docs:
+    for index, doc in enumerate(web_docs, start=1):
+        doc_label = str(doc.get("name") or doc.get("url") or f"doc_{index}")[:60]
+        scope_label = f"chunk_retrieval[{index}:{doc_label}]"
+        if timing is not None:
+            with timing.scope("retrieve.doc_chunk_retrieval", label=scope_label):
+                _extend_chunk_candidates(
+                    chunk_candidates=chunk_candidates,
+                    doc=doc,
+                    doc_index=index,
+                    query=query,
+                    img_paths=img_paths,
+                    chunk_size=chunk_size,
+                    chunks_per_doc=chunks_per_doc,
+                    use_multimodal=use_multimodal,
+                    session_cache=session_cache,
+                    prompt_image_embeddings=prompt_image_embeddings,
+                    cached_query_text_embedding=cached_query_text_embedding,
+                )
+        else:
+            _extend_chunk_candidates(
+                chunk_candidates=chunk_candidates,
+                doc=doc,
+                doc_index=index,
+                query=query,
+                img_paths=img_paths,
+                chunk_size=chunk_size,
+                chunks_per_doc=chunks_per_doc,
+                use_multimodal=use_multimodal,
+                session_cache=session_cache,
+                prompt_image_embeddings=prompt_image_embeddings,
+                cached_query_text_embedding=cached_query_text_embedding,
+            )
+
+    if session_cache is not None:
+        if timing is not None:
+            with timing.scope("retrieve.session_cache.flush", label="session_cache.flush(final)"):
+                session_cache.flush()
+        else:
+            session_cache.flush()
+
+    if not chunk_candidates:
+        return []
+
+    if timing is not None:
+        with timing.scope("retrieve.rank_chunks", label="rank_chunks"):
+            ranked = sorted(chunk_candidates, key=lambda item: item["score"], reverse=True)
+    else:
+        ranked = sorted(chunk_candidates, key=lambda item: item["score"], reverse=True)
+    if debug:
+        print(f"Ranked chunks:\n{ranked}")
+    if timing is not None:
+        with timing.scope("retrieve.select_diverse_chunks", label="select_diverse_chunks"):
+            selected = _select_diverse_chunks(ranked, top_k=top_k)
+    else:
+        selected = _select_diverse_chunks(ranked, top_k=top_k)
+    if debug and len(selected) != min(top_k, len(ranked)):
+        print(f"Diversified chunks: kept {len(selected)}/{len(ranked)}")
+    return selected
+
+
+def _extend_chunk_candidates(
+    chunk_candidates: List[Dict[str, object]],
+    doc: Dict[str, object],
+    doc_index: int,
+    query: str,
+    img_paths: Sequence[Union[str, Path]],
+    chunk_size: int,
+    chunks_per_doc: int,
+    use_multimodal: bool,
+    session_cache: Optional[RecallSessionCache],
+    prompt_image_embeddings: Optional[object],
+    cached_query_text_embedding: Optional[object],
+) -> None:
+    timing = get_active_timing()
+    chunk_profile = None
+    precomputed_chunks = None
+    cached_clip_text_embeddings = None
+    cached_text_retrieval_chunk_embeddings = None
+    if session_cache is not None:
+        if timing is not None:
+            with timing.scope("retrieve.get_chunk_profile", label=f"get_chunk_profile[{doc_index}]"):
+                chunk_profile = session_cache.get_chunk_profile(
+                    doc=doc,
+                    question=query,
+                    chunk_size=chunk_size,
+                    use_multimodal=use_multimodal,
+                )
+        else:
+            chunk_profile = session_cache.get_chunk_profile(
+                doc=doc,
+                question=query,
+                chunk_size=chunk_size,
+                use_multimodal=use_multimodal,
+            )
+        precomputed_chunks = [
+            str(item.get("text") or "")
+            for item in (chunk_profile.get("chunks") or [])
+            if str(item.get("text") or "").strip()
+        ]
+        clip_payload = chunk_profile.get("clip_text_embeddings") or []
+        if clip_payload:
+            cached_clip_text_embeddings = clip_payload
+        text_payload = chunk_profile.get("text_retrieval_chunk_embeddings") or []
+        if text_payload:
+            cached_text_retrieval_chunk_embeddings = text_payload
+
+    if timing is not None:
+        with timing.scope("retrieve.chunk_extractor_init", label=f"ChunkExtractor[{doc_index}]"):
+            extractor = ChunkExtractor(
+                document=doc,
+                question=query,
+                image_paths=img_paths,
+                chunk_size=chunk_size,
+                precomputed_chunks=precomputed_chunks,
+            )
+    else:
         extractor = ChunkExtractor(
             document=doc,
             question=query,
             image_paths=img_paths,
             chunk_size=chunk_size,
+            precomputed_chunks=precomputed_chunks,
         )
 
-        if not use_multimodal:
-            chunk_results = extractor.retrieve_text_chunks(top_n=chunks_per_doc)
+    if not use_multimodal:
+        if timing is not None:
+            with timing.scope("retrieve.retrieve_text_chunks", label=f"retrieve_text_chunks[{doc_index}]"):
+                chunk_results = extractor.retrieve_text_chunks(
+                    top_n=chunks_per_doc,
+                    query_text_embedding=cached_query_text_embedding,
+                    chunk_text_embeddings=cached_text_retrieval_chunk_embeddings,
+                )
         else:
-            chunk_results = extractor.retrieve_multimodal_chunks(top_n=chunks_per_doc)
-
-        for chunk in chunk_results:
-            semantic_score = float(chunk["score"])
-            score_breakdown = _evidence_score_breakdown(semantic_score, doc)
-            chunk_candidates.append(
-                {
-                    "url": chunk.get("url", doc.get("url", "")),
-                    "canonical_url": chunk.get("canonical_url", doc.get("canonical_url", "")),
-                    "score": score_breakdown["total_score"],
-                    "semantic_score": semantic_score,
-                    "score_breakdown": score_breakdown,
-                    "text_score": float(chunk.get("text_score", chunk["score"])),
-                    "content": chunk["text"],
-                    "image_urls": chunk.get("image_urls", doc.get("image_urls", [])),
-                    "max_image_similarity": float(doc.get("max_image_similarity", 0.0)),
-                    "chunk_id": chunk["chunk_id"],
-                    "chunk_size": chunk["chunk_size"],
-                    "name": chunk.get("name", doc.get("name")),
-                    "site_name": chunk.get("site_name", doc.get("site_name")),
-                    "display_url": chunk.get("display_url", doc.get("display_url")),
-                    "date_published": doc.get("date_published"),
-                    "date_last_crawled": doc.get("date_last_crawled"),
-                    "content_source": doc.get("content_source"),
-                    "web_fetch_status": doc.get("web_fetch_status"),
-                    "web_fetch_from_cache": doc.get("web_fetch_from_cache"),
-                    "web_fetch_quality_score": doc.get("web_fetch_quality_score"),
-                    "web_fetch_content_hash": doc.get("web_fetch_content_hash"),
-                    "web_fetch_is_probable_listing": doc.get("web_fetch_is_probable_listing"),
-                    "evidence_rescue_status": doc.get("evidence_rescue_status"),
-                    "image_match_status": doc.get("image_match_status"),
-                    "image_match_decision": doc.get("image_match_decision"),
-                    "image_match_image_count": doc.get("image_match_image_count"),
-                    "image_match_failed_count": doc.get("image_match_failed_count"),
-                }
+            chunk_results = extractor.retrieve_text_chunks(
+                top_n=chunks_per_doc,
+                query_text_embedding=cached_query_text_embedding,
+                chunk_text_embeddings=cached_text_retrieval_chunk_embeddings,
+            )
+    else:
+        if timing is not None:
+            with timing.scope(
+                "retrieve.retrieve_multimodal_chunks",
+                label=f"retrieve_multimodal_chunks[{doc_index}]",
+            ):
+                chunk_results = extractor.retrieve_multimodal_chunks(
+                    top_n=chunks_per_doc,
+                    prompt_image_embeddings=prompt_image_embeddings,
+                    chunk_clip_text_embeddings=cached_clip_text_embeddings,
+                )
+        else:
+            chunk_results = extractor.retrieve_multimodal_chunks(
+                top_n=chunks_per_doc,
+                prompt_image_embeddings=prompt_image_embeddings,
+                chunk_clip_text_embeddings=cached_clip_text_embeddings,
             )
 
-    if not chunk_candidates:
-        return []
-
-    ranked = sorted(chunk_candidates, key=lambda item: item["score"], reverse=True)
-    if debug:
-        print(f"Ranked chunks:\n{ranked}")
-    selected = _select_diverse_chunks(ranked, top_k=top_k)
-    if debug and len(selected) != min(top_k, len(ranked)):
-        print(f"Diversified chunks: kept {len(selected)}/{len(ranked)}")
-    return selected
+    for chunk in chunk_results:
+        semantic_score = float(chunk["score"])
+        score_breakdown = _evidence_score_breakdown(semantic_score, doc)
+        chunk_candidates.append(
+            {
+                "url": chunk.get("url", doc.get("url", "")),
+                "canonical_url": chunk.get("canonical_url", doc.get("canonical_url", "")),
+                "score": score_breakdown["total_score"],
+                "semantic_score": semantic_score,
+                "score_breakdown": score_breakdown,
+                "text_score": float(chunk.get("text_score", chunk["score"])),
+                "content": chunk["text"],
+                "image_urls": chunk.get("image_urls", doc.get("image_urls", [])),
+                "max_image_similarity": float(doc.get("max_image_similarity", 0.0)),
+                "chunk_id": chunk["chunk_id"],
+                "chunk_size": chunk["chunk_size"],
+                "name": chunk.get("name", doc.get("name")),
+                "site_name": chunk.get("site_name", doc.get("site_name")),
+                "display_url": chunk.get("display_url", doc.get("display_url")),
+                "date_published": doc.get("date_published"),
+                "date_last_crawled": doc.get("date_last_crawled"),
+                "content_source": doc.get("content_source"),
+                "web_fetch_status": doc.get("web_fetch_status"),
+                "web_fetch_from_cache": doc.get("web_fetch_from_cache"),
+                "web_fetch_quality_score": doc.get("web_fetch_quality_score"),
+                "web_fetch_content_hash": doc.get("web_fetch_content_hash"),
+                "web_fetch_is_probable_listing": doc.get("web_fetch_is_probable_listing"),
+                "evidence_rescue_status": doc.get("evidence_rescue_status"),
+                "image_match_status": doc.get("image_match_status"),
+                "image_match_decision": doc.get("image_match_decision"),
+                "image_match_image_count": doc.get("image_match_image_count"),
+                "image_match_failed_count": doc.get("image_match_failed_count"),
+            }
+        )
 
 
 def _format_score(value: object) -> str:
@@ -704,6 +978,26 @@ def aggregate_context(
     retrieved_docs: Sequence[Dict[str, object]],
     current_time: Optional[str] = None,
 ) -> str:
+    timing = get_active_timing()
+    if timing is None:
+        return _aggregate_context_impl(
+            query=query,
+            retrieved_docs=retrieved_docs,
+            current_time=current_time,
+        )
+    with timing.scope("aggregate_context", label="aggregate_context"):
+        return _aggregate_context_impl(
+            query=query,
+            retrieved_docs=retrieved_docs,
+            current_time=current_time,
+        )
+
+
+def _aggregate_context_impl(
+    query: str,
+    retrieved_docs: Sequence[Dict[str, object]],
+    current_time: Optional[str],
+) -> str:
     sections: List[str] = []
 
     if current_time:
@@ -778,8 +1072,117 @@ def answer_with_rag(
     debug: bool = False,
     max_sufficiency_iterations: int = 3,
 ) -> str:
+    timing = get_active_timing()
+    if timing is None:
+        return _answer_with_rag_impl(
+            img_paths=img_paths,
+            question=question,
+            top_k=top_k,
+            candidate_k=candidate_k,
+            top_n_images=top_n_images,
+            chunk_size=chunk_size,
+            chunks_per_doc=chunks_per_doc,
+            use_multimodal=use_multimodal,
+            debug=debug,
+            max_sufficiency_iterations=max_sufficiency_iterations,
+        )
+    with timing.scope("answer_with_rag", label="answer_with_rag"):
+        return _answer_with_rag_impl(
+            img_paths=img_paths,
+            question=question,
+            top_k=top_k,
+            candidate_k=candidate_k,
+            top_n_images=top_n_images,
+            chunk_size=chunk_size,
+            chunks_per_doc=chunks_per_doc,
+            use_multimodal=use_multimodal,
+            debug=debug,
+            max_sufficiency_iterations=max_sufficiency_iterations,
+        )
+
+
+def _answer_with_rag_impl(
+    img_paths: Sequence[Union[str, Path]],
+    question: str,
+    top_k: int,
+    candidate_k: int,
+    top_n_images: int,
+    chunk_size: int,
+    chunks_per_doc: int,
+    use_multimodal: bool,
+    debug: bool,
+    max_sufficiency_iterations: int,
+) -> str:
+    timing = get_active_timing()
+    if timing is not None:
+        with timing.scope("pipeline.rag_decision", label="should_use_rag"):
+            rag_decision = should_use_rag(
+                question=question,
+                img_paths=img_paths,
+                debug=debug,
+            )
+    else:
+        rag_decision = should_use_rag(
+            question=question,
+            img_paths=img_paths,
+            debug=debug,
+        )
+    if not rag_decision.use_rag:
+        print("Step 1/1: Answering without web RAG...")
+        if timing is not None:
+            with timing.scope("pipeline.answer_without_rag", label="answer_question(no_rag)"):
+                return answer_question(
+                    img_paths=img_paths,
+                    question=question,
+                    context=rag_decision.answer_context,
+                    debug=debug,
+                )
+        return answer_question(
+            img_paths=img_paths,
+            question=question,
+            context=rag_decision.answer_context,
+            debug=debug,
+        )
+
+    if timing is not None:
+        with timing.scope("pipeline.create_session_cache", label="RecallSessionCache.create"):
+            session_cache = RecallSessionCache.create(
+                question=question,
+                img_paths=img_paths,
+                use_multimodal=use_multimodal,
+            )
+    else:
+        session_cache = RecallSessionCache.create(
+            question=question,
+            img_paths=img_paths,
+            use_multimodal=use_multimodal,
+        )
+    if img_paths:
+        if timing is not None:
+            with timing.scope(
+                "pipeline.ensure_prompt_image_embeddings",
+                label="session_cache.ensure_prompt_image_embeddings",
+            ):
+                session_cache.ensure_prompt_image_embeddings(img_paths)
+        else:
+            session_cache.ensure_prompt_image_embeddings(img_paths)
+    if timing is not None:
+        with timing.scope(
+            "pipeline.ensure_question_text_embedding",
+            label="session_cache.ensure_question_text_embedding",
+        ):
+            session_cache.ensure_question_text_embedding(question)
+    else:
+        session_cache.ensure_question_text_embedding(question)
+    if debug:
+        print(f"Recall session cache file: {session_cache.session_path}")
+
     print("Step 1/4: Generating initial search query...")
-    query = generate_search_query(img_paths=img_paths, question=question)
+    if timing is not None:
+        with timing.scope("pipeline.generate_search_query", label="generate_search_query"):
+            query = generate_search_query(img_paths=img_paths, question=question)
+    else:
+        query = generate_search_query(img_paths=img_paths, question=question)
     if debug:
         print(f"\nquery:\n{query}\n")
 
@@ -797,6 +1200,7 @@ def answer_with_rag(
         use_multimodal=use_multimodal,
         debug=debug,
         current_time=current_time,
+        session_cache=session_cache,
     )
     context = aggregate_context(query=query, retrieved_docs=retrieved_docs, current_time=current_time)
     if debug:
@@ -811,16 +1215,33 @@ def answer_with_rag(
         print(f"Step 3/4: Checking context sufficiency (iteration {iteration})...")
         if debug:
             print(f"\n===== Sufficiency Loop Iteration {iteration} =====")
-        raw_judgement = judge_context_sufficiency(
-            img_paths=img_paths,
-            question=question,
-            context=context,
-            debug=debug,
-        )
-        if debug:
-            print(f"Sufficiency raw response:\n{raw_judgement}\n")
+        iteration_label = f"sufficiency_iteration[{iteration}]"
+        if timing is not None:
+            with timing.scope("pipeline.sufficiency_iteration", label=iteration_label):
+                raw_judgement = judge_context_sufficiency(
+                    img_paths=img_paths,
+                    question=question,
+                    context=context,
+                    debug=debug,
+                )
+                if debug:
+                    print(f"Sufficiency raw response:\n{raw_judgement}\n")
 
-        judgement_payload = extract_sufficiency_json(raw_judgement)
+                with timing.scope(
+                    "pipeline.extract_sufficiency_json",
+                    label=f"extract_sufficiency_json[{iteration}]",
+                ):
+                    judgement_payload = extract_sufficiency_json(raw_judgement)
+        else:
+            raw_judgement = judge_context_sufficiency(
+                img_paths=img_paths,
+                question=question,
+                context=context,
+                debug=debug,
+            )
+            if debug:
+                print(f"Sufficiency raw response:\n{raw_judgement}\n")
+            judgement_payload = extract_sufficiency_json(raw_judgement)
         if judgement_payload is None:
             consecutive_parse_failures += 1
             if debug:
@@ -865,6 +1286,7 @@ def answer_with_rag(
             use_multimodal=use_multimodal,
             debug=debug,
             current_time=current_time,
+            session_cache=session_cache,
         )
         additional_context = aggregate_context(
             query=addition,
@@ -887,7 +1309,20 @@ def answer_with_rag(
     if exhausted_sufficiency_iterations:
         print("Reached maximum sufficiency iterations. Proceeding to final answer.")
 
+    if timing is not None:
+        with timing.scope("pipeline.flush_session_cache", label="session_cache.flush(before_answer)"):
+            session_cache.flush()
+    else:
+        session_cache.flush()
     print("Step 4/4: Generating final answer...")
+    if timing is not None:
+        with timing.scope("pipeline.answer_question", label="answer_question(final)"):
+            return answer_question(
+                img_paths=img_paths,
+                question=question,
+                context=context,
+                debug=debug,
+            )
     return answer_question(
         img_paths=img_paths,
         question=question,

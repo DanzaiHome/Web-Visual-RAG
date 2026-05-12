@@ -13,14 +13,27 @@ Requires-Dist: sentence-transformers<6,>=3.0
 
 # RAG V2
 
-相比 v1，规范了项目结构，简化了运行方式。
+## 2026.5.6 update xzh
 
-`2026/5/5`：优化了 prompt，对 clip_server 添加了占位图片过滤功能。
+这次更新重点把系统从“搜索摘要 RAG”推进到“网页证据 RAG”：
 
+- Web Search 现在主要用于发现候选 URL，系统会继续抓取真实网页正文、抽取标题/发布时间/页面图片并做缓存。
+- 新增网页质量评分、canonical URL 去重、listing 页面识别和低质量内容降权。
+- 图片匹配从硬过滤改为软评分：强匹配会加分，弱匹配或无图不会直接误杀高质量文本证据。
+- chunk 检索加入综合 evidence score，融合语义相似度、网页质量、图片相似度、来源可信度、freshness 和 listing penalty。
+- 增强中英文 chunk 切分，改善中文长文本、英文段落和异常换行网页的召回效果。
+- Prompt 更新：搜索 query、freshness 判断和最终回答更强调“最新/最近/当前”问题的时间证据，不在证据不足时强行断言。
+- CLIP server 更新：过滤无效图片 URL，减少字体、脚本、favicon 等非图片资源导致的 embedding 请求失败。
+- 新增单元测试覆盖网页抓取、图片软评分、chunk 切分、context 聚合和 temporal prompt 行为。
 
 一个面向图文问答的 Visual Web RAG 项目。
 
 用户输入一张或多张图片，以及一个问题后，系统会先调用视觉语言模型生成搜索查询，再通过 Web Search 获取候选网页，结合图片相似度过滤和文本/多模态 chunk 检索，最后把聚合后的上下文交给视觉语言模型生成答案。
+
+## 2026.5.6 update hxz
+
+- 引入参数 time、debug.
+- 引入循环检索和自我验证，以应对单次搜索无法获取全部消息的复杂情况.
 
 ## 项目结构
 
@@ -119,7 +132,8 @@ python pipeline.py --question "What new policies did this person announce recent
 8. 当 `use_multimodal=False` 时，仅进行文本相似度召回。
 9. 当 `use_multimodal=True` 时，会额外计算图片与 chunk 文本的 CLIP 相似度，并与文本分数融合。
 10. 聚合 top-k chunk 作为上下文。
-11. `vl_router.answer_question(...)` 结合图片、问题和上下文生成最终答案。
+11. 模型判断当前 context 是否足够回答问题；如果不够，重新生成 query，回到 `4` 继续检索。如果信息足够或者超出循环限制，进入下一步。
+12. `vl_router.answer_question(...)` 结合图片、问题和上下文生成最终答案。
 
 ## CLIP Server
 
@@ -187,5 +201,5 @@ pictures/trump.jpg
 并通过 CLI 参数传入问题与图片，例如：
 
 ```powershell
-rag-pipeline --question "What new activities have these two people been up to lately?" --images pictures/trump.jpg pictures/Biden.jpg --use-multimodal --debug --max-sufficiency-iterations 3 --time
+rag-pipeline --question "What new activities have these two people been up to lately?" --images pictures/trump.jpg pictures/Curry.jpg --use-multimodal --debug --max-sufficiency-iterations 3 --time
 ```

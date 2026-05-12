@@ -4,6 +4,7 @@ from typing import Dict, List, Optional, Sequence, Tuple, Union
 import numpy as np
 
 from rag_v1.clients.clip import ClipClient
+from rag_v1.timing import get_active_timing
 from rag_v1.services.web_page_fetcher import is_valid_page_image_url
 
 
@@ -147,6 +148,16 @@ def _embed_images_lenient(
     return embeddings, failures
 
 
+def _coerce_embedding_matrix(values: object) -> np.ndarray:
+    if values is None:
+        return np.zeros((0, 0), dtype=np.float32)
+    if isinstance(values, np.ndarray):
+        return values.astype(np.float32, copy=False)
+    if not values:
+        return np.zeros((0, 0), dtype=np.float32)
+    return np.asarray(values, dtype=np.float32)
+
+
 def compute_page_image_match_score(
     prompt_image_paths: Sequence[Union[str, Path]],
     page_image_urls: Sequence[str],
@@ -187,7 +198,35 @@ def score_docs_by_image_match(
     prompt_image_paths: Sequence[Union[str, Path]],
     threshold: float = 0.5,
     clip_client: Optional[ClipClient] = None,
+    prompt_image_embeddings: Optional[np.ndarray] = None,
 ) -> List[Dict[str, object]]:
+    timing = get_active_timing()
+    if timing is not None:
+        with timing.scope("image_match.score_docs", label=f"score_docs_by_image_match[{len(web_docs)}]"):
+            return _score_docs_by_image_match_impl(
+                web_docs=web_docs,
+                prompt_image_paths=prompt_image_paths,
+                threshold=threshold,
+                clip_client=clip_client,
+                prompt_image_embeddings=prompt_image_embeddings,
+            )
+    return _score_docs_by_image_match_impl(
+        web_docs=web_docs,
+        prompt_image_paths=prompt_image_paths,
+        threshold=threshold,
+        clip_client=clip_client,
+        prompt_image_embeddings=prompt_image_embeddings,
+    )
+
+
+def _score_docs_by_image_match_impl(
+    web_docs: Sequence[Dict[str, object]],
+    prompt_image_paths: Sequence[Union[str, Path]],
+    threshold: float = 0.5,
+    clip_client: Optional[ClipClient] = None,
+    prompt_image_embeddings: Optional[np.ndarray] = None,
+) -> List[Dict[str, object]]:
+    timing = get_active_timing()
     if not prompt_image_paths:
         for doc in web_docs:
             doc["image_match_status"] = "not_requested"
@@ -204,7 +243,10 @@ def score_docs_by_image_match(
     prompt_images = [str(path) for path in prompt_image_paths]
 
     try:
-        prompt_embeddings = clip_client.embed_images(prompt_images)
+        if prompt_image_embeddings is not None:
+            prompt_embeddings = _coerce_embedding_matrix(prompt_image_embeddings)
+        else:
+            prompt_embeddings = clip_client.embed_images(prompt_images)
     except Exception as exc:
         print(f"Image match unavailable: {exc}; keeping all pages as soft evidence")
         for doc in web_docs:
@@ -216,62 +258,110 @@ def score_docs_by_image_match(
         return list(web_docs)
 
     for doc in web_docs:
-        image_urls = _normalize_image_urls(doc.get("image_urls"))
-        match_status = "matched"
-        failed_count = 0
-        matched_image_count = 0
-
-        if not image_urls:
-            match_score = 0.0
-            match_status = "no_images"
-        else:
-            page_embedding_rows, failures = _embed_images_lenient(clip_client, image_urls)
-            failed_count = len(failures)
-            matched_image_count = len(page_embedding_rows)
-            if failures and page_embedding_rows:
-                print(
-                    f"Skipped {len(failures)}/{len(image_urls)} page image(s) "
-                    f"for {doc.get('url', '')}"
+        if timing is not None:
+            doc_label = str(doc.get("url") or doc.get("name") or "doc")[:60]
+            with timing.scope("image_match.score_doc", label=f"image_match[{doc_label}]"):
+                _score_single_doc(
+                    doc=doc,
+                    prompt_embeddings=prompt_embeddings,
+                    threshold=threshold,
+                    clip_client=clip_client,
+                    scored_docs=scored_docs,
+                    status_counts=status_counts,
+                    decision_counts=decision_counts,
                 )
-
-            if not page_embedding_rows:
-                match_score = 0.0
-                match_status = "failed"
-                if failures:
-                    first_error = failures[0][1]
-                    print(
-                        f"Image match skipped for {doc.get('url', '')}: "
-                        f"all {len(failures)} page image(s) failed: {first_error}; "
-                        f"fallback score={match_score}"
-                    )
-            else:
-                page_embeddings = np.vstack(page_embedding_rows)
-                similarity_matrix = prompt_embeddings @ page_embeddings.T
-                match_score = float(np.max(similarity_matrix))
-
-        if not np.isfinite(match_score):
-            match_score = 0.0
-            match_status = "failed"
-            print(
-                f"Image match produced non-finite score for {doc.get('url', '')}; "
-                f"fallback score={match_score}"
-            )
-
-        doc["image_match_status"] = match_status
-        doc["max_image_similarity"] = match_score
-        doc["image_match_image_count"] = matched_image_count
-        doc["image_match_failed_count"] = failed_count
-        decision = _image_match_decision(match_status, match_score, threshold)
-        doc["image_match_decision"] = decision
-        status_counts[match_status] = status_counts.get(match_status, 0) + 1
-        decision_counts[decision] = decision_counts.get(decision, 0) + 1
-        scored_docs.append(doc)
+            continue
+        _score_single_doc(
+            doc=doc,
+            prompt_embeddings=prompt_embeddings,
+            threshold=threshold,
+            clip_client=clip_client,
+            scored_docs=scored_docs,
+            status_counts=status_counts,
+            decision_counts=decision_counts,
+        )
 
     print(
         f"Image match scored {len(scored_docs)}/{len(web_docs)} pages "
         f"(threshold={threshold}, statuses={status_counts}, decisions={decision_counts})"
     )
     return scored_docs
+
+
+def _score_single_doc(
+    doc: Dict[str, object],
+    prompt_embeddings: np.ndarray,
+    threshold: float,
+    clip_client: ClipClient,
+    scored_docs: List[Dict[str, object]],
+    status_counts: Dict[str, int],
+    decision_counts: Dict[str, int],
+) -> None:
+    image_urls = _normalize_image_urls(doc.get("image_urls"))
+    match_status = "matched"
+    failed_count = 0
+    matched_image_count = 0
+
+    if not image_urls:
+        match_score = 0.0
+        match_status = "no_images"
+    else:
+        cached_page_embeddings = _coerce_embedding_matrix(doc.get("clip_page_image_embeddings"))
+        cached_page_urls = list(doc.get("clip_page_image_embedding_urls") or [])
+        cached_failed_urls = list(doc.get("clip_page_image_failed_urls") or [])
+
+        if cached_page_urls and cached_page_embeddings.shape[0] == len(cached_page_urls):
+            page_embeddings = cached_page_embeddings
+            failed_count = len(cached_failed_urls)
+            matched_image_count = len(cached_page_urls)
+            failures = [(url, RuntimeError("cached_page_image_embedding_failed")) for url in cached_failed_urls]
+        else:
+            page_embedding_rows, failures = _embed_images_lenient(clip_client, image_urls)
+            failed_count = len(failures)
+            matched_image_count = len(page_embedding_rows)
+            page_embeddings = (
+                np.vstack(page_embedding_rows)
+                if page_embedding_rows
+                else np.zeros((0, 0), dtype=np.float32)
+            )
+
+        if failures and matched_image_count:
+            print(
+                f"Skipped {len(failures)}/{len(image_urls)} page image(s) "
+                f"for {doc.get('url', '')}"
+            )
+
+        if page_embeddings.size == 0:
+            match_score = 0.0
+            match_status = "failed"
+            if failures:
+                first_error = failures[0][1]
+                print(
+                    f"Image match skipped for {doc.get('url', '')}: "
+                    f"all {len(failures)} page image(s) failed: {first_error}; "
+                    f"fallback score={match_score}"
+                )
+        else:
+            similarity_matrix = prompt_embeddings @ page_embeddings.T
+            match_score = float(np.max(similarity_matrix))
+
+    if not np.isfinite(match_score):
+        match_score = 0.0
+        match_status = "failed"
+        print(
+            f"Image match produced non-finite score for {doc.get('url', '')}; "
+            f"fallback score={match_score}"
+        )
+
+    doc["image_match_status"] = match_status
+    doc["max_image_similarity"] = match_score
+    doc["image_match_image_count"] = matched_image_count
+    doc["image_match_failed_count"] = failed_count
+    decision = _image_match_decision(match_status, match_score, threshold)
+    doc["image_match_decision"] = decision
+    status_counts[match_status] = status_counts.get(match_status, 0) + 1
+    decision_counts[decision] = decision_counts.get(decision, 0) + 1
+    scored_docs.append(doc)
 
 
 def filter_docs_by_image_match(

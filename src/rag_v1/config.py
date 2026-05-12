@@ -22,7 +22,7 @@ def _get_bool_env(name: str, default: bool) -> bool:
 
 @dataclass(frozen=True)
 class BochaConfig:
-    api_key: str = os.getenv("BOCHA_API_KEY", "sk-6622e8a14d4c4169858cae132cb4b6ca")
+    api_key: str = os.getenv("BOCHA_API_KEY", "sk-XXX")
     api_url: str = os.getenv("BOCHA_API_URL", "https://api.bocha.cn/v1/web-search")
     timeout: int = _get_int_env("BOCHA_TIMEOUT", 20)
 
@@ -31,13 +31,14 @@ class BochaConfig:
 class ChatAPIConfig:
     api_key: str = os.getenv(
         "CHAT_API_KEY",
-        os.getenv("DASHSCOPE_API_KEY", "sk-d2e3e0a96dd941eb92555a105a93eab9"),
+        os.getenv("DASHSCOPE_API_KEY", "sk-XXX"),
     )
     api_base: str = os.getenv(
         "CHAT_API_BASE",
         "https://dashscope.aliyuncs.com/compatible-mode/v1",
     )
-    model: str = os.getenv("CHAT_MODEL", "qwen3.6-plus")
+    model: str = os.getenv("CHAT_MODEL", "qwen3-vl-8b-instruct")
+    # model: str = os.getenv("CHAT_MODEL", "qwen3.6-plus")
     api_mode: str = os.getenv("CHAT_API_MODE", "chat_completions")
     max_retries: int = _get_int_env("CHAT_MAX_RETRIES", 2)
     connect_timeout: int = _get_int_env("CHAT_CONNECT_TIMEOUT", 10)

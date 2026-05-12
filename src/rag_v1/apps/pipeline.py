@@ -130,6 +130,15 @@ def main() -> None:
         web_search_api_time = timing.get_duration("web_search_api")
         api_time = chat_api_time + web_search_api_time
         clip_server_time = timing.get_duration("clip_server")
+        web_page_fetch_time = timing.get_duration("web_page_fetch")
+        text_retrieval_time = timing.get_duration("text_retrieval")
+        accounted_time = (
+            api_time
+            + clip_server_time
+            + web_page_fetch_time
+            + text_retrieval_time
+        )
+        other_time = max(0.0, total_elapsed - accounted_time)
         print("------------------------")
         print("Timing:")
         print(f"Total: {total_elapsed:.3f}s")
@@ -143,6 +152,17 @@ def main() -> None:
             f"CLIP server: {clip_server_time:.3f}s "
             f"({timing.get_count('clip_server')} calls)"
         )
+        print(
+            f"Web page fetch: {web_page_fetch_time:.3f}s "
+            f"({timing.get_count('web_page_fetch')} calls)"
+        )
+        print(
+            f"Text retrieval: {text_retrieval_time:.3f}s "
+            f"({timing.get_count('text_retrieval')} calls)"
+        )
+        print(f"Other: {other_time:.3f}s")
+        for line in timing.report_lines(total_elapsed=total_elapsed):
+            print(line)
 
 
 if __name__ == "__main__":

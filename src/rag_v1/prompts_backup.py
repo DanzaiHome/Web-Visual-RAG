@@ -72,6 +72,50 @@ You should construct the query for web retrieval based on the following requirem
 
     ** 4. Construct query: **
         Based on the information you get above, construct the query.
+
+## Examples:
+
+    **Example 1:**
+        Input:
+            image description: "The image shows the White House."
+            user question: "Who lives here?"
+        Output:
+            White House current resident
+
+    **Example 2:**
+        Input:
+            image description: "A mountain range that looks like Huangshan."
+            user question: "Where was this photo taken?"
+        Output:
+            Huangshan geographical location
+
+    **Example 3:**
+        Input:
+            image description: "A photo of a tall building."
+            user question: "What were Yuan Longping's outstanding contributions?"
+        Output:
+            Yuan Longping achievements
+
+    **Example 4:**
+        Input:
+            image description: "LeBron James wearing a Los Angeles Lakers jersey."
+            user question: "What was the final score of the most recent official game for the team this person plays for, and how many points did that team score?"
+        Output:
+            Los Angeles Lakers latest completed game final score schedule results
+
+    **Example 5:**
+        Input:
+            image description: "A public company logo on a building."
+            user question: "What is its current stock price?"
+        Output:
+            company name current stock price quote market data official
+
+    **Example 6:**
+        Input:
+            image description: "LeBron James wearing a Los Angeles Lakers jersey."
+            user question: "图中这个人所在的球队最近一场正式比赛的最终比分是多少？这支球队得了多少分？"
+        Output:
+            洛杉矶湖人 最近一场 已结束 正式比赛 最终比分 赛程 结果
 '''
 
     freshness_prompt_en = """You are choosing a web-search freshness parameter for a visual RAG pipeline. This parameter controls the time range for the network search.

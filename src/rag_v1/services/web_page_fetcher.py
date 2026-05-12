@@ -24,6 +24,7 @@ from urllib.parse import (
 import requests
 
 from rag_v1.config import PROJECT_ROOT, WEB_FETCH_CONFIG
+from rag_v1.timing import get_active_timing
 
 
 CACHE_SCHEMA_VERSION = 8
@@ -979,103 +980,109 @@ class WebPageFetcher:
         self._validate_cache_dir()
 
     def fetch(self, url: object) -> FetchedPage:
+        start_time = time.perf_counter()
         requested_url = str(url or "").strip()
         canonical_url = canonicalize_url(requested_url)
-        if not canonical_url:
-            return self._failed_page(
-                requested_url=requested_url,
-                canonical_url="",
-                status="invalid_url",
-                error="unsupported or invalid URL",
-            )
-
-        cached_page = self._read_cache(canonical_url)
-        if cached_page is not None:
-            return cached_page
-
-        max_attempts = max(1, self.max_retries + 1)
-        last_error = ""
-        for attempt in range(max_attempts):
-            response: Optional[requests.Response] = None
-            try:
-                response = self.session.get(
-                    canonical_url,
-                    headers=DEFAULT_HEADERS,
-                    timeout=(min(6, self.timeout), self.timeout),
-                    allow_redirects=True,
-                    stream=True,
+        try:
+            if not canonical_url:
+                return self._failed_page(
+                    requested_url=requested_url,
+                    canonical_url="",
+                    status="invalid_url",
+                    error="unsupported or invalid URL",
                 )
-                status_code = response.status_code
-                if status_code in {429, 500, 502, 503, 504} and attempt < max_attempts - 1:
-                    time.sleep(min(2 ** attempt, 4))
-                    continue
-                if status_code >= 400:
-                    page = self._failed_page(
-                        requested_url=requested_url,
-                        canonical_url=canonical_url,
-                        final_url=response.url,
-                        status="http_error",
-                        error=f"HTTP {status_code}",
-                        status_code=status_code,
-                        content_type=response.headers.get("Content-Type", ""),
+
+            cached_page = self._read_cache(canonical_url)
+            if cached_page is not None:
+                return cached_page
+
+            max_attempts = max(1, self.max_retries + 1)
+            last_error = ""
+            for attempt in range(max_attempts):
+                response: Optional[requests.Response] = None
+                try:
+                    response = self.session.get(
+                        canonical_url,
+                        headers=DEFAULT_HEADERS,
+                        timeout=(min(6, self.timeout), self.timeout),
+                        allow_redirects=True,
+                        stream=True,
                     )
+                    status_code = response.status_code
+                    if status_code in {429, 500, 502, 503, 504} and attempt < max_attempts - 1:
+                        time.sleep(min(2 ** attempt, 4))
+                        continue
+                    if status_code >= 400:
+                        page = self._failed_page(
+                            requested_url=requested_url,
+                            canonical_url=canonical_url,
+                            final_url=response.url,
+                            status="http_error",
+                            error=f"HTTP {status_code}",
+                            status_code=status_code,
+                            content_type=response.headers.get("Content-Type", ""),
+                        )
+                        self._write_cache(canonical_url, page)
+                        return page
+
+                    content_type = response.headers.get("Content-Type", "")
+                    if not self._is_supported_content_type(content_type):
+                        page = self._failed_page(
+                            requested_url=requested_url,
+                            canonical_url=canonical_url,
+                            final_url=response.url,
+                            status="unsupported_content_type",
+                            error=f"unsupported content type: {content_type}",
+                            status_code=status_code,
+                            content_type=content_type,
+                        )
+                        self._write_cache(canonical_url, page)
+                        return page
+
+                    body = self._read_limited_response(response)
+                    decoded = self._decode_response(response, body)
+                    if self._is_plain_text(content_type):
+                        page = extract_text_document(
+                            requested_url=requested_url,
+                            final_url=response.url,
+                            text=decoded,
+                            content_type=content_type,
+                            status_code=status_code,
+                        )
+                    else:
+                        page = extract_html_document(
+                            requested_url=requested_url,
+                            final_url=response.url,
+                            html=decoded,
+                            content_type=content_type,
+                            status_code=status_code,
+                        )
+
+                    if page.ok and len(page.text) < self.min_text_chars:
+                        page.fetch_status = "short_content"
                     self._write_cache(canonical_url, page)
                     return page
+                except (requests.Timeout, requests.ConnectionError, requests.RequestException) as exc:
+                    last_error = str(exc)
+                    if attempt < max_attempts - 1:
+                        time.sleep(min(2 ** attempt, 4))
+                        continue
+                finally:
+                    if response is not None:
+                        response.close()
 
-                content_type = response.headers.get("Content-Type", "")
-                if not self._is_supported_content_type(content_type):
-                    page = self._failed_page(
-                        requested_url=requested_url,
-                        canonical_url=canonical_url,
-                        final_url=response.url,
-                        status="unsupported_content_type",
-                        error=f"unsupported content type: {content_type}",
-                        status_code=status_code,
-                        content_type=content_type,
-                    )
-                    self._write_cache(canonical_url, page)
-                    return page
-
-                body = self._read_limited_response(response)
-                decoded = self._decode_response(response, body)
-                if self._is_plain_text(content_type):
-                    page = extract_text_document(
-                        requested_url=requested_url,
-                        final_url=response.url,
-                        text=decoded,
-                        content_type=content_type,
-                        status_code=status_code,
-                    )
-                else:
-                    page = extract_html_document(
-                        requested_url=requested_url,
-                        final_url=response.url,
-                        html=decoded,
-                        content_type=content_type,
-                        status_code=status_code,
-                    )
-
-                if page.ok and len(page.text) < self.min_text_chars:
-                    page.fetch_status = "short_content"
-                self._write_cache(canonical_url, page)
-                return page
-            except (requests.Timeout, requests.ConnectionError, requests.RequestException) as exc:
-                last_error = str(exc)
-                if attempt < max_attempts - 1:
-                    time.sleep(min(2 ** attempt, 4))
-                    continue
-            finally:
-                if response is not None:
-                    response.close()
-
-        page = self._failed_page(
-            requested_url=requested_url,
-            canonical_url=canonical_url,
-            status="request_failed",
-            error=last_error or "request failed",
-        )
-        self._write_cache(canonical_url, page)
-        return page
+            page = self._failed_page(
+                requested_url=requested_url,
+                canonical_url=canonical_url,
+                status="request_failed",
+                error=last_error or "request failed",
+            )
+            self._write_cache(canonical_url, page)
+            return page
+        finally:
+            timing = get_active_timing()
+            if timing is not None:
+                timing.add("web_page_fetch", time.perf_counter() - start_time)
 
     def _validate_cache_dir(self) -> None:
         project_root = PROJECT_ROOT.resolve()

@@ -1,10 +1,12 @@
 import re
+import time
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Dict, List, Optional, Sequence, Union
 
 import numpy as np
 
 from rag_v1.clients.clip import ClipClient
+from rag_v1.timing import get_active_timing
 
 if TYPE_CHECKING:
     from sentence_transformers import SentenceTransformer
@@ -21,13 +23,17 @@ class ChunkExtractor:
         question: str,
         image_paths: Sequence[Union[str, Path]],
         chunk_size: int = 400,
+        precomputed_chunks: Optional[Sequence[str]] = None,
     ) -> None:
         self.document = document
         self.question = question
         self.image_paths = [str(path) for path in image_paths]
         self.chunk_size = chunk_size
         self.document_text = self._get_document_text(document)
-        self.chunks = self._split_into_chunks(self.document_text, chunk_size)
+        if precomputed_chunks is None:
+            self.chunks = self._split_into_chunks(self.document_text, chunk_size)
+        else:
+            self.chunks = [str(chunk) for chunk in precomputed_chunks if str(chunk).strip()]
 
     @staticmethod
     def _get_document_text(document: Union[str, Dict[str, object]]) -> str:
@@ -311,17 +317,44 @@ class ChunkExtractor:
         return result
 
     def _compute_text_scores(self) -> np.ndarray:
+        start_time = time.perf_counter()
         try:
-            model = self._get_similarity_model()
-        except RuntimeError as exc:
-            print(f"{exc} Falling back to lexical chunk scoring.")
-            return self._compute_lexical_text_scores()
+            try:
+                model = self._get_similarity_model()
+            except RuntimeError as exc:
+                print(f"{exc} Falling back to lexical chunk scoring.")
+                return self._compute_lexical_text_scores()
 
-        query_emb = model.encode([self.question])[0]
-        chunk_embs = model.encode(self.chunks)
+            query_emb = model.encode([self.question])[0]
+            chunk_embs = model.encode(self.chunks)
 
-        return (chunk_embs @ query_emb) / (
-            np.linalg.norm(chunk_embs, axis=1) * np.linalg.norm(query_emb) + 1e-8
+            return (chunk_embs @ query_emb) / (
+                np.linalg.norm(chunk_embs, axis=1) * np.linalg.norm(query_emb) + 1e-8
+            )
+        finally:
+            timing = get_active_timing()
+            if timing is not None:
+                timing.add("text_retrieval", time.perf_counter() - start_time)
+
+    def _compute_text_scores_from_embeddings(
+        self,
+        query_embedding: np.ndarray,
+        chunk_embeddings: np.ndarray,
+    ) -> np.ndarray:
+        query_vector = np.asarray(query_embedding, dtype=np.float32)
+        chunk_matrix = np.asarray(chunk_embeddings, dtype=np.float32)
+        if query_vector.size == 0 or chunk_matrix.size == 0:
+            return np.zeros(len(self.chunks), dtype=np.float32)
+
+        if chunk_matrix.ndim != 2:
+            raise ValueError("chunk_embeddings must be a 2D matrix")
+        if query_vector.ndim != 1:
+            raise ValueError("query_embedding must be a 1D vector")
+        if chunk_matrix.shape[0] != len(self.chunks):
+            raise ValueError("chunk_embeddings row count must match chunk count")
+
+        return (chunk_matrix @ query_vector) / (
+            np.linalg.norm(chunk_matrix, axis=1) * np.linalg.norm(query_vector) + 1e-8
         )
 
     @staticmethod
@@ -349,11 +382,22 @@ class ChunkExtractor:
 
         return np.array(scores, dtype=np.float32)
 
-    def retrieve_text_chunks(self, top_n: int = 3) -> List[Dict[str, Any]]:
+    def retrieve_text_chunks(
+        self,
+        top_n: int = 3,
+        query_text_embedding: Optional[np.ndarray] = None,
+        chunk_text_embeddings: Optional[np.ndarray] = None,
+    ) -> List[Dict[str, Any]]:
         if top_n <= 0 or not self.chunks:
             return []
 
-        text_scores = self._compute_text_scores()
+        if query_text_embedding is not None and chunk_text_embeddings is not None:
+            text_scores = self._compute_text_scores_from_embeddings(
+                query_embedding=query_text_embedding,
+                chunk_embeddings=chunk_text_embeddings,
+            )
+        else:
+            text_scores = self._compute_text_scores()
         order = np.argsort(-text_scores)[:top_n]
         return [
             self._build_chunk_result(
@@ -369,6 +413,8 @@ class ChunkExtractor:
         self,
         top_n: int = 3,
         a: float = 0.5,
+        prompt_image_embeddings: Optional[np.ndarray] = None,
+        chunk_clip_text_embeddings: Optional[np.ndarray] = None,
     ) -> List[Dict[str, Any]]:
         if a < 0 or a > 1:
             raise ValueError("a must be between 0 and 1")
@@ -379,10 +425,19 @@ class ChunkExtractor:
         image_avg_scores = np.zeros(len(self.chunks), dtype=np.float32)
 
         if self.image_paths:
-            clip_client = ClipClient()
-            clip_texts = [f"{self.question}\n\n{chunk}" for chunk in self.chunks]
-            text_features = clip_client.embed_texts(clip_texts)
-            image_features = clip_client.embed_images(self.image_paths)
+            if chunk_clip_text_embeddings is not None:
+                text_features = np.asarray(chunk_clip_text_embeddings, dtype=np.float32)
+            else:
+                clip_client = ClipClient()
+                clip_texts = [f"{self.question}\n\n{chunk}" for chunk in self.chunks]
+                text_features = clip_client.embed_texts(clip_texts)
+
+            if prompt_image_embeddings is not None:
+                image_features = np.asarray(prompt_image_embeddings, dtype=np.float32)
+            else:
+                clip_client = ClipClient()
+                image_features = clip_client.embed_images(self.image_paths)
+
             image_scores = text_features @ image_features.T
             image_avg_scores = image_scores.mean(axis=1)
 
