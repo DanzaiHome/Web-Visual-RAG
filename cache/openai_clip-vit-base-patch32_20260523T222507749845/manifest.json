@@ -1,0 +1,467 @@
+{
+  "session_type": "visual_rag_recall",
+  "storage_format": "manifest+npy",
+  "created_at": "2026-05-23T22:25:07+08:00",
+  "clip_model_id": "openai/clip-vit-base-patch32",
+  "text_retrieval_model_id": "sentence-transformers/all-MiniLM-L6-v2",
+  "question": "What new activities has this man been up to lately?",
+  "question_hash": "61d37520716a7876",
+  "use_multimodal": true,
+  "prompt_images": [
+    "/mnt/d/MarkdownFile/Computer_Vision/CV-project/pictures/trump.jpg"
+  ],
+  "prompt_image_embeddings_file": "prompt_image_embeddings.npy",
+  "question_clip_text_embedding_file": "question_clip_text_embedding.npy",
+  "query_text_retrieval_embeddings": {
+    "d8363355d270f714": "queries/d8363355d270f714.npy"
+  },
+  "queries": [
+    {
+      "query": "trump recent activities",
+      "freshness": "oneWeek",
+      "recorded_at": "2026-05-23T22:25:08+08:00"
+    }
+  ],
+  "docs": {
+    "https://www.nikkan-gendai.com/articles/view/money/387804": {
+      "url": "https://www.nikkan-gendai.com/articles/view/money/387804",
+      "canonical_url": "https://www.nikkan-gendai.com/articles/view/money/387804",
+      "name": "トランプ大統領「疑惑の取引」で高まる弾劾リスク…1～3月期に3600件超の証券売買判明｜日刊ゲンダイDIGITAL",
+      "site_name": "日刊ゲンダイ DIGITAL",
+      "display_url": "https://www.nikkan-gendai.com/articles/view/money/387804",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.0,
+      "date_published": "2026-05-20T06:00:00+08:00",
+      "date_last_crawled": "2026-05-20T06:00:00Z",
+      "full_content": "どこまでカネにがめついのか。米政府倫理局が14日に開示した財務資料で、トランプ米大統領が今年1~3月期に3600件超の証券取引を行っていたことが判明。米メディアが次々と「疑惑の取引」を報じている。\n取引対象には半導体大手エヌビディアやアップル、アマゾンなどビッグテックの名前がズラリ。回転ずしチェーン「くら寿司」の子会社で米国に上場している「くら寿司USA」の株も含まれていた。\n米ロイターによれば、取引総額は2億2000万~7億5000万ドル(約350億~1200億円)に上るという。米ブルームバーグは、タトル・キャピタル・マネジメントCEOのマシュー・タトル氏の「常軌を逸した取引量だ」との指摘を紹介。〈ウォール街関係者は驚愕〉と報じた。\n問題は、トランプ氏が大統領の立場を利用して利益誘導している疑いが濃厚なことだ。\n米CNBCは15日、〈トランプ大統領は、自身のSNS「トゥルース・ソーシャル」でAIソフトウエア大手のパランティアを銘柄コード付きで称賛する前、同社の株を買い漁っていた〉と報道。トランプ氏は1~3月期に24万7000~63万ドル(約4000万~1億円)のパランティア株を購入した翌月、イラン攻撃を念頭に〈パランティアは極めて優れた戦闘遂行能力を持っていることを証明した〉〈敵に聞いてみればいい〉などと投稿していた。",
+      "image_urls": [
+        "https://jmqvqzo7.user.webaccel.jp/img/article/000/387/804/3ac589f7f49cb09c7fdb29905303965d20260519105847066.jpg",
+        "https://jmqvqzo7.user.webaccel.jp/img/article/000/387/804/3ac589f7f49cb09c7fdb29905303965d20260519105847066_262_262.webp",
+        "https://jmqvqzo7.user.webaccel.jp/img/article/000/387/804/3ac589f7f49cb09c7fdb29905303965d20260519105847066_262_262.jpg"
+      ],
+      "page_image_embeddings_file": "docs/49a6c7d61e720369/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://jmqvqzo7.user.webaccel.jp/img/article/000/387/804/3ac589f7f49cb09c7fdb29905303965d20260519105847066.jpg",
+        "https://jmqvqzo7.user.webaccel.jp/img/article/000/387/804/3ac589f7f49cb09c7fdb29905303965d20260519105847066_262_262.webp",
+        "https://jmqvqzo7.user.webaccel.jp/img/article/000/387/804/3ac589f7f49cb09c7fdb29905303965d20260519105847066_262_262.jpg"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "trump recent activities",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "どこまでカネにがめついのか。米政府倫理局が14日に開示した財務資料で、トランプ米大統領が今年1~3月期に3600件超の証券取引を行っていたことが判明。米メディアが次々と「疑惑の取引」を報じている。\n\n取引対象には半導体大手エヌビディアやアップル、アマゾンなどビッグテックの名前がズラリ。回転ずしチェーン「くら寿司」の子会社で米国に上場している「くら寿司USA」の株も含まれていた。\n\n米ロイターによれば、取引総額は2億2000万~7億5000万ドル(約350億~1200億円)に上るという。米ブルームバーグは、タトル・キャピタル・マネジメントCEOのマシュー・タトル氏の「常軌を逸した取引量だ」との指摘を紹介。〈ウォール街関係者は驚愕〉と報じた。\n\n問題は、トランプ氏が大統領の立場を利用して利益誘導している疑いが濃厚なことだ。"
+            },
+            {
+              "chunk_id": 1,
+              "text": "米CNBCは15日、〈トランプ大統領は、自身のSNS「トゥルース・ソーシャル」でAIソフトウエア大手のパランティアを銘柄コード付きで称賛する前、同社の株を買い漁っていた〉と報道。トランプ氏は1~3月期に24万7000~63万ドル(約4000万~1億円)のパランティア株を購入した翌月、イラン攻撃を念頭に〈パランティアは極めて優れた戦闘遂行能力を持っていることを証明した〉〈敵に聞いてみればいい〉などと投稿していた。"
+            }
+          ],
+          "clip_text_embeddings_file": "docs/49a6c7d61e720369/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/49a6c7d61e720369/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://longportapp.cn/en/topics/40855426": {
+      "url": "https://longportapp.cn/en/topics/40855426",
+      "canonical_url": "https://longportapp.cn/en/topics/40855426",
+      "name": "$Alphabet - C(GOOG.US) Trump's highest-return stoc - LongPort",
+      "site_name": "longportapp.cn",
+      "display_url": "https://longportapp.cn/en/topics/40855426",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.5188928571428572,
+      "date_published": "2026-05-17T17:17:00+08:00",
+      "date_last_crawled": "2026-05-17T17:17:00Z",
+      "full_content": "$Alphabet - C(GOOG.US) Trump's highest-return stock can reach 157%, indeed, value investing/value speculation can't compare to drawing K-lines. But then again, he gave us a very clear direction: just hold the targets he bought without moving them. 🌹👍 $Berkshire Hathaway B(BRK.B.US) $Apple(AAPL.US)\n\nThe US Office of Government Ethics released Trump's US stock trading report, showing he conducted a staggering 3,642 securities transactions in Q1, with a total scale between $220 million and $750 million.\n\nSome of these trades were quite pivotal. He made large-scale positions in the semiconductor computing power and storage sectors, including $Sandisk(SNDK.US) , $NVIDIA(NVDA.US) , and $Broadcom(AVGO.US) .\n\nMost notably, he bought $Dell Tech(DELL.US) in February, then publicly hyped Dell in May, after which the stock price soared. He also continued to increase his holdings in $Intel(INTC.US) , a company the US government had already invested in.\n\nFinally, let's look at a chart of Trump's win rate. He absolutely struck gold, with his most profitable single trade this year already up 157%. This really puts even Warren Buffett to shame.",
+      "image_urls": [
+        "https://pub.pbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png",
+        "https://pub.pbkrs.com/cms/2025/0/8ZgMk7Y9fAEHMFhCKwjuZGgyKa9hy2dU.png",
+        "https://pub.pbkrs.com/social/badge/annualSummary2025/small_summary2025YieldHunter.png?v=7&1766496113"
+      ],
+      "page_image_embeddings_file": "docs/e909af71a51f4846/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://pub.pbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png",
+        "https://pub.pbkrs.com/cms/2025/0/8ZgMk7Y9fAEHMFhCKwjuZGgyKa9hy2dU.png",
+        "https://pub.pbkrs.com/social/badge/annualSummary2025/small_summary2025YieldHunter.png?v=7&1766496113"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "trump recent activities",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "$Alphabet - C(GOOG.US) Trump's highest-return stock can reach 157%, indeed, value investing/value speculation can't compare to drawing K-lines. But then again, he gave us a very clear direction: just hold the targets he bought without moving them. 🌹👍 $Berkshire Hathaway B(BRK.B.US) $Apple(AAPL.US)"
+            },
+            {
+              "chunk_id": 1,
+              "text": "The US Office of Government Ethics released Trump's US stock trading report, showing he conducted a staggering 3,642 securities transactions in Q1, with a total scale between $220 million and $750 million."
+            },
+            {
+              "chunk_id": 2,
+              "text": "Some of these trades were quite pivotal. He made large-scale positions in the semiconductor computing power and storage sectors, including $Sandisk(SNDK.US) , $NVIDIA(NVDA.US) , and $Broadcom(AVGO.US) ."
+            },
+            {
+              "chunk_id": 3,
+              "text": "Most notably, he bought $Dell Tech(DELL.US) in February, then publicly hyped Dell in May, after which the stock price soared. He also continued to increase his holdings in $Intel(INTC.US) , a company the US government had already invested in."
+            },
+            {
+              "chunk_id": 4,
+              "text": "Finally, let's look at a chart of Trump's win rate. He absolutely struck gold, with his most profitable single trade this year already up 157%. This really puts even Warren Buffett to shame."
+            }
+          ],
+          "clip_text_embeddings_file": "docs/e909af71a51f4846/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/e909af71a51f4846/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://spanish.news.cn/20260523/d6f9cca1b88f4cc4bf960584bc5ecf39/c.html": {
+      "url": "https://spanish.news.cn/20260523/d6f9cca1b88f4cc4bf960584bc5ecf39/c.html",
+      "canonical_url": "https://spanish.news.cn/20260523/d6f9cca1b88f4cc4bf960584bc5ecf39/c.html",
+      "name": "Trump sopesa opciones militares ante la incertidumbre sobre conversaciones con Irán",
+      "site_name": "新华网",
+      "display_url": "https://spanish.news.cn/20260523/d6f9cca1b88f4cc4bf960584bc5ecf39/c.html",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.8137714285714286,
+      "date_published": "2026-05-23T00:00:00+08:00",
+      "date_last_crawled": "2026-05-23T00:00:00Z",
+      "full_content": "Trump sopesa opciones militares ante la incertidumbre sobre conversaciones con Irán\n\nWASHINGTON, 22 may (Xinhua) -- El Gobierno del presidente estadounidense, Donald Trump, se está preparando para una nueva ronda de ataques militares contra Irán, pese a los esfuerzos diplomáticos en curso, informaron hoy medios de comunicación locales.\n\nTrump se reunió este viernes con altos cargos de seguridad nacional para abordar el futuro de la guerra con Irán, pero el encuentro concluyó sin una decisión sobre los próximos pasos, dijo a la cadena CNN una fuente familiarizada con la cita.\n\nTrump está considerando seriamente lanzar nuevos ataques contra Irán, a menos que se produzca un avance de último minuto en las negociaciones, indicó el portal Axios, citando fuentes que han hablado con el mandatario.\n\nEn declaraciones recogidas por Axios, una fuente cercana a Trump señaló que el presidente ha planteado la posibilidad de una \"decisiva\" operación militar final a gran escala, tras la cual podría declarar la victoria y poner fin a la guerra, pero no hay indicios de que haya tomado una decisión definitiva.\n\nMás tarde, el mismo viernes, Trump canceló sus planes de pasar el fin de semana en su complejo de golf de Nueva Jersey, y anunció que, en lugar de asistir a la boda de su hijo en las Bahamas, se quedará en Washington debido a lo que describió como \"circunstancias relacionadas con el Gobierno\".\n\n\"Considero importante permanecer en Washington D. C., en la Casa Blanca, durante este importante período\", escribió Trump en su red Truth Social.\n\nTambién el viernes, la cadena de televisión Al Arabiya informó en redes sociales que se espera que el borrador final de un posible acuerdo entre Estados Unidos e Irán, mediado por Pakistán, se anuncie en las próximas horas.\n\nSegún fuentes citadas por Al Arabiya, los términos clave del borrador incluyen un alto el fuego inmediato, integral e incondicional en todos los frentes, el compromiso mutuo de no atacar infraestructura militar, civil o económica, y el fin de las operaciones militares y la guerra mediática.\n\nTrascendió que las delegaciones de Qatar y Pakistán visitaron Teherán el viernes, en un intento por ayudar a poner fin a la guerra de Estados Unidos con Irán.",
+      "image_urls": [
+        "https://spanish.news.cn/20260523/d6f9cca1b88f4cc4bf960584bc5ecf39/zxcode_20260523d6f9cca1b88f4cc4bf960584bc5ecf39.jpg",
+        "https://spanish.news.cn/20260523/ec676cf132164e3eac502ac9d39dca81/20260523ec676cf132164e3eac502ac9d39dca81_25c6fd8870914f2fa05bcd466aee66a3.JPG",
+        "https://spanish.news.cn/20260523/91b4e986970d4e2a97377b07e5820bdb/2026052391b4e986970d4e2a97377b07e5820bdb_72c49cd30185420f9cf0bb5172437b54.JPG"
+      ],
+      "page_image_embeddings_file": "docs/8f64382d4aefadf3/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://spanish.news.cn/20260523/d6f9cca1b88f4cc4bf960584bc5ecf39/zxcode_20260523d6f9cca1b88f4cc4bf960584bc5ecf39.jpg",
+        "https://spanish.news.cn/20260523/ec676cf132164e3eac502ac9d39dca81/20260523ec676cf132164e3eac502ac9d39dca81_25c6fd8870914f2fa05bcd466aee66a3.JPG",
+        "https://spanish.news.cn/20260523/91b4e986970d4e2a97377b07e5820bdb/2026052391b4e986970d4e2a97377b07e5820bdb_72c49cd30185420f9cf0bb5172437b54.JPG"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "trump recent activities",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "Trump sopesa opciones militares ante la incertidumbre sobre conversaciones con Irán\n\nWASHINGTON, 22 may (Xinhua) -- El Gobierno del presidente estadounidense, Donald Trump, se está preparando para una nueva ronda de ataques militares contra Irán, pese a los esfuerzos diplomáticos en curso, informaron hoy medios de comunicación locales."
+            },
+            {
+              "chunk_id": 1,
+              "text": "Trump se reunió este viernes con altos cargos de seguridad nacional para abordar el futuro de la guerra con Irán, pero el encuentro concluyó sin una decisión sobre los próximos pasos, dijo a la cadena CNN una fuente familiarizada con la cita."
+            },
+            {
+              "chunk_id": 2,
+              "text": "Trump está considerando seriamente lanzar nuevos ataques contra Irán, a menos que se produzca un avance de último minuto en las negociaciones, indicó el portal Axios, citando fuentes que han hablado con el mandatario."
+            },
+            {
+              "chunk_id": 3,
+              "text": "En declaraciones recogidas por Axios, una fuente cercana a Trump señaló que el presidente ha planteado la posibilidad de una \"decisiva\" operación militar final a gran escala, tras la cual podría declarar la victoria y poner fin a la guerra, pero no hay indicios de que haya tomado una decisión definitiva."
+            },
+            {
+              "chunk_id": 4,
+              "text": "Más tarde, el mismo viernes, Trump canceló sus planes de pasar el fin de semana en su complejo de golf de Nueva Jersey, y anunció que, en lugar de asistir a la boda de su hijo en las Bahamas, se quedará en Washington debido a lo que describió como \"circunstancias relacionadas con el Gobierno\"."
+            },
+            {
+              "chunk_id": 5,
+              "text": "\"Considero importante permanecer en Washington D. C., en la Casa Blanca, durante este importante período\", escribió Trump en su red Truth Social.\n\nTambién el viernes, la cadena de televisión Al Arabiya informó en redes sociales que se espera que el borrador final de un posible acuerdo entre Estados Unidos e Irán, mediado por Pakistán, se anuncie en las próximas horas."
+            },
+            {
+              "chunk_id": 6,
+              "text": "Según fuentes citadas por Al Arabiya, los términos clave del borrador incluyen un alto el fuego inmediato, integral e incondicional en todos los frentes, el compromiso mutuo de no atacar infraestructura militar, civil o económica, y el fin de las operaciones militares y la guerra mediática."
+            },
+            {
+              "chunk_id": 7,
+              "text": "Trascendió que las delegaciones de Qatar y Pakistán visitaron Teherán el viernes, en un intento por ayudar a poner fin a la guerra de Estados Unidos con Irán."
+            }
+          ],
+          "clip_text_embeddings_file": "docs/8f64382d4aefadf3/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/8f64382d4aefadf3/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/c.html": {
+      "url": "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/c.html",
+      "canonical_url": "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/c.html",
+      "name": "(Multimedia) Trump sopesa opciones militares ante la incertidumbre sobre conversaciones con Irán",
+      "site_name": "新华网",
+      "display_url": "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/c.html",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.8499857142857143,
+      "date_published": "2026-05-23T00:00:00+08:00",
+      "date_last_crawled": "2026-05-23T00:00:00Z",
+      "full_content": "(Multimedia) Trump sopesa opciones militares ante la incertidumbre sobre conversaciones con Irán\n\nImagen del 1 de mayo de 2026 del presidente estadounidense, Donald Trump, caminando hacia el Jardín Sur de la Casa Blanca, en Washington D. C., Estados Unidos. (Xinhua/Li Yuanqing)\n\nWASHINGTON, 22 may (Xinhua) -- El Gobierno del presidente estadounidense, Donald Trump, se está preparando para una nueva ronda de ataques militares contra Irán, pese a los esfuerzos diplomáticos en curso, informaron hoy medios de comunicación locales.\n\nTrump se reunió este viernes con altos cargos de seguridad nacional para abordar el futuro de la guerra con Irán, pero el encuentro concluyó sin una decisión sobre los próximos pasos, dijo a la cadena CNN una fuente familiarizada con la cita.\n\nTrump está considerando seriamente lanzar nuevos ataques contra Irán, a menos que se produzca un avance de último minuto en las negociaciones, indicó el portal Axios, citando fuentes que han hablado con el mandatario.\n\nEn declaraciones recogidas por Axios, una fuente cercana a Trump señaló que el presidente ha planteado la posibilidad de una \"decisiva\" operación militar final a gran escala, tras la cual podría declarar la victoria y poner fin a la guerra, pero no hay indicios de que haya tomado una decisión definitiva.\n\nMás tarde, el mismo viernes, Trump canceló sus planes de pasar el fin de semana en su complejo de golf de Nueva Jersey, y anunció que, en lugar de asistir a la boda de su hijo en las Bahamas, se quedará en Washington debido a lo que describió como \"circunstancias relacionadas con el Gobierno\".\n\n\"Considero importante permanecer en Washington D. C., en la Casa Blanca, durante este importante período\", escribió Trump en su red Truth Social.\n\nTambién el viernes, la cadena de televisión Al Arabiya informó en redes sociales que se espera que el borrador final de un posible acuerdo entre Estados Unidos e Irán, mediado por Pakistán, se anuncie en las próximas horas.\n\nSegún fuentes citadas por Al Arabiya, los términos clave del borrador incluyen un alto el fuego inmediato, integral e incondicional en todos los frentes, el compromiso mutuo de no atacar infraestructura militar, civil o económica, y el fin de las operaciones militares y la guerra mediática.\n\nTrascendió que las delegaciones de Qatar y Pakistán visitaron Teherán el viernes, en un intento por ayudar a poner fin a la guerra de Estados Unidos con Irán.",
+      "image_urls": [
+        "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/202605231186112de2d84daab87029a4ed6c7935_XxjiseS000022_20260523_CBMFN0A001.JPG",
+        "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/zxcode_202605231186112de2d84daab87029a4ed6c7935.jpg"
+      ],
+      "page_image_embeddings_file": "docs/98994c1769583976/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/202605231186112de2d84daab87029a4ed6c7935_XxjiseS000022_20260523_CBMFN0A001.JPG",
+        "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/zxcode_202605231186112de2d84daab87029a4ed6c7935.jpg"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "trump recent activities",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "(Multimedia) Trump sopesa opciones militares ante la incertidumbre sobre conversaciones con Irán\n\nImagen del 1 de mayo de 2026 del presidente estadounidense, Donald Trump, caminando hacia el Jardín Sur de la Casa Blanca, en Washington D. C., Estados Unidos. (Xinhua/Li Yuanqing)"
+            },
+            {
+              "chunk_id": 1,
+              "text": "WASHINGTON, 22 may (Xinhua) -- El Gobierno del presidente estadounidense, Donald Trump, se está preparando para una nueva ronda de ataques militares contra Irán, pese a los esfuerzos diplomáticos en curso, informaron hoy medios de comunicación locales."
+            },
+            {
+              "chunk_id": 2,
+              "text": "Trump se reunió este viernes con altos cargos de seguridad nacional para abordar el futuro de la guerra con Irán, pero el encuentro concluyó sin una decisión sobre los próximos pasos, dijo a la cadena CNN una fuente familiarizada con la cita."
+            },
+            {
+              "chunk_id": 3,
+              "text": "Trump está considerando seriamente lanzar nuevos ataques contra Irán, a menos que se produzca un avance de último minuto en las negociaciones, indicó el portal Axios, citando fuentes que han hablado con el mandatario."
+            },
+            {
+              "chunk_id": 4,
+              "text": "En declaraciones recogidas por Axios, una fuente cercana a Trump señaló que el presidente ha planteado la posibilidad de una \"decisiva\" operación militar final a gran escala, tras la cual podría declarar la victoria y poner fin a la guerra, pero no hay indicios de que haya tomado una decisión definitiva."
+            },
+            {
+              "chunk_id": 5,
+              "text": "Más tarde, el mismo viernes, Trump canceló sus planes de pasar el fin de semana en su complejo de golf de Nueva Jersey, y anunció que, en lugar de asistir a la boda de su hijo en las Bahamas, se quedará en Washington debido a lo que describió como \"circunstancias relacionadas con el Gobierno\"."
+            },
+            {
+              "chunk_id": 6,
+              "text": "\"Considero importante permanecer en Washington D. C., en la Casa Blanca, durante este importante período\", escribió Trump en su red Truth Social.\n\nTambién el viernes, la cadena de televisión Al Arabiya informó en redes sociales que se espera que el borrador final de un posible acuerdo entre Estados Unidos e Irán, mediado por Pakistán, se anuncie en las próximas horas."
+            },
+            {
+              "chunk_id": 7,
+              "text": "Según fuentes citadas por Al Arabiya, los términos clave del borrador incluyen un alto el fuego inmediato, integral e incondicional en todos los frentes, el compromiso mutuo de no atacar infraestructura militar, civil o económica, y el fin de las operaciones militares y la guerra mediática."
+            },
+            {
+              "chunk_id": 8,
+              "text": "Trascendió que las delegaciones de Qatar y Pakistán visitaron Teherán el viernes, en un intento por ayudar a poner fin a la guerra de Estados Unidos con Irán."
+            }
+          ],
+          "clip_text_embeddings_file": "docs/98994c1769583976/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/98994c1769583976/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://french.news.cn/20260523/15b8d2a4604e414c9aa10caa996e2ad3/c.html": {
+      "url": "https://french.news.cn/20260523/15b8d2a4604e414c9aa10caa996e2ad3/c.html",
+      "canonical_url": "https://french.news.cn/20260523/15b8d2a4604e414c9aa10caa996e2ad3/c.html",
+      "name": "Trump évalue les options militaires alors que l'incertitude plane sur les négociations avec l'Iran",
+      "site_name": "新华网",
+      "display_url": "https://french.news.cn/20260523/15b8d2a4604e414c9aa10caa996e2ad3/c.html",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.9123857142857144,
+      "date_published": "2026-05-23T00:00:00+08:00",
+      "date_last_crawled": "2026-05-23T00:00:00Z",
+      "full_content": "Trump évalue les options militaires alors que l'incertitude plane sur les négociations avec l'Iran\n\nWASHINGTON, 22 mai (Xinhua) -- L'administration Trump se prépare à lancer une nouvelle série de frappes militaires contre l'Iran malgré les efforts diplomatiques en cours, ont rapporté vendredi des médias américains, citant des sources directement informées de ces préparatifs.\n\nLe président américain Donald Trump a reçu vendredi les hauts responsables de la sécurité nationale afin de discuter de la marche à suivre dans le conflit avec l'Iran, mais la réunion s'est terminée sans qu'aucune décision n'ait été prise quant à la suite des événements, a déclaré à la chaîne CNN une source proche de la réunion.\n\nSelon le site d'information Axios, qui cite vendredi des sources ayant directement parlé au président, M. Trump envisagerait sérieusement de lancer de nouvelles frappes contre l'Iran, à moins d'une avancée de dernière minute dans les négociations.\n\nOn indiquait de source proche de M. Trump que le président avait évoqué la possibilité d'une dernière opération militaire majeure \"décisive\", à l'issue de laquelle il pourrait proclamer la victoire et mettre fin à la guerre, mais rien n'indique qu'il ait pris une décision définitive, selon Axios.\n\nUn responsable américain informé des efforts diplomatiques a qualifié les négociations de \"pénibles\", les projets d'accord \"faisant l'objet d'allers-retours quotidiens\" sans grand progrès, a ajouté le site.\n\nPlus tard dans la journée, Donald Trump a annulé son projet de passer le week-end dans son complexe de golf du New Jersey et a dit qu'il ne se rendrait pas au mariage de son fils aux Bahamas, préférant rester à Washington en raison de ce qu'il a qualifié de \"circonstances liées au gouvernement et à (son) amour pour les Etats-Unis d'Amérique\".\n\n\"Je pense qu'il est important pour moi de rester à Washington, à la Maison Blanche, pendant cette période importante\", a-t-il écrit sur son réseau Truth Social.\n\nVendredi également, la chaîne saoudienne Al Arabiya a indiqué sur les réseaux sociaux que la version finale d'un éventuel accord entre les Etats-Unis et l'Iran, négocié avec la médiation du Pakistan, devrait être annoncée dans les prochaines heures.\n\nLes principales dispositions du projet prévoient un cessez-le-feu immédiat, total et inconditionnel sur tous les fronts, un engagement mutuel à ne pas prendre pour cible les infrastructures militaires, civiles ou économiques, ainsi que la fin des opérations militaires et de la guerre médiatique, a-t-elle indiqué, citant des sources.\n\nSelon certaines informations, des délégations qatarie et pakistanaise se seraient rendues à Téhéran vendredi afin de tenter de contribuer à mettre fin au conflit entre les Etats-Unis et l'Iran. Fin",
+      "image_urls": [],
+      "page_image_embeddings_file": "",
+      "page_image_embedding_urls": [],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "trump recent activities",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "Trump évalue les options militaires alors que l'incertitude plane sur les négociations avec l'Iran\n\nWASHINGTON, 22 mai (Xinhua) -- L'administration Trump se prépare à lancer une nouvelle série de frappes militaires contre l'Iran malgré les efforts diplomatiques en cours, ont rapporté vendredi des médias américains, citant des sources directement informées de ces préparatifs."
+            },
+            {
+              "chunk_id": 1,
+              "text": "Le président américain Donald Trump a reçu vendredi les hauts responsables de la sécurité nationale afin de discuter de la marche à suivre dans le conflit avec l'Iran, mais la réunion s'est terminée sans qu'aucune décision n'ait été prise quant à la suite des événements, a déclaré à la chaîne CNN une source proche de la réunion."
+            },
+            {
+              "chunk_id": 2,
+              "text": "Selon le site d'information Axios, qui cite vendredi des sources ayant directement parlé au président, M. Trump envisagerait sérieusement de lancer de nouvelles frappes contre l'Iran, à moins d'une avancée de dernière minute dans les négociations."
+            },
+            {
+              "chunk_id": 3,
+              "text": "On indiquait de source proche de M. Trump que le président avait évoqué la possibilité d'une dernière opération militaire majeure \"décisive\", à l'issue de laquelle il pourrait proclamer la victoire et mettre fin à la guerre, mais rien n'indique qu'il ait pris une décision définitive, selon Axios."
+            },
+            {
+              "chunk_id": 4,
+              "text": "Un responsable américain informé des efforts diplomatiques a qualifié les négociations de \"pénibles\", les projets d'accord \"faisant l'objet d'allers-retours quotidiens\" sans grand progrès, a ajouté le site."
+            },
+            {
+              "chunk_id": 5,
+              "text": "Plus tard dans la journée, Donald Trump a annulé son projet de passer le week-end dans son complexe de golf du New Jersey et a dit qu'il ne se rendrait pas au mariage de son fils aux Bahamas, préférant rester à Washington en raison de ce qu'il a qualifié de \"circonstances liées au gouvernement et à (son) amour pour les Etats-Unis d'Amérique\"."
+            },
+            {
+              "chunk_id": 6,
+              "text": "\"Je pense qu'il est important pour moi de rester à Washington, à la Maison Blanche, pendant cette période importante\", a-t-il écrit sur son réseau Truth Social."
+            },
+            {
+              "chunk_id": 7,
+              "text": "Vendredi également, la chaîne saoudienne Al Arabiya a indiqué sur les réseaux sociaux que la version finale d'un éventuel accord entre les Etats-Unis et l'Iran, négocié avec la médiation du Pakistan, devrait être annoncée dans les prochaines heures."
+            },
+            {
+              "chunk_id": 8,
+              "text": "Les principales dispositions du projet prévoient un cessez-le-feu immédiat, total et inconditionnel sur tous les fronts, un engagement mutuel à ne pas prendre pour cible les infrastructures militaires, civiles ou économiques, ainsi que la fin des opérations militaires et de la guerre médiatique, a-t-elle indiqué, citant des sources."
+            },
+            {
+              "chunk_id": 9,
+              "text": "Selon certaines informations, des délégations qatarie et pakistanaise se seraient rendues à Téhéran vendredi afin de tenter de contribuer à mettre fin au conflit entre les Etats-Unis et l'Iran. Fin"
+            }
+          ],
+          "clip_text_embeddings_file": "docs/32e07c7dd37e096f/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/32e07c7dd37e096f/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://www.fx678.com/C/20260523/202605230359221120.html": {
+      "url": "https://www.fx678.com/C/20260523/202605230359221120.html",
+      "canonical_url": "https://www.fx678.com/C/20260523/202605230359221120.html",
+      "name": "特朗普对股市的近期表现予以赞赏。 我目前无法获取实时股市动态及相关表态的完整背景信息，以上内容仅基于给定文本进行同义表述调整，具体相关官方表述请以权威媒体的公开报道为准。_外汇动态报道",
+      "site_name": "汇通财经",
+      "display_url": "https://www.fx678.com/C/20260523/202605230359221120.html",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "empty_content",
+      "web_fetch_quality_score": 0.0,
+      "date_published": "2026-05-23T03:59:22+08:00",
+      "date_last_crawled": "2026-05-23T03:59:22Z",
+      "full_content": "汇通财经APP讯——特朗普对股市的近期表现予以赞赏。\n我目前无法获取实时股市动态及相关表态的完整背景信息,以上内容仅基于给定文本进行同义表述调整,具体相关官方表述请以权威媒体的公开报道为准。",
+      "image_urls": [
+        "https://www.fx678.com/images/yhtpc.png",
+        "https://www.fx678.com/images/windows.png",
+        "https://www.fx678.com/images/default.jpg"
+      ],
+      "page_image_embeddings_file": "",
+      "page_image_embedding_urls": [],
+      "page_image_failed_urls": [
+        "https://www.fx678.com/images/yhtpc.png",
+        "https://www.fx678.com/images/windows.png",
+        "https://www.fx678.com/images/default.jpg"
+      ],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    },
+    "https://cryptonews.net/news/finance/32875073": {
+      "url": "https://cryptonews.net/news/finance/32875073/",
+      "canonical_url": "https://cryptonews.net/news/finance/32875073",
+      "name": "Trump discloses over 3,700 trades in first quarter, raising scrutiny",
+      "site_name": "Crypto News",
+      "display_url": "https://cryptonews.net/news/finance/32875073/",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.9996714285714287,
+      "date_published": "2026-05-18T01:36:03+08:00",
+      "date_last_crawled": "2026-05-18T01:36:03Z",
+      "full_content": "Trump discloses over 3,700 trades in first quarter, raising scrutiny\n\nA sitting president averaging roughly 40 trades per day is, to put it mildly, unusual. Donald Trump’s first-quarter financial disclosure reveals approximately 3,700 transactions, representing an estimated $220 million to $750 million in trading volume, a figure that has ethics watchdogs and market analysts reaching for their reading glasses.\n\nThe bulk of the activity centers on large-cap US equities, with a pronounced tilt toward the technology and semiconductor sectors. Nvidia, Broadcom, and Intel all appear as new positions, with multiple transactions exceeding $1 million each. At the same time, the disclosure shows major reductions in holdings of Amazon, Meta, and Microsoft through transactions ranging from $5 million to $25 million apiece.\n\nThat kind of rotation isn’t inherently suspicious. Plenty of sophisticated investors have been making similar moves. But plenty of sophisticated investors don’t also set tariff policy, negotiate trade deals with chip-manufacturing nations, or sign executive orders that can move semiconductor stocks by double digits in a single session.\n\nOne transaction stands out in particular. A $1 million to $5 million stake in Dell Technologies was initiated on February 10, prior to a presidential endorsement of the company. The timing raises the kind of questions that congressional ethics committees were theoretically designed to investigate.\n\nWhether the trades were executed by Trump personally or by advisers managing his portfolio, the disclosure doesn’t fully clarify. The filing references “President Trump or his advisers” as the decision-makers, a construction that provides just enough ambiguity to be deeply unhelpful.\n\nThe president has direct influence over export controls, tariffs on imported chips, and the allocation of CHIPS Act funding. Taking new positions in Nvidia, Broadcom, and Intel while simultaneously holding the policy levers that determine those companies’ regulatory environment is, at minimum, optically catastrophic.\n\nMembers of Congress have faced similar scrutiny for years, most notably during the controversy around stock trades by lawmakers who sat on committees overseeing the industries they were investing in. The STOCK Act of 2012 was supposed to address this by requiring timely disclosure of congressional trades. But the presidency operates under different, and in many ways looser, ethical guidelines when it comes to personal financial activity.\n\nThe sheer volume of transactions makes oversight practically difficult, too. Reviewing 3,700 trades for potential conflicts requires cross-referencing each transaction’s timing against policy announcements, executive orders, regulatory actions, and even informal presidential statements that might have moved specific stocks.\n\nThe scale of the trading, potentially up to $750 million in a single quarter, also means the transactions themselves could have market impact, particularly in less liquid names or during concentrated buying periods. A presidential disclosure showing new multi-million-dollar positions in specific companies functions as a de facto endorsement, regardless of whether it was intended as one.",
+      "image_urls": [
+        "https://cnews24.ru/uploads/a80/a8038c453fead8661cba9b139ddd3a6894ef0663.jpeg"
+      ],
+      "page_image_embeddings_file": "docs/d886f825da5569b4/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://cnews24.ru/uploads/a80/a8038c453fead8661cba9b139ddd3a6894ef0663.jpeg"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "trump recent activities",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "Trump discloses over 3,700 trades in first quarter, raising scrutiny"
+            },
+            {
+              "chunk_id": 1,
+              "text": "A sitting president averaging roughly 40 trades per day is, to put it mildly, unusual. Donald Trump’s first-quarter financial disclosure reveals approximately 3,700 transactions, representing an estimated $220 million to $750 million in trading volume, a figure that has ethics watchdogs and market analysts reaching for their reading glasses."
+            },
+            {
+              "chunk_id": 2,
+              "text": "The bulk of the activity centers on large-cap US equities, with a pronounced tilt toward the technology and semiconductor sectors. Nvidia, Broadcom, and Intel all appear as new positions, with multiple transactions exceeding $1 million each."
+            },
+            {
+              "chunk_id": 3,
+              "text": "At the same time, the disclosure shows major reductions in holdings of Amazon, Meta, and Microsoft through transactions ranging from $5 million to $25 million apiece."
+            },
+            {
+              "chunk_id": 4,
+              "text": "That kind of rotation isn’t inherently suspicious. Plenty of sophisticated investors have been making similar moves. But plenty of sophisticated investors don’t also set tariff policy, negotiate trade deals with chip-manufacturing nations, or sign executive orders that can move semiconductor stocks by double digits in a single session."
+            },
+            {
+              "chunk_id": 5,
+              "text": "One transaction stands out in particular. A $1 million to $5 million stake in Dell Technologies was initiated on February 10, prior to a presidential endorsement of the company. The timing raises the kind of questions that congressional ethics committees were theoretically designed to investigate."
+            },
+            {
+              "chunk_id": 6,
+              "text": "Whether the trades were executed by Trump personally or by advisers managing his portfolio, the disclosure doesn’t fully clarify. The filing references “President Trump or his advisers” as the decision-makers, a construction that provides just enough ambiguity to be deeply unhelpful."
+            },
+            {
+              "chunk_id": 7,
+              "text": "The president has direct influence over export controls, tariffs on imported chips, and the allocation of CHIPS Act funding. Taking new positions in Nvidia, Broadcom, and Intel while simultaneously holding the policy levers that determine those companies’ regulatory environment is, at minimum, optically catastrophic."
+            },
+            {
+              "chunk_id": 8,
+              "text": "Members of Congress have faced similar scrutiny for years, most notably during the controversy around stock trades by lawmakers who sat on committees overseeing the industries they were investing in. The STOCK Act of 2012 was supposed to address this by requiring timely disclosure of congressional trades."
+            },
+            {
+              "chunk_id": 9,
+              "text": "But the presidency operates under different, and in many ways looser, ethical guidelines when it comes to personal financial activity."
+            },
+            {
+              "chunk_id": 10,
+              "text": "The sheer volume of transactions makes oversight practically difficult, too. Reviewing 3,700 trades for potential conflicts requires cross-referencing each transaction’s timing against policy announcements, executive orders, regulatory actions, and even informal presidential statements that might have moved specific stocks."
+            },
+            {
+              "chunk_id": 11,
+              "text": "The scale of the trading, potentially up to $750 million in a single quarter, also means the transactions themselves could have market impact, particularly in less liquid names or during concentrated buying periods. A presidential disclosure showing new multi-million-dollar positions in specific companies functions as a de facto endorsement, regardless of whether it was intended as one."
+            }
+          ],
+          "clip_text_embeddings_file": "docs/d886f825da5569b4/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/d886f825da5569b4/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://focus.scol.com.cn/ygtx/202605/83258851.html": {
+      "url": "https://focus.scol.com.cn/ygtx/202605/83258851.html",
+      "canonical_url": "https://focus.scol.com.cn/ygtx/202605/83258851.html",
+      "name": "特朗普一季度进行了3600多次股票买卖丨夜观天下·漫话 缅怀！袁隆平逝世五周年，禾下乘凉梦，自有后来人 《寻味100处》成都特辑的第2集上线 《寻味100处》被我们请到四川了！ min甜，树莓在龙泉山试种成功了！ 要做熊猫玩偶界的“爱马仕”，山东小镇工厂凭啥造出最真的假熊猫？",
+      "site_name": "四川在线天下频道",
+      "display_url": "https://focus.scol.com.cn/ygtx/202605/83258851.html",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "short_content",
+      "web_fetch_quality_score": 0.1177,
+      "date_published": "2026-05-22T17:23:06+08:00",
+      "date_last_crawled": "2026-05-22T17:23:06Z",
+      "full_content": "报告显示,美国总统特朗普今年第一季度进行了3600多次股票买卖,其中包括许多直接受其决策影响的公司的股票。(新华社)漫画:黄琪\n王桃",
+      "image_urls": [
+        "https://imgcdn.scol.com.cn/media/2026/05/22/181759944744.jpg",
+        "https://imgcdn.scol.com.cn/media/2026/05/22/181800206967.jpg",
+        "https://focus.scol.com.cn/images/2013scol.jpg"
+      ],
+      "page_image_embeddings_file": "docs/d1b34469faa78d64/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://imgcdn.scol.com.cn/media/2026/05/22/181759944744.jpg",
+        "https://imgcdn.scol.com.cn/media/2026/05/22/181800206967.jpg",
+        "https://focus.scol.com.cn/images/2013scol.jpg"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    }
+  }
+}

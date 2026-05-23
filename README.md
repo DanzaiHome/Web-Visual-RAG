@@ -162,6 +162,36 @@ http://127.0.0.1:8001
 - `CLIP_LOCAL_MODEL_DIR`：本地 CLIP 模型目录
 - `CLIP_IMAGE_TIMEOUT`：CLIP server 下载远程图片时的超时
 
+## 运行参数
+
+- `--question` 必填，问题
+- `--images` 必填，一个或多个本地图片路径
+- `--top-n-images` 每个搜索结果保留的页面图片数，默认 `3`
+- `--use-multimodal` 开关，开启多模态 chunk 检索
+- `--debug` 开关，打印详细调试信息
+- `--max-sufficiency-iterations` 充分性检查和补充检索的最大迭代次数，默认 `3`
+- `--time` 开关，打印整条 pipeline 的 timing 统计
+- `--simple-time` 开关，开启 `--time` 时，简化输出
+- `--candidate-k` 搜索阶段拿多少候选网页，默认 `10`
+- `--chunks-per-doc` 每个文档最多取多少 chunks，默认 `3`
+- `--top-k` 最后保留多少 chunk 进入上下文，默认 `5`
+- `--chunk-size` 每个 chunk 大小，默认 `400`
+
+```bash
+rag-pipeline \
+    --question "What new activities has this man been up to lately?" \
+    --images pictures/trump.jpg \
+    --max-sufficiency-iterations 3 \
+    --candidate-k 10 \
+    --chunks-per-doc 3 \
+    --top-k 5 \
+    --chunk-size 400 \
+    --use-multimodal \
+    --time \
+    --simple-time \
+    > "./logs/qa.log" 2>&1 &
+```
+
 ## 导入与开发说明
 
 项目现在统一使用包导入，例如：

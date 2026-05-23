@@ -1,0 +1,1605 @@
+{
+  "session_type": "visual_rag_recall",
+  "storage_format": "manifest+npy",
+  "created_at": "2026-05-23T22:20:22+08:00",
+  "clip_model_id": "openai/clip-vit-base-patch32",
+  "text_retrieval_model_id": "sentence-transformers/all-MiniLM-L6-v2",
+  "question": "What new activities has this man been up to lately?",
+  "question_hash": "61d37520716a7876",
+  "use_multimodal": true,
+  "prompt_images": [
+    "/mnt/d/MarkdownFile/Computer_Vision/CV-project/pictures/trump.jpg"
+  ],
+  "prompt_image_embeddings_file": "prompt_image_embeddings.npy",
+  "question_clip_text_embedding_file": "question_clip_text_embedding.npy",
+  "query_text_retrieval_embeddings": {
+    "d8363355d270f714": "queries/d8363355d270f714.npy",
+    "9df85035b7b87329": "queries/9df85035b7b87329.npy",
+    "7471cb5404aa6868": "queries/7471cb5404aa6868.npy",
+    "74d7bac60783ca23": "queries/74d7bac60783ca23.npy"
+  },
+  "queries": [
+    {
+      "query": "trump recent activities",
+      "freshness": "oneWeek",
+      "recorded_at": "2026-05-23T22:20:24+08:00"
+    },
+    {
+      "query": "recent activities of Donald Trump in 2026",
+      "freshness": "oneYear",
+      "recorded_at": "2026-05-23T22:20:40+08:00"
+    },
+    {
+      "query": "recent activities of Donald Trump in May 2026",
+      "freshness": "oneWeek",
+      "recorded_at": "2026-05-23T22:21:07+08:00"
+    },
+    {
+      "query": "recent activities of Donald Trump in May 2026 including meetings, speeches, and financial disclosures",
+      "freshness": "oneWeek",
+      "recorded_at": "2026-05-23T22:21:19+08:00"
+    }
+  ],
+  "docs": {
+    "https://www.nikkan-gendai.com/articles/view/money/387804": {
+      "url": "https://www.nikkan-gendai.com/articles/view/money/387804",
+      "canonical_url": "https://www.nikkan-gendai.com/articles/view/money/387804",
+      "name": "トランプ大統領「疑惑の取引」で高まる弾劾リスク…1～3月期に3600件超の証券売買判明｜日刊ゲンダイDIGITAL",
+      "site_name": "日刊ゲンダイ DIGITAL",
+      "display_url": "https://www.nikkan-gendai.com/articles/view/money/387804",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.0,
+      "date_published": "2026-05-20T06:00:00+08:00",
+      "date_last_crawled": "2026-05-20T06:00:00Z",
+      "full_content": "どこまでカネにがめついのか。米政府倫理局が14日に開示した財務資料で、トランプ米大統領が今年1~3月期に3600件超の証券取引を行っていたことが判明。米メディアが次々と「疑惑の取引」を報じている。\n取引対象には半導体大手エヌビディアやアップル、アマゾンなどビッグテックの名前がズラリ。回転ずしチェーン「くら寿司」の子会社で米国に上場している「くら寿司USA」の株も含まれていた。\n米ロイターによれば、取引総額は2億2000万~7億5000万ドル(約350億~1200億円)に上るという。米ブルームバーグは、タトル・キャピタル・マネジメントCEOのマシュー・タトル氏の「常軌を逸した取引量だ」との指摘を紹介。〈ウォール街関係者は驚愕〉と報じた。\n問題は、トランプ氏が大統領の立場を利用して利益誘導している疑いが濃厚なことだ。\n米CNBCは15日、〈トランプ大統領は、自身のSNS「トゥルース・ソーシャル」でAIソフトウエア大手のパランティアを銘柄コード付きで称賛する前、同社の株を買い漁っていた〉と報道。トランプ氏は1~3月期に24万7000~63万ドル(約4000万~1億円)のパランティア株を購入した翌月、イラン攻撃を念頭に〈パランティアは極めて優れた戦闘遂行能力を持っていることを証明した〉〈敵に聞いてみればいい〉などと投稿していた。",
+      "image_urls": [
+        "https://jmqvqzo7.user.webaccel.jp/img/article/000/387/804/3ac589f7f49cb09c7fdb29905303965d20260519105847066.jpg",
+        "https://jmqvqzo7.user.webaccel.jp/img/article/000/387/804/3ac589f7f49cb09c7fdb29905303965d20260519105847066_262_262.webp",
+        "https://jmqvqzo7.user.webaccel.jp/img/article/000/387/804/3ac589f7f49cb09c7fdb29905303965d20260519105847066_262_262.jpg"
+      ],
+      "page_image_embeddings_file": "docs/49a6c7d61e720369/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://jmqvqzo7.user.webaccel.jp/img/article/000/387/804/3ac589f7f49cb09c7fdb29905303965d20260519105847066.jpg",
+        "https://jmqvqzo7.user.webaccel.jp/img/article/000/387/804/3ac589f7f49cb09c7fdb29905303965d20260519105847066_262_262.webp",
+        "https://jmqvqzo7.user.webaccel.jp/img/article/000/387/804/3ac589f7f49cb09c7fdb29905303965d20260519105847066_262_262.jpg"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "trump recent activities",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "どこまでカネにがめついのか。米政府倫理局が14日に開示した財務資料で、トランプ米大統領が今年1~3月期に3600件超の証券取引を行っていたことが判明。米メディアが次々と「疑惑の取引」を報じている。\n\n取引対象には半導体大手エヌビディアやアップル、アマゾンなどビッグテックの名前がズラリ。回転ずしチェーン「くら寿司」の子会社で米国に上場している「くら寿司USA」の株も含まれていた。\n\n米ロイターによれば、取引総額は2億2000万~7億5000万ドル(約350億~1200億円)に上るという。米ブルームバーグは、タトル・キャピタル・マネジメントCEOのマシュー・タトル氏の「常軌を逸した取引量だ」との指摘を紹介。〈ウォール街関係者は驚愕〉と報じた。\n\n問題は、トランプ氏が大統領の立場を利用して利益誘導している疑いが濃厚なことだ。"
+            },
+            {
+              "chunk_id": 1,
+              "text": "米CNBCは15日、〈トランプ大統領は、自身のSNS「トゥルース・ソーシャル」でAIソフトウエア大手のパランティアを銘柄コード付きで称賛する前、同社の株を買い漁っていた〉と報道。トランプ氏は1~3月期に24万7000~63万ドル(約4000万~1億円)のパランティア株を購入した翌月、イラン攻撃を念頭に〈パランティアは極めて優れた戦闘遂行能力を持っていることを証明した〉〈敵に聞いてみればいい〉などと投稿していた。"
+            }
+          ],
+          "clip_text_embeddings_file": "docs/49a6c7d61e720369/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/49a6c7d61e720369/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://longportapp.cn/en/topics/40855426": {
+      "url": "https://longportapp.cn/en/topics/40855426",
+      "canonical_url": "https://longportapp.cn/en/topics/40855426",
+      "name": "$Alphabet - C(GOOG.US) Trump's highest-return stoc - LongPort",
+      "site_name": "longportapp.cn",
+      "display_url": "https://longportapp.cn/en/topics/40855426",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.5188928571428572,
+      "date_published": "2026-05-17T17:17:00+08:00",
+      "date_last_crawled": "2026-05-17T17:17:00Z",
+      "full_content": "$Alphabet - C(GOOG.US) Trump's highest-return stock can reach 157%, indeed, value investing/value speculation can't compare to drawing K-lines. But then again, he gave us a very clear direction: just hold the targets he bought without moving them. 🌹👍 $Berkshire Hathaway B(BRK.B.US) $Apple(AAPL.US)\n\nThe US Office of Government Ethics released Trump's US stock trading report, showing he conducted a staggering 3,642 securities transactions in Q1, with a total scale between $220 million and $750 million.\n\nSome of these trades were quite pivotal. He made large-scale positions in the semiconductor computing power and storage sectors, including $Sandisk(SNDK.US) , $NVIDIA(NVDA.US) , and $Broadcom(AVGO.US) .\n\nMost notably, he bought $Dell Tech(DELL.US) in February, then publicly hyped Dell in May, after which the stock price soared. He also continued to increase his holdings in $Intel(INTC.US) , a company the US government had already invested in.\n\nFinally, let's look at a chart of Trump's win rate. He absolutely struck gold, with his most profitable single trade this year already up 157%. This really puts even Warren Buffett to shame.",
+      "image_urls": [
+        "https://pub.pbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png",
+        "https://pub.pbkrs.com/cms/2025/0/8ZgMk7Y9fAEHMFhCKwjuZGgyKa9hy2dU.png",
+        "https://pub.pbkrs.com/social/badge/annualSummary2025/small_summary2025YieldHunter.png?v=7&1766496113"
+      ],
+      "page_image_embeddings_file": "docs/e909af71a51f4846/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://pub.pbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png",
+        "https://pub.pbkrs.com/cms/2025/0/8ZgMk7Y9fAEHMFhCKwjuZGgyKa9hy2dU.png",
+        "https://pub.pbkrs.com/social/badge/annualSummary2025/small_summary2025YieldHunter.png?v=7&1766496113"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "trump recent activities",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "$Alphabet - C(GOOG.US) Trump's highest-return stock can reach 157%, indeed, value investing/value speculation can't compare to drawing K-lines. But then again, he gave us a very clear direction: just hold the targets he bought without moving them. 🌹👍 $Berkshire Hathaway B(BRK.B.US) $Apple(AAPL.US)"
+            },
+            {
+              "chunk_id": 1,
+              "text": "The US Office of Government Ethics released Trump's US stock trading report, showing he conducted a staggering 3,642 securities transactions in Q1, with a total scale between $220 million and $750 million."
+            },
+            {
+              "chunk_id": 2,
+              "text": "Some of these trades were quite pivotal. He made large-scale positions in the semiconductor computing power and storage sectors, including $Sandisk(SNDK.US) , $NVIDIA(NVDA.US) , and $Broadcom(AVGO.US) ."
+            },
+            {
+              "chunk_id": 3,
+              "text": "Most notably, he bought $Dell Tech(DELL.US) in February, then publicly hyped Dell in May, after which the stock price soared. He also continued to increase his holdings in $Intel(INTC.US) , a company the US government had already invested in."
+            },
+            {
+              "chunk_id": 4,
+              "text": "Finally, let's look at a chart of Trump's win rate. He absolutely struck gold, with his most profitable single trade this year already up 157%. This really puts even Warren Buffett to shame."
+            }
+          ],
+          "clip_text_embeddings_file": "docs/e909af71a51f4846/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/e909af71a51f4846/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://spanish.news.cn/20260523/d6f9cca1b88f4cc4bf960584bc5ecf39/c.html": {
+      "url": "https://spanish.news.cn/20260523/d6f9cca1b88f4cc4bf960584bc5ecf39/c.html",
+      "canonical_url": "https://spanish.news.cn/20260523/d6f9cca1b88f4cc4bf960584bc5ecf39/c.html",
+      "name": "Trump sopesa opciones militares ante la incertidumbre sobre conversaciones con Irán",
+      "site_name": "新华网",
+      "display_url": "https://spanish.news.cn/20260523/d6f9cca1b88f4cc4bf960584bc5ecf39/c.html",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.8137714285714286,
+      "date_published": "2026-05-23T00:00:00+08:00",
+      "date_last_crawled": "2026-05-23T00:00:00Z",
+      "full_content": "Trump sopesa opciones militares ante la incertidumbre sobre conversaciones con Irán\n\nWASHINGTON, 22 may (Xinhua) -- El Gobierno del presidente estadounidense, Donald Trump, se está preparando para una nueva ronda de ataques militares contra Irán, pese a los esfuerzos diplomáticos en curso, informaron hoy medios de comunicación locales.\n\nTrump se reunió este viernes con altos cargos de seguridad nacional para abordar el futuro de la guerra con Irán, pero el encuentro concluyó sin una decisión sobre los próximos pasos, dijo a la cadena CNN una fuente familiarizada con la cita.\n\nTrump está considerando seriamente lanzar nuevos ataques contra Irán, a menos que se produzca un avance de último minuto en las negociaciones, indicó el portal Axios, citando fuentes que han hablado con el mandatario.\n\nEn declaraciones recogidas por Axios, una fuente cercana a Trump señaló que el presidente ha planteado la posibilidad de una \"decisiva\" operación militar final a gran escala, tras la cual podría declarar la victoria y poner fin a la guerra, pero no hay indicios de que haya tomado una decisión definitiva.\n\nMás tarde, el mismo viernes, Trump canceló sus planes de pasar el fin de semana en su complejo de golf de Nueva Jersey, y anunció que, en lugar de asistir a la boda de su hijo en las Bahamas, se quedará en Washington debido a lo que describió como \"circunstancias relacionadas con el Gobierno\".\n\n\"Considero importante permanecer en Washington D. C., en la Casa Blanca, durante este importante período\", escribió Trump en su red Truth Social.\n\nTambién el viernes, la cadena de televisión Al Arabiya informó en redes sociales que se espera que el borrador final de un posible acuerdo entre Estados Unidos e Irán, mediado por Pakistán, se anuncie en las próximas horas.\n\nSegún fuentes citadas por Al Arabiya, los términos clave del borrador incluyen un alto el fuego inmediato, integral e incondicional en todos los frentes, el compromiso mutuo de no atacar infraestructura militar, civil o económica, y el fin de las operaciones militares y la guerra mediática.\n\nTrascendió que las delegaciones de Qatar y Pakistán visitaron Teherán el viernes, en un intento por ayudar a poner fin a la guerra de Estados Unidos con Irán.",
+      "image_urls": [
+        "https://spanish.news.cn/20260523/d6f9cca1b88f4cc4bf960584bc5ecf39/zxcode_20260523d6f9cca1b88f4cc4bf960584bc5ecf39.jpg",
+        "https://spanish.news.cn/20260523/ec676cf132164e3eac502ac9d39dca81/20260523ec676cf132164e3eac502ac9d39dca81_25c6fd8870914f2fa05bcd466aee66a3.JPG",
+        "https://spanish.news.cn/20260523/91b4e986970d4e2a97377b07e5820bdb/2026052391b4e986970d4e2a97377b07e5820bdb_72c49cd30185420f9cf0bb5172437b54.JPG"
+      ],
+      "page_image_embeddings_file": "docs/8f64382d4aefadf3/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://spanish.news.cn/20260523/d6f9cca1b88f4cc4bf960584bc5ecf39/zxcode_20260523d6f9cca1b88f4cc4bf960584bc5ecf39.jpg",
+        "https://spanish.news.cn/20260523/ec676cf132164e3eac502ac9d39dca81/20260523ec676cf132164e3eac502ac9d39dca81_25c6fd8870914f2fa05bcd466aee66a3.JPG",
+        "https://spanish.news.cn/20260523/91b4e986970d4e2a97377b07e5820bdb/2026052391b4e986970d4e2a97377b07e5820bdb_72c49cd30185420f9cf0bb5172437b54.JPG"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "trump recent activities",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "Trump sopesa opciones militares ante la incertidumbre sobre conversaciones con Irán\n\nWASHINGTON, 22 may (Xinhua) -- El Gobierno del presidente estadounidense, Donald Trump, se está preparando para una nueva ronda de ataques militares contra Irán, pese a los esfuerzos diplomáticos en curso, informaron hoy medios de comunicación locales."
+            },
+            {
+              "chunk_id": 1,
+              "text": "Trump se reunió este viernes con altos cargos de seguridad nacional para abordar el futuro de la guerra con Irán, pero el encuentro concluyó sin una decisión sobre los próximos pasos, dijo a la cadena CNN una fuente familiarizada con la cita."
+            },
+            {
+              "chunk_id": 2,
+              "text": "Trump está considerando seriamente lanzar nuevos ataques contra Irán, a menos que se produzca un avance de último minuto en las negociaciones, indicó el portal Axios, citando fuentes que han hablado con el mandatario."
+            },
+            {
+              "chunk_id": 3,
+              "text": "En declaraciones recogidas por Axios, una fuente cercana a Trump señaló que el presidente ha planteado la posibilidad de una \"decisiva\" operación militar final a gran escala, tras la cual podría declarar la victoria y poner fin a la guerra, pero no hay indicios de que haya tomado una decisión definitiva."
+            },
+            {
+              "chunk_id": 4,
+              "text": "Más tarde, el mismo viernes, Trump canceló sus planes de pasar el fin de semana en su complejo de golf de Nueva Jersey, y anunció que, en lugar de asistir a la boda de su hijo en las Bahamas, se quedará en Washington debido a lo que describió como \"circunstancias relacionadas con el Gobierno\"."
+            },
+            {
+              "chunk_id": 5,
+              "text": "\"Considero importante permanecer en Washington D. C., en la Casa Blanca, durante este importante período\", escribió Trump en su red Truth Social.\n\nTambién el viernes, la cadena de televisión Al Arabiya informó en redes sociales que se espera que el borrador final de un posible acuerdo entre Estados Unidos e Irán, mediado por Pakistán, se anuncie en las próximas horas."
+            },
+            {
+              "chunk_id": 6,
+              "text": "Según fuentes citadas por Al Arabiya, los términos clave del borrador incluyen un alto el fuego inmediato, integral e incondicional en todos los frentes, el compromiso mutuo de no atacar infraestructura militar, civil o económica, y el fin de las operaciones militares y la guerra mediática."
+            },
+            {
+              "chunk_id": 7,
+              "text": "Trascendió que las delegaciones de Qatar y Pakistán visitaron Teherán el viernes, en un intento por ayudar a poner fin a la guerra de Estados Unidos con Irán."
+            }
+          ],
+          "clip_text_embeddings_file": "docs/8f64382d4aefadf3/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/8f64382d4aefadf3/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/c.html": {
+      "url": "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/c.html",
+      "canonical_url": "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/c.html",
+      "name": "(Multimedia) Trump sopesa opciones militares ante la incertidumbre sobre conversaciones con Irán",
+      "site_name": "新华网",
+      "display_url": "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/c.html",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.8499857142857143,
+      "date_published": "2026-05-23T00:00:00+08:00",
+      "date_last_crawled": "2026-05-23T00:00:00Z",
+      "full_content": "(Multimedia) Trump sopesa opciones militares ante la incertidumbre sobre conversaciones con Irán\n\nImagen del 1 de mayo de 2026 del presidente estadounidense, Donald Trump, caminando hacia el Jardín Sur de la Casa Blanca, en Washington D. C., Estados Unidos. (Xinhua/Li Yuanqing)\n\nWASHINGTON, 22 may (Xinhua) -- El Gobierno del presidente estadounidense, Donald Trump, se está preparando para una nueva ronda de ataques militares contra Irán, pese a los esfuerzos diplomáticos en curso, informaron hoy medios de comunicación locales.\n\nTrump se reunió este viernes con altos cargos de seguridad nacional para abordar el futuro de la guerra con Irán, pero el encuentro concluyó sin una decisión sobre los próximos pasos, dijo a la cadena CNN una fuente familiarizada con la cita.\n\nTrump está considerando seriamente lanzar nuevos ataques contra Irán, a menos que se produzca un avance de último minuto en las negociaciones, indicó el portal Axios, citando fuentes que han hablado con el mandatario.\n\nEn declaraciones recogidas por Axios, una fuente cercana a Trump señaló que el presidente ha planteado la posibilidad de una \"decisiva\" operación militar final a gran escala, tras la cual podría declarar la victoria y poner fin a la guerra, pero no hay indicios de que haya tomado una decisión definitiva.\n\nMás tarde, el mismo viernes, Trump canceló sus planes de pasar el fin de semana en su complejo de golf de Nueva Jersey, y anunció que, en lugar de asistir a la boda de su hijo en las Bahamas, se quedará en Washington debido a lo que describió como \"circunstancias relacionadas con el Gobierno\".\n\n\"Considero importante permanecer en Washington D. C., en la Casa Blanca, durante este importante período\", escribió Trump en su red Truth Social.\n\nTambién el viernes, la cadena de televisión Al Arabiya informó en redes sociales que se espera que el borrador final de un posible acuerdo entre Estados Unidos e Irán, mediado por Pakistán, se anuncie en las próximas horas.\n\nSegún fuentes citadas por Al Arabiya, los términos clave del borrador incluyen un alto el fuego inmediato, integral e incondicional en todos los frentes, el compromiso mutuo de no atacar infraestructura militar, civil o económica, y el fin de las operaciones militares y la guerra mediática.\n\nTrascendió que las delegaciones de Qatar y Pakistán visitaron Teherán el viernes, en un intento por ayudar a poner fin a la guerra de Estados Unidos con Irán.",
+      "image_urls": [
+        "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/202605231186112de2d84daab87029a4ed6c7935_XxjiseS000022_20260523_CBMFN0A001.JPG",
+        "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/zxcode_202605231186112de2d84daab87029a4ed6c7935.jpg"
+      ],
+      "page_image_embeddings_file": "docs/98994c1769583976/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/202605231186112de2d84daab87029a4ed6c7935_XxjiseS000022_20260523_CBMFN0A001.JPG",
+        "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/zxcode_202605231186112de2d84daab87029a4ed6c7935.jpg"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "trump recent activities",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "(Multimedia) Trump sopesa opciones militares ante la incertidumbre sobre conversaciones con Irán\n\nImagen del 1 de mayo de 2026 del presidente estadounidense, Donald Trump, caminando hacia el Jardín Sur de la Casa Blanca, en Washington D. C., Estados Unidos. (Xinhua/Li Yuanqing)"
+            },
+            {
+              "chunk_id": 1,
+              "text": "WASHINGTON, 22 may (Xinhua) -- El Gobierno del presidente estadounidense, Donald Trump, se está preparando para una nueva ronda de ataques militares contra Irán, pese a los esfuerzos diplomáticos en curso, informaron hoy medios de comunicación locales."
+            },
+            {
+              "chunk_id": 2,
+              "text": "Trump se reunió este viernes con altos cargos de seguridad nacional para abordar el futuro de la guerra con Irán, pero el encuentro concluyó sin una decisión sobre los próximos pasos, dijo a la cadena CNN una fuente familiarizada con la cita."
+            },
+            {
+              "chunk_id": 3,
+              "text": "Trump está considerando seriamente lanzar nuevos ataques contra Irán, a menos que se produzca un avance de último minuto en las negociaciones, indicó el portal Axios, citando fuentes que han hablado con el mandatario."
+            },
+            {
+              "chunk_id": 4,
+              "text": "En declaraciones recogidas por Axios, una fuente cercana a Trump señaló que el presidente ha planteado la posibilidad de una \"decisiva\" operación militar final a gran escala, tras la cual podría declarar la victoria y poner fin a la guerra, pero no hay indicios de que haya tomado una decisión definitiva."
+            },
+            {
+              "chunk_id": 5,
+              "text": "Más tarde, el mismo viernes, Trump canceló sus planes de pasar el fin de semana en su complejo de golf de Nueva Jersey, y anunció que, en lugar de asistir a la boda de su hijo en las Bahamas, se quedará en Washington debido a lo que describió como \"circunstancias relacionadas con el Gobierno\"."
+            },
+            {
+              "chunk_id": 6,
+              "text": "\"Considero importante permanecer en Washington D. C., en la Casa Blanca, durante este importante período\", escribió Trump en su red Truth Social.\n\nTambién el viernes, la cadena de televisión Al Arabiya informó en redes sociales que se espera que el borrador final de un posible acuerdo entre Estados Unidos e Irán, mediado por Pakistán, se anuncie en las próximas horas."
+            },
+            {
+              "chunk_id": 7,
+              "text": "Según fuentes citadas por Al Arabiya, los términos clave del borrador incluyen un alto el fuego inmediato, integral e incondicional en todos los frentes, el compromiso mutuo de no atacar infraestructura militar, civil o económica, y el fin de las operaciones militares y la guerra mediática."
+            },
+            {
+              "chunk_id": 8,
+              "text": "Trascendió que las delegaciones de Qatar y Pakistán visitaron Teherán el viernes, en un intento por ayudar a poner fin a la guerra de Estados Unidos con Irán."
+            }
+          ],
+          "clip_text_embeddings_file": "docs/98994c1769583976/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/98994c1769583976/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://french.news.cn/20260523/15b8d2a4604e414c9aa10caa996e2ad3/c.html": {
+      "url": "https://french.news.cn/20260523/15b8d2a4604e414c9aa10caa996e2ad3/c.html",
+      "canonical_url": "https://french.news.cn/20260523/15b8d2a4604e414c9aa10caa996e2ad3/c.html",
+      "name": "Trump évalue les options militaires alors que l'incertitude plane sur les négociations avec l'Iran",
+      "site_name": "新华网",
+      "display_url": "https://french.news.cn/20260523/15b8d2a4604e414c9aa10caa996e2ad3/c.html",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.9123857142857144,
+      "date_published": "2026-05-23T00:00:00+08:00",
+      "date_last_crawled": "2026-05-23T00:00:00Z",
+      "full_content": "Trump évalue les options militaires alors que l'incertitude plane sur les négociations avec l'Iran\n\nWASHINGTON, 22 mai (Xinhua) -- L'administration Trump se prépare à lancer une nouvelle série de frappes militaires contre l'Iran malgré les efforts diplomatiques en cours, ont rapporté vendredi des médias américains, citant des sources directement informées de ces préparatifs.\n\nLe président américain Donald Trump a reçu vendredi les hauts responsables de la sécurité nationale afin de discuter de la marche à suivre dans le conflit avec l'Iran, mais la réunion s'est terminée sans qu'aucune décision n'ait été prise quant à la suite des événements, a déclaré à la chaîne CNN une source proche de la réunion.\n\nSelon le site d'information Axios, qui cite vendredi des sources ayant directement parlé au président, M. Trump envisagerait sérieusement de lancer de nouvelles frappes contre l'Iran, à moins d'une avancée de dernière minute dans les négociations.\n\nOn indiquait de source proche de M. Trump que le président avait évoqué la possibilité d'une dernière opération militaire majeure \"décisive\", à l'issue de laquelle il pourrait proclamer la victoire et mettre fin à la guerre, mais rien n'indique qu'il ait pris une décision définitive, selon Axios.\n\nUn responsable américain informé des efforts diplomatiques a qualifié les négociations de \"pénibles\", les projets d'accord \"faisant l'objet d'allers-retours quotidiens\" sans grand progrès, a ajouté le site.\n\nPlus tard dans la journée, Donald Trump a annulé son projet de passer le week-end dans son complexe de golf du New Jersey et a dit qu'il ne se rendrait pas au mariage de son fils aux Bahamas, préférant rester à Washington en raison de ce qu'il a qualifié de \"circonstances liées au gouvernement et à (son) amour pour les Etats-Unis d'Amérique\".\n\n\"Je pense qu'il est important pour moi de rester à Washington, à la Maison Blanche, pendant cette période importante\", a-t-il écrit sur son réseau Truth Social.\n\nVendredi également, la chaîne saoudienne Al Arabiya a indiqué sur les réseaux sociaux que la version finale d'un éventuel accord entre les Etats-Unis et l'Iran, négocié avec la médiation du Pakistan, devrait être annoncée dans les prochaines heures.\n\nLes principales dispositions du projet prévoient un cessez-le-feu immédiat, total et inconditionnel sur tous les fronts, un engagement mutuel à ne pas prendre pour cible les infrastructures militaires, civiles ou économiques, ainsi que la fin des opérations militaires et de la guerre médiatique, a-t-elle indiqué, citant des sources.\n\nSelon certaines informations, des délégations qatarie et pakistanaise se seraient rendues à Téhéran vendredi afin de tenter de contribuer à mettre fin au conflit entre les Etats-Unis et l'Iran. Fin",
+      "image_urls": [],
+      "page_image_embeddings_file": "",
+      "page_image_embedding_urls": [],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "trump recent activities",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "Trump évalue les options militaires alors que l'incertitude plane sur les négociations avec l'Iran\n\nWASHINGTON, 22 mai (Xinhua) -- L'administration Trump se prépare à lancer une nouvelle série de frappes militaires contre l'Iran malgré les efforts diplomatiques en cours, ont rapporté vendredi des médias américains, citant des sources directement informées de ces préparatifs."
+            },
+            {
+              "chunk_id": 1,
+              "text": "Le président américain Donald Trump a reçu vendredi les hauts responsables de la sécurité nationale afin de discuter de la marche à suivre dans le conflit avec l'Iran, mais la réunion s'est terminée sans qu'aucune décision n'ait été prise quant à la suite des événements, a déclaré à la chaîne CNN une source proche de la réunion."
+            },
+            {
+              "chunk_id": 2,
+              "text": "Selon le site d'information Axios, qui cite vendredi des sources ayant directement parlé au président, M. Trump envisagerait sérieusement de lancer de nouvelles frappes contre l'Iran, à moins d'une avancée de dernière minute dans les négociations."
+            },
+            {
+              "chunk_id": 3,
+              "text": "On indiquait de source proche de M. Trump que le président avait évoqué la possibilité d'une dernière opération militaire majeure \"décisive\", à l'issue de laquelle il pourrait proclamer la victoire et mettre fin à la guerre, mais rien n'indique qu'il ait pris une décision définitive, selon Axios."
+            },
+            {
+              "chunk_id": 4,
+              "text": "Un responsable américain informé des efforts diplomatiques a qualifié les négociations de \"pénibles\", les projets d'accord \"faisant l'objet d'allers-retours quotidiens\" sans grand progrès, a ajouté le site."
+            },
+            {
+              "chunk_id": 5,
+              "text": "Plus tard dans la journée, Donald Trump a annulé son projet de passer le week-end dans son complexe de golf du New Jersey et a dit qu'il ne se rendrait pas au mariage de son fils aux Bahamas, préférant rester à Washington en raison de ce qu'il a qualifié de \"circonstances liées au gouvernement et à (son) amour pour les Etats-Unis d'Amérique\"."
+            },
+            {
+              "chunk_id": 6,
+              "text": "\"Je pense qu'il est important pour moi de rester à Washington, à la Maison Blanche, pendant cette période importante\", a-t-il écrit sur son réseau Truth Social."
+            },
+            {
+              "chunk_id": 7,
+              "text": "Vendredi également, la chaîne saoudienne Al Arabiya a indiqué sur les réseaux sociaux que la version finale d'un éventuel accord entre les Etats-Unis et l'Iran, négocié avec la médiation du Pakistan, devrait être annoncée dans les prochaines heures."
+            },
+            {
+              "chunk_id": 8,
+              "text": "Les principales dispositions du projet prévoient un cessez-le-feu immédiat, total et inconditionnel sur tous les fronts, un engagement mutuel à ne pas prendre pour cible les infrastructures militaires, civiles ou économiques, ainsi que la fin des opérations militaires et de la guerre médiatique, a-t-elle indiqué, citant des sources."
+            },
+            {
+              "chunk_id": 9,
+              "text": "Selon certaines informations, des délégations qatarie et pakistanaise se seraient rendues à Téhéran vendredi afin de tenter de contribuer à mettre fin au conflit entre les Etats-Unis et l'Iran. Fin"
+            }
+          ],
+          "clip_text_embeddings_file": "docs/32e07c7dd37e096f/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/32e07c7dd37e096f/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://www.fx678.com/C/20260523/202605230359221120.html": {
+      "url": "https://www.fx678.com/C/20260523/202605230359221120.html",
+      "canonical_url": "https://www.fx678.com/C/20260523/202605230359221120.html",
+      "name": "特朗普对股市的近期表现予以赞赏。 我目前无法获取实时股市动态及相关表态的完整背景信息，以上内容仅基于给定文本进行同义表述调整，具体相关官方表述请以权威媒体的公开报道为准。_外汇动态报道",
+      "site_name": "汇通财经",
+      "display_url": "https://www.fx678.com/C/20260523/202605230359221120.html",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "empty_content",
+      "web_fetch_quality_score": 0.0,
+      "date_published": "2026-05-23T03:59:22+08:00",
+      "date_last_crawled": "2026-05-23T03:59:22Z",
+      "full_content": "汇通财经APP讯——特朗普对股市的近期表现予以赞赏。\n我目前无法获取实时股市动态及相关表态的完整背景信息,以上内容仅基于给定文本进行同义表述调整,具体相关官方表述请以权威媒体的公开报道为准。",
+      "image_urls": [
+        "https://www.fx678.com/images/yhtpc.png",
+        "https://www.fx678.com/images/windows.png",
+        "https://www.fx678.com/images/default.jpg"
+      ],
+      "page_image_embeddings_file": "",
+      "page_image_embedding_urls": [],
+      "page_image_failed_urls": [
+        "https://www.fx678.com/images/yhtpc.png",
+        "https://www.fx678.com/images/windows.png",
+        "https://www.fx678.com/images/default.jpg"
+      ],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    },
+    "https://cryptonews.net/news/finance/32875073": {
+      "url": "https://cryptonews.net/news/finance/32875073/",
+      "canonical_url": "https://cryptonews.net/news/finance/32875073",
+      "name": "Trump discloses over 3,700 trades in first quarter, raising scrutiny",
+      "site_name": "Crypto News",
+      "display_url": "https://cryptonews.net/news/finance/32875073/",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.9996714285714287,
+      "date_published": "2026-05-18T01:36:03+08:00",
+      "date_last_crawled": "2026-05-18T01:36:03Z",
+      "full_content": "Trump discloses over 3,700 trades in first quarter, raising scrutiny\n\nA sitting president averaging roughly 40 trades per day is, to put it mildly, unusual. Donald Trump’s first-quarter financial disclosure reveals approximately 3,700 transactions, representing an estimated $220 million to $750 million in trading volume, a figure that has ethics watchdogs and market analysts reaching for their reading glasses.\n\nThe bulk of the activity centers on large-cap US equities, with a pronounced tilt toward the technology and semiconductor sectors. Nvidia, Broadcom, and Intel all appear as new positions, with multiple transactions exceeding $1 million each. At the same time, the disclosure shows major reductions in holdings of Amazon, Meta, and Microsoft through transactions ranging from $5 million to $25 million apiece.\n\nThat kind of rotation isn’t inherently suspicious. Plenty of sophisticated investors have been making similar moves. But plenty of sophisticated investors don’t also set tariff policy, negotiate trade deals with chip-manufacturing nations, or sign executive orders that can move semiconductor stocks by double digits in a single session.\n\nOne transaction stands out in particular. A $1 million to $5 million stake in Dell Technologies was initiated on February 10, prior to a presidential endorsement of the company. The timing raises the kind of questions that congressional ethics committees were theoretically designed to investigate.\n\nWhether the trades were executed by Trump personally or by advisers managing his portfolio, the disclosure doesn’t fully clarify. The filing references “President Trump or his advisers” as the decision-makers, a construction that provides just enough ambiguity to be deeply unhelpful.\n\nThe president has direct influence over export controls, tariffs on imported chips, and the allocation of CHIPS Act funding. Taking new positions in Nvidia, Broadcom, and Intel while simultaneously holding the policy levers that determine those companies’ regulatory environment is, at minimum, optically catastrophic.\n\nMembers of Congress have faced similar scrutiny for years, most notably during the controversy around stock trades by lawmakers who sat on committees overseeing the industries they were investing in. The STOCK Act of 2012 was supposed to address this by requiring timely disclosure of congressional trades. But the presidency operates under different, and in many ways looser, ethical guidelines when it comes to personal financial activity.\n\nThe sheer volume of transactions makes oversight practically difficult, too. Reviewing 3,700 trades for potential conflicts requires cross-referencing each transaction’s timing against policy announcements, executive orders, regulatory actions, and even informal presidential statements that might have moved specific stocks.\n\nThe scale of the trading, potentially up to $750 million in a single quarter, also means the transactions themselves could have market impact, particularly in less liquid names or during concentrated buying periods. A presidential disclosure showing new multi-million-dollar positions in specific companies functions as a de facto endorsement, regardless of whether it was intended as one.",
+      "image_urls": [
+        "https://cnews24.ru/uploads/a80/a8038c453fead8661cba9b139ddd3a6894ef0663.jpeg"
+      ],
+      "page_image_embeddings_file": "docs/d886f825da5569b4/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://cnews24.ru/uploads/a80/a8038c453fead8661cba9b139ddd3a6894ef0663.jpeg"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "trump recent activities",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "Trump discloses over 3,700 trades in first quarter, raising scrutiny"
+            },
+            {
+              "chunk_id": 1,
+              "text": "A sitting president averaging roughly 40 trades per day is, to put it mildly, unusual. Donald Trump’s first-quarter financial disclosure reveals approximately 3,700 transactions, representing an estimated $220 million to $750 million in trading volume, a figure that has ethics watchdogs and market analysts reaching for their reading glasses."
+            },
+            {
+              "chunk_id": 2,
+              "text": "The bulk of the activity centers on large-cap US equities, with a pronounced tilt toward the technology and semiconductor sectors. Nvidia, Broadcom, and Intel all appear as new positions, with multiple transactions exceeding $1 million each."
+            },
+            {
+              "chunk_id": 3,
+              "text": "At the same time, the disclosure shows major reductions in holdings of Amazon, Meta, and Microsoft through transactions ranging from $5 million to $25 million apiece."
+            },
+            {
+              "chunk_id": 4,
+              "text": "That kind of rotation isn’t inherently suspicious. Plenty of sophisticated investors have been making similar moves. But plenty of sophisticated investors don’t also set tariff policy, negotiate trade deals with chip-manufacturing nations, or sign executive orders that can move semiconductor stocks by double digits in a single session."
+            },
+            {
+              "chunk_id": 5,
+              "text": "One transaction stands out in particular. A $1 million to $5 million stake in Dell Technologies was initiated on February 10, prior to a presidential endorsement of the company. The timing raises the kind of questions that congressional ethics committees were theoretically designed to investigate."
+            },
+            {
+              "chunk_id": 6,
+              "text": "Whether the trades were executed by Trump personally or by advisers managing his portfolio, the disclosure doesn’t fully clarify. The filing references “President Trump or his advisers” as the decision-makers, a construction that provides just enough ambiguity to be deeply unhelpful."
+            },
+            {
+              "chunk_id": 7,
+              "text": "The president has direct influence over export controls, tariffs on imported chips, and the allocation of CHIPS Act funding. Taking new positions in Nvidia, Broadcom, and Intel while simultaneously holding the policy levers that determine those companies’ regulatory environment is, at minimum, optically catastrophic."
+            },
+            {
+              "chunk_id": 8,
+              "text": "Members of Congress have faced similar scrutiny for years, most notably during the controversy around stock trades by lawmakers who sat on committees overseeing the industries they were investing in. The STOCK Act of 2012 was supposed to address this by requiring timely disclosure of congressional trades."
+            },
+            {
+              "chunk_id": 9,
+              "text": "But the presidency operates under different, and in many ways looser, ethical guidelines when it comes to personal financial activity."
+            },
+            {
+              "chunk_id": 10,
+              "text": "The sheer volume of transactions makes oversight practically difficult, too. Reviewing 3,700 trades for potential conflicts requires cross-referencing each transaction’s timing against policy announcements, executive orders, regulatory actions, and even informal presidential statements that might have moved specific stocks."
+            },
+            {
+              "chunk_id": 11,
+              "text": "The scale of the trading, potentially up to $750 million in a single quarter, also means the transactions themselves could have market impact, particularly in less liquid names or during concentrated buying periods. A presidential disclosure showing new multi-million-dollar positions in specific companies functions as a de facto endorsement, regardless of whether it was intended as one."
+            }
+          ],
+          "clip_text_embeddings_file": "docs/d886f825da5569b4/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/d886f825da5569b4/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://focus.scol.com.cn/ygtx/202605/83258851.html": {
+      "url": "https://focus.scol.com.cn/ygtx/202605/83258851.html",
+      "canonical_url": "https://focus.scol.com.cn/ygtx/202605/83258851.html",
+      "name": "特朗普一季度进行了3600多次股票买卖丨夜观天下·漫话 缅怀！袁隆平逝世五周年，禾下乘凉梦，自有后来人 《寻味100处》成都特辑的第2集上线 《寻味100处》被我们请到四川了！ min甜，树莓在龙泉山试种成功了！ 要做熊猫玩偶界的“爱马仕”，山东小镇工厂凭啥造出最真的假熊猫？",
+      "site_name": "四川在线天下频道",
+      "display_url": "https://focus.scol.com.cn/ygtx/202605/83258851.html",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "short_content",
+      "web_fetch_quality_score": 0.1177,
+      "date_published": "2026-05-22T17:23:06+08:00",
+      "date_last_crawled": "2026-05-22T17:23:06Z",
+      "full_content": "报告显示,美国总统特朗普今年第一季度进行了3600多次股票买卖,其中包括许多直接受其决策影响的公司的股票。(新华社)漫画:黄琪\n王桃",
+      "image_urls": [
+        "https://imgcdn.scol.com.cn/media/2026/05/22/181759944744.jpg",
+        "https://imgcdn.scol.com.cn/media/2026/05/22/181800206967.jpg",
+        "https://focus.scol.com.cn/images/2013scol.jpg"
+      ],
+      "page_image_embeddings_file": "docs/d1b34469faa78d64/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://imgcdn.scol.com.cn/media/2026/05/22/181759944744.jpg",
+        "https://imgcdn.scol.com.cn/media/2026/05/22/181800206967.jpg",
+        "https://focus.scol.com.cn/images/2013scol.jpg"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    },
+    "https://www.whitehouse.gov/gallery/president-donald-j-trump-participates-in-a-maternal-healthcare-event-in-the-oval-office-may-11-2026": {
+      "url": "https://www.whitehouse.gov/gallery/president-donald-j-trump-participates-in-a-maternal-healthcare-event-in-the-oval-office-may-11-2026/",
+      "canonical_url": "https://www.whitehouse.gov/gallery/president-donald-j-trump-participates-in-a-maternal-healthcare-event-in-the-oval-office-may-11-2026",
+      "name": "President Donald J. Trump participates in a maternal healthcare event in the Oval Office, May 11, 2026",
+      "site_name": "www.whitehouse.gov",
+      "display_url": "https://www.whitehouse.gov/gallery/president-donald-j-trump-participates-in-a-maternal-healthcare-event-in-the-oval-office-may-11-2026/",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "short_content",
+      "web_fetch_quality_score": 0.20019285714285717,
+      "date_published": "2026-05-11T20:19:48+08:00",
+      "date_last_crawled": "2026-05-11T20:19:48Z",
+      "full_content": "President\nDonald\nJ.\nTrump\nparticipates\nin\na\nmaternal\nhealthcare\nevent\nin\nthe\nOval\nOffice,\nMay\n11,\n2026",
+      "image_urls": [
+        "https://www.whitehouse.gov/wp-content/uploads/2026/05/P20260511AM-0325.jpg?w=1200",
+        "https://www.whitehouse.gov/wp-content/uploads/2026/05/P20260511AM-0468.jpg?w=1200",
+        "https://www.whitehouse.gov/wp-content/uploads/2026/05/P20260511AM-0899.jpg?w=1200"
+      ],
+      "page_image_embeddings_file": "docs/6c7c2ef64cc84535/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://www.whitehouse.gov/wp-content/uploads/2026/05/P20260511AM-0325.jpg?w=1200",
+        "https://www.whitehouse.gov/wp-content/uploads/2026/05/P20260511AM-0468.jpg?w=1200",
+        "https://www.whitehouse.gov/wp-content/uploads/2026/05/P20260511AM-0899.jpg?w=1200"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    },
+    "https://www.whitehouse.gov/gallery/president-donald-j-trump-signs-an-executive-order-in-the-oval-office-april-30-2026": {
+      "url": "https://www.whitehouse.gov/gallery/president-donald-j-trump-signs-an-executive-order-in-the-oval-office-april-30-2026/",
+      "canonical_url": "https://www.whitehouse.gov/gallery/president-donald-j-trump-signs-an-executive-order-in-the-oval-office-april-30-2026",
+      "name": "President Donald J. Trump signs an executive order in the Oval Office, April 30, 2026.",
+      "site_name": "www.whitehouse.gov",
+      "display_url": "https://www.whitehouse.gov/gallery/president-donald-j-trump-signs-an-executive-order-in-the-oval-office-april-30-2026/",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "short_content",
+      "web_fetch_quality_score": 0.1972214285714286,
+      "date_published": "2026-05-04T19:37:47+08:00",
+      "date_last_crawled": "2026-05-04T19:37:47Z",
+      "full_content": "President\nDonald\nJ.\nTrump\nsigns\nan\nexecutive\norder\nin\nthe\nOval\nOffice,\nApril\n30,\n2026.",
+      "image_urls": [
+        "https://www.whitehouse.gov/wp-content/uploads/2026/05/P20260430JB-0007.jpg?w=1200",
+        "https://www.whitehouse.gov/wp-content/uploads/2026/05/P20260430JB-0099.jpg?w=1200",
+        "https://www.whitehouse.gov/wp-content/uploads/2026/05/P20260430JB-0388.jpg?w=1200"
+      ],
+      "page_image_embeddings_file": "docs/82b1c14741e21db1/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://www.whitehouse.gov/wp-content/uploads/2026/05/P20260430JB-0007.jpg?w=1200",
+        "https://www.whitehouse.gov/wp-content/uploads/2026/05/P20260430JB-0099.jpg?w=1200",
+        "https://www.whitehouse.gov/wp-content/uploads/2026/05/P20260430JB-0388.jpg?w=1200"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    },
+    "https://longportapp.cn/en/topics/37920666": {
+      "url": "https://longportapp.cn/en/topics/37920666",
+      "canonical_url": "https://longportapp.cn/en/topics/37920666",
+      "name": "Wild-card Trump: erratic swings—are US equities still a trade in 2026? - LongPort",
+      "site_name": "longportapp.cn",
+      "display_url": "https://longportapp.cn/en/topics/37920666",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 1.0,
+      "date_published": "2026-01-19T11:58:00+08:00",
+      "date_last_crawled": "2026-01-19T11:58:00Z",
+      "full_content": "Wild-card Trump: erratic swings—are US equities still a trade in 2026?\n\nTrump kicked off 2026 with high drama: pushing a 10% cap on credit-card APRs at home and having the GSEs buy hundreds of billions of MBS, while abroad launching a decapitation move against Venezuela and pressing to strong-arm Greenland. What policy logic sits behind these 'erratic' moves? For Trump, who has largely gotten his way since taking office in 2025, what do these actions mean for 2026 investing, and how should we position?\n\nDolphin Research lays out the framework below. Here is our take.\n\nThe 2026 midterms are the core force shaping policy choices. Scarred by repeated impeachments after losing the House, Trump is fixated on winning the midterms.\n\nThe ballot-box issue is affordability: headline inflation is cooling, but households still feel priced out. That short-term aim collides with his longer-term industrial agenda—onshoring manufacturing and winning the AI race—which needs pro-industry policies to rebuild in the AI era.\n\nLong-term goals imply persistent inflation, while short-term politics demand suppressing it. Faced with this trade-off, Trump wants both.\n\nA: Deliver near-term affordability? Housing, oil, credit cards: administrative price control.\n\n1) Rents too high? A $200bn MBS bid to cap mortgage rates.\n\nHousing costs are squeezing disposable income, and rents track mortgage rates. With rates high, affordability has broken down.\n\nThe Fed stopped QT in Treasuries but has let MBS roll off. Near-market MBS purchases by Fannie and Freddie effectively manufacture a buyer, compress MBS yields, and pull down commercial mortgage rates.\n\n2) Credit cards: cap APRs at 10%?\n\nBeyond rent, credit-card rates are in the crosshairs. Personal loan rates at banks average near 12%, while card APRs hover around 20%.\n\nThe share of delinquencies rolling past 90 days is elevated, reflecting weaker ability to carry high rates among lower-income borrowers. Regardless of whether a cap truly anchors consumer-loan pricing, it is, at its core, administrative price control.\n\n3) Cap oil prices: the Venezuela decapitation move.\n\nFraming it as a counternarcotics operation helps bypass Congress and minimize legal friction. The real aim is oil reserves, and Trump barely hides it.\n\nGrabbing foreign oil resources now ties directly to lowering domestic fuel costs. While regime transition and legacy creditor disputes limit near-term supply effects, signaling accelerated extraction and releases can guide price expectations lower. If the market buys it and Brent trades down to $40–50/bbl into the late-2026 election window, that would be a narrative win for Trump's 'lower cost of living' push.\n\nTrump's longer-term strategy features the OBBB mega-bill, corporate tax cuts, and tariff exemptions or breaks for key capacity moved onshore, alongside broader external tariffs. By design, these raise domestic living costs.\n\nWith the midterms looming, the short term trumps the long term. For example, the latest power-intervention plan presses cloud majors like Microsoft to ensure AI buildouts do not lift residential power bills, even cutting water usage, and requires data centers to be self-funded.\n\nA deeper structural issue is fiscal over monetary primacy. Voters cannot be alienated, yet strategic industries and manufacturing reshoring require capital.\n\nTwo fronts of spending meet pandemic-era fiscal inertia: interest payments reached $100bn in 2025, or 14% of federal outlays, making it the No. 2 line item after Social Security and surpassing defense. That is a heavy drag.\n\nNarrow deficit (ex-interest) gained an extra $180bn from the global trade war in 2025, yet the full-year deficit still neared $700bn. A sticky primary deficit plus high interest costs imply ~$2tn annual fiscal gaps ahead unless AI-driven growth delivers. Otherwise, the federal deficit ratio will keep rising passively.\n\nTrump's response is blunt: subpoenaing Powell over Fed HQ renovation overruns and alleged perjury, repeatedly probing the limits of Fed independence. This is pressure, plain and simple.\n\nThere is clear overlap between short- and long-term aims: rate cuts and easier liquidity. Lower borrowing costs ease household interest burdens, support AI capex, and reduce Treasury interest expense—one policy, many wins.\n\nThe swing variable is the next Fed lineup. With Kevin Hassett seemingly out, the leading candidate is Kevin Warsh, who favors rate cuts but opposes QE.\n\nHe leans toward deregulation and tax cuts, arguing that freer capital and productivity flows cool inflation. Opposition to QE reads more like 'activate existing liquidity' via looser financial regulation rather than expand the balance sheet. Net-net, he is less aligned than Hassett would be, but still broadly supportive of Trump's economic playbook.\n\nIn essence, Trump is engineering administratively suppressed inflation in 2026. Lower rates would fuel spending and capex, creating a manufactured boom.\n\nWhether inflation snaps back in 2027 depends on AI's deflationary force. But 2026 looks set for a policy-driven 'prosperity' phase.\n\nTwo rules of thumb from the past year still apply: in markets, TACO—'Trump always chickens out'; against rivals, TAGW—'Trump always gets what he wants'. They anchor two principles.\n\n1) His red line is higher U.S. equities. Stocks power consumption and tax receipts, and in a midterm year, he cannot afford a market break.\n\n2) Within that constraint, he is flexible and pragmatic in pursuing his goals: a) rate cuts, b) lower oil prices, and c) lower power bills. All roads lead to the midterms.\n\nHence, Dolphin Research's macro strategy boils down to:\n\n1) Stay constructive on U.S. equities, but avoid sectors facing administrative price caps. Overweight beneficiaries of Trump's policies.\n\nExpect tariff revenues to be packaged as voter rebates in Hill negotiations—'buying votes' by converting tariffs from a drag on purchasing power into a consumer boost. This setup argues for pre-positioning in consumption and retail names.\n\n2) With heavy debt and forced easing to push reindustrialization, the dollar's credibility may erode. A weak-USD regime argues for diversification and higher non-U.S. exposure in 2026.\n\n3) Dollar credibility risk plus renewed global easing (ex-China) favors 'trust substitutes' like gold. Expect continued opportunities in monetary hedges.\n\nLast week, Alpha Dolphin made no changes. The portfolio returned 0.1%, beating CSI 300 (-0.6%) and the S&P 500 (-0.4%) but lagging MSCI China (+1.5%) and the Hang Seng Tech Index (+2.4%).\n\nA pullback in gold weighed on performance, and several large positions were hit by earnings-related communication. That was the main drag.\n\nSince inception (Mar 25, 2022) to last week, absolute return is 119%, with 100% excess return vs. MSCI China. NAV terms: starting from $100mn of virtual capital, the book now exceeds $222mn.\n\nThe portfolio underperformed China equity benchmarks as the rally broadened to smaller ADRs, while quality holdings like Pop Mart and PDD pulled back. We were also hit by Trip.com Group's antitrust fine.\n\nStock-level moves are detailed below. See the breakdown.\n\nAlpha Dolphin holds 18 equities and equity ETFs, with 7 core positions and the rest underweight. Non-equity exposure is mainly gold, U.S. Treasuries, and USD cash, with equities vs. defensive (gold/UST/cash) at roughly 52:48.\n\nAs of last week, see the asset allocation and equity position weights below. Details follow.",
+      "image_urls": [
+        "https://pub.pbkrs.com/cms/2026/0/TNMTxxfuzSfeqDSuvmshm69MDxE5BoYY.jpg?x-oss-process=style/lg",
+        "https://pub.pbkrs.com/cms/2026/0/FPzt91Jwxx7Jy3q38vos1p8UrYAcrpt3.jpg?x-oss-process=style/lg",
+        "https://pub.pbkrs.com/cms/2026/0/96Jj56r1NArL8dEt4dBJcCpNf2Tt1Hqn.jpg?x-oss-process=style/lg"
+      ],
+      "page_image_embeddings_file": "docs/a772ef35008088bc/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://pub.pbkrs.com/cms/2026/0/TNMTxxfuzSfeqDSuvmshm69MDxE5BoYY.jpg?x-oss-process=style/lg",
+        "https://pub.pbkrs.com/cms/2026/0/FPzt91Jwxx7Jy3q38vos1p8UrYAcrpt3.jpg?x-oss-process=style/lg",
+        "https://pub.pbkrs.com/cms/2026/0/96Jj56r1NArL8dEt4dBJcCpNf2Tt1Hqn.jpg?x-oss-process=style/lg"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "recent activities of Donald Trump in 2026",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "Wild-card Trump: erratic swings—are US equities still a trade in 2026?"
+            },
+            {
+              "chunk_id": 1,
+              "text": "Trump kicked off 2026 with high drama: pushing a 10% cap on credit-card APRs at home and having the GSEs buy hundreds of billions of MBS, while abroad launching a decapitation move against Venezuela and pressing to strong-arm Greenland. What policy logic sits behind these 'erratic' moves?"
+            },
+            {
+              "chunk_id": 2,
+              "text": "For Trump, who has largely gotten his way since taking office in 2025, what do these actions mean for 2026 investing, and how should we position?"
+            },
+            {
+              "chunk_id": 3,
+              "text": "Dolphin Research lays out the framework below. Here is our take.\n\nThe 2026 midterms are the core force shaping policy choices. Scarred by repeated impeachments after losing the House, Trump is fixated on winning the midterms."
+            },
+            {
+              "chunk_id": 4,
+              "text": "The ballot-box issue is affordability: headline inflation is cooling, but households still feel priced out. That short-term aim collides with his longer-term industrial agenda—onshoring manufacturing and winning the AI race—which needs pro-industry policies to rebuild in the AI era."
+            },
+            {
+              "chunk_id": 5,
+              "text": "Long-term goals imply persistent inflation, while short-term politics demand suppressing it. Faced with this trade-off, Trump wants both.\n\nA: Deliver near-term affordability? Housing, oil, credit cards: administrative price control.\n\n1) Rents too high? A $200bn MBS bid to cap mortgage rates."
+            },
+            {
+              "chunk_id": 6,
+              "text": "Housing costs are squeezing disposable income, and rents track mortgage rates. With rates high, affordability has broken down.\n\nThe Fed stopped QT in Treasuries but has let MBS roll off. Near-market MBS purchases by Fannie and Freddie effectively manufacture a buyer, compress MBS yields, and pull down commercial mortgage rates.\n\n2) Credit cards: cap APRs at 10%?"
+            },
+            {
+              "chunk_id": 7,
+              "text": "Beyond rent, credit-card rates are in the crosshairs. Personal loan rates at banks average near 12%, while card APRs hover around 20%.\n\nThe share of delinquencies rolling past 90 days is elevated, reflecting weaker ability to carry high rates among lower-income borrowers. Regardless of whether a cap truly anchors consumer-loan pricing, it is, at its core, administrative price control."
+            },
+            {
+              "chunk_id": 8,
+              "text": "3) Cap oil prices: the Venezuela decapitation move.\n\nFraming it as a counternarcotics operation helps bypass Congress and minimize legal friction. The real aim is oil reserves, and Trump barely hides it."
+            },
+            {
+              "chunk_id": 9,
+              "text": "Grabbing foreign oil resources now ties directly to lowering domestic fuel costs. While regime transition and legacy creditor disputes limit near-term supply effects, signaling accelerated extraction and releases can guide price expectations lower."
+            },
+            {
+              "chunk_id": 10,
+              "text": "If the market buys it and Brent trades down to $40–50/bbl into the late-2026 election window, that would be a narrative win for Trump's 'lower cost of living' push."
+            },
+            {
+              "chunk_id": 11,
+              "text": "Trump's longer-term strategy features the OBBB mega-bill, corporate tax cuts, and tariff exemptions or breaks for key capacity moved onshore, alongside broader external tariffs. By design, these raise domestic living costs."
+            },
+            {
+              "chunk_id": 12,
+              "text": "With the midterms looming, the short term trumps the long term. For example, the latest power-intervention plan presses cloud majors like Microsoft to ensure AI buildouts do not lift residential power bills, even cutting water usage, and requires data centers to be self-funded."
+            },
+            {
+              "chunk_id": 13,
+              "text": "A deeper structural issue is fiscal over monetary primacy. Voters cannot be alienated, yet strategic industries and manufacturing reshoring require capital.\n\nTwo fronts of spending meet pandemic-era fiscal inertia: interest payments reached $100bn in 2025, or 14% of federal outlays, making it the No. 2 line item after Social Security and surpassing defense. That is a heavy drag."
+            },
+            {
+              "chunk_id": 14,
+              "text": "Narrow deficit (ex-interest) gained an extra $180bn from the global trade war in 2025, yet the full-year deficit still neared $700bn. A sticky primary deficit plus high interest costs imply ~$2tn annual fiscal gaps ahead unless AI-driven growth delivers. Otherwise, the federal deficit ratio will keep rising passively."
+            },
+            {
+              "chunk_id": 15,
+              "text": "Trump's response is blunt: subpoenaing Powell over Fed HQ renovation overruns and alleged perjury, repeatedly probing the limits of Fed independence. This is pressure, plain and simple."
+            },
+            {
+              "chunk_id": 16,
+              "text": "There is clear overlap between short- and long-term aims: rate cuts and easier liquidity. Lower borrowing costs ease household interest burdens, support AI capex, and reduce Treasury interest expense—one policy, many wins.\n\nThe swing variable is the next Fed lineup. With Kevin Hassett seemingly out, the leading candidate is Kevin Warsh, who favors rate cuts but opposes QE."
+            },
+            {
+              "chunk_id": 17,
+              "text": "He leans toward deregulation and tax cuts, arguing that freer capital and productivity flows cool inflation. Opposition to QE reads more like 'activate existing liquidity' via looser financial regulation rather than expand the balance sheet. Net-net, he is less aligned than Hassett would be, but still broadly supportive of Trump's economic playbook."
+            },
+            {
+              "chunk_id": 18,
+              "text": "In essence, Trump is engineering administratively suppressed inflation in 2026. Lower rates would fuel spending and capex, creating a manufactured boom.\n\nWhether inflation snaps back in 2027 depends on AI's deflationary force. But 2026 looks set for a policy-driven 'prosperity' phase."
+            },
+            {
+              "chunk_id": 19,
+              "text": "Two rules of thumb from the past year still apply: in markets, TACO—'Trump always chickens out'; against rivals, TAGW—'Trump always gets what he wants'. They anchor two principles.\n\n1) His red line is higher U.S. equities. Stocks power consumption and tax receipts, and in a midterm year, he cannot afford a market break."
+            },
+            {
+              "chunk_id": 20,
+              "text": "2) Within that constraint, he is flexible and pragmatic in pursuing his goals: a) rate cuts, b) lower oil prices, and c) lower power bills. All roads lead to the midterms.\n\nHence, Dolphin Research's macro strategy boils down to:\n\n1) Stay constructive on U.S. equities, but avoid sectors facing administrative price caps. Overweight beneficiaries of Trump's policies."
+            },
+            {
+              "chunk_id": 21,
+              "text": "Expect tariff revenues to be packaged as voter rebates in Hill negotiations—'buying votes' by converting tariffs from a drag on purchasing power into a consumer boost. This setup argues for pre-positioning in consumption and retail names."
+            },
+            {
+              "chunk_id": 22,
+              "text": "2) With heavy debt and forced easing to push reindustrialization, the dollar's credibility may erode. A weak-USD regime argues for diversification and higher non-U.S. exposure in 2026.\n\n3) Dollar credibility risk plus renewed global easing (ex-China) favors 'trust substitutes' like gold. Expect continued opportunities in monetary hedges."
+            },
+            {
+              "chunk_id": 23,
+              "text": "Last week, Alpha Dolphin made no changes. The portfolio returned 0.1%, beating CSI 300 (-0.6%) and the S&P 500 (-0.4%) but lagging MSCI China (+1.5%) and the Hang Seng Tech Index (+2.4%).\n\nA pullback in gold weighed on performance, and several large positions were hit by earnings-related communication. That was the main drag."
+            },
+            {
+              "chunk_id": 24,
+              "text": "Since inception (Mar 25, 2022) to last week, absolute return is 119%, with 100% excess return vs. MSCI China. NAV terms: starting from $100mn of virtual capital, the book now exceeds $222mn.\n\nThe portfolio underperformed China equity benchmarks as the rally broadened to smaller ADRs, while quality holdings like Pop Mart and PDD pulled back. We were also hit by Trip.com Group's antitrust fine."
+            },
+            {
+              "chunk_id": 25,
+              "text": "Stock-level moves are detailed below. See the breakdown.\n\nAlpha Dolphin holds 18 equities and equity ETFs, with 7 core positions and the rest underweight. Non-equity exposure is mainly gold, U.S. Treasuries, and USD cash, with equities vs. defensive (gold/UST/cash) at roughly 52:48.\n\nAs of last week, see the asset allocation and equity position weights below. Details follow."
+            }
+          ],
+          "clip_text_embeddings_file": "docs/a772ef35008088bc/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/a772ef35008088bc/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://news.qq.com/rain/a/20260511A04CVO00": {
+      "url": "https://news.qq.com/rain/a/20260511A04CVO00",
+      "canonical_url": "https://news.qq.com/rain/a/20260511A04CVO00",
+      "name": "申万宏源程翔等:写在特朗普拟访华之前,2026年中美相关政策全面梳理_腾讯新闻",
+      "site_name": "腾讯网",
+      "display_url": "https://news.qq.com/rain/a/20260511A04CVO00",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "empty_content",
+      "web_fetch_quality_score": 0.0,
+      "date_published": "2026-05-11T12:54:58+08:00",
+      "date_last_crawled": "2026-05-11T12:54:58Z",
+      "full_content": "本文转载自微信公众号:申万宏源研究写在特朗普拟访华之前——2026\n年中美相关政策全面梳理程翔/王胜/傅静涛2026\n年开年以来,国际地缘政治持续动荡。1\n月初,美军闪击委内瑞拉,随后美以联合对伊朗发动军事打击,加剧了中东地区的紧张局势,也对中美博弈的外部环境产生深刻影响。与此同时,中美关系领域延续了\n2025\n年\n10\n月釜山元首会晤后基调,两国围绕经贸、科技、金融、地缘等领域展开了密集博弈。一、美方相关动作(一)贸易领域2026\n年\n2\n月至\n3\n月,美国在贸易层面接连出台管控与调查措施,对多国发起贸易限制:2\n月\n20\n日,美最高法院裁定\nIEEPA\n关税违法后,特朗普调整关税政策。美国总统特朗普表示,他将签署一项命令,依据美国《1974\n年贸易法》第\n122\n条,在目前已经征收的常规关税基础上,额外对全球输美商品加征\n10%\n的关税,为期\n150\n天,以取代稍早前被美国最高法院认定违法的一些紧急关税。3\n月\n12\n日,美国贸易代表办公室以“产能过剩”为由对中国等\n16\n个经济体发起\n301调查,又于\n3\n月\n13\n日以\n“未有效禁止强迫劳动产品进口”\n为由对中国等\n60\n个经济体发起\n301\n调查。3\n月\n23\n日,美国联邦通信委员会(FCC)公共安全和国土安全局发布官方公告(DA\n26-278,DA-26-286A1),核心是将外国生产的消费级路由器正式纳入\nFCC\n受管控清单。(二)科技领域进入\n4\n月,美国科技管制力度持续升级,通过法案、清单制裁、业务限制等多重手段加大限制:3\n月\n26\n日,美国众议院外交事务委员会表决通过了《芯片安全法案》(H.R.3447),法案要求美国商务部在生效后\n180\n日内,对所有受出口管制的高性能芯片及相关计算产品实施强制监管。4\n月\n22\n日,美国众议院外交事务委员会通过了《硬件技术控制多边协同法案》(简称MATCH\n法案)",
+      "image_urls": [],
+      "page_image_embeddings_file": "",
+      "page_image_embedding_urls": [],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    },
+    "https://k.sina.com.cn/article_7879923856_m1d5ae189003301cauc.html?subch=onews": {
+      "url": "https://k.sina.com.cn/article_7879923856_m1d5ae189003301cauc.html?from=news&subch=onews",
+      "canonical_url": "https://k.sina.com.cn/article_7879923856_m1d5ae189003301cauc.html?subch=onews",
+      "name": "美国总统唐纳德·特朗普2026年首次返回白宫|寰球|新鲜事_新浪新闻",
+      "site_name": "新浪网",
+      "display_url": "https://k.sina.com.cn/article_7879923856_m1d5ae189003301cauc.html?from=news&subch=onews",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "empty_content",
+      "web_fetch_quality_score": 0.0,
+      "date_published": "2026-01-05T16:03:46+08:00",
+      "date_last_crawled": "2026-01-05T16:03:46Z",
+      "full_content": "美国总统唐纳德·特朗普2026年首次返回白宫\n美国总统唐纳德·特朗普2026年首次返回白宫。#海外编译精选#\n#寰球探索君[超话]#\n#海外新鲜事#\n特别声明:以上文章内容仅代表作者本人观点,不代表新浪网观点或立场。如有关于作品内容、版权或其它问题请于作品发表后的30日内与新浪网联系。",
+      "image_urls": [
+        "https://wx4.sinaimg.cn/orj480/eca67b8ely1i8zth93fgaj20zk0k0t9l.jpg"
+      ],
+      "page_image_embeddings_file": "docs/b74ee07c0215b012/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://wx4.sinaimg.cn/orj480/eca67b8ely1i8zth93fgaj20zk0k0t9l.jpg"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    },
+    "https://www.sohu.com/a/954127528_130887?scm=10001.8085_13-8085_13.0.0.0": {
+      "url": "https://www.sohu.com/a/954127528_130887?scm=10001.8085_13-8085_13.0.0.0",
+      "canonical_url": "https://www.sohu.com/a/954127528_130887?scm=10001.8085_13-8085_13.0.0.0",
+      "name": "据知情人士透露，美国总统特朗普计划2026年1月出席达沃斯会议。（彭博）",
+      "site_name": "搜狐",
+      "display_url": "https://www.sohu.com/a/954127528_130887?scm=10001.8085_13-8085_13.0.0.0",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "short_content",
+      "web_fetch_quality_score": 0.16671428571428573,
+      "date_published": "2025-11-14T03:15:00+08:00",
+      "date_last_crawled": "2025-11-14T03:15:00Z",
+      "full_content": "据知情人士透露,美国总统特朗普计划2026年1月出席达沃斯会议。(彭博)\n据知情人士透露,美国总统特朗普计划2026年1月出席达沃斯会议。(彭博)\n返回搜狐,查看更多\n平台声明:该文观点仅代表作者本人,搜狐号系信息发布平台,搜狐仅提供信息存储空间服务。",
+      "image_urls": [
+        "https://p2.itc.cn/mpbp/pro/20210918/c752cb31cf1c4256aea997be6d1fafac.png"
+      ],
+      "page_image_embeddings_file": "",
+      "page_image_embedding_urls": [],
+      "page_image_failed_urls": [
+        "https://p2.itc.cn/mpbp/pro/20210918/c752cb31cf1c4256aea997be6d1fafac.png"
+      ],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    },
+    "https://longportapp.cn/en/topics/39867782": {
+      "url": "https://longportapp.cn/en/topics/39867782",
+      "canonical_url": "https://longportapp.cn/en/topics/39867782",
+      "name": "Trump’s return to office is not far off. Risk appetite can start to recover - LongPort",
+      "site_name": "longportapp.cn",
+      "display_url": "https://longportapp.cn/en/topics/39867782",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 1.0,
+      "date_published": "2026-04-13T13:03:00+08:00",
+      "date_last_crawled": "2026-04-13T13:03:00Z",
+      "full_content": "Trump’s return to office is not far off. Risk appetite can start to recover\n\nBy the end of Q1 2026, risk appetite has shifted sharply from the collective AI euphoria of 2025. A string of headline-grabbing moves by Trump, the breakneck pace of AI, and swings in USD liquidity have all pushed investors to recalibrate.\n\nHow much of this is a short-term swing in war-related risk appetite versus a deliberate alignment with longer-term trends? After a rapid style rotation, what exactly are the investable themes in 2026? Dolphin Research offers a brief take in this weekly strategy note.\n\n1) 2026: What Is the Ultimate Trade?\n\nAs 2026 began, markets had yet to step back from the AI leaderboard race. The launch of OpenClaw, the internalization of various skills into models, and more grounded productization drove deeper AI penetration into mainstream perception.\n\nCapital started to worry about the collapse of SaaS terminal value, triggering a broad selloff across software under doomsday narratives. The shift was swift and indiscriminate.\n\nAt the same time, as Big Tech’s capex surged, pressure spread beyond industrial internet SaaS to consumer internet names. These companies are either footing today’s AI build-out bills or seen as likely ‘losers’ in the AI era.\n\nIn Dolphin’s watchlist, the worst decliners are industrial internet SaaS, while the best performers are producers of capital goods and inputs benefiting from AI capex. On the consumer internet side, valuation cuts were broad-based.\n\nGiants faced short-term cash flow mismatches as capex rose, or were deemed to have business models ripe for AI disruption. Either way, multiples compressed.\n\nTwo forces are now shaping market direction. Politically, the U.S. has escalated from a decapitation strike on Venezuela to rhetorical ‘epic fury’ toward Iran, and these moves ultimately point to energy, resources, and critical energy chokepoints.\n\nLayered on top is a severe mismatch in power infrastructure needed for AI build-out. With that backdrop, energy, metals, and other traditional resource plays have rallied even more than semiconductor capital-goods names.\n\nThis differs from 2025’s straight-up contest over whose model was better, such as Google’s, or who could use AI to drive revenue and efficiency. That narrative sent PLTR and even META soaring.\n\nIn 2026, amid macro uncertainty, the market is chasing what’s highly visible and near-term. Near term, who benefits with certainty from AI capex?\n\nLonger term, if AI truly replaces human labor, what demand is structurally and perpetually rewritten? These are the key questions anchoring flows.\n\nNear term, one clear answer is memory, where pricing has already adjusted. Up the chain, capex equipment makers and networking vendors are also in the slipstream.\n\nOver the long run, AI replacing labor is essentially compute replacing brainpower. Compute runs on electricity, whereas human cognition is powered by glucose.\n\nThat shift to electricity plus compute as ‘silicon-based intelligence’ implies AI will fundamentally reshape future energy demand. The knock-on effects should not be underestimated.\n\nEnergy and commodities may take time to transition, but the opportunity set looks long and persistent. We view this as a secular theme that unfolds over years.\n\nDolphin Research believes the re-rating in energy and other resource-linked assets will take a long time to play out. The market will need time to fully reprice these shifts.\n\nBetween traditional internet and AI, whether the endgame is co-construction or full disruption remains uncertain. Who bears the risks of the infrastructure build and how business models are reshaped will also take time to verify, creating trades when internet assets are oversold.\n\nTherefore, for 2026, energy and commodity-linked assets look like ongoing opportunities. In the AI era, the struggle and symbiosis between traditional internet and AI also create sell-rally, buy-dip trading setups.\n\n2) TACO: Trade the Outcome, Not the Process\n\nThe Trump administration clearly recognizes energy’s centrality in AI’s endgame. As tariff skirmishes cooled, an energy land-grab began almost immediately.\n\nIf we set aside the ebbs and flows of war and negotiations, and how long the tug-of-war lasts, the current U.S. macro picture is telling. The following points are most relevant.\n\na) On the consumer side, household wealth growth relies excessively on asset appreciation. Persistent weakness in equities not only depresses returns but also erodes consumption willingness in the real economy.\n\nb) Sustained high oil prices lift inflation expectations. With the U.S. facing a heavy interest burden, relying on high oil to prop inflation and squeeze household affordability is not sustainable.\n\nThis implies that regardless of the outcome in Iran, and whether hostilities shift from high-intensity to a prolonged, low-intensity stalemate, the administration will push to restore shipping through the Strait of Hormuz ahead of elections. A paper peace would help craft a narrative of having ‘won.’\n\nIn the U.S. electoral calendar, roughly Mar–Jun sees each party select its candidates. From Jun to Oct, the two parties then square off.\n\nIf the war drags on, it clearly hurts the ruling party. Hence, de-escalation incentives are strong.\n\nPractically, from mid-Apr to Jun, we should see signs of de-escalation in the Strait of Hormuz. Volatility during negotiation back-and-forths can create buy-the-dip opportunities.\n\nThis contrasts with the war’s onset, when excessive optimism saw risks build to the upside. Positioning should reflect that regime shift.\n\nLast week, Dolphin Research’s virtual portfolio Alpha Dolphin made no changes. The portfolio returned 2% for the week, underperforming CSI 300 (+4.4%), MSCI China (+3.1%), HSTECH (+3.9%), and the S&P 500 (+3.6%).\n\nSince inception on Mar 25, 2022 through last week, the portfolio has gained 115% in absolute terms. Excess return vs MSCI China is 97%.\n\nOn an NAV basis, the initial $100 mn of virtual capital has grown to over $218 mn. Compounding has been steady.\n\n4) Single-Name P&L Contribution\n\nLast week, as the war moved into a more negotiable phase, most asset classes recovered. Within our holdings, high-quality AI exposures led the rebound.\n\nGiven the portfolio has not been rebalanced for some time and the 2026 investment framework has shifted, we will refocus on active rebalancing in the near term. Expect more proactive management.\n\nThe Alpha Dolphin virtual portfolio holds 18 stocks and equity ETFs, with 7 at benchmark weight and the rest underweight. Outside equities, exposure is concentrated in gold, U.S. Treasuries, and USD cash, with equities vs gold/USTs/cash roughly 50:50.\n\nAs of last week, asset allocation and equity position weights are as follows. See below for details.\n\nAs we move into mid-Apr, U.S. earnings season ramps up. Two semiconductor heavyweights, ASML (ASML) and TSMC (TSM), will report.\n\nOther key names include CATL and Netflix (NFLX), with focus points summarized below. We will track catalysts closely.\n\nRisk Disclosure and Statement: Dolphin Research Disclaimer and General Disclosure\n\nFor recent weekly portfolio reports by Dolphin Research, please refer to:\n\n‘The Most Grounded Way to Start: Dolphin’s Portfolio Is Off and Running’",
+      "image_urls": [
+        "https://pub.pbkrs.com/social/2026/0/9bWfUyFpvrZpTRN9CmrjPJLAshub3DDF.jpg",
+        "https://pub.pbkrs.com/social/badge/view/small_3000.png?v=4&1766496113",
+        "https://pub.pbkrs.com/social/badge/like/small_10000.png?v=4&1766496113"
+      ],
+      "page_image_embeddings_file": "docs/d4c1bab4179b5e1d/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://pub.pbkrs.com/social/2026/0/9bWfUyFpvrZpTRN9CmrjPJLAshub3DDF.jpg",
+        "https://pub.pbkrs.com/social/badge/view/small_3000.png?v=4&1766496113",
+        "https://pub.pbkrs.com/social/badge/like/small_10000.png?v=4&1766496113"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "recent activities of Donald Trump in 2026",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "Trump’s return to office is not far off. Risk appetite can start to recover\n\nBy the end of Q1 2026, risk appetite has shifted sharply from the collective AI euphoria of 2025. A string of headline-grabbing moves by Trump, the breakneck pace of AI, and swings in USD liquidity have all pushed investors to recalibrate."
+            },
+            {
+              "chunk_id": 1,
+              "text": "How much of this is a short-term swing in war-related risk appetite versus a deliberate alignment with longer-term trends? After a rapid style rotation, what exactly are the investable themes in 2026? Dolphin Research offers a brief take in this weekly strategy note.\n\n1) 2026: What Is the Ultimate Trade?"
+            },
+            {
+              "chunk_id": 2,
+              "text": "As 2026 began, markets had yet to step back from the AI leaderboard race. The launch of OpenClaw, the internalization of various skills into models, and more grounded productization drove deeper AI penetration into mainstream perception."
+            },
+            {
+              "chunk_id": 3,
+              "text": "Capital started to worry about the collapse of SaaS terminal value, triggering a broad selloff across software under doomsday narratives. The shift was swift and indiscriminate."
+            },
+            {
+              "chunk_id": 4,
+              "text": "At the same time, as Big Tech’s capex surged, pressure spread beyond industrial internet SaaS to consumer internet names. These companies are either footing today’s AI build-out bills or seen as likely ‘losers’ in the AI era."
+            },
+            {
+              "chunk_id": 5,
+              "text": "In Dolphin’s watchlist, the worst decliners are industrial internet SaaS, while the best performers are producers of capital goods and inputs benefiting from AI capex. On the consumer internet side, valuation cuts were broad-based.\n\nGiants faced short-term cash flow mismatches as capex rose, or were deemed to have business models ripe for AI disruption. Either way, multiples compressed."
+            },
+            {
+              "chunk_id": 6,
+              "text": "Two forces are now shaping market direction. Politically, the U.S. has escalated from a decapitation strike on Venezuela to rhetorical ‘epic fury’ toward Iran, and these moves ultimately point to energy, resources, and critical energy chokepoints."
+            },
+            {
+              "chunk_id": 7,
+              "text": "Layered on top is a severe mismatch in power infrastructure needed for AI build-out. With that backdrop, energy, metals, and other traditional resource plays have rallied even more than semiconductor capital-goods names."
+            },
+            {
+              "chunk_id": 8,
+              "text": "This differs from 2025’s straight-up contest over whose model was better, such as Google’s, or who could use AI to drive revenue and efficiency. That narrative sent PLTR and even META soaring.\n\nIn 2026, amid macro uncertainty, the market is chasing what’s highly visible and near-term. Near term, who benefits with certainty from AI capex?"
+            },
+            {
+              "chunk_id": 9,
+              "text": "Longer term, if AI truly replaces human labor, what demand is structurally and perpetually rewritten? These are the key questions anchoring flows.\n\nNear term, one clear answer is memory, where pricing has already adjusted. Up the chain, capex equipment makers and networking vendors are also in the slipstream."
+            },
+            {
+              "chunk_id": 10,
+              "text": "Over the long run, AI replacing labor is essentially compute replacing brainpower. Compute runs on electricity, whereas human cognition is powered by glucose.\n\nThat shift to electricity plus compute as ‘silicon-based intelligence’ implies AI will fundamentally reshape future energy demand. The knock-on effects should not be underestimated."
+            },
+            {
+              "chunk_id": 11,
+              "text": "Energy and commodities may take time to transition, but the opportunity set looks long and persistent. We view this as a secular theme that unfolds over years.\n\nDolphin Research believes the re-rating in energy and other resource-linked assets will take a long time to play out. The market will need time to fully reprice these shifts."
+            },
+            {
+              "chunk_id": 12,
+              "text": "Between traditional internet and AI, whether the endgame is co-construction or full disruption remains uncertain. Who bears the risks of the infrastructure build and how business models are reshaped will also take time to verify, creating trades when internet assets are oversold."
+            },
+            {
+              "chunk_id": 13,
+              "text": "Therefore, for 2026, energy and commodity-linked assets look like ongoing opportunities. In the AI era, the struggle and symbiosis between traditional internet and AI also create sell-rally, buy-dip trading setups.\n\n2) TACO: Trade the Outcome, Not the Process"
+            },
+            {
+              "chunk_id": 14,
+              "text": "The Trump administration clearly recognizes energy’s centrality in AI’s endgame. As tariff skirmishes cooled, an energy land-grab began almost immediately.\n\nIf we set aside the ebbs and flows of war and negotiations, and how long the tug-of-war lasts, the current U.S. macro picture is telling. The following points are most relevant."
+            },
+            {
+              "chunk_id": 15,
+              "text": "a) On the consumer side, household wealth growth relies excessively on asset appreciation. Persistent weakness in equities not only depresses returns but also erodes consumption willingness in the real economy."
+            },
+            {
+              "chunk_id": 16,
+              "text": "b) Sustained high oil prices lift inflation expectations. With the U.S. facing a heavy interest burden, relying on high oil to prop inflation and squeeze household affordability is not sustainable."
+            },
+            {
+              "chunk_id": 17,
+              "text": "This implies that regardless of the outcome in Iran, and whether hostilities shift from high-intensity to a prolonged, low-intensity stalemate, the administration will push to restore shipping through the Strait of Hormuz ahead of elections. A paper peace would help craft a narrative of having ‘won.’"
+            },
+            {
+              "chunk_id": 18,
+              "text": "In the U.S. electoral calendar, roughly Mar–Jun sees each party select its candidates. From Jun to Oct, the two parties then square off.\n\nIf the war drags on, it clearly hurts the ruling party. Hence, de-escalation incentives are strong."
+            },
+            {
+              "chunk_id": 19,
+              "text": "Practically, from mid-Apr to Jun, we should see signs of de-escalation in the Strait of Hormuz. Volatility during negotiation back-and-forths can create buy-the-dip opportunities.\n\nThis contrasts with the war’s onset, when excessive optimism saw risks build to the upside. Positioning should reflect that regime shift."
+            },
+            {
+              "chunk_id": 20,
+              "text": "Last week, Dolphin Research’s virtual portfolio Alpha Dolphin made no changes. The portfolio returned 2% for the week, underperforming CSI 300 (+4.4%), MSCI China (+3.1%), HSTECH (+3.9%), and the S&P 500 (+3.6%).\n\nSince inception on Mar 25, 2022 through last week, the portfolio has gained 115% in absolute terms. Excess return vs MSCI China is 97%."
+            },
+            {
+              "chunk_id": 21,
+              "text": "On an NAV basis, the initial $100 mn of virtual capital has grown to over $218 mn. Compounding has been steady.\n\n4) Single-Name P&L Contribution\n\nLast week, as the war moved into a more negotiable phase, most asset classes recovered. Within our holdings, high-quality AI exposures led the rebound."
+            },
+            {
+              "chunk_id": 22,
+              "text": "Given the portfolio has not been rebalanced for some time and the 2026 investment framework has shifted, we will refocus on active rebalancing in the near term. Expect more proactive management."
+            },
+            {
+              "chunk_id": 23,
+              "text": "The Alpha Dolphin virtual portfolio holds 18 stocks and equity ETFs, with 7 at benchmark weight and the rest underweight. Outside equities, exposure is concentrated in gold, U.S. Treasuries, and USD cash, with equities vs gold/USTs/cash roughly 50:50.\n\nAs of last week, asset allocation and equity position weights are as follows. See below for details."
+            },
+            {
+              "chunk_id": 24,
+              "text": "As we move into mid-Apr, U.S. earnings season ramps up. Two semiconductor heavyweights, ASML (ASML) and TSMC (TSM), will report.\n\nOther key names include CATL and Netflix (NFLX), with focus points summarized below. We will track catalysts closely.\n\nRisk Disclosure and Statement: Dolphin Research Disclaimer and General Disclosure"
+            },
+            {
+              "chunk_id": 25,
+              "text": "For recent weekly portfolio reports by Dolphin Research, please refer to:\n\n‘The Most Grounded Way to Start: Dolphin’s Portfolio Is Off and Running’"
+            }
+          ],
+          "clip_text_embeddings_file": "docs/d4c1bab4179b5e1d/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/d4c1bab4179b5e1d/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://database.caixin.com/m/2025-09-06/102359602.html": {
+      "url": "https://database.caixin.com/m/2025-09-06/102359602.html",
+      "canonical_url": "https://database.caixin.com/m/2025-09-06/102359602.html",
+      "name": "【市场动态】特朗普称2026年G20峰会将在他位于迈阿密的度假村举行",
+      "site_name": "财新网数据频道",
+      "display_url": "https://database.caixin.com/m/2025-09-06/102359602.html",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.0,
+      "date_published": "2025-09-06T08:13:00+08:00",
+      "date_last_crawled": "2025-09-06T08:13:00Z",
+      "full_content": "【市场动态】特朗普称2026年G20峰会将在他位于迈阿密的度假村举行\n此次峰会将于2026年12月14日至15日举行,主题为“通过放松管制、能源富足和创新实现增长”\n原图\n资料图:特朗普。图;视觉中国\n财新网所刊载内容之知识产权为财新传媒及/或相关权利人专属所有或持有。未经许可,禁止进行转载、摘编、复制及建立镜像等任何使用。\n如有意愿转载,请发邮件至hello@caixin.com,获得书面确认及授权后,方可转载。\n请按\n然后点选“添加到主屏幕”添加快捷方式到桌面。",
+      "image_urls": [
+        "https://img.caixin.com/2025-08-27/175630054720346_560_373.jpg",
+        "https://img.caixin.com/2025-08-27/175630054720346_480_320.jpg",
+        "https://img.caixin.com/2025-09-05/175706999265648.jpg"
+      ],
+      "page_image_embeddings_file": "docs/208f262f504cb0da/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://img.caixin.com/2025-08-27/175630054720346_560_373.jpg",
+        "https://img.caixin.com/2025-08-27/175630054720346_480_320.jpg",
+        "https://img.caixin.com/2025-09-05/175706999265648.jpg"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    },
+    "https://ah.huatu.com/2026/0520/3245275.html": {
+      "url": "https://ah.huatu.com/2026/0520/3245275.html",
+      "canonical_url": "https://ah.huatu.com/2026/0520/3245275.html",
+      "name": "2026时政热点:国内外时事政治汇总（5月15日）",
+      "site_name": "安徽华图",
+      "display_url": "https://ah.huatu.com/2026/0520/3245275.html",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.0,
+      "date_published": "2026-05-20T10:31:00+08:00",
+      "date_last_crawled": "2026-05-20T10:31:00Z",
+      "full_content": "2026时政热点:国内外时事政治汇总(5月15日)\n一、时政要闻\n1、中美元首会晤:国家主席习近平在北京中南海同美国总统特朗普举行小范围会晤。多国人士和国际媒体高度关注,认为此次会谈为两国关系提供了战略指引,为全球注入稳定性。\n2、国务院会议:李强主持召开国务院常务会议,审议通过了《城市更新“十五五”规划》及《加快农业农村现代化“十五五”规划》。\n3、高层调研:赵乐际5月13日至15日在贵州调研。\n4、重要文章预告:5月16日出版的《求是》杂志将发表习近平总书记重要文章《做强做优做大实体经济》。\n二、经济与数据\n1、“十五五”开局:江苏、安徽举行新闻发布会,介绍“十五五”时期高质量发展目标与举措。\n2、数字产业:一季度我国数字产业收入达9.5万亿元,同比增长12.9%。\n3、铁路客运:1至4月全国铁路发送旅客15.55亿人次,同比增长6.8%。\n4、夏粮收获:西南麦区迎来大面积收获,总产量稳步增长。\n三、国内动态\n1、残疾人事业:国新办举行“新征程上的奋斗者”中外记者见面会,5位残疾人代表围绕自强精神分享奋斗故事。\n2、法律实施:新修订的《药品管理法实施条例》今日起正式施行。\n3、航天发射:力箭一号遥十三运载火箭成功发射,力箭系列运载火箭完成百星发射。\n4、家庭与教育:中央宣传部、全国妇联联合发布2026年“最美家庭”;中央财政两年投入10亿元支持校园足球发展。\n5、基建工程:广州港南沙港区五期工程开工;上海“一网通办”累计办件量超8亿件。\n6、文化活动:雄安新区举办首场青年人才交流会;首届中国新文创市集暨潮玩游园会在京举办。\n四、国际动态\n1、中东局势:以色列与黎巴嫩在美国举行新一轮会谈但分歧明显;也门政府与胡塞武装达成人员释放协议。\n2、自然与事故:印度恶劣天气已致超百人死亡;美国基拉韦厄火山喷出大量岩浆。一、时政要闻\n1、中美元首会晤:国家主席习近平在北京中南海同美",
+      "image_urls": [
+        "https://u3.huatu.com/uploads/allimg/260520/660647-260520091P18632226350.png",
+        "https://ah.huatu.com/z/pic/top-img.png",
+        "https://ah.huatu.com/z/pic/top-wx.jpg"
+      ],
+      "page_image_embeddings_file": "docs/6ee9c40c9d4cf75c/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://u3.huatu.com/uploads/allimg/260520/660647-260520091P18632226350.png",
+        "https://ah.huatu.com/z/pic/top-img.png",
+        "https://ah.huatu.com/z/pic/top-wx.jpg"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "recent activities of Donald Trump in May 2026",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "2026时政热点:国内外时事政治汇总(5月15日)\n\n一、时政要闻\n\n1、中美元首会晤:国家主席习近平在北京中南海同美国总统特朗普举行小范围会晤。多国人士和国际媒体高度关注,认为此次会谈为两国关系提供了战略指引,为全球注入稳定性。\n\n2、国务院会议:李强主持召开国务院常务会议,审议通过了《城市更新“十五五”规划》及《加快农业农村现代化“十五五”规划》。\n\n3、高层调研:赵乐际5月13日至15日在贵州调研。\n\n4、重要文章预告:5月16日出版的《求是》杂志将发表习近平总书记重要文章《做强做优做大实体经济》。\n\n二、经济与数据\n\n1、“十五五”开局:江苏、安徽举行新闻发布会,介绍“十五五”时期高质量发展目标与举措。\n\n2、数字产业:一季度我国数字产业收入达9.5万亿元,同比增长12.9%。\n\n3、铁路客运:1至4月全国铁路发送旅客15.55亿人次,同比增长6.8%。"
+            },
+            {
+              "chunk_id": 1,
+              "text": "4、夏粮收获:西南麦区迎来大面积收获,总产量稳步增长。\n\n三、国内动态\n\n1、残疾人事业:国新办举行“新征程上的奋斗者”中外记者见面会,5位残疾人代表围绕自强精神分享奋斗故事。\n\n2、法律实施:新修订的《药品管理法实施条例》今日起正式施行。\n\n3、航天发射:力箭一号遥十三运载火箭成功发射,力箭系列运载火箭完成百星发射。\n\n4、家庭与教育:中央宣传部、全国妇联联合发布2026年“最美家庭”;中央财政两年投入10亿元支持校园足球发展。\n\n5、基建工程:广州港南沙港区五期工程开工;上海“一网通办”累计办件量超8亿件。\n\n6、文化活动:雄安新区举办首场青年人才交流会;首届中国新文创市集暨潮玩游园会在京举办。\n\n四、国际动态\n\n1、中东局势:以色列与黎巴嫩在美国举行新一轮会谈但分歧明显;也门政府与胡塞武装达成人员释放协议。"
+            },
+            {
+              "chunk_id": 2,
+              "text": "2、自然与事故:印度恶劣天气已致超百人死亡;美国基拉韦厄火山喷出大量岩浆。一、时政要闻\n\n1、中美元首会晤:国家主席习近平在北京中南海同美"
+            }
+          ],
+          "clip_text_embeddings_file": "docs/6ee9c40c9d4cf75c/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/6ee9c40c9d4cf75c/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://www.ah.huatu.com/2026/0520/3245298.html": {
+      "url": "https://m.ah.huatu.com/2026/0520/3245298.html",
+      "canonical_url": "https://www.ah.huatu.com/2026/0520/3245298.html",
+      "name": "2026时政热点:国内外时事政治汇总(5月14日)_华图教育",
+      "site_name": "安徽华图",
+      "display_url": "https://m.ah.huatu.com/2026/0520/3245298.html",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "request_failed",
+      "web_fetch_quality_score": 0.0,
+      "date_published": "2026-05-20T10:39:00+08:00",
+      "date_last_crawled": "2026-05-20T10:39:00Z",
+      "full_content": "2026时政热点:国内外时事政治汇总(5月14日)\n一、时政要闻\n1、中美元首系列活动:国家主席习近平举行仪式欢迎美国总统特朗普访华,随后双方举行会谈,共同参观天坛,晚间习近平为特朗普举行欢迎宴会。双方同意将构建“中美建设性战略稳定关系”作为中美关系新定位。\n2、李强会见美国工商界代表:国务院总理李强在人民大会堂会见随同特朗普访华的美国工商界代表。\n3、国际社会关注:多国人士高度关注中美元首会谈,认为这是一次历史性会谈,向世界发出积极信号。\n二、经济与数据\n1、金融数据:4月末,我国社会融资规模存量同比增长7.8%,广义货币(M2)余额353万亿元,同比增长8.6%。\n2、电商物流:4月份中国电商物流指数为110.6点,环比回升0.3点,电商物流运行稳中有升。\n3、工程机械出口:一季度我国工程机械产品出口保持快速增长,海外业务比重显著提升。\n4、夏粮收购:夏粮旺季收购即将启动,预计收购小麦1亿吨左右,目前各地准备工作已就绪。\n5、期货市场:1-4月全国期货市场累计成交额同比增长42.75%。\n三、国内动态\n1、快递从业者见面会:国新办举行“新征程上的奋斗者”中外记者见面会,5位快递从业者代表围绕“青春贯山海,寄递连万家”主题分享基层实践。\n2、城市再生水:2025年我国城市再生水利用量突破220亿立方米。\n3、医保飞检:2026年度国家医保基金飞行检查全面启动。\n4、数据要素:“数据要素×”今年首场数据场景供需对接会今天举办。\n5、航天发射:朱雀二号改进型遥五运载火箭发射成功。\n四、国际动态\n1、中东局势:以军袭击黎南部多地,以军称已在所有战区创造“新的安全现实”。\n2、欧佩克预期:欧佩克下调2026年全球石油需求增长预期。\n3、俄气进口:欧盟一季度进口俄液化天然气创近年新高。\n4、日本破产企业:日本破产企业数连续5个月同比增加。\n5、邮轮疫情:英国一邮轮发生诺如病毒感染",
+      "image_urls": [
+        "https://u3.huatu.com/uploads/allimg/260520/660647-260520091P18632226350.png"
+      ],
+      "page_image_embeddings_file": "docs/72dee2d7dc764fa0/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://u3.huatu.com/uploads/allimg/260520/660647-260520091P18632226350.png"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "recent activities of Donald Trump in May 2026",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "2026时政热点:国内外时事政治汇总(5月14日)\n\n一、时政要闻\n\n1、中美元首系列活动:国家主席习近平举行仪式欢迎美国总统特朗普访华,随后双方举行会谈,共同参观天坛,晚间习近平为特朗普举行欢迎宴会。双方同意将构建“中美建设性战略稳定关系”作为中美关系新定位。\n\n2、李强会见美国工商界代表:国务院总理李强在人民大会堂会见随同特朗普访华的美国工商界代表。\n\n3、国际社会关注:多国人士高度关注中美元首会谈,认为这是一次历史性会谈,向世界发出积极信号。\n\n二、经济与数据\n\n1、金融数据:4月末,我国社会融资规模存量同比增长7.8%,广义货币(M2)余额353万亿元,同比增长8.6%。\n\n2、电商物流:4月份中国电商物流指数为110.6点,环比回升0.3点,电商物流运行稳中有升。\n\n3、工程机械出口:一季度我国工程机械产品出口保持快速增长,海外业务比重显著提升。"
+            },
+            {
+              "chunk_id": 1,
+              "text": "4、夏粮收购:夏粮旺季收购即将启动,预计收购小麦1亿吨左右,目前各地准备工作已就绪。\n\n5、期货市场:1-4月全国期货市场累计成交额同比增长42.75%。\n\n三、国内动态\n\n1、快递从业者见面会:国新办举行“新征程上的奋斗者”中外记者见面会,5位快递从业者代表围绕“青春贯山海,寄递连万家”主题分享基层实践。\n\n2、城市再生水:2025年我国城市再生水利用量突破220亿立方米。\n\n3、医保飞检:2026年度国家医保基金飞行检查全面启动。\n\n4、数据要素:“数据要素×”今年首场数据场景供需对接会今天举办。\n\n5、航天发射:朱雀二号改进型遥五运载火箭发射成功。\n\n四、国际动态\n\n1、中东局势:以军袭击黎南部多地,以军称已在所有战区创造“新的安全现实”。\n\n2、欧佩克预期:欧佩克下调2026年全球石油需求增长预期。\n\n3、俄气进口:欧盟一季度进口俄液化天然气创近年新高。"
+            },
+            {
+              "chunk_id": 2,
+              "text": "4、日本破产企业:日本破产企业数连续5个月同比增加。\n\n5、邮轮疫情:英国一邮轮发生诺如病毒感染"
+            }
+          ],
+          "clip_text_embeddings_file": "docs/72dee2d7dc764fa0/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/72dee2d7dc764fa0/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://www.bjreview.com/Opinion/Voice/202605/t20260518_800437584.html": {
+      "url": "https://www.bjreview.com/Opinion/Voice/202605/t20260518_800437584.html",
+      "canonical_url": "https://www.bjreview.com/Opinion/Voice/202605/t20260518_800437584.html",
+      "name": "Hormuz to the Great Hall",
+      "site_name": "北京周报英文网",
+      "display_url": "https://www.bjreview.com/Opinion/Voice/202605/t20260518_800437584.html",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 1.0,
+      "date_published": "2026-05-18T00:00:00+08:00",
+      "date_last_crawled": "2026-05-18T00:00:00Z",
+      "full_content": "Pacific Dialogue\n\nWisdom Without Borders\n\nThrough Their Eyes\n\nReal People, Real Lives\n\nOn the Scene\n\nMy China Eye\n\nInfographics\n\nSpecial Reports\n\nXinjiang Today\n\nAs the dust settled over the Persian Gulf in early May, U.S. President Donald Trump began preparing for a landmark journey eastward. Weeks after a fragile ceasefire in the Iran conflict, codenamed \"Operation Epic Fury\" by the United States, Trump arrived in Beijing on May 13 for his first presidential visit to China in nearly a decade.\n\nHe last visited China in November 2017, a trip during which Trump and Chinese President Xi Jinping reached broad consensus on bilateral relations and economic cooperation and signed a series of large-scale trade and investment agreements totaling over $250 billion. Since coming back into office in early 2025, Trump has sought a return visit. That trip was originally planned for late March, but was postponed due to the war in Iran.\n\nThe U.S.-led military campaign, involving American and Israeli strikes, intended to neutralize Iran's missile and naval capabilities while securing the Strait of Hormuz. After roughly 38 days of major combat, a ceasefire was announced. Both sides claimed success: Washington touted dismantled Iranian capabilities and reopened shipping lanes, while Tehran hailed a \"historic and crushing defeat\" of U.S. and Israeli ambitions. Broader economic ripple effects, including spiking oil prices, disrupted trade and long-term reconstruction, have fueled informal estimates reaching into the hundreds of billions of U.S. dollars.\n\nAgainst this backdrop, President Trump's visit to China was neither a victory lap nor a desperate plea. Previously, he had described the trip as \"amazing\" and \"potentially historic.\"\n\nBeijing, a major buyer of Iranian oil and an important diplomatic player, reportedly stepped up mediation efforts during the conflict while also safeguarding its own energy interests. The summit offered a venue to manage great-power competition amid systemic stress, stabilizing global markets after the Hormuz chaos, addressing outstanding tariff issues and exploring ways to derisk economic relations without resorting to full decoupling.\n\nSome commentators have suggested that Trump arrived in Beijing as a \"defeated party,\" seeking concessions to avert economic collapse in the U.S. Such claims, however, overlook certain realities.\n\nThe American economy, while facing headwinds from inflation and higher oil prices, retains structural strengths in innovation and alliances.\n\nThe war's price tag, whether $60 billion or considerably higher, is significant but remains within the capacity of U.S. defense spending. Broader costs reflect global energy interdependence and put pressure on all major economies, including China.\n\nTrump's visit will inevitably color the atmosphere of the second China-Arab States Summit, slated to be held in Beijing later this year. The gathering will celebrate the 70th anniversary of China-Arab diplomatic ties. The U.S. and Israeli strikes on Iran, together with the disruption of shipping in the Strait of Hormuz, have made Arab countries keenly aware of the vulnerability of maritime trade in the Gulf region.\n\nArab leaders may therefore want to accelerate their eastward diversification strategies, deepening economic partnerships with China, the world's largest oil importer, through continued progress in the Belt and Road Initiative, oil trade, technological cooperation and other areas. (The Belt and Road Initiative is a China-proposed framework to boost connectivity along and beyond the ancient Silk Road routes—Ed.)\n\nAt the same time, the U.S. remains a key ally for many Arab states. Washington may need to reassure its Gulf partners, who are wary of over-reliance on any single power and are actively adopting hedging strategies, that it intends to remain engaged in the region.\n\nA Xi-Trump meeting that yields pragmatic understandings on energy stability, regional de-escalation or investment flows could foster a more constructive environment. It would signal an attempt at great-power coordination to prevent wider spillover, potentially reassuring Arab states that do not wish to be caught in superpower crossfire. Conversely, visible friction between the two might embolden hedging behavior and accelerate diversification. Riyadh's dual-track approach, maintaining a U.S. security umbrella while deepening economic ties with the East, already exemplifies this balancing act.\n\nUltimately, Trump's eastward journey reflected a multipolar reality rather than a simple story of American decline. The diplomacy will test whether great powers can convert a battlefield pause into broader stability. The stakes, namely, energy flows, economic recovery and regional order in the Middle East, transcend any single narrative of triumph or defeat.\n\nThe author is director and founder of the Asia Center for Studies & Translation in Egypt\n\nCopyedited by Elsbeth van Paridon\n\nComments to dingying@cicgamericas.com",
+      "image_urls": [
+        "https://www.bjreview.com/Opinion/Voice/202605/W020260518575109008944.jpg",
+        "https://www.bjreview.com/images/1228-ej.png",
+        "https://www.bjreview.com/2020img/1228-1.png"
+      ],
+      "page_image_embeddings_file": "docs/96c9f2d5ccf9f8c8/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://www.bjreview.com/Opinion/Voice/202605/W020260518575109008944.jpg",
+        "https://www.bjreview.com/images/1228-ej.png",
+        "https://www.bjreview.com/2020img/1228-1.png"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "recent activities of Donald Trump in May 2026",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "Pacific Dialogue\n\nWisdom Without Borders\n\nThrough Their Eyes\n\nReal People, Real Lives\n\nOn the Scene\n\nMy China Eye\n\nInfographics\n\nSpecial Reports\n\nXinjiang Today"
+            },
+            {
+              "chunk_id": 1,
+              "text": "As the dust settled over the Persian Gulf in early May, U.S. President Donald Trump began preparing for a landmark journey eastward. Weeks after a fragile ceasefire in the Iran conflict, codenamed \"Operation Epic Fury\" by the United States, Trump arrived in Beijing on May 13 for his first presidential visit to China in nearly a decade."
+            },
+            {
+              "chunk_id": 2,
+              "text": "He last visited China in November 2017, a trip during which Trump and Chinese President Xi Jinping reached broad consensus on bilateral relations and economic cooperation and signed a series of large-scale trade and investment agreements totaling over $250 billion. Since coming back into office in early 2025, Trump has sought a return visit."
+            },
+            {
+              "chunk_id": 3,
+              "text": "That trip was originally planned for late March, but was postponed due to the war in Iran."
+            },
+            {
+              "chunk_id": 4,
+              "text": "The U.S.-led military campaign, involving American and Israeli strikes, intended to neutralize Iran's missile and naval capabilities while securing the Strait of Hormuz. After roughly 38 days of major combat, a ceasefire was announced."
+            },
+            {
+              "chunk_id": 5,
+              "text": "Both sides claimed success: Washington touted dismantled Iranian capabilities and reopened shipping lanes, while Tehran hailed a \"historic and crushing defeat\" of U.S. and Israeli ambitions. Broader economic ripple effects, including spiking oil prices, disrupted trade and long-term reconstruction, have fueled informal estimates reaching into the hundreds of billions of U.S. dollars."
+            },
+            {
+              "chunk_id": 6,
+              "text": "Against this backdrop, President Trump's visit to China was neither a victory lap nor a desperate plea. Previously, he had described the trip as \"amazing\" and \"potentially historic.\""
+            },
+            {
+              "chunk_id": 7,
+              "text": "Beijing, a major buyer of Iranian oil and an important diplomatic player, reportedly stepped up mediation efforts during the conflict while also safeguarding its own energy interests."
+            },
+            {
+              "chunk_id": 8,
+              "text": "The summit offered a venue to manage great-power competition amid systemic stress, stabilizing global markets after the Hormuz chaos, addressing outstanding tariff issues and exploring ways to derisk economic relations without resorting to full decoupling."
+            },
+            {
+              "chunk_id": 9,
+              "text": "Some commentators have suggested that Trump arrived in Beijing as a \"defeated party,\" seeking concessions to avert economic collapse in the U.S. Such claims, however, overlook certain realities.\n\nThe American economy, while facing headwinds from inflation and higher oil prices, retains structural strengths in innovation and alliances."
+            },
+            {
+              "chunk_id": 10,
+              "text": "The war's price tag, whether $60 billion or considerably higher, is significant but remains within the capacity of U.S. defense spending. Broader costs reflect global energy interdependence and put pressure on all major economies, including China."
+            },
+            {
+              "chunk_id": 11,
+              "text": "Trump's visit will inevitably color the atmosphere of the second China-Arab States Summit, slated to be held in Beijing later this year. The gathering will celebrate the 70th anniversary of China-Arab diplomatic ties. The U.S."
+            },
+            {
+              "chunk_id": 12,
+              "text": "and Israeli strikes on Iran, together with the disruption of shipping in the Strait of Hormuz, have made Arab countries keenly aware of the vulnerability of maritime trade in the Gulf region."
+            },
+            {
+              "chunk_id": 13,
+              "text": "Arab leaders may therefore want to accelerate their eastward diversification strategies, deepening economic partnerships with China, the world's largest oil importer, through continued progress in the Belt and Road Initiative, oil trade, technological cooperation and other areas."
+            },
+            {
+              "chunk_id": 14,
+              "text": "(The Belt and Road Initiative is a China-proposed framework to boost connectivity along and beyond the ancient Silk Road routes—Ed.)"
+            },
+            {
+              "chunk_id": 15,
+              "text": "At the same time, the U.S. remains a key ally for many Arab states. Washington may need to reassure its Gulf partners, who are wary of over-reliance on any single power and are actively adopting hedging strategies, that it intends to remain engaged in the region."
+            },
+            {
+              "chunk_id": 16,
+              "text": "A Xi-Trump meeting that yields pragmatic understandings on energy stability, regional de-escalation or investment flows could foster a more constructive environment. It would signal an attempt at great-power coordination to prevent wider spillover, potentially reassuring Arab states that do not wish to be caught in superpower crossfire."
+            },
+            {
+              "chunk_id": 17,
+              "text": "Conversely, visible friction between the two might embolden hedging behavior and accelerate diversification. Riyadh's dual-track approach, maintaining a U.S. security umbrella while deepening economic ties with the East, already exemplifies this balancing act."
+            },
+            {
+              "chunk_id": 18,
+              "text": "Ultimately, Trump's eastward journey reflected a multipolar reality rather than a simple story of American decline. The diplomacy will test whether great powers can convert a battlefield pause into broader stability. The stakes, namely, energy flows, economic recovery and regional order in the Middle East, transcend any single narrative of triumph or defeat."
+            },
+            {
+              "chunk_id": 19,
+              "text": "The author is director and founder of the Asia Center for Studies & Translation in Egypt\n\nCopyedited by Elsbeth van Paridon\n\nComments to dingying@cicgamericas.com"
+            }
+          ],
+          "clip_text_embeddings_file": "docs/96c9f2d5ccf9f8c8/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/96c9f2d5ccf9f8c8/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://news.qq.com/rain/a/20260520A0253C00": {
+      "url": "https://news.qq.com/rain/a/20260520A0253C00",
+      "canonical_url": "https://news.qq.com/rain/a/20260520A0253C00",
+      "name": "起床号5月20日_腾讯新闻",
+      "site_name": "腾讯网",
+      "display_url": "https://news.qq.com/rain/a/20260520A0253C00",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.25925000000000004,
+      "date_published": "2026-05-20T07:51:57+08:00",
+      "date_last_crawled": "2026-05-20T07:51:57Z",
+      "full_content": "2026-05-20 07:51 发布于 北京 中国人民解放军新闻传播中心网络部官方账号\n\n应国家主席习近平邀请，俄罗斯总统普京5月19日晚乘专机抵达北京，开始对中国进行国事访问。\n\n近日，中央宣传部、中央统战部、中央社会工作部、国家发展改革委、教育部等21家部门联合印发通知，部署开展2026年“强国复兴有我”群众性主题宣传教育活动。\n\n据伊朗学生通讯社5月19日报道，伊朗军方发言人表示，如果敌对势力再次侵略伊朗，伊朗将采取新手段并“开辟新战线”予以反击。\n\n瑞典政府5月19日宣布将从法国采购4艘新型 护卫舰 。瑞典首相克里斯特松表示，这将使瑞典的防空能力大幅提高。\n\n5月19日20时至20日20时，江西北部、安徽南部、江苏南部、浙江西部、贵州南部、湖南南部、广西北部和东部、广东中北部和西南部、海南岛南部以及山东半岛东部等地有大到暴雨，其中，安徽南部、江西北部、广西东北部、广东西南部等地的部分地区有大暴雨（100～180毫米）。",
+      "image_urls": [
+        "https://inews.gtimg.com/om_bt/OHR-AKg7s9rZVEp-r7U8Ho7qRkkje29nTw5EK9H1WIHAsAA/641",
+        "https://inews.gtimg.com/om_bt/OIJOYjXWwI4E4x71D8foBuWXWhr0eHItRicYU7_9BbAS8AA/641",
+        "https://inews.gtimg.com/om_bt/OofdI5FH3rBsy5Aeb5slQGm2D8Rv7UmWzWQBJcz1003l8AA/641"
+      ],
+      "page_image_embeddings_file": "docs/a50a15977a321258/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://inews.gtimg.com/om_bt/OHR-AKg7s9rZVEp-r7U8Ho7qRkkje29nTw5EK9H1WIHAsAA/641",
+        "https://inews.gtimg.com/om_bt/OIJOYjXWwI4E4x71D8foBuWXWhr0eHItRicYU7_9BbAS8AA/641",
+        "https://inews.gtimg.com/om_bt/OofdI5FH3rBsy5Aeb5slQGm2D8Rv7UmWzWQBJcz1003l8AA/641"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "recent activities of Donald Trump in May 2026",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "2026-05-20 07:51 发布于 北京 中国人民解放军新闻传播中心网络部官方账号\n\n应国家主席习近平邀请，俄罗斯总统普京5月19日晚乘专机抵达北京，开始对中国进行国事访问。\n\n近日，中央宣传部、中央统战部、中央社会工作部、国家发展改革委、教育部等21家部门联合印发通知，部署开展2026年“强国复兴有我”群众性主题宣传教育活动。\n\n据伊朗学生通讯社5月19日报道，伊朗军方发言人表示，如果敌对势力再次侵略伊朗，伊朗将采取新手段并“开辟新战线”予以反击。\n\n瑞典政府5月19日宣布将从法国采购4艘新型 护卫舰 。瑞典首相克里斯特松表示，这将使瑞典的防空能力大幅提高。"
+            },
+            {
+              "chunk_id": 1,
+              "text": "5月19日20时至20日20时，江西北部、安徽南部、江苏南部、浙江西部、贵州南部、湖南南部、广西北部和东部、广东中北部和西南部、海南岛南部以及山东半岛东部等地有大到暴雨，其中，安徽南部、江西北部、广西东北部、广东西南部等地的部分地区有大暴雨（100～180毫米）。"
+            }
+          ],
+          "clip_text_embeddings_file": "docs/a50a15977a321258/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/a50a15977a321258/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://www.fx678.com/C/20260523/202605230136411129.html": {
+      "url": "https://www.fx678.com/C/20260523/202605230136411129.html",
+      "canonical_url": "https://www.fx678.com/C/20260523/202605230136411129.html",
+      "name": "特朗普会在5月23日到24日前往白宫出席行政工作会议。_外汇动态报道",
+      "site_name": "汇通财经",
+      "display_url": "https://www.fx678.com/C/20260523/202605230136411129.html",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "empty_content",
+      "web_fetch_quality_score": 0.0,
+      "date_published": "2026-05-23T01:36:41+08:00",
+      "date_last_crawled": "2026-05-23T01:36:41Z",
+      "full_content": "2026-05-23\n01:36:41\n汇通财经APP讯——特朗普会在5月23日到24日前往白宫出席行政工作会议。",
+      "image_urls": [
+        "https://www.fx678.com/images/yhtpc.png",
+        "https://www.fx678.com/images/windows.png",
+        "https://www.fx678.com/images/default.jpg"
+      ],
+      "page_image_embeddings_file": "",
+      "page_image_embedding_urls": [],
+      "page_image_failed_urls": [
+        "https://www.fx678.com/images/yhtpc.png",
+        "https://www.fx678.com/images/windows.png",
+        "https://www.fx678.com/images/default.jpg"
+      ],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    },
+    "https://www.163.com/dy/article/KT9D1CNG0519DDQ2.html": {
+      "url": "https://m.163.com/dy/article/KT9D1CNG0519DDQ2.html",
+      "canonical_url": "https://www.163.com/dy/article/KT9D1CNG0519DDQ2.html",
+      "name": "盘前必读丨特朗普称将推迟对伊朗发动军事打击；中金公司“三合一”重组迎来新进展",
+      "site_name": "网易",
+      "display_url": "https://m.163.com/dy/article/KT9D1CNG0519DDQ2.html",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.9278000000000001,
+      "date_published": "2026-05-19T08:02:27+08:00",
+      "date_last_crawled": "2026-05-19T08:02:27Z",
+      "full_content": "盘前必读丨特朗普称将推迟对伊朗发动军事打击；中金公司“三合一”重组迎来新进展\n\nGoogle l/O 2026开发者大会(美国加州，5/19-5/20)\n\n►►据新华社，中共中央政治局常委、国务院总理李强5月18日在北京调研。他强调，要推动人工智能与先进制造业深度融合，坚持创新发展，突出应用导向，积极促进智能机器人迭代升级，大力推进人工智能全方位、深层次赋能制造业，加快培育塑造经济发展新动能新优势。\n\n李强指出，当前人工智能加速与先进制造业深度融合，正深刻改变生产制造模式和产业形态。要深入实施制造业领域“人工智能+”行动，改造提升传统产业，不断壮大新兴产业，努力培育未来产业。要加快发展新一代智能制造，强化标准引领、人才支撑、安全保障，支持行业大模型和智能体开发应用，鼓励研发新一代智能装备和产品，加强软硬件适配，分类推进重点行业数智化转型，发展赋能应用服务商，促进产业体系实现整体跃升。李强强调，企业是推动产业变革的主力军，要充分发挥企业创新主体作用，支持更多企业加大研发投入，加强产学研协同攻关，推进研发设计、生产制造、运营管理、售后服务等全流程智能化升级，打造智能产品、智能服务新业态新模式，更好引领产业转型升级、满足群众生活需要。\n\n►►据新华社，近日，中共中央政治局常委、国务院副总理丁薛祥先后在北京、河北、内蒙古调研算力网建设。他强调，要按照“十五五”规划纲要部署，加强顶层设计和科学谋划，推进全国一体化算力网建设和集约高效利用，赋能经济社会高质量发展。在北京人工智能公共算力中心和内蒙古多云算力资源监测与调度平台，丁薛祥听取算力设施规划汇报，详细了解算力资源调度等情况。他表示，算力是国家综合国力的重要体现，要统筹布局、有序建设，注重供需适配、算电协同，加快形成全国一张网。加强算力监测调度，提升算力接入和精准匹配能力，把分散的资源整合利用起来，有效满足多元化算力需求。当前各种传统和新型风险交织叠加，要强化底线思维，进一步提高设施、模型、数据、网络安全防护能力，增强算力系统整体韧性。\n\n►►工业和信息化部印发钢铁行业产能置换实施办法的通知。修订的主要内容如下：一是提高置换比例。全国炼铁、炼钢产能置换比例均不低于1.5:1，兼并重组置换比例提高至不低于1.25:1。二是逐步取消不同企业间产能置换。对不同企业间实施产能置换设置2年过渡期；过渡期后，仅可通过实质性兼并重组实现产能转移。三是设置有效期。明确方案有效期为24个月。四是规范不锈钢企业设备建设。不锈钢企业建设熔化合金感应炉设备数量和容积，须与其电炉或转炉工艺的需求相匹配，防范企业滥用熔化合金名义建设感应炉新增炼钢产能。五是支持高端化、绿色化发展。建设氢冶金等低碳冶炼设备、电炉以及特钢企业建设限制类及以下电炉可实施差异化置换比例。六是增加产能置换方案闭环管理。省级工业和信息化主管部门负责组织核实产能置换方案落实情况，按年度开展实施情况自查，并报送自查报告。七是强化政策联动。在环评、排污许可、节能审查和碳排放评价等方面，加强与国家发展改革委、生态环境部政策协同，形成部门合力。\n\n►►商务部副部长盛秋平18日在国新办新闻发布会上表示，下一步，商务部将以更大力度、更实举措精准有效实施好消费政策，并围绕商品消费、服务消费、线下消费三方面加力谋划出台一批新举措。结合能源转型，商务部将出台针对11万座加油站转型的举措，推动加油站高质量发展。结合城市更新，商务部将聚焦全屋智能家居消费，鼓励推广套餐式、定制化的服务。近期，国家发布了《人工智能终端智能化分级》系列国家标准，商务部正在抓紧筹划出台“人工智能+消费”政策体系。扩大优质消费品进口，加力促进国际精品、时尚名品、国货潮品、外贸优品消费。\n\n►►据央视新闻，美国总统特朗普当地时间5月18日在社交平台“真实社交”发文表示，在卡塔尔、沙特阿拉伯、阿联酋领导人要求下，他已下令“明天（19日）”不按原计划对伊朗发动军事打击。特朗普表示，鉴于目前正进行着严肃的谈判，且在这些领导人及盟友看来，双方终将达成一项协议。尤为重要的是，这项协议将明确包含以下核心条款：伊朗不得拥有核武器。特朗普表示，他已指示国防部长赫格塞思、美军参谋长联席会议主席凯恩以及美国军方，19日将不按原计划对伊朗发动打击。但他同时也下达了进一步指令：一旦未能达成令人满意的协议，美军必须时刻保持战备状态，随时准备对伊朗发起全面、大规模的军事打击。\n\n►►据报道，SpaceX已正式告知投资者启动1股拆5股的股票拆分计划，此举将大幅下调其即将登陆资本市场的IPO单股发行价格。知情人士透露，公司已通过邮件通知全体股东。此次拆股完成后，个股公允市场价值从此前的526.59美元下调至约105.32美元。该知情人士表示，本次股权拆分工作将于5月18日当周启动，预计5月22日前完成。\n\n►►当地时间周一，美股三大股指分化，截至收盘，道指涨0.32%，纳指跌0.51%，标普500指数跌0.07%。\n\n明星科技股跌多涨少，特斯拉跌2.90%，报道称公司已正式放弃在印度建厂的计划。英伟达跌1.33%，Meta跌0.49%，苹果跌0.80%。微软、亚马逊小幅走高约0.3%。\n\n纳斯达克中国金龙指数跌0.72%，百度涨1.76%，阿里巴巴涨0.51%，网易涨0.20%，拼多多跌0.90%，京东跌1.28%。\n\n大普微：AI带动企业级SSD存储需求发展存在一定波动和不确定性 停牌核查\n\n金发科技：LCP树脂已在AI算力、新能源等行业的头部客户实现批量供应\n\n步科股份：成功进入全球协作机器人龙头企业的供应链 实现批量供货\n\n华锐精密：近期建成PCB棒材生产线 产品将在完成相应测试后面向市场\n\n立昂微：12英寸重掺硅片订单饱满已出现交货延期 VCSEL芯片预计2026年出货量快速增长\n\n中金公司：东兴证券A股换股价格调整为16.05元/股 信达证券A股换股价格调整为19.11元/股\n\n盟科药业：股东Best Idea、JSR及GP TMT拟合计减持不超6%股份\n\n光大证券： 大盘在连续调整后，风险已明显释放，继续下探的空间相对有限。\n\n【推荐订阅】《盘前点金》 每交易日盘前7:30左右，为您抢先捕捉关键讯息+ 研判主题机会 + 挖掘潜力标的。 点击下方图片，一键直达：\n\n特别声明：以上内容(如有图片或视频亦包括在内)为自媒体平台“网易号”用户上传并发布，本平台仅提供信息存储服务。\n\nNotice: The content above (including the pictures and videos if any) is uploaded and posted by a user of NetEase Hao, which is a social media platform and only provides information storage services.",
+      "image_urls": [
+        "https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2026%2F0519%2F7f561bccj00tf9bzx0010d000ku005ug.jpg&thumbnail=660x2147483647&quality=80&type=jpg",
+        "https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2026%2F0518%2Fdba28ad1j00tf7hf9004ed000yi00jeg.jpg&thumbnail=660x2147483647&quality=80&type=jpg",
+        "https://nimg.ws.126.net/?url=http://dingyue.ws.126.net/2022/1207/1deb2f51j00rmips30007d000780078p.jpg&thumbnail=160y160&quality=80&type=jpg"
+      ],
+      "page_image_embeddings_file": "",
+      "page_image_embedding_urls": [],
+      "page_image_failed_urls": [
+        "https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2026%2F0519%2F7f561bccj00tf9bzx0010d000ku005ug.jpg&thumbnail=660x2147483647&quality=80&type=jpg",
+        "https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2026%2F0518%2Fdba28ad1j00tf7hf9004ed000yi00jeg.jpg&thumbnail=660x2147483647&quality=80&type=jpg",
+        "https://nimg.ws.126.net/?url=http://dingyue.ws.126.net/2022/1207/1deb2f51j00rmips30007d000780078p.jpg&thumbnail=160y160&quality=80&type=jpg"
+      ],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "recent activities of Donald Trump in May 2026",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "盘前必读丨特朗普称将推迟对伊朗发动军事打击；中金公司“三合一”重组迎来新进展\n\nGoogle l/O 2026开发者大会(美国加州，5/19-5/20)\n\n►►据新华社，中共中央政治局常委、国务院总理李强5月18日在北京调研。他强调，要推动人工智能与先进制造业深度融合，坚持创新发展，突出应用导向，积极促进智能机器人迭代升级，大力推进人工智能全方位、深层次赋能制造业，加快培育塑造经济发展新动能新优势。"
+            },
+            {
+              "chunk_id": 1,
+              "text": "李强指出，当前人工智能加速与先进制造业深度融合，正深刻改变生产制造模式和产业形态。要深入实施制造业领域“人工智能+”行动，改造提升传统产业，不断壮大新兴产业，努力培育未来产业。要加快发展新一代智能制造，强化标准引领、人才支撑、安全保障，支持行业大模型和智能体开发应用，鼓励研发新一代智能装备和产品，加强软硬件适配，分类推进重点行业数智化转型，发展赋能应用服务商，促进产业体系实现整体跃升。李强强调，企业是推动产业变革的主力军，要充分发挥企业创新主体作用，支持更多企业加大研发投入，加强产学研协同攻关，推进研发设计、生产制造、运营管理、售后服务等全流程智能化升级，打造智能产品、智能服务新业态新模式，更好引领产业转型升级、满足群众生活需要。"
+            },
+            {
+              "chunk_id": 2,
+              "text": "►►据新华社，近日，中共中央政治局常委、国务院副总理丁薛祥先后在北京、河北、内蒙古调研算力网建设。他强调，要按照“十五五”规划纲要部署，加强顶层设计和科学谋划，推进全国一体化算力网建设和集约高效利用，赋能经济社会高质量发展。在北京人工智能公共算力中心和内蒙古多云算力资源监测与调度平台，丁薛祥听取算力设施规划汇报，详细了解算力资源调度等情况。他表示，算力是国家综合国力的重要体现，要统筹布局、有序建设，注重供需适配、算电协同，加快形成全国一张网。加强算力监测调度，提升算力接入和精准匹配能力，把分散的资源整合利用起来，有效满足多元化算力需求。当前各种传统和新型风险交织叠加，要强化底线思维，进一步提高设施、模型、数据、网络安全防护能力，增强算力系统整体韧性。"
+            },
+            {
+              "chunk_id": 3,
+              "text": "►►工业和信息化部印发钢铁行业产能置换实施办法的通知。 修订的主要内容如下：一是提高置换比例。 全国炼铁、炼钢产能置换比例均不低于1.5:1，兼并重组置换比例提高至不低于1.25:1。 二是逐步取消不同企业间产能置换。 对不同企业间实施产能置换设置2年过渡期；过渡期后，仅可通过实质性兼并重组实现产能转移。 三是设置有效期。 明确方案有效期为24个月。 四是规范不锈钢企业设备建设。 不锈钢企业建设熔化合金感应炉设备数量和容积，须与其电炉或转炉工艺的需求相匹配，防范企业滥用熔化合金名义建设感应炉新增炼钢产能。 五是支持高端化、绿色化发展。 建设氢冶金等低碳冶炼设备、电炉以及特钢企业建设限制类及以下电炉可实施差异化置换比例。 六是增加产能置换方案闭环管理。 省级工业和信息化主管部门负责组织核实产能置换方案落实情况，按年度开展实施情况自查，并报送自查报告。 七是强化政策联动。"
+            },
+            {
+              "chunk_id": 4,
+              "text": "在环评、排污许可、节能审查和碳排放评价等方面，加强与国家发展改革委、生态环境部政策协同，形成部门合力。"
+            },
+            {
+              "chunk_id": 5,
+              "text": "►►商务部副部长盛秋平18日在国新办新闻发布会上表示，下一步，商务部将以更大力度、更实举措精准有效实施好消费政策，并围绕商品消费、服务消费、线下消费三方面加力谋划出台一批新举措。结合能源转型，商务部将出台针对11万座加油站转型的举措，推动加油站高质量发展。结合城市更新，商务部将聚焦全屋智能家居消费，鼓励推广套餐式、定制化的服务。近期，国家发布了《人工智能终端智能化分级》系列国家标准，商务部正在抓紧筹划出台“人工智能+消费”政策体系。扩大优质消费品进口，加力促进国际精品、时尚名品、国货潮品、外贸优品消费。"
+            },
+            {
+              "chunk_id": 6,
+              "text": "►►据央视新闻，美国总统特朗普当地时间5月18日在社交平台“真实社交”发文表示，在卡塔尔、沙特阿拉伯、阿联酋领导人要求下，他已下令“明天（19日）”不按原计划对伊朗发动军事打击。特朗普表示，鉴于目前正进行着严肃的谈判，且在这些领导人及盟友看来，双方终将达成一项协议。尤为重要的是，这项协议将明确包含以下核心条款：伊朗不得拥有核武器。特朗普表示，他已指示国防部长赫格塞思、美军参谋长联席会议主席凯恩以及美国军方，19日将不按原计划对伊朗发动打击。但他同时也下达了进一步指令：一旦未能达成令人满意的协议，美军必须时刻保持战备状态，随时准备对伊朗发起全面、大规模的军事打击。"
+            },
+            {
+              "chunk_id": 7,
+              "text": "►►据报道，SpaceX已正式告知投资者启动1股拆5股的股票拆分计划，此举将大幅下调其即将登陆资本市场的IPO单股发行价格。知情人士透露，公司已通过邮件通知全体股东。此次拆股完成后，个股公允市场价值从此前的526.59美元下调至约105.32美元。该知情人士表示，本次股权拆分工作将于5月18日当周启动，预计5月22日前完成。\n\n►►当地时间周一，美股三大股指分化，截至收盘，道指涨0.32%，纳指跌0.51%，标普500指数跌0.07%。\n\n明星科技股跌多涨少，特斯拉跌2.90%，报道称公司已正式放弃在印度建厂的计划。英伟达跌1.33%，Meta跌0.49%，苹果跌0.80%。微软、亚马逊小幅走高约0.3%。\n\n纳斯达克中国金龙指数跌0.72%，百度涨1.76%，阿里巴巴涨0.51%，网易涨0.20%，拼多多跌0.90%，京东跌1.28%。"
+            },
+            {
+              "chunk_id": 8,
+              "text": "大普微：AI带动企业级SSD存储需求发展存在一定波动和不确定性 停牌核查\n\n金发科技：LCP树脂已在AI算力、新能源等行业的头部客户实现批量供应\n\n步科股份：成功进入全球协作机器人龙头企业的供应链 实现批量供货\n\n华锐精密：近期建成PCB棒材生产线 产品将在完成相应测试后面向市场\n\n立昂微：12英寸重掺硅片订单饱满已出现交货延期 VCSEL芯片预计2026年出货量快速增长\n\n中金公司：东兴证券A股换股价格调整为16.05元/股 信达证券A股换股价格调整为19.11元/股\n\n盟科药业：股东Best Idea、JSR及GP TMT拟合计减持不超6%股份\n\n光大证券： 大盘在连续调整后，风险已明显释放，继续下探的空间相对有限。\n\n【推荐订阅】《盘前点金》 每交易日盘前7:30左右，为您抢先捕捉关键讯息+ 研判主题机会 + 挖掘潜力标的。 点击下方图片，一键直达："
+            },
+            {
+              "chunk_id": 9,
+              "text": "特别声明：以上内容(如有图片或视频亦包括在内)为自媒体平台“网易号”用户上传并发布，本平台仅提供信息存储服务。\n\nNotice: The content above (including the pictures and videos if any) is uploaded and posted by a user of NetEase Hao, which is a social media platform and only provides information storage services."
+            }
+          ],
+          "clip_text_embeddings_file": "docs/6d6192b8a8479f51/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/6d6192b8a8479f51/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://finance.sina.com.cn/money/fund/jjgsgd/2026-05-18/doc-inhyimee3878737.shtml": {
+      "url": "https://finance.sina.com.cn/money/fund/jjgsgd/2026-05-18/doc-inhyimee3878737.shtml",
+      "canonical_url": "https://finance.sina.com.cn/money/fund/jjgsgd/2026-05-18/doc-inhyimee3878737.shtml",
+      "name": "海外金融市场早报 2026-05-18|美元_新浪财经_新浪网",
+      "site_name": "新浪财经",
+      "display_url": "https://finance.sina.com.cn/money/fund/jjgsgd/2026-05-18/doc-inhyimee3878737.shtml",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.8548142857142857,
+      "date_published": "2026-05-19T09:37:09+08:00",
+      "date_last_crawled": "2026-05-19T09:37:09Z",
+      "full_content": "海外金融市场早报 2026-05-18\n\n美国总统特朗普近日向美国政府道德办公室申报最新的财务资料，一次性披露约3,600笔股票交易纪录，显示他在今年首季对旗下科技股持仓进行重大调整。其中大手买入波音、英伟达的交易引发外界关注，因这两间公司被视作是次特朗普访华行程的主要受惠者。据该两份文件总计超过100页的财务文件显示，特朗普今年首三个月进行了一系列涉及美国大型企业的证券交易，交易总额最低估计为2.2亿美元，最高约7.5亿美元。季内买入股份包括英伟达、甲骨文、微软、波音和超市集团Costco等，单笔金额介乎100万至500万美元。\n\n彭博知情人士透露，苹果公司与OpenAI为期两年的合作关系出现裂痕，这家人工智能初创公司未能从该协议中获得预期收益，目前正准备采取可能的法律行动。消息人士称，OpenAI的律师正与一家外部律所积极研究多种方案，可能在不久的将来正式采取行动。知情人士称，OpenAI可能向苹果发通知函，指其违反合同，但不一定一开始就提起全面诉讼。OpenAI已在最近几天聘请该外部律所协助处理此事。OpenAI曾认为，这项将ChatGPT嵌入苹果软件的合作将促使更多用户订阅该聊天 机器人 。该公司还预计，双方将在更多苹果应用中实现更深层次的整合，OpenAI的产品将在Siri语音助手中占据主要地位。\n\n美国亿万富豪马斯克（Elon Musk）旗下太空探索公司SpaceX的上市万众瞩目，综合外电报道，SpaceX 计划最快本周披露招股书，目标是当地时间6月8日启动招股程序、6月16日定价，于6月17日正式上市，料集资750亿美元，相当于估值可达1.75万亿美元。有外电指，SpaceX早于4月1日已秘密提交IPO申请。据美国上市程序，公司需要在招股开始前至少15日公开招股书。另亦有指，SpaceX及其顾问希望略早于限期披露文件，以便投资者有更多时间消化数据。\n\n花旗发表研究报告指出，对2026年下半年中国股市前景审慎乐观，看好科技及出口板块，并将保险板块的投资评级从「中性」上调至「增持」。该行预期保险公司将受惠于更多来自股票的投资收益，以及银行存款流入保险产品。该行分别将恒生指数、 沪深300指数 及MSCI中国指数的2026年底目标价定于29,600点(较原目标30,000点下调1.3%)、5,600点及92.0，并引入2027年上半年恒指目标30,500点。花旗表示，由于A股市场拥有较多科技股权重及更充裕的流动性，因此在2026年下半年较看好A股多于H股。行业配置方面，花旗维持对科技、基本材料、医疗保健及互联网板块的「增持」评级，但将互联网板块的权重下调5.3个百分点至36.5%，主因盈利增长放缓。该行同时将金融板块权重上调1.6个百分点至12.1%，看好香港强劲的IPO管道及高市场成交额。该行亦指出，恒指2026年每股盈利增长预测已加速至按年增长9.9%，主要来自能源及原材料板块，而科技、互联网及汽车板块则遭下调，其中小米(01810.HK)、阿里巴巴(09988.HK)及美团(03690.HK)被点名为盈利下调的主要原因。\n\n近年超强台风、暴雨及水浸愈趋频密，对于香港这个高密度沿海城市，极端天气的威胁，已由偶发情况演变成企业必须正视的新常态。为协助工商界应对日益严峻的气候风险，中华电力（中电）近日举行了「共建气候韧性倡议」启动仪式，联同香港质量保证局、 交通银行 (香港) 及中国交银保险推出本地化气候风险与韧性披露平台，协助企业系统化识别气候相关风险、落实具体应对措施，提升营运稳健性，并推动企业把气候韧性纳入ESG管理架构。在启动仪式上，中电同时与交通银行 (香港) 签署深化合作协议，标志着跨界合作再进一步。双方将在绿色业务、企业减碳支持及气候风险管理等领域展开更深入合作，期望把企业的风险评估、改善措施与金融支持进一步对接，为香港整体抗御能力及经济长远稳健发展注入新动能。\n\n欧洲期交所（Euronext）小麦期货周五延续跌势，与芝加哥期货市场同步下行。中美峰会结果令市场失望，引发谷物市场大规模抛售，加之欧洲作物状况改善、干旱忧虑缓解，进一步压低麦价。截至格林威治标准时间15:49，欧洲期交所9月份磨粉小麦期货下跌1.9%，报每公吨209.50欧元（243.52美元），连续第三个交易日录得跌幅。此前该合约于周三曾攀升至两周高位218.00欧元。美国总统唐纳德·特朗普周五访问中国期间，美国贸易代表杰米森·格里尔（Jamieson Greer）表示，华盛顿预计未来三年中方将采购「数百亿美元」的美国 农产品 。然而，市场人士对于缺乏具体细节感到失望，并对相关农业贸易规模能否超越北京此前承诺的每年采购2,500万公吨美国大豆的目标，表示存在不确定性。\n\n近日金价高位震荡之际，内地周大福却传出将于明日（15日）起上调部分一口价金饰价格，被网民质疑在金价跳水下加价，是利用设计溢价转嫁成本压力。对此，周大福表示，此次价格调整仅涉及极小部份产品，大部份产品价格维持不变。综合内媒报道，内地周大福珠宝系统价格将于5月15日凌晨自动更新，部分一口价金饰价格将上调约5%到20%。其中五帝钱手炼（大号）将由53,800元（人民币，下同）上调至59,800元，加幅11.15%；黄金凤钗则由83,800元上调至92,800元，加幅10.74%。\n\n天然气期货星期五美国交易走高。纽约商品期货交易所 6月天然气期货，至截稿前成交价上升 2.35%，成交于每百万英热单位 USD2.96。之前时段高点每百万英热单位 USD2.98。天然气有望于 USD2.751 找到支撑点， USD2.983 遇到阻力。美元指数期货(旨在追踪美金对六种主要货币的表现)上升 0.46%，成交于 USD99.18。至于 Nymex，原油 6月成交价上升 4.15% 至每桶 USD105.37；6月燃烧用油成交价上升 4.09% 至每加仑 USD4.07。",
+      "image_urls": [
+        "https://n.sinaimg.cn/spider20260518/454/w1027h1027/20260518/de80-0f8e23f437311e24503268d68e48aa7e.jpg",
+        "https://n.sinaimg.cn/spider20260518/341/w1080h61/20260518/bc9b-198cdeb956979c9cbdd2b731d54f53e1.png",
+        "https://n.sinaimg.cn/spider20260518/607/w659h748/20260518/0e07-f66047c081d0817e1271ad8e815d652c.png"
+      ],
+      "page_image_embeddings_file": "docs/c6139cf70ee4833e/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://n.sinaimg.cn/spider20260518/454/w1027h1027/20260518/de80-0f8e23f437311e24503268d68e48aa7e.jpg",
+        "https://n.sinaimg.cn/spider20260518/341/w1080h61/20260518/bc9b-198cdeb956979c9cbdd2b731d54f53e1.png",
+        "https://n.sinaimg.cn/spider20260518/607/w659h748/20260518/0e07-f66047c081d0817e1271ad8e815d652c.png"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "recent activities of Donald Trump in May 2026",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "海外金融市场早报 2026-05-18\n\n美国总统特朗普近日向美国政府道德办公室申报最新的财务资料，一次性披露约3,600笔股票交易纪录，显示他在今年首季对旗下科技股持仓进行重大调整。其中大手买入波音、英伟达的交易引发外界关注，因这两间公司被视作是次特朗普访华行程的主要受惠者。据该两份文件总计超过100页的财务文件显示，特朗普今年首三个月进行了一系列涉及美国大型企业的证券交易，交易总额最低估计为2.2亿美元，最高约7.5亿美元。季内买入股份包括英伟达、甲骨文、微软、波音和超市集团Costco等，单笔金额介乎100万至500万美元。"
+            },
+            {
+              "chunk_id": 1,
+              "text": "彭博知情人士透露，苹果公司与OpenAI为期两年的合作关系出现裂痕，这家人工智能初创公司未能从该协议中获得预期收益，目前正准备采取可能的法律行动。消息人士称，OpenAI的律师正与一家外部律所积极研究多种方案，可能在不久的将来正式采取行动。知情人士称，OpenAI可能向苹果发通知函，指其违反合同，但不一定一开始就提起全面诉讼。OpenAI已在最近几天聘请该外部律所协助处理此事。OpenAI曾认为，这项将ChatGPT嵌入苹果软件的合作将促使更多用户订阅该聊天 机器人 。该公司还预计，双方将在更多苹果应用中实现更深层次的整合，OpenAI的产品将在Siri语音助手中占据主要地位。"
+            },
+            {
+              "chunk_id": 2,
+              "text": "美国亿万富豪马斯克（Elon Musk）旗下太空探索公司SpaceX的上市万众瞩目，综合外电报道，SpaceX 计划最快本周披露招股书，目标是当地时间6月8日启动招股程序、6月16日定价，于6月17日正式上市，料集资750亿美元，相当于估值可达1.75万亿美元。有外电指，SpaceX早于4月1日已秘密提交IPO申请。据美国上市程序，公司需要在招股开始前至少15日公开招股书。另亦有指，SpaceX及其顾问希望略早于限期披露文件，以便投资者有更多时间消化数据。"
+            },
+            {
+              "chunk_id": 3,
+              "text": "花旗发表研究报告指出，对2026年下半年中国股市前景审慎乐观，看好科技及出口板块，并将保险板块的投资评级从「中性」上调至「增持」。 该行预期保险公司将受惠于更多来自股票的投资收益，以及银行存款流入保险产品。 该行分别将恒生指数、 沪深300指数 及MSCI中国指数的2026年底目标价定于29,600点(较原目标30,000点下调1.3%)、5,600点及92.0，并引入2027年上半年恒指目标30,500点。 花旗表示，由于A股市场拥有较多科技股权重及更充裕的流动性，因此在2026年下半年较看好A股多于H股。 行业配置方面，花旗维持对科技、基本材料、医疗保健及互联网板块的「增持」评级，但将互联网板块的权重下调5.3个百分点至36.5%，主因盈利增长放缓。 该行同时将金融板块权重上调1.6个百分点至12.1%，看好香港强劲的IPO管道及高市场成交额。"
+            },
+            {
+              "chunk_id": 4,
+              "text": "该行亦指出，恒指2026年每股盈利增长预测已加速至按年增长9.9%，主要来自能源及原材料板块，而科技、互联网及汽车板块则遭下调，其中小米(01810.HK)、阿里巴巴(09988.HK)及美团(03690.HK)被点名为盈利下调的主要原因。"
+            },
+            {
+              "chunk_id": 5,
+              "text": "近年超强台风、暴雨及水浸愈趋频密，对于香港这个高密度沿海城市，极端天气的威胁，已由偶发情况演变成企业必须正视的新常态。为协助工商界应对日益严峻的气候风险，中华电力（中电）近日举行了「共建气候韧性倡议」启动仪式，联同香港质量保证局、 交通银行 (香港) 及中国交银保险推出本地化气候风险与韧性披露平台，协助企业系统化识别气候相关风险、落实具体应对措施，提升营运稳健性，并推动企业把气候韧性纳入ESG管理架构。在启动仪式上，中电同时与交通银行 (香港) 签署深化合作协议，标志着跨界合作再进一步。双方将在绿色业务、企业减碳支持及气候风险管理等领域展开更深入合作，期望把企业的风险评估、改善措施与金融支持进一步对接，为香港整体抗御能力及经济长远稳健发展注入新动能。"
+            },
+            {
+              "chunk_id": 6,
+              "text": "欧洲期交所（Euronext）小麦期货周五延续跌势，与芝加哥期货市场同步下行。中美峰会结果令市场失望，引发谷物市场大规模抛售，加之欧洲作物状况改善、干旱忧虑缓解，进一步压低麦价。截至格林威治标准时间15:49，欧洲期交所9月份磨粉小麦期货下跌1.9%，报每公吨209.50欧元（243.52美元），连续第三个交易日录得跌幅。此前该合约于周三曾攀升至两周高位218.00欧元。美国总统唐纳德·特朗普周五访问中国期间，美国贸易代表杰米森·格里尔（Jamieson Greer）表示，华盛顿预计未来三年中方将采购「数百亿美元」的美国 农产品 。然而，市场人士对于缺乏具体细节感到失望，并对相关农业贸易规模能否超越北京此前承诺的每年采购2,500万公吨美国大豆的目标，表示存在不确定性。"
+            },
+            {
+              "chunk_id": 7,
+              "text": "近日金价高位震荡之际，内地周大福却传出将于明日（15日）起上调部分一口价金饰价格，被网民质疑在金价跳水下加价，是利用设计溢价转嫁成本压力。对此，周大福表示，此次价格调整仅涉及极小部份产品，大部份产品价格维持不变。综合内媒报道，内地周大福珠宝系统价格将于5月15日凌晨自动更新，部分一口价金饰价格将上调约5%到20%。其中五帝钱手炼（大号）将由53,800元（人民币，下同）上调至59,800元，加幅11.15%；黄金凤钗则由83,800元上调至92,800元，加幅10.74%。"
+            },
+            {
+              "chunk_id": 8,
+              "text": "天然气期货星期五美国交易走高。纽约商品期货交易所 6月天然气期货，至截稿前成交价上升 2.35%，成交于每百万英热单位 USD2.96。之前时段高点每百万英热单位 USD2.98。天然气有望于 USD2.751 找到支撑点， USD2.983 遇到阻力。美元指数期货(旨在追踪美金对六种主要货币的表现)上升 0.46%，成交于 USD99.18。至于 Nymex，原油 6月成交价上升 4.15% 至每桶 USD105.37；6月燃烧用油成交价上升 4.09% 至每加仑 USD4.07。"
+            }
+          ],
+          "clip_text_embeddings_file": "docs/c6139cf70ee4833e/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/c6139cf70ee4833e/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://news.qq.com/rain/a/20260522A05OTM00": {
+      "url": "https://news.qq.com/rain/a/20260522A05OTM00",
+      "canonical_url": "https://news.qq.com/rain/a/20260522A05OTM00",
+      "name": "白宫里的“高频交易员”：特朗普的交易流水，藏着多少不能明说的逻辑？_腾讯新闻",
+      "site_name": "腾讯网",
+      "display_url": "https://news.qq.com/rain/a/20260522A05OTM00",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 1.0,
+      "date_published": "2026-05-22T11:20:46+08:00",
+      "date_last_crawled": "2026-05-22T11:20:46Z",
+      "full_content": "白宫里的“高频交易员”：特朗普的交易流水，藏着多少不能明说的逻辑？\n\n最近，特朗普公布了自己2026年一季度的金融交易记录。短短90天，3711笔交易——平均每天要做超过40笔。很多人都在惊叹，这位史上最忙的美国总统，除了要应付各路记者的刁钻提问，在社交平台上指点江山，以及每周固定几场高尔夫之外，竟还能以如此高频调整自己的投资组合，精力属实惊人。\n\n一个尤其值得注意的对比是：2025年上任后的头六个月，特朗普大约只做了690笔交易，整个2025年加起来不到1500次。而2026年刚过一个季度，交易次数就超过2025年全年的两倍。最自然的推论是，今年以来的地缘政治变化太快，行情自然多变。但有趣的是，今年地缘风险的急速放大，究竟拜谁所赐，实在相当难猜。\n\n对于这份交易记录，官方给出的声明是这样的：“Neither President Trump, his family, nor The Trump Organization plays any role in selecting, directing, or approving specific investments. They receive no advance notice of trading activity and provide no input regarding investment decisions or portfolio management.” 大意是，总统及其家人，以及相关组织，都没有参与投资决策，也从未被提前告知任何交易活动。\n\n我们姑且假设这份声明是真诚的，总统确实不参与选股，但有一句话极其耐人寻味——“没有被提前告知”。对普通人来说，想做内幕交易，得先听到风声，提前埋伏进去。可凡事总有例外，而特朗普就是这个世界上最大的例外：他完全可以先进场，再画线。不必提前获得消息，因为他自己就是那个制造消息的人。\n\n《华尔街日报》的分析显示，这样的案例并不少。这里只举两个。一个关于 英伟达 。一季度特朗普买入了175万美元的英伟达股票，其中仅在1月6日一天就买进50万美元。短短一周后，白宫宣布同意英伟达向中国出售H200芯片，明显抬了英伟达一手。虽然最终中国没有接盘H200，画线失败，但买入一周就出利好，这个巧合未免过于刻意。另一个更直白：2月10日，特朗普买入价值100万至500万美元的戴尔电脑股票，一周后他在佐治亚州发表讲话，大力称赞迈克尔·戴尔夫妇对国家的重大贡献，并鼓励现场人群赶紧去买一台戴尔电脑。是不是非常特朗普。\n\n但我今天聊这件事，并不是为了取笑他，而是想提供几个不同的观察角度，看看这些交易背后真正值得思考的东西。\n\n视角一：华尔街在意的，是这能赚钱吗？\n\n第一个观察来自华尔街的资深交易员。 他们对特朗普滥用职权做交易这件事并不愤怒，只是好奇：像这样频繁操作，真的能赚钱吗？\n\n这个视角本身就说明很多问题。不愤怒，是因为在华尔街，特权从来就是用来变现的。每一家投行，每一家对冲基金，都有自己的特权获取故事，能全身而退的人被视为强者。在那里，道德往往被看作弱者的盾牌，结果才是唯一的审判。关于这一点，以后可以专门展开。\n\n而他们之所以好奇盈亏，是因为特朗普团队的披露并不提供具体点位和日内操作细节，外人只能看个大概。可即便粗略观察，每天40笔交易，除非是基于算法的量化交易，否则几乎必然以亏损收场。看看英伟达的操作：绿蓝色上三角是买入，橘黄色下三角是卖出，整体呈现的格局是“买在震荡时，卖在下山处”。 甲骨文 和微软的操作同样谈不上高明。即使贵为总统，手中握着最领先的信息资源，面对资本市场时如此随意操作，依然难免尴尬。\n\n这里可以引出的一个更普遍的教训是：过度交易是投资大忌。一天40笔当然是过度，但更切实的衡量标准应该是——如果你每天忍不住盯盘，时常因内心澎湃就想操作一下，总是在没有预案的情况下做激情交易，那就已经陷入了过度交易。对于绝大多数普通投资者，这一点尤其值得警惕。\n\n视角二：重仓科技，避开能源的逻辑\n\n再看他交易记录的结构。 特朗普金额较大的交易，几乎全部集中在英伟达、博通、微软、苹果、波音、甲骨文这样的高科技大票上，而与他关系一直亲厚的传统能源公司，几乎完全缺席。要知道，今年头三个月，白宫连续主导了对 委内瑞拉 的斩首行动和对伊朗的全面进攻，按理说油价暴涨的确定性非常高。为什么最终形成的交易组合是一只跛脚鸭，只押注科技？\n\n两个原因值得深思。首先，披露范围有限。根据《政府道德法》（ EIGA ），总统本人、配偶和受抚养子女必须披露财务情况，但已经成年、不再受抚养的子女完全不在披露之列。而恰恰是小唐纳德、埃里克这样的成年儿女，正在运营特朗普集团的生意与投资，他们完全可以通过期货市场或海外衍生品市场，从原油交易中获取巨额利益，并且绕开披露。特朗普自己的账户，根本没必要再买传统能源股票。\n\n其次，美国当前股市的主线在科技，流动性也在此聚集。一旦有政策利好，科技股弹性更强。总统以自有资金买入科技股，与“制造业回流”、“AI竞赛”等政策倾向恰好一致，算得上“知行合一”，还能引导更多资本投入美国科技资产。但如果你以为他真的重仓科技，那就太天真了。我们在去年末的一期深度分析里算过一笔账：特朗普上任一年内，赚了大约26亿美元，而这次披露的股票交易记录总计不超过7.5亿美元。这些公开的股票持仓，并非他真正的财富重心。他更大的财富，隐藏在他最钟爱的地产，以及由家族年轻一代操控的数字货币市场里。而当下美国的金融监管，对非标准资产，尤其是加密货币，基本无能为力。\n\n美国对高层政客的金融监管，说到底是一套建立在“政治羞耻心”之上的荣誉系统，而它偏偏对总统和副总统约束极少。美国联邦法典严格禁止行政部门官员参与会影响其个人财务利益的事务，但同时明确规定，该禁令不适用于总统和副总统。也就是说，这二位几乎完全自由，只能靠自身的道德和判断来约束自己。2026年1月，特朗普接受《纽约时报》采访，被问及他的权力是否存在任何限制时，他回答：“有，只有一样东西——我自己的道德，我自己的判断。这是唯一能阻止我的东西。”他还补了一句：“我不需要国际法，也无意伤害他人。”\n\n这就是特朗普，一个完全没有打算接受“政治羞耻”约束的总统。对财富的渴望太多，对自我的设限太少，于是便出现了今天这幅景象：每天交易40次，发帖100条，拉手风琴若干次，并坚称没有人比他更了解这个世界。\n\n最后，从更宏观的视角来收束。 华尔街的特权变现不是新闻，国会山股神佩洛西已在神坛上呼风唤雨数十年。那么，特朗普这次高频交易事件，还有什么额外的讨论价值？\n\n有，而且很大。以前的政客们，更多是提前知晓某项法案大概会通过，然后买入相关股票或期权。他们还算是市场的信息接收者，只是领先于其他人。但现在这位，可不仅仅是信息接收者，他是信息发布者，甚至，他就是信息本身。他乐此不疲地不断发出信息，不断画出K线，也在不断扭曲市场价格的形成机制。特朗普给市场带来的破坏性，是巨大的。\n\n更进一步，以前的政客搞内幕交易时，还多少带着羞耻心，操作更为隐蔽，不太会形成庞大的联盟。但特朗普完全是抱着“共同富裕”的姿态来的，不只自己一个家族，还有一帮富豪兄弟。这会导致两个明显的结果：一方面，市场被操纵得更厉害，局内人攫取极高利益，普通人能分到一点残羹冷炙都算幸运；另一方面，这些利益集团对资本市场的依赖将进一步加深，使得美股越来越变成一个“跌不得”的市场，这背后潜藏的系统性风险，经不起深思。\n\n百年华尔街所构筑的信用，核心护城河本是所谓的“法治与程序正义”。全球资本，包括主权基金和大型机构，愿意给美国科技股那么高的估值溢价，本质上是相信这套规矩还在。但今天，这个本该正义的底层逻辑，正在被一个庞大的利益集团公开操纵和扭曲。这意味着，美国的信用以及附着其上的溢价，或许将在未来几年迎来一轮痛苦的重新估值。对交易者来说，这将是值得长期观察的结构性变量。\n\n我们观察这场闹剧，起点固然是觉得荒诞有趣，但没必要跟着外媒的节奏去单纯谴责或嘲笑。总统的道德问题，说到底还是美国人自己该操心的事。对我们而言，更值得思考的是：权力被毫无顾忌地资本化，究竟会带来什么。在这点上，今天的美国提供了一个绝佳的标本。",
+      "image_urls": [
+        "https://inews.gtimg.com/om_ls/O9Z9tuWxlYrHixCxvElJpFVxgiamBRXQ0S27xYPe0ayx4AA_640330/0",
+        "https://inews.gtimg.com/news_ls/OXvVprlO_y03X6d_A926XzfZL4W7_aLiA_YEyNelr_EZ4AA_200200/0"
+      ],
+      "page_image_embeddings_file": "docs/1942ff5396efc7ac/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://inews.gtimg.com/om_ls/O9Z9tuWxlYrHixCxvElJpFVxgiamBRXQ0S27xYPe0ayx4AA_640330/0",
+        "https://inews.gtimg.com/news_ls/OXvVprlO_y03X6d_A926XzfZL4W7_aLiA_YEyNelr_EZ4AA_200200/0"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "recent activities of Donald Trump in May 2026 including meetings, speeches, and financial disclosures",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "白宫里的“高频交易员”：特朗普的交易流水，藏着多少不能明说的逻辑？\n\n最近，特朗普公布了自己2026年一季度的金融交易记录。短短90天，3711笔交易——平均每天要做超过40笔。很多人都在惊叹，这位史上最忙的美国总统，除了要应付各路记者的刁钻提问，在社交平台上指点江山，以及每周固定几场高尔夫之外，竟还能以如此高频调整自己的投资组合，精力属实惊人。\n\n一个尤其值得注意的对比是：2025年上任后的头六个月，特朗普大约只做了690笔交易，整个2025年加起来不到1500次。而2026年刚过一个季度，交易次数就超过2025年全年的两倍。最自然的推论是，今年以来的地缘政治变化太快，行情自然多变。但有趣的是，今年地缘风险的急速放大，究竟拜谁所赐，实在相当难猜。"
+            },
+            {
+              "chunk_id": 1,
+              "text": "对于这份交易记录，官方给出的声明是这样的：“Neither President Trump, his family, nor The Trump Organization plays any role in selecting, directing, or approving specific investments. They receive no advance notice of trading activity and provide no input regarding investment decisions or portfolio management.” 大意是，总统及其家人，以及相关组织，都没有参与投资决策，也从未被提前告知任何交易活动。"
+            },
+            {
+              "chunk_id": 2,
+              "text": "我们姑且假设这份声明是真诚的，总统确实不参与选股，但有一句话极其耐人寻味——“没有被提前告知”。对普通人来说，想做内幕交易，得先听到风声，提前埋伏进去。可凡事总有例外，而特朗普就是这个世界上最大的例外：他完全可以先进场，再画线。不必提前获得消息，因为他自己就是那个制造消息的人。\n\n《华尔街日报》的分析显示，这样的案例并不少。这里只举两个。一个关于 英伟达 。一季度特朗普买入了175万美元的英伟达股票，其中仅在1月6日一天就买进50万美元。短短一周后，白宫宣布同意英伟达向中国出售H200芯片，明显抬了英伟达一手。虽然最终中国没有接盘H200，画线失败，但买入一周就出利好，这个巧合未免过于刻意。另一个更直白：2月10日，特朗普买入价值100万至500万美元的戴尔电脑股票，一周后他在佐治亚州发表讲话，大力称赞迈克尔·戴尔夫妇对国家的重大贡献，并鼓励现场人群赶紧去买一台戴尔电脑。是不是非常特朗普。"
+            },
+            {
+              "chunk_id": 3,
+              "text": "但我今天聊这件事，并不是为了取笑他，而是想提供几个不同的观察角度，看看这些交易背后真正值得思考的东西。\n\n视角一：华尔街在意的，是这能赚钱吗？\n\n第一个观察来自华尔街的资深交易员。 他们对特朗普滥用职权做交易这件事并不愤怒，只是好奇：像这样频繁操作，真的能赚钱吗？\n\n这个视角本身就说明很多问题。不愤怒，是因为在华尔街，特权从来就是用来变现的。每一家投行，每一家对冲基金，都有自己的特权获取故事，能全身而退的人被视为强者。在那里，道德往往被看作弱者的盾牌，结果才是唯一的审判。关于这一点，以后可以专门展开。"
+            },
+            {
+              "chunk_id": 4,
+              "text": "而他们之所以好奇盈亏，是因为特朗普团队的披露并不提供具体点位和日内操作细节，外人只能看个大概。可即便粗略观察，每天40笔交易，除非是基于算法的量化交易，否则几乎必然以亏损收场。看看英伟达的操作：绿蓝色上三角是买入，橘黄色下三角是卖出，整体呈现的格局是“买在震荡时，卖在下山处”。 甲骨文 和微软的操作同样谈不上高明。即使贵为总统，手中握着最领先的信息资源，面对资本市场时如此随意操作，依然难免尴尬。\n\n这里可以引出的一个更普遍的教训是：过度交易是投资大忌。一天40笔当然是过度，但更切实的衡量标准应该是——如果你每天忍不住盯盘，时常因内心澎湃就想操作一下，总是在没有预案的情况下做激情交易，那就已经陷入了过度交易。对于绝大多数普通投资者，这一点尤其值得警惕。\n\n视角二：重仓科技，避开能源的逻辑"
+            },
+            {
+              "chunk_id": 5,
+              "text": "再看他交易记录的结构。 特朗普金额较大的交易，几乎全部集中在英伟达、博通、微软、苹果、波音、甲骨文这样的高科技大票上，而与他关系一直亲厚的传统能源公司，几乎完全缺席。要知道，今年头三个月，白宫连续主导了对 委内瑞拉 的斩首行动和对伊朗的全面进攻，按理说油价暴涨的确定性非常高。为什么最终形成的交易组合是一只跛脚鸭，只押注科技？\n\n两个原因值得深思。首先，披露范围有限。根据《政府道德法》（ EIGA ），总统本人、配偶和受抚养子女必须披露财务情况，但已经成年、不再受抚养的子女完全不在披露之列。而恰恰是小唐纳德、埃里克这样的成年儿女，正在运营特朗普集团的生意与投资，他们完全可以通过期货市场或海外衍生品市场，从原油交易中获取巨额利益，并且绕开披露。特朗普自己的账户，根本没必要再买传统能源股票。"
+            },
+            {
+              "chunk_id": 6,
+              "text": "其次，美国当前股市的主线在科技，流动性也在此聚集。一旦有政策利好，科技股弹性更强。总统以自有资金买入科技股，与“制造业回流”、“AI竞赛”等政策倾向恰好一致，算得上“知行合一”，还能引导更多资本投入美国科技资产。但如果你以为他真的重仓科技，那就太天真了。我们在去年末的一期深度分析里算过一笔账：特朗普上任一年内，赚了大约26亿美元，而这次披露的股票交易记录总计不超过7.5亿美元。这些公开的股票持仓，并非他真正的财富重心。他更大的财富，隐藏在他最钟爱的地产，以及由家族年轻一代操控的数字货币市场里。而当下美国的金融监管，对非标准资产，尤其是加密货币，基本无能为力。"
+            },
+            {
+              "chunk_id": 7,
+              "text": "美国对高层政客的金融监管，说到底是一套建立在“政治羞耻心”之上的荣誉系统，而它偏偏对总统和副总统约束极少。美国联邦法典严格禁止行政部门官员参与会影响其个人财务利益的事务，但同时明确规定，该禁令不适用于总统和副总统。也就是说，这二位几乎完全自由，只能靠自身的道德和判断来约束自己。2026年1月，特朗普接受《纽约时报》采访，被问及他的权力是否存在任何限制时，他回答：“有，只有一样东西——我自己的道德，我自己的判断。这是唯一能阻止我的东西。”他还补了一句：“我不需要国际法，也无意伤害他人。”\n\n这就是特朗普，一个完全没有打算接受“政治羞耻”约束的总统。对财富的渴望太多，对自我的设限太少，于是便出现了今天这幅景象：每天交易40次，发帖100条，拉手风琴若干次，并坚称没有人比他更了解这个世界。"
+            },
+            {
+              "chunk_id": 8,
+              "text": "最后，从更宏观的视角来收束。 华尔街的特权变现不是新闻，国会山股神佩洛西已在神坛上呼风唤雨数十年。那么，特朗普这次高频交易事件，还有什么额外的讨论价值？\n\n有，而且很大。以前的政客们，更多是提前知晓某项法案大概会通过，然后买入相关股票或期权。他们还算是市场的信息接收者，只是领先于其他人。但现在这位，可不仅仅是信息接收者，他是信息发布者，甚至，他就是信息本身。他乐此不疲地不断发出信息，不断画出K线，也在不断扭曲市场价格的形成机制。特朗普给市场带来的破坏性，是巨大的。"
+            },
+            {
+              "chunk_id": 9,
+              "text": "更进一步，以前的政客搞内幕交易时，还多少带着羞耻心，操作更为隐蔽，不太会形成庞大的联盟。但特朗普完全是抱着“共同富裕”的姿态来的，不只自己一个家族，还有一帮富豪兄弟。这会导致两个明显的结果：一方面，市场被操纵得更厉害，局内人攫取极高利益，普通人能分到一点残羹冷炙都算幸运；另一方面，这些利益集团对资本市场的依赖将进一步加深，使得美股越来越变成一个“跌不得”的市场，这背后潜藏的系统性风险，经不起深思。\n\n百年华尔街所构筑的信用，核心护城河本是所谓的“法治与程序正义”。全球资本，包括主权基金和大型机构，愿意给美国科技股那么高的估值溢价，本质上是相信这套规矩还在。但今天，这个本该正义的底层逻辑，正在被一个庞大的利益集团公开操纵和扭曲。这意味着，美国的信用以及附着其上的溢价，或许将在未来几年迎来一轮痛苦的重新估值。对交易者来说，这将是值得长期观察的结构性变量。"
+            },
+            {
+              "chunk_id": 10,
+              "text": "我们观察这场闹剧，起点固然是觉得荒诞有趣，但没必要跟着外媒的节奏去单纯谴责或嘲笑。总统的道德问题，说到底还是美国人自己该操心的事。对我们而言，更值得思考的是：权力被毫无顾忌地资本化，究竟会带来什么。在这点上，今天的美国提供了一个绝佳的标本。"
+            }
+          ],
+          "clip_text_embeddings_file": "docs/1942ff5396efc7ac/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/1942ff5396efc7ac/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://www.topnews.cn/news/145FD7E147BC4475": {
+      "url": "https://www.topnews.cn/news/145FD7E147BC4475",
+      "canonical_url": "https://www.topnews.cn/news/145FD7E147BC4475",
+      "name": "特朗普一季度高频华尔街交易引热议：常规调配还是隐秘布局？—顶端新闻",
+      "site_name": "www.topnews.cn",
+      "display_url": "https://www.topnews.cn/news/145FD7E147BC4475",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.8188,
+      "date_published": "2026-05-18T12:06:00+08:00",
+      "date_last_crawled": "2026-05-18T12:06:00Z",
+      "full_content": "2026-05-18 12:06 来源：红色前哨 认证：兴趣认证\n\n据彭博社披露，美国政府道德办公室最新公布的财务文件，曝光了特朗普2026年第一季度的金融操作动向：短短三个月内，其相关金融交易数量突破3700笔，日均交易超40笔，高频交易动作直接震动华尔街市场。此次交易覆盖范围广泛，囊括英伟达、微软、亚马逊、Meta、英特尔、奈飞等欧美头部科技及实业巨头，大额密集的买卖行为不仅搅动资本市场情绪，更引发外界对交易动机、操作合规性的诸多争议与猜测，而白宫的紧急回应未能平息舆论，关于交易背后是常规资产调配还是另有政治、经济布局的讨论仍在持续发酵。\n\n从披露的财务细节来看，特朗普一季度的金融交易呈现出“高频次、广覆盖、大额度”的显著特征。根据财务文件显示，此次交易累计规模介于2.2亿美元至7.5亿美元之间，交易标的不仅包括多家热门科技企业的证券，还涵盖市政债券等品类。具体来看，交易呈现明显的“减持与增持并行”态势：在减持方面，特朗普对亚马逊、Meta、微软等既有持仓进行了大规模减持，交易金额处于500万美元至2500万美元的最高估值区间，同时又通过小额买入保持了在这些企业的活跃投资敞口；在增持方面，其在100万至500万美元区间建立了多个新持仓，重点布局芯片领域，包括英伟达、博通、德州仪器等半导体龙头企业，同时也重仓买入苹果、甲骨文等企业软件服务商的证券。\n\n值得关注的是，此次交易中存在两笔较为敏感的操作，进一步加剧了外界的质疑。2026年2月10日，特朗普旗下账户新购入价值100万至500万美元的戴尔科技公司C类股，而这一购买行为发生在他于5月初在白宫活动上公开为戴尔硬件产品背书之前；此外，自2026年3月初开始，特朗普通过一系列交易增加了对英特尔公司的持仓，而这一动作紧随美国政府2025年底决定持有这家国内芯片制造商大量股权之后。尽管这些交易被标注为“非主动委托”，即由经纪人发起、无总统明确指示，但交易时机与特朗普后续公开表态、政府政策的高度关联性，仍让市场对交易的“非人为干预”性质产生怀疑。\n\n面对外界关于“人为操盘”“内幕交易”的质疑，白宫火速出面作出回应，明确否认所有争议说法。白宫发言人强调，特朗普名下所有投资业务均由独立金融机构全权打理，交易全程依托自动化流程执行，特朗普本人及其家属并未参与任何交易决策，不存在利用职务便利操控市场、谋取私利的行为。同时，白宫方面补充说明，特朗普的金融资产存放在其子女管理的信托基金中，部分交易由经纪人代理进行，符合美国联邦道德规范要求。按照联邦道德规范，总统需披露超过1000美元的交易，但报告仅涵盖大致金额范围，不包含确切价格、已实现利润等细节，这也为白宫的回应提供了一定的解释空间。\n\n然而，白宫的回应并未平息资本市场的议论，各界对高频交易背后的真实意图仍有不同解读。一种观点认为，此次高频交易属于常规资产调配行为——特朗普的投资组合涵盖多领域头部企业，一季度的买卖操作主要是为了优化资产配置、规避市场波动风险，尤其是在AI行业担忧加剧、软件板块出现折价的背景下，增持芯片、企业软件类资产，属于合理的投资策略调整。此外，特朗普此前就有活跃的金融投资记录，2025年8月底至10月初曾在一个多月内购买逾8200万美元的公司债券和市政债券，高频交易并非首次出现。\n\n另一种观点则指向更为隐秘的布局，认为此次高频交易背后可能暗藏政治与经济的双重考量。BBC此前的报道显示，特朗普第二任期内，其重大公开表态前多次出现异常交易，交易 volume 在其发布市场影响性言论前几小时甚至几分钟内激增，呈现出疑似内幕交易的特征。有金融监管领域专家指出，尽管特朗普阵营声称交易由独立机构和自动化流程打理，但难以完全排除“间接干预”的可能，尤其是敏感交易的时机与政府政策、总统公开表态高度契合，不排除通过交易提前布局，借助政策导向谋取投资收益。此外，结合特朗普此前曾通过社交媒体喊话影响股市、自身持股公司股价随之暴涨的过往，市场对其交易行为的合规性始终保持警惕。\n\n从市场影响来看，特朗普的高频交易已对华尔街产生实际震动。一方面，其对英伟达、微软等龙头企业的大额买卖，短期内影响了相关个股的股价波动，部分机构跟风调整持仓，加剧了市场短期波动；另一方面，交易引发的争议也影响了市场信心，部分投资者担忧此类高频交易可能存在违规操作，进而对资本市场的公平性产生质疑。此外，由于财务披露文件仅提供交易金额大致范围，未明确交易确切价格、利润情况及交易地点、交易人等细节，诸多谜团仍有待后续更全面的年度披露文件揭开。\n\n从合规性角度来看，尽管白宫强调交易符合联邦道德规范，但外界的质疑仍有其合理性。美国法律明确禁止内幕交易，但由于信息来源认定、证据收集存在诸多困难，相关执法面临较大挑战。有金融监管法律专家表示，即便交易标注为“非主动委托”，也不能完全排除内幕信息泄露的可能，若特朗普身边人员提前获知其政策倾向并传递给经纪人，仍可能构成违规。此前，特朗普就曾因关税政策摇摆引发股市剧烈波动，其本人在政策宣布前发布“买入时机”的喊话，导致其持股公司股价暴涨，引发外界对内幕交易的强烈质疑。\n\n综上，特朗普2026年第一季度的高频华尔街交易，以其惊人的交易频次和广泛的标的覆盖，成为资本市场的焦点议题。白宫关于“独立机构自动化打理、无人工干预”的回应，虽试图化解争议，但敏感交易时机、过往交易争议等因素，仍让市场对交易背后的真实意图充满猜测。此次高频交易究竟是常规的资产优化调配，还是借助职务便利、政策导向的隐秘布局，目前尚无明确答案。未来，随着更全面的年度财务披露文件发布，交易细节将进一步清晰，而相关争议的持续，也将引发市场对总统任职期间金融投资行为合规性、透明度的进一步讨论，对美国资本市场的监管与公平性产生深远影响。\n\n人民网 新华网 央视网 中国新闻网 光明网 中国经济网 河南日报报业集团 北方网 长城网 开封网 鹤壁新闻网 焦作网 商丘网 大象网 新华网河南频道 中国网河南频道 河南机关党建 河南省委宣传部党建网 新闻学院实训平台 大河政务云 大河号 河南法学网 河南省人民政府外事办公室 河南郑州航空港\n\n网信算备410105910025302260013号\n\n豫ICP备2022017130号-5\n\n投诉举报请联系邮箱：qqjubao@dingxinwen.com\n\n新闻许可证 41120180001",
+      "image_urls": [
+        "https://img.dingxinwen.cn/image/20260518/23b07a832c24be602d95951d9c3ed874.jpg",
+        "https://image.dingxinwen.com//image/20240307/501bf335dcb2ac8f06c46ae78b40533a.jpeg?x-oss-process=image/resize,w_200",
+        "https://img.dingxinwen.cn/image/20260517/5c56f82117e185516df8561b9add55e7.png?x-oss-process=image/resize,w_400"
+      ],
+      "page_image_embeddings_file": "docs/1878b089f7855fca/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://img.dingxinwen.cn/image/20260518/23b07a832c24be602d95951d9c3ed874.jpg",
+        "https://image.dingxinwen.com//image/20240307/501bf335dcb2ac8f06c46ae78b40533a.jpeg?x-oss-process=image/resize,w_200",
+        "https://img.dingxinwen.cn/image/20260517/5c56f82117e185516df8561b9add55e7.png?x-oss-process=image/resize,w_400"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "recent activities of Donald Trump in May 2026 including meetings, speeches, and financial disclosures",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "2026-05-18 12:06 来源：红色前哨 认证：兴趣认证\n\n据彭博社披露，美国政府道德办公室最新公布的财务文件，曝光了特朗普2026年第一季度的金融操作动向：短短三个月内，其相关金融交易数量突破3700笔，日均交易超40笔，高频交易动作直接震动华尔街市场。此次交易覆盖范围广泛，囊括英伟达、微软、亚马逊、Meta、英特尔、奈飞等欧美头部科技及实业巨头，大额密集的买卖行为不仅搅动资本市场情绪，更引发外界对交易动机、操作合规性的诸多争议与猜测，而白宫的紧急回应未能平息舆论，关于交易背后是常规资产调配还是另有政治、经济布局的讨论仍在持续发酵。"
+            },
+            {
+              "chunk_id": 1,
+              "text": "从披露的财务细节来看，特朗普一季度的金融交易呈现出“高频次、广覆盖、大额度”的显著特征。根据财务文件显示，此次交易累计规模介于2.2亿美元至7.5亿美元之间，交易标的不仅包括多家热门科技企业的证券，还涵盖市政债券等品类。具体来看，交易呈现明显的“减持与增持并行”态势：在减持方面，特朗普对亚马逊、Meta、微软等既有持仓进行了大规模减持，交易金额处于500万美元至2500万美元的最高估值区间，同时又通过小额买入保持了在这些企业的活跃投资敞口；在增持方面，其在100万至500万美元区间建立了多个新持仓，重点布局芯片领域，包括英伟达、博通、德州仪器等半导体龙头企业，同时也重仓买入苹果、甲骨文等企业软件服务商的证券。"
+            },
+            {
+              "chunk_id": 2,
+              "text": "值得关注的是，此次交易中存在两笔较为敏感的操作，进一步加剧了外界的质疑。2026年2月10日，特朗普旗下账户新购入价值100万至500万美元的戴尔科技公司C类股，而这一购买行为发生在他于5月初在白宫活动上公开为戴尔硬件产品背书之前；此外，自2026年3月初开始，特朗普通过一系列交易增加了对英特尔公司的持仓，而这一动作紧随美国政府2025年底决定持有这家国内芯片制造商大量股权之后。尽管这些交易被标注为“非主动委托”，即由经纪人发起、无总统明确指示，但交易时机与特朗普后续公开表态、政府政策的高度关联性，仍让市场对交易的“非人为干预”性质产生怀疑。"
+            },
+            {
+              "chunk_id": 3,
+              "text": "面对外界关于“人为操盘”“内幕交易”的质疑，白宫火速出面作出回应，明确否认所有争议说法。白宫发言人强调，特朗普名下所有投资业务均由独立金融机构全权打理，交易全程依托自动化流程执行，特朗普本人及其家属并未参与任何交易决策，不存在利用职务便利操控市场、谋取私利的行为。同时，白宫方面补充说明，特朗普的金融资产存放在其子女管理的信托基金中，部分交易由经纪人代理进行，符合美国联邦道德规范要求。按照联邦道德规范，总统需披露超过1000美元的交易，但报告仅涵盖大致金额范围，不包含确切价格、已实现利润等细节，这也为白宫的回应提供了一定的解释空间。"
+            },
+            {
+              "chunk_id": 4,
+              "text": "然而，白宫的回应并未平息资本市场的议论，各界对高频交易背后的真实意图仍有不同解读。一种观点认为，此次高频交易属于常规资产调配行为——特朗普的投资组合涵盖多领域头部企业，一季度的买卖操作主要是为了优化资产配置、规避市场波动风险，尤其是在AI行业担忧加剧、软件板块出现折价的背景下，增持芯片、企业软件类资产，属于合理的投资策略调整。此外，特朗普此前就有活跃的金融投资记录，2025年8月底至10月初曾在一个多月内购买逾8200万美元的公司债券和市政债券，高频交易并非首次出现。"
+            },
+            {
+              "chunk_id": 5,
+              "text": "另一种观点则指向更为隐秘的布局，认为此次高频交易背后可能暗藏政治与经济的双重考量。BBC此前的报道显示，特朗普第二任期内，其重大公开表态前多次出现异常交易，交易 volume 在其发布市场影响性言论前几小时甚至几分钟内激增，呈现出疑似内幕交易的特征。有金融监管领域专家指出，尽管特朗普阵营声称交易由独立机构和自动化流程打理，但难以完全排除“间接干预”的可能，尤其是敏感交易的时机与政府政策、总统公开表态高度契合，不排除通过交易提前布局，借助政策导向谋取投资收益。此外，结合特朗普此前曾通过社交媒体喊话影响股市、自身持股公司股价随之暴涨的过往，市场对其交易行为的合规性始终保持警惕。"
+            },
+            {
+              "chunk_id": 6,
+              "text": "从市场影响来看，特朗普的高频交易已对华尔街产生实际震动。一方面，其对英伟达、微软等龙头企业的大额买卖，短期内影响了相关个股的股价波动，部分机构跟风调整持仓，加剧了市场短期波动；另一方面，交易引发的争议也影响了市场信心，部分投资者担忧此类高频交易可能存在违规操作，进而对资本市场的公平性产生质疑。此外，由于财务披露文件仅提供交易金额大致范围，未明确交易确切价格、利润情况及交易地点、交易人等细节，诸多谜团仍有待后续更全面的年度披露文件揭开。"
+            },
+            {
+              "chunk_id": 7,
+              "text": "从合规性角度来看，尽管白宫强调交易符合联邦道德规范，但外界的质疑仍有其合理性。美国法律明确禁止内幕交易，但由于信息来源认定、证据收集存在诸多困难，相关执法面临较大挑战。有金融监管法律专家表示，即便交易标注为“非主动委托”，也不能完全排除内幕信息泄露的可能，若特朗普身边人员提前获知其政策倾向并传递给经纪人，仍可能构成违规。此前，特朗普就曾因关税政策摇摆引发股市剧烈波动，其本人在政策宣布前发布“买入时机”的喊话，导致其持股公司股价暴涨，引发外界对内幕交易的强烈质疑。"
+            },
+            {
+              "chunk_id": 8,
+              "text": "综上，特朗普2026年第一季度的高频华尔街交易，以其惊人的交易频次和广泛的标的覆盖，成为资本市场的焦点议题。白宫关于“独立机构自动化打理、无人工干预”的回应，虽试图化解争议，但敏感交易时机、过往交易争议等因素，仍让市场对交易背后的真实意图充满猜测。此次高频交易究竟是常规的资产优化调配，还是借助职务便利、政策导向的隐秘布局，目前尚无明确答案。未来，随着更全面的年度财务披露文件发布，交易细节将进一步清晰，而相关争议的持续，也将引发市场对总统任职期间金融投资行为合规性、透明度的进一步讨论，对美国资本市场的监管与公平性产生深远影响。"
+            },
+            {
+              "chunk_id": 9,
+              "text": "人民网 新华网 央视网 中国新闻网 光明网 中国经济网 河南日报报业集团 北方网 长城网 开封网 鹤壁新闻网 焦作网 商丘网 大象网 新华网河南频道 中国网河南频道 河南机关党建 河南省委宣传部党建网 新闻学院实训平台 大河政务云 大河号 河南法学网 河南省人民政府外事办公室 河南郑州航空港\n\n网信算备410105910025302260013号\n\n豫ICP备2022017130号-5\n\n投诉举报请联系邮箱：qqjubao@dingxinwen.com\n\n新闻许可证 41120180001"
+            }
+          ],
+          "clip_text_embeddings_file": "docs/1878b089f7855fca/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/1878b089f7855fca/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://www.laohu8.com/post/564359256498200": {
+      "url": "https://www.laohu8.com/post/564359256498200",
+      "canonical_url": "https://www.laohu8.com/post/564359256498200",
+      "name": "特朗普炒股风波:总统操盘手?还是政策套利者?_老虎社区_美港股上老虎 - 老虎社区",
+      "site_name": "老虎国际",
+      "display_url": "https://www.laohu8.com/post/564359256498200",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.12467218045112782,
+      "date_published": "2026-05-17T00:43:28+08:00",
+      "date_last_crawled": "2026-05-17T00:43:28Z",
+      "full_content": "美国政坛再掀波澜。\n当地时间周四(5月14日),美国政府道德办公室披露的最新文件显示,特朗普在今年前三个月进行了规模惊人的金融交易——累计价值在2.2亿美元至7.5亿美元之间。相关交易标的包括标普500指数基金、\n$英伟达(NVDA)$\n和$苹果(AAPL)$\n、\n$微软(MSFT)$\n、\n$亚马逊(AMZN)$\n和Meta等。\n这意味着,坐在白宫椭圆形办公室里的那个男人,正以一种前所未有的积极性参与资本市场。很快,相关话题被推上舆论的风口浪尖:当全球最有权势的政策制定者,同时成为手握数亿美元筹码的活跃交易者,市场最底层的公平信仰正在被撕开一道裂缝。\n政策制定者,也是交易者?\n据媒体报道,美国政府伦理办公室周四发布的两份新财务披露表格。其中,\n一份长达113页的政府道德办公室278-T表格披露文件,显示特朗普在2026年第一季度进行了3642笔股票交易。该文件显示,其投资组合较2026年早些时候报告中以债券为主的布局出现了明显转向。\n最刺眼的不是交易规模或频率,而是交易标的与特朗普政府政策方向的高度绑定,以及部分交易与重大政策节点的惊人同步。\n从持仓结构看,特朗普家族信托的配置几乎完全复刻了其执政纲领。譬如,投资持仓占比最大的科技股。特朗普家族重仓英伟达、微软、Meta等AI龙头,这精准对应其政府推出的“万亿美元\nAI\n基础设施计划”与半导体产业全面扶持政策。\n更令人警觉的是,部分交易发生在重大政策调整频繁出台的窗口期——关税反复、科技监管表态摇摆、财政政策转向等关键节点。有市场人士质疑:“莫非总统也在做波段?”\n3月23日,在特朗普表示此前威胁要发动的对伊朗能源基础设施的打击将被推迟之前15分钟,价值数十亿美元的石油和股票期货被交易。特朗普在Truth\nSocial平台上发表的评论导致原油价格暴跌、股市飙升。\n除了炒股,特朗普家族“炒币”也是能手。在去年,币圈很热的时候",
+      "image_urls": [
+        "https://static.tigerbbs.com/acc23d9ae5b625e3281bef9842b6ccbc",
+        "https://static.tigerbbs.com/949f8a10973a2dc1542640dceb1b24b8",
+        "https://c1.itigergrowtha.com/community/assets/media/empty-default.06ba11e0.png"
+      ],
+      "page_image_embeddings_file": "docs/9469a9760441187c/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://static.tigerbbs.com/acc23d9ae5b625e3281bef9842b6ccbc",
+        "https://static.tigerbbs.com/949f8a10973a2dc1542640dceb1b24b8",
+        "https://c1.itigergrowtha.com/community/assets/media/empty-default.06ba11e0.png"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "recent activities of Donald Trump in May 2026 including meetings, speeches, and financial disclosures",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "美国政坛再掀波澜。\n\n当地时间周四(5月14日),美国政府道德办公室披露的最新文件显示,特朗普在今年前三个月进行了规模惊人的金融交易——累计价值在2.2亿美元至7.5亿美元之间。相关交易标的包括标普500指数基金、\n\n$英伟达(NVDA)$\n\n和$苹果(AAPL)$\n\n、\n\n$微软(MSFT)$\n\n、\n\n$亚马逊(AMZN)$\n\n和Meta等。\n\n这意味着,坐在白宫椭圆形办公室里的那个男人,正以一种前所未有的积极性参与资本市场。很快,相关话题被推上舆论的风口浪尖:当全球最有权势的政策制定者,同时成为手握数亿美元筹码的活跃交易者,市场最底层的公平信仰正在被撕开一道裂缝。\n\n政策制定者,也是交易者?\n\n据媒体报道,美国政府伦理办公室周四发布的两份新财务披露表格。其中,"
+            },
+            {
+              "chunk_id": 1,
+              "text": "一份长达113页的政府道德办公室278-T表格披露文件,显示特朗普在2026年第一季度进行了3642笔股票交易。该文件显示,其投资组合较2026年早些时候报告中以债券为主的布局出现了明显转向。\n\n最刺眼的不是交易规模或频率,而是交易标的与特朗普政府政策方向的高度绑定,以及部分交易与重大政策节点的惊人同步。\n\n从持仓结构看,特朗普家族信托的配置几乎完全复刻了其执政纲领。譬如,投资持仓占比最大的科技股。特朗普家族重仓英伟达、微软、Meta等AI龙头,这精准对应其政府推出的“万亿美元\n\nAI\n\n基础设施计划”与半导体产业全面扶持政策。\n\n更令人警觉的是,部分交易发生在重大政策调整频繁出台的窗口期——关税反复、科技监管表态摇摆、财政政策转向等关键节点。有市场人士质疑:“莫非总统也在做波段?”"
+            },
+            {
+              "chunk_id": 2,
+              "text": "3月23日,在特朗普表示此前威胁要发动的对伊朗能源基础设施的打击将被推迟之前15分钟,价值数十亿美元的石油和股票期货被交易。特朗普在Truth\n\nSocial平台上发表的评论导致原油价格暴跌、股市飙升。\n\n除了炒股,特朗普家族“炒币”也是能手。在去年,币圈很热的时候"
+            }
+          ],
+          "clip_text_embeddings_file": "docs/9469a9760441187c/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/9469a9760441187c/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://finance.sina.com.cn/7x24/2026-05-18/doc-inhyfsvf8543186.shtml": {
+      "url": "https://finance.sina.com.cn/7x24/2026-05-18/doc-inhyfsvf8543186.shtml",
+      "canonical_url": "https://finance.sina.com.cn/7x24/2026-05-18/doc-inhyfsvf8543186.shtml",
+      "name": "特朗普及其幕僚2026年Q1交易超3700笔,总额数千万美元_7x24小时财经新闻_新浪网",
+      "site_name": "新浪财经",
+      "display_url": "https://finance.sina.com.cn/7x24/2026-05-18/doc-inhyfsvf8543186.shtml",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "short_content",
+      "web_fetch_quality_score": 0.16473571428571426,
+      "date_published": "2026-05-18T01:09:22+08:00",
+      "date_last_crawled": "2026-05-18T01:09:22Z",
+      "full_content": "最新财务披露文件显示,特朗普及其幕僚在2026年第一季度完成超3700笔交易,交易总额达数千万美元,涉及多家与其执政阵营存在关联的企业。\n文件披露,其高频交易覆盖英伟达、微软、波音、甲骨文、开市客、亚马逊、Meta、英特尔、奈飞等大型企业,日均交易超40笔。\n此番披露再度引发外界对利益冲突问题的担忧,原因是特朗普仍持有庞大商业资产版图,且未将个人资产交由无记名信托托管。\n老布什、比尔・克林顿等历任美国总统均设立过无记名信托隔离资产,奥巴马与拜登在任期间则彻底杜绝个人股票交易行为。",
+      "image_urls": [],
+      "page_image_embeddings_file": "",
+      "page_image_embedding_urls": [],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    },
+    "https://www.toutiao.com/article/7641478223242543635": {
+      "url": "https://www.toutiao.com/article/7641478223242543635/",
+      "canonical_url": "https://www.toutiao.com/article/7641478223242543635",
+      "name": "特朗普投资转向!重仓AI与芯片股,背后是个人决策还是资本风向? - 今日头条",
+      "site_name": "今日头条",
+      "display_url": "https://www.toutiao.com/article/7641478223242543635/",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "empty_content",
+      "web_fetch_quality_score": 0.0,
+      "date_published": "2026-05-19T13:58:00+08:00",
+      "date_last_crawled": "2026-05-19T13:58:00Z",
+      "full_content": "5月16日报道,5月14日,美国政府道德办公室(OGE)公布了特朗普最新提交的两份278-T定期财务披露文件,首次曝光了其在2026年前三个月的大规模证券交易情况。英伟达、博通、AMD、甲骨文、Palantir、英特尔等AI与芯片公司,以及苹果、戴尔等科技硬件公司,成为其投资的重点方向;微软、Meta、亚马逊等科技巨头则出现了大额减持记录。其中,英伟达和英特尔相关交易尤为密集,披露文件中分别出现15笔和6笔相关交易。戴尔则在2月新增了一笔价值100万至500万美元(约合人民币680.9万至3404.9万元)的仓位,而数月后特朗普又在公开场合高调称赞戴尔硬件产品。文件显示,仅2026年1月至3月期间,特朗普名下账户就累计进行了超过3700笔证券交易,涉及金额约2.2亿至7.5亿美元(约合人民币14.9亿至51亿元)。由于美国联邦财务披露制度仅要求申报交易金额区间,而非具体成交金额,因此外界目前无法得知其真实交易规模。其中,大量交易集中于美国科技巨头、AI产业链公司、军工企业以及金融机构相关股票。这也是特朗普重返白宫后,首次出现如此大规模的个股交易披露。相比此前主要配置市政债券和企业债券,其投资重心明显开始转向美国大型科技股和AI产业链。特朗普集团回应称,相关资产均由第三方金融机构通过“全权委托账户”自动管理,特朗普本人、家族及特朗普集团均不参与具体投资决策,也不会提前获知交易信息。一、转向科技股,特朗普大举加仓AI产业链过去一年里,特朗普公开披露的大部分交易主要集中于市政债券和企业债券,但最新文件显示,其资金开始大量流向美国科技巨头以及AI相关企业。披露文件中,英伟达、博通、Synopsys、Cadence、AMD、德州仪器、甲骨文、ServiceNow、Adobe、Workday等公司均出现百万美元级别交易。其中,英伟达相关交易高达15笔,覆盖整个2026年第一季度。与此同",
+      "image_urls": [],
+      "page_image_embeddings_file": "",
+      "page_image_embedding_urls": [],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    },
+    "https://www.jqman.com/chip/456872.html": {
+      "url": "https://www.jqman.com/chip/456872.html",
+      "canonical_url": "https://www.jqman.com/chip/456872.html",
+      "name": "特朗普,买入英伟达、苹果、英特尔 - 芯片 - JQman",
+      "site_name": "www.jqman.com",
+      "display_url": "https://www.jqman.com/chip/456872.html",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "request_failed",
+      "web_fetch_quality_score": 0.0,
+      "date_published": "2026-05-21T11:21:57+08:00",
+      "date_last_crawled": "2026-05-21T11:21:57Z",
+      "full_content": "特朗普2026年前三个月进行超3700笔证券交易,重点投资AI与芯片公司,如英伟达、英特尔等,同时减持微软、Meta等科技巨头。其投资重心转向科技股和AI产业链。\n编译|江宇编辑|心缘智东西5月16日报道,5月14日,美国政府道德办公室(OGE)公布了特朗普最新提交的两份278-T定期财务披露文件,首次曝光了其在2026年前三个月的大规模证券交易情况。英伟达、博通、AMD、甲骨文、Palantir、英特尔等AI与芯片公司,以及苹果、戴尔等科技硬件公司,成为其投资的重点方向;微软、Meta、亚马逊等科技巨头则出现了大额减持记录。其中,英伟达和英特尔相关交易尤为密集,披露文件中分别出现15笔和6笔相关交易。戴尔则在2月新增了一笔价值100万至500万美元(约合人民币680.9万至3404.9万元)的仓位,而数月后特朗普又在公开场合高调称赞戴尔硬件产品。文件显示,仅2026年1月至3月期间,特朗普名下账户就累计进行了超过3700笔证券交易,涉及金额约2.2亿至7.5亿美元(约合人民币14.9亿至51亿元)。由于美国联邦财务披露制度仅要求申报交易金额区间,而非具体成交金额,因此外界目前无法得知其真实交易规模。其中,大量交易集中于美国科技巨头、AI产业链公司、军工企业以及金融机构相关股票。这也是特朗普重返白宫后,首次出现如此大规模的个股交易披露。相比此前主要配置市政债券和企业债券,其投资重心明显开始转向美国大型科技股和AI产业链。特朗普集团回应称,相关资产均由第三方金融机构通过“全权委托账户”自动管理,特朗普本人、家族及特朗普集团均不参与具体投资决策,也不会提前获知交易信息。一、转向科技股,特朗普大举加仓AI产业链过去一年里,特朗普公开披露的大部分交易主要集中于市政债券和企业债券,但最新文件显示,其资金开始大量流向美国科技巨头以及AI相关企业。披露文件中,英伟达、博通、Synopsy",
+      "image_urls": [
+        "https://www.jqman.com/uploads/20260516/02cbffd15299f4347bbaf4b6fba7636e.jpg",
+        "https://www.jqman.com/uploads/20260516/88bfe0c71d48198e4ad79c70337637a4.jpg",
+        "https://www.jqman.com/uploads/20260516/32d78f9e76326b458782b80dc722fd2b.jpg"
+      ],
+      "page_image_embeddings_file": "",
+      "page_image_embedding_urls": [],
+      "page_image_failed_urls": [
+        "https://www.jqman.com/uploads/20260516/02cbffd15299f4347bbaf4b6fba7636e.jpg",
+        "https://www.jqman.com/uploads/20260516/88bfe0c71d48198e4ad79c70337637a4.jpg",
+        "https://www.jqman.com/uploads/20260516/32d78f9e76326b458782b80dc722fd2b.jpg"
+      ],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    }
+  }
+}

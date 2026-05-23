@@ -8,6 +8,111 @@ from rag_v1.pipeline.rag_pipeline import answer_with_rag
 from rag_v1.timing import TimingStats, set_active_timing
 
 
+def _timing_metric(timing: TimingStats, *keys: str) -> float:
+    return sum(timing.get_duration(key) for key in keys)
+
+
+def _timing_count(timing: TimingStats, *keys: str) -> int:
+    return sum(timing.get_count(key) for key in keys)
+
+
+def _print_simple_timing(timing: TimingStats, total_elapsed: float) -> None:
+    chat_api_time = timing.get_duration("chat_api")
+    search_api_time = timing.get_duration("web_search_api")
+    api_time = chat_api_time + search_api_time
+    chat_api_count = timing.get_count("chat_api")
+    search_api_count = timing.get_count("web_search_api")
+    clip_server_time = timing.get_duration("clip_server")
+    clip_server_count = timing.get_count("clip_server")
+    sentence_transformer_time = _timing_metric(
+        timing,
+        "text_retrieval",
+        "text_retrieval_server",
+    )
+    sentence_transformer_count = _timing_count(
+        timing,
+        "text_retrieval",
+        "text_retrieval_server",
+    )
+    web_page_fetch_time = timing.get_duration("web_page_fetch")
+    web_page_fetch_count = timing.get_count("web_page_fetch")
+    cache_io_time = timing.get_duration("session_cache.flush_io")
+    cache_io_count = timing.get_count("session_cache.flush_io")
+    accounted_time = (
+        api_time
+        + clip_server_time
+        + sentence_transformer_time
+        + web_page_fetch_time
+        + cache_io_time
+    )
+    other_time = max(0.0, total_elapsed - accounted_time)
+
+    print("------------------------")
+    print("Timing:")
+    print(f"Total time: {total_elapsed:.3f}s")
+    print(f"API: {api_time:.3f}s ({chat_api_count + search_api_count} calls)")
+    print(f"Search API: {search_api_time:.3f}s ({search_api_count} calls)")
+    print(f"Chat API: {chat_api_time:.3f}s ({chat_api_count} calls)")
+    print(f"CLIP: {clip_server_time:.3f}s ({clip_server_count} calls)")
+    print(
+        f"Sentence Transformer: {sentence_transformer_time:.3f}s "
+        f"({sentence_transformer_count} calls)"
+    )
+    print(f"Web page fetch: {web_page_fetch_time:.3f}s ({web_page_fetch_count} calls)")
+    print(f"Cache I/O: {cache_io_time:.3f}s ({cache_io_count} writes)")
+    print(f"Other: {other_time:.3f}s")
+
+
+def _print_detailed_timing(timing: TimingStats, total_elapsed: float) -> None:
+    chat_api_time = timing.get_duration("chat_api")
+    web_search_api_time = timing.get_duration("web_search_api")
+    api_time = chat_api_time + web_search_api_time
+    clip_server_time = timing.get_duration("clip_server")
+    web_page_fetch_time = timing.get_duration("web_page_fetch")
+    text_retrieval_time = _timing_metric(
+        timing,
+        "text_retrieval",
+        "text_retrieval_server",
+    )
+    text_retrieval_count = _timing_count(
+        timing,
+        "text_retrieval",
+        "text_retrieval_server",
+    )
+    accounted_time = (
+        api_time
+        + clip_server_time
+        + web_page_fetch_time
+        + text_retrieval_time
+    )
+    other_time = max(0.0, total_elapsed - accounted_time)
+
+    print("------------------------")
+    print("Timing:")
+    print(f"Total: {total_elapsed:.3f}s")
+    print(f"API: {api_time:.3f}s")
+    print(
+        "API breakdown: "
+        f"chat={chat_api_time:.3f}s ({timing.get_count('chat_api')} calls), "
+        f"web_search={web_search_api_time:.3f}s ({timing.get_count('web_search_api')} calls)"
+    )
+    print(
+        f"CLIP server: {clip_server_time:.3f}s "
+        f"({timing.get_count('clip_server')} calls)"
+    )
+    print(
+        f"Web page fetch: {web_page_fetch_time:.3f}s "
+        f"({timing.get_count('web_page_fetch')} calls)"
+    )
+    print(
+        f"Text retrieval: {text_retrieval_time:.3f}s "
+        f"({text_retrieval_count} calls)"
+    )
+    print(f"Other: {other_time:.3f}s")
+    for line in timing.report_lines(total_elapsed=total_elapsed):
+        print(line)
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="rag-pipeline",
@@ -70,6 +175,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Print timing statistics for the full run, API calls, and CLIP server calls.",
     )
+    parser.add_argument(
+        "--simple-time",
+        action="store_true",
+        help="When used with --time, print only a compact timing summary.",
+    )
     return parser
 
 
@@ -105,6 +215,8 @@ def main() -> None:
         parser.error(str(exc))
     if args.max_sufficiency_iterations < 0:
         parser.error("--max-sufficiency-iterations must be >= 0")
+    if args.simple_time and not args.time:
+        parser.error("--simple-time requires --time")
     timing = TimingStats() if args.time else None
     set_active_timing(timing)
     total_start_time = time.perf_counter()
@@ -126,43 +238,10 @@ def main() -> None:
         set_active_timing(None)
     print(f"------------------------\nFinal response:\n{response}")
     if timing is not None:
-        chat_api_time = timing.get_duration("chat_api")
-        web_search_api_time = timing.get_duration("web_search_api")
-        api_time = chat_api_time + web_search_api_time
-        clip_server_time = timing.get_duration("clip_server")
-        web_page_fetch_time = timing.get_duration("web_page_fetch")
-        text_retrieval_time = timing.get_duration("text_retrieval")
-        accounted_time = (
-            api_time
-            + clip_server_time
-            + web_page_fetch_time
-            + text_retrieval_time
-        )
-        other_time = max(0.0, total_elapsed - accounted_time)
-        print("------------------------")
-        print("Timing:")
-        print(f"Total: {total_elapsed:.3f}s")
-        print(f"API: {api_time:.3f}s")
-        print(
-            "API breakdown: "
-            f"chat={chat_api_time:.3f}s ({timing.get_count('chat_api')} calls), "
-            f"web_search={web_search_api_time:.3f}s ({timing.get_count('web_search_api')} calls)"
-        )
-        print(
-            f"CLIP server: {clip_server_time:.3f}s "
-            f"({timing.get_count('clip_server')} calls)"
-        )
-        print(
-            f"Web page fetch: {web_page_fetch_time:.3f}s "
-            f"({timing.get_count('web_page_fetch')} calls)"
-        )
-        print(
-            f"Text retrieval: {text_retrieval_time:.3f}s "
-            f"({timing.get_count('text_retrieval')} calls)"
-        )
-        print(f"Other: {other_time:.3f}s")
-        for line in timing.report_lines(total_elapsed=total_elapsed):
-            print(line)
+        if args.simple_time:
+            _print_simple_timing(timing=timing, total_elapsed=total_elapsed)
+        else:
+            _print_detailed_timing(timing=timing, total_elapsed=total_elapsed)
 
 
 if __name__ == "__main__":

@@ -39,7 +39,7 @@ class TextRetrievalEmbeddingService:
     def _load_model(self) -> SentenceTransformer:
         model_path: str | Path
         if (self.local_model_dir / "modules.json").exists():
-            model_path = self.local_model_dir
+            model_path = str(self.local_model_dir)
         else:
             self.local_model_dir.mkdir(parents=True, exist_ok=True)
             model_path = self.model_id

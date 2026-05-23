@@ -1,0 +1,918 @@
+{
+  "session_type": "visual_rag_recall",
+  "storage_format": "manifest+npy",
+  "created_at": "2026-05-23T22:28:41+08:00",
+  "clip_model_id": "openai/clip-vit-base-patch32",
+  "text_retrieval_model_id": "sentence-transformers/all-MiniLM-L6-v2",
+  "question": "What new activities has this man been up to lately?",
+  "question_hash": "61d37520716a7876",
+  "use_multimodal": true,
+  "prompt_images": [
+    "/mnt/d/MarkdownFile/Computer_Vision/CV-project/pictures/trump.jpg"
+  ],
+  "prompt_image_embeddings_file": "prompt_image_embeddings.npy",
+  "question_clip_text_embedding_file": "question_clip_text_embedding.npy",
+  "query_text_retrieval_embeddings": {
+    "d8363355d270f714": "queries/d8363355d270f714.npy",
+    "3fdfc68c736f5d9b": "queries/3fdfc68c736f5d9b.npy",
+    "dbc1341422be7286": "queries/dbc1341422be7286.npy"
+  },
+  "queries": [
+    {
+      "query": "trump recent activities",
+      "freshness": "oneWeek",
+      "recorded_at": "2026-05-23T22:28:43+08:00"
+    },
+    {
+      "query": "Trump recent activities 2026",
+      "freshness": "oneWeek",
+      "recorded_at": "2026-05-23T22:28:59+08:00"
+    },
+    {
+      "query": "Trump recent activities May 2026",
+      "freshness": "oneWeek",
+      "recorded_at": "2026-05-23T22:29:18+08:00"
+    }
+  ],
+  "docs": {
+    "https://www.nikkan-gendai.com/articles/view/money/387804": {
+      "url": "https://www.nikkan-gendai.com/articles/view/money/387804",
+      "canonical_url": "https://www.nikkan-gendai.com/articles/view/money/387804",
+      "name": "トランプ大統領「疑惑の取引」で高まる弾劾リスク…1～3月期に3600件超の証券売買判明｜日刊ゲンダイDIGITAL",
+      "site_name": "日刊ゲンダイ DIGITAL",
+      "display_url": "https://www.nikkan-gendai.com/articles/view/money/387804",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.0,
+      "date_published": "2026-05-20T06:00:00+08:00",
+      "date_last_crawled": "2026-05-20T06:00:00Z",
+      "full_content": "どこまでカネにがめついのか。米政府倫理局が14日に開示した財務資料で、トランプ米大統領が今年1~3月期に3600件超の証券取引を行っていたことが判明。米メディアが次々と「疑惑の取引」を報じている。\n取引対象には半導体大手エヌビディアやアップル、アマゾンなどビッグテックの名前がズラリ。回転ずしチェーン「くら寿司」の子会社で米国に上場している「くら寿司USA」の株も含まれていた。\n米ロイターによれば、取引総額は2億2000万~7億5000万ドル(約350億~1200億円)に上るという。米ブルームバーグは、タトル・キャピタル・マネジメントCEOのマシュー・タトル氏の「常軌を逸した取引量だ」との指摘を紹介。〈ウォール街関係者は驚愕〉と報じた。\n問題は、トランプ氏が大統領の立場を利用して利益誘導している疑いが濃厚なことだ。\n米CNBCは15日、〈トランプ大統領は、自身のSNS「トゥルース・ソーシャル」でAIソフトウエア大手のパランティアを銘柄コード付きで称賛する前、同社の株を買い漁っていた〉と報道。トランプ氏は1~3月期に24万7000~63万ドル(約4000万~1億円)のパランティア株を購入した翌月、イラン攻撃を念頭に〈パランティアは極めて優れた戦闘遂行能力を持っていることを証明した〉〈敵に聞いてみればいい〉などと投稿していた。",
+      "image_urls": [
+        "https://jmqvqzo7.user.webaccel.jp/img/article/000/387/804/3ac589f7f49cb09c7fdb29905303965d20260519105847066.jpg",
+        "https://jmqvqzo7.user.webaccel.jp/img/article/000/387/804/3ac589f7f49cb09c7fdb29905303965d20260519105847066_262_262.webp",
+        "https://jmqvqzo7.user.webaccel.jp/img/article/000/387/804/3ac589f7f49cb09c7fdb29905303965d20260519105847066_262_262.jpg"
+      ],
+      "page_image_embeddings_file": "docs/49a6c7d61e720369/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://jmqvqzo7.user.webaccel.jp/img/article/000/387/804/3ac589f7f49cb09c7fdb29905303965d20260519105847066.jpg",
+        "https://jmqvqzo7.user.webaccel.jp/img/article/000/387/804/3ac589f7f49cb09c7fdb29905303965d20260519105847066_262_262.webp",
+        "https://jmqvqzo7.user.webaccel.jp/img/article/000/387/804/3ac589f7f49cb09c7fdb29905303965d20260519105847066_262_262.jpg"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "trump recent activities",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "どこまでカネにがめついのか。米政府倫理局が14日に開示した財務資料で、トランプ米大統領が今年1~3月期に3600件超の証券取引を行っていたことが判明。米メディアが次々と「疑惑の取引」を報じている。\n\n取引対象には半導体大手エヌビディアやアップル、アマゾンなどビッグテックの名前がズラリ。回転ずしチェーン「くら寿司」の子会社で米国に上場している「くら寿司USA」の株も含まれていた。\n\n米ロイターによれば、取引総額は2億2000万~7億5000万ドル(約350億~1200億円)に上るという。米ブルームバーグは、タトル・キャピタル・マネジメントCEOのマシュー・タトル氏の「常軌を逸した取引量だ」との指摘を紹介。〈ウォール街関係者は驚愕〉と報じた。\n\n問題は、トランプ氏が大統領の立場を利用して利益誘導している疑いが濃厚なことだ。"
+            },
+            {
+              "chunk_id": 1,
+              "text": "米CNBCは15日、〈トランプ大統領は、自身のSNS「トゥルース・ソーシャル」でAIソフトウエア大手のパランティアを銘柄コード付きで称賛する前、同社の株を買い漁っていた〉と報道。トランプ氏は1~3月期に24万7000~63万ドル(約4000万~1億円)のパランティア株を購入した翌月、イラン攻撃を念頭に〈パランティアは極めて優れた戦闘遂行能力を持っていることを証明した〉〈敵に聞いてみればいい〉などと投稿していた。"
+            }
+          ],
+          "clip_text_embeddings_file": "docs/49a6c7d61e720369/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/49a6c7d61e720369/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://longportapp.cn/en/topics/40855426": {
+      "url": "https://longportapp.cn/en/topics/40855426",
+      "canonical_url": "https://longportapp.cn/en/topics/40855426",
+      "name": "$Alphabet - C(GOOG.US) Trump's highest-return stoc - LongPort",
+      "site_name": "longportapp.cn",
+      "display_url": "https://longportapp.cn/en/topics/40855426",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.5188928571428572,
+      "date_published": "2026-05-17T17:17:00+08:00",
+      "date_last_crawled": "2026-05-17T17:17:00Z",
+      "full_content": "$Alphabet - C(GOOG.US) Trump's highest-return stock can reach 157%, indeed, value investing/value speculation can't compare to drawing K-lines. But then again, he gave us a very clear direction: just hold the targets he bought without moving them. 🌹👍 $Berkshire Hathaway B(BRK.B.US) $Apple(AAPL.US)\n\nThe US Office of Government Ethics released Trump's US stock trading report, showing he conducted a staggering 3,642 securities transactions in Q1, with a total scale between $220 million and $750 million.\n\nSome of these trades were quite pivotal. He made large-scale positions in the semiconductor computing power and storage sectors, including $Sandisk(SNDK.US) , $NVIDIA(NVDA.US) , and $Broadcom(AVGO.US) .\n\nMost notably, he bought $Dell Tech(DELL.US) in February, then publicly hyped Dell in May, after which the stock price soared. He also continued to increase his holdings in $Intel(INTC.US) , a company the US government had already invested in.\n\nFinally, let's look at a chart of Trump's win rate. He absolutely struck gold, with his most profitable single trade this year already up 157%. This really puts even Warren Buffett to shame.",
+      "image_urls": [
+        "https://pub.pbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png",
+        "https://pub.pbkrs.com/cms/2025/0/8ZgMk7Y9fAEHMFhCKwjuZGgyKa9hy2dU.png",
+        "https://pub.pbkrs.com/social/badge/annualSummary2025/small_summary2025YieldHunter.png?v=7&1766496113"
+      ],
+      "page_image_embeddings_file": "docs/e909af71a51f4846/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://pub.pbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png",
+        "https://pub.pbkrs.com/cms/2025/0/8ZgMk7Y9fAEHMFhCKwjuZGgyKa9hy2dU.png",
+        "https://pub.pbkrs.com/social/badge/annualSummary2025/small_summary2025YieldHunter.png?v=7&1766496113"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "trump recent activities",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "$Alphabet - C(GOOG.US) Trump's highest-return stock can reach 157%, indeed, value investing/value speculation can't compare to drawing K-lines. But then again, he gave us a very clear direction: just hold the targets he bought without moving them. 🌹👍 $Berkshire Hathaway B(BRK.B.US) $Apple(AAPL.US)"
+            },
+            {
+              "chunk_id": 1,
+              "text": "The US Office of Government Ethics released Trump's US stock trading report, showing he conducted a staggering 3,642 securities transactions in Q1, with a total scale between $220 million and $750 million."
+            },
+            {
+              "chunk_id": 2,
+              "text": "Some of these trades were quite pivotal. He made large-scale positions in the semiconductor computing power and storage sectors, including $Sandisk(SNDK.US) , $NVIDIA(NVDA.US) , and $Broadcom(AVGO.US) ."
+            },
+            {
+              "chunk_id": 3,
+              "text": "Most notably, he bought $Dell Tech(DELL.US) in February, then publicly hyped Dell in May, after which the stock price soared. He also continued to increase his holdings in $Intel(INTC.US) , a company the US government had already invested in."
+            },
+            {
+              "chunk_id": 4,
+              "text": "Finally, let's look at a chart of Trump's win rate. He absolutely struck gold, with his most profitable single trade this year already up 157%. This really puts even Warren Buffett to shame."
+            }
+          ],
+          "clip_text_embeddings_file": "docs/e909af71a51f4846/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/e909af71a51f4846/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://spanish.news.cn/20260523/d6f9cca1b88f4cc4bf960584bc5ecf39/c.html": {
+      "url": "https://spanish.news.cn/20260523/d6f9cca1b88f4cc4bf960584bc5ecf39/c.html",
+      "canonical_url": "https://spanish.news.cn/20260523/d6f9cca1b88f4cc4bf960584bc5ecf39/c.html",
+      "name": "Trump sopesa opciones militares ante la incertidumbre sobre conversaciones con Irán",
+      "site_name": "新华网",
+      "display_url": "https://spanish.news.cn/20260523/d6f9cca1b88f4cc4bf960584bc5ecf39/c.html",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.8137714285714286,
+      "date_published": "2026-05-23T00:00:00+08:00",
+      "date_last_crawled": "2026-05-23T00:00:00Z",
+      "full_content": "Trump sopesa opciones militares ante la incertidumbre sobre conversaciones con Irán\n\nWASHINGTON, 22 may (Xinhua) -- El Gobierno del presidente estadounidense, Donald Trump, se está preparando para una nueva ronda de ataques militares contra Irán, pese a los esfuerzos diplomáticos en curso, informaron hoy medios de comunicación locales.\n\nTrump se reunió este viernes con altos cargos de seguridad nacional para abordar el futuro de la guerra con Irán, pero el encuentro concluyó sin una decisión sobre los próximos pasos, dijo a la cadena CNN una fuente familiarizada con la cita.\n\nTrump está considerando seriamente lanzar nuevos ataques contra Irán, a menos que se produzca un avance de último minuto en las negociaciones, indicó el portal Axios, citando fuentes que han hablado con el mandatario.\n\nEn declaraciones recogidas por Axios, una fuente cercana a Trump señaló que el presidente ha planteado la posibilidad de una \"decisiva\" operación militar final a gran escala, tras la cual podría declarar la victoria y poner fin a la guerra, pero no hay indicios de que haya tomado una decisión definitiva.\n\nMás tarde, el mismo viernes, Trump canceló sus planes de pasar el fin de semana en su complejo de golf de Nueva Jersey, y anunció que, en lugar de asistir a la boda de su hijo en las Bahamas, se quedará en Washington debido a lo que describió como \"circunstancias relacionadas con el Gobierno\".\n\n\"Considero importante permanecer en Washington D. C., en la Casa Blanca, durante este importante período\", escribió Trump en su red Truth Social.\n\nTambién el viernes, la cadena de televisión Al Arabiya informó en redes sociales que se espera que el borrador final de un posible acuerdo entre Estados Unidos e Irán, mediado por Pakistán, se anuncie en las próximas horas.\n\nSegún fuentes citadas por Al Arabiya, los términos clave del borrador incluyen un alto el fuego inmediato, integral e incondicional en todos los frentes, el compromiso mutuo de no atacar infraestructura militar, civil o económica, y el fin de las operaciones militares y la guerra mediática.\n\nTrascendió que las delegaciones de Qatar y Pakistán visitaron Teherán el viernes, en un intento por ayudar a poner fin a la guerra de Estados Unidos con Irán.",
+      "image_urls": [
+        "https://spanish.news.cn/20260523/d6f9cca1b88f4cc4bf960584bc5ecf39/zxcode_20260523d6f9cca1b88f4cc4bf960584bc5ecf39.jpg",
+        "https://spanish.news.cn/20260523/ec676cf132164e3eac502ac9d39dca81/20260523ec676cf132164e3eac502ac9d39dca81_25c6fd8870914f2fa05bcd466aee66a3.JPG",
+        "https://spanish.news.cn/20260523/91b4e986970d4e2a97377b07e5820bdb/2026052391b4e986970d4e2a97377b07e5820bdb_72c49cd30185420f9cf0bb5172437b54.JPG"
+      ],
+      "page_image_embeddings_file": "docs/8f64382d4aefadf3/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://spanish.news.cn/20260523/d6f9cca1b88f4cc4bf960584bc5ecf39/zxcode_20260523d6f9cca1b88f4cc4bf960584bc5ecf39.jpg",
+        "https://spanish.news.cn/20260523/ec676cf132164e3eac502ac9d39dca81/20260523ec676cf132164e3eac502ac9d39dca81_25c6fd8870914f2fa05bcd466aee66a3.JPG",
+        "https://spanish.news.cn/20260523/91b4e986970d4e2a97377b07e5820bdb/2026052391b4e986970d4e2a97377b07e5820bdb_72c49cd30185420f9cf0bb5172437b54.JPG"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "trump recent activities",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "Trump sopesa opciones militares ante la incertidumbre sobre conversaciones con Irán\n\nWASHINGTON, 22 may (Xinhua) -- El Gobierno del presidente estadounidense, Donald Trump, se está preparando para una nueva ronda de ataques militares contra Irán, pese a los esfuerzos diplomáticos en curso, informaron hoy medios de comunicación locales."
+            },
+            {
+              "chunk_id": 1,
+              "text": "Trump se reunió este viernes con altos cargos de seguridad nacional para abordar el futuro de la guerra con Irán, pero el encuentro concluyó sin una decisión sobre los próximos pasos, dijo a la cadena CNN una fuente familiarizada con la cita."
+            },
+            {
+              "chunk_id": 2,
+              "text": "Trump está considerando seriamente lanzar nuevos ataques contra Irán, a menos que se produzca un avance de último minuto en las negociaciones, indicó el portal Axios, citando fuentes que han hablado con el mandatario."
+            },
+            {
+              "chunk_id": 3,
+              "text": "En declaraciones recogidas por Axios, una fuente cercana a Trump señaló que el presidente ha planteado la posibilidad de una \"decisiva\" operación militar final a gran escala, tras la cual podría declarar la victoria y poner fin a la guerra, pero no hay indicios de que haya tomado una decisión definitiva."
+            },
+            {
+              "chunk_id": 4,
+              "text": "Más tarde, el mismo viernes, Trump canceló sus planes de pasar el fin de semana en su complejo de golf de Nueva Jersey, y anunció que, en lugar de asistir a la boda de su hijo en las Bahamas, se quedará en Washington debido a lo que describió como \"circunstancias relacionadas con el Gobierno\"."
+            },
+            {
+              "chunk_id": 5,
+              "text": "\"Considero importante permanecer en Washington D. C., en la Casa Blanca, durante este importante período\", escribió Trump en su red Truth Social.\n\nTambién el viernes, la cadena de televisión Al Arabiya informó en redes sociales que se espera que el borrador final de un posible acuerdo entre Estados Unidos e Irán, mediado por Pakistán, se anuncie en las próximas horas."
+            },
+            {
+              "chunk_id": 6,
+              "text": "Según fuentes citadas por Al Arabiya, los términos clave del borrador incluyen un alto el fuego inmediato, integral e incondicional en todos los frentes, el compromiso mutuo de no atacar infraestructura militar, civil o económica, y el fin de las operaciones militares y la guerra mediática."
+            },
+            {
+              "chunk_id": 7,
+              "text": "Trascendió que las delegaciones de Qatar y Pakistán visitaron Teherán el viernes, en un intento por ayudar a poner fin a la guerra de Estados Unidos con Irán."
+            }
+          ],
+          "clip_text_embeddings_file": "docs/8f64382d4aefadf3/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/8f64382d4aefadf3/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/c.html": {
+      "url": "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/c.html",
+      "canonical_url": "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/c.html",
+      "name": "(Multimedia) Trump sopesa opciones militares ante la incertidumbre sobre conversaciones con Irán",
+      "site_name": "新华网",
+      "display_url": "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/c.html",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.8499857142857143,
+      "date_published": "2026-05-23T00:00:00+08:00",
+      "date_last_crawled": "2026-05-23T00:00:00Z",
+      "full_content": "(Multimedia) Trump sopesa opciones militares ante la incertidumbre sobre conversaciones con Irán\n\nImagen del 1 de mayo de 2026 del presidente estadounidense, Donald Trump, caminando hacia el Jardín Sur de la Casa Blanca, en Washington D. C., Estados Unidos. (Xinhua/Li Yuanqing)\n\nWASHINGTON, 22 may (Xinhua) -- El Gobierno del presidente estadounidense, Donald Trump, se está preparando para una nueva ronda de ataques militares contra Irán, pese a los esfuerzos diplomáticos en curso, informaron hoy medios de comunicación locales.\n\nTrump se reunió este viernes con altos cargos de seguridad nacional para abordar el futuro de la guerra con Irán, pero el encuentro concluyó sin una decisión sobre los próximos pasos, dijo a la cadena CNN una fuente familiarizada con la cita.\n\nTrump está considerando seriamente lanzar nuevos ataques contra Irán, a menos que se produzca un avance de último minuto en las negociaciones, indicó el portal Axios, citando fuentes que han hablado con el mandatario.\n\nEn declaraciones recogidas por Axios, una fuente cercana a Trump señaló que el presidente ha planteado la posibilidad de una \"decisiva\" operación militar final a gran escala, tras la cual podría declarar la victoria y poner fin a la guerra, pero no hay indicios de que haya tomado una decisión definitiva.\n\nMás tarde, el mismo viernes, Trump canceló sus planes de pasar el fin de semana en su complejo de golf de Nueva Jersey, y anunció que, en lugar de asistir a la boda de su hijo en las Bahamas, se quedará en Washington debido a lo que describió como \"circunstancias relacionadas con el Gobierno\".\n\n\"Considero importante permanecer en Washington D. C., en la Casa Blanca, durante este importante período\", escribió Trump en su red Truth Social.\n\nTambién el viernes, la cadena de televisión Al Arabiya informó en redes sociales que se espera que el borrador final de un posible acuerdo entre Estados Unidos e Irán, mediado por Pakistán, se anuncie en las próximas horas.\n\nSegún fuentes citadas por Al Arabiya, los términos clave del borrador incluyen un alto el fuego inmediato, integral e incondicional en todos los frentes, el compromiso mutuo de no atacar infraestructura militar, civil o económica, y el fin de las operaciones militares y la guerra mediática.\n\nTrascendió que las delegaciones de Qatar y Pakistán visitaron Teherán el viernes, en un intento por ayudar a poner fin a la guerra de Estados Unidos con Irán.",
+      "image_urls": [
+        "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/202605231186112de2d84daab87029a4ed6c7935_XxjiseS000022_20260523_CBMFN0A001.JPG",
+        "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/zxcode_202605231186112de2d84daab87029a4ed6c7935.jpg"
+      ],
+      "page_image_embeddings_file": "docs/98994c1769583976/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/202605231186112de2d84daab87029a4ed6c7935_XxjiseS000022_20260523_CBMFN0A001.JPG",
+        "https://spanish.news.cn/20260523/1186112de2d84daab87029a4ed6c7935/zxcode_202605231186112de2d84daab87029a4ed6c7935.jpg"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "trump recent activities",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "(Multimedia) Trump sopesa opciones militares ante la incertidumbre sobre conversaciones con Irán\n\nImagen del 1 de mayo de 2026 del presidente estadounidense, Donald Trump, caminando hacia el Jardín Sur de la Casa Blanca, en Washington D. C., Estados Unidos. (Xinhua/Li Yuanqing)"
+            },
+            {
+              "chunk_id": 1,
+              "text": "WASHINGTON, 22 may (Xinhua) -- El Gobierno del presidente estadounidense, Donald Trump, se está preparando para una nueva ronda de ataques militares contra Irán, pese a los esfuerzos diplomáticos en curso, informaron hoy medios de comunicación locales."
+            },
+            {
+              "chunk_id": 2,
+              "text": "Trump se reunió este viernes con altos cargos de seguridad nacional para abordar el futuro de la guerra con Irán, pero el encuentro concluyó sin una decisión sobre los próximos pasos, dijo a la cadena CNN una fuente familiarizada con la cita."
+            },
+            {
+              "chunk_id": 3,
+              "text": "Trump está considerando seriamente lanzar nuevos ataques contra Irán, a menos que se produzca un avance de último minuto en las negociaciones, indicó el portal Axios, citando fuentes que han hablado con el mandatario."
+            },
+            {
+              "chunk_id": 4,
+              "text": "En declaraciones recogidas por Axios, una fuente cercana a Trump señaló que el presidente ha planteado la posibilidad de una \"decisiva\" operación militar final a gran escala, tras la cual podría declarar la victoria y poner fin a la guerra, pero no hay indicios de que haya tomado una decisión definitiva."
+            },
+            {
+              "chunk_id": 5,
+              "text": "Más tarde, el mismo viernes, Trump canceló sus planes de pasar el fin de semana en su complejo de golf de Nueva Jersey, y anunció que, en lugar de asistir a la boda de su hijo en las Bahamas, se quedará en Washington debido a lo que describió como \"circunstancias relacionadas con el Gobierno\"."
+            },
+            {
+              "chunk_id": 6,
+              "text": "\"Considero importante permanecer en Washington D. C., en la Casa Blanca, durante este importante período\", escribió Trump en su red Truth Social.\n\nTambién el viernes, la cadena de televisión Al Arabiya informó en redes sociales que se espera que el borrador final de un posible acuerdo entre Estados Unidos e Irán, mediado por Pakistán, se anuncie en las próximas horas."
+            },
+            {
+              "chunk_id": 7,
+              "text": "Según fuentes citadas por Al Arabiya, los términos clave del borrador incluyen un alto el fuego inmediato, integral e incondicional en todos los frentes, el compromiso mutuo de no atacar infraestructura militar, civil o económica, y el fin de las operaciones militares y la guerra mediática."
+            },
+            {
+              "chunk_id": 8,
+              "text": "Trascendió que las delegaciones de Qatar y Pakistán visitaron Teherán el viernes, en un intento por ayudar a poner fin a la guerra de Estados Unidos con Irán."
+            }
+          ],
+          "clip_text_embeddings_file": "docs/98994c1769583976/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/98994c1769583976/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://french.news.cn/20260523/15b8d2a4604e414c9aa10caa996e2ad3/c.html": {
+      "url": "https://french.news.cn/20260523/15b8d2a4604e414c9aa10caa996e2ad3/c.html",
+      "canonical_url": "https://french.news.cn/20260523/15b8d2a4604e414c9aa10caa996e2ad3/c.html",
+      "name": "Trump évalue les options militaires alors que l'incertitude plane sur les négociations avec l'Iran",
+      "site_name": "新华网",
+      "display_url": "https://french.news.cn/20260523/15b8d2a4604e414c9aa10caa996e2ad3/c.html",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.9123857142857144,
+      "date_published": "2026-05-23T00:00:00+08:00",
+      "date_last_crawled": "2026-05-23T00:00:00Z",
+      "full_content": "Trump évalue les options militaires alors que l'incertitude plane sur les négociations avec l'Iran\n\nWASHINGTON, 22 mai (Xinhua) -- L'administration Trump se prépare à lancer une nouvelle série de frappes militaires contre l'Iran malgré les efforts diplomatiques en cours, ont rapporté vendredi des médias américains, citant des sources directement informées de ces préparatifs.\n\nLe président américain Donald Trump a reçu vendredi les hauts responsables de la sécurité nationale afin de discuter de la marche à suivre dans le conflit avec l'Iran, mais la réunion s'est terminée sans qu'aucune décision n'ait été prise quant à la suite des événements, a déclaré à la chaîne CNN une source proche de la réunion.\n\nSelon le site d'information Axios, qui cite vendredi des sources ayant directement parlé au président, M. Trump envisagerait sérieusement de lancer de nouvelles frappes contre l'Iran, à moins d'une avancée de dernière minute dans les négociations.\n\nOn indiquait de source proche de M. Trump que le président avait évoqué la possibilité d'une dernière opération militaire majeure \"décisive\", à l'issue de laquelle il pourrait proclamer la victoire et mettre fin à la guerre, mais rien n'indique qu'il ait pris une décision définitive, selon Axios.\n\nUn responsable américain informé des efforts diplomatiques a qualifié les négociations de \"pénibles\", les projets d'accord \"faisant l'objet d'allers-retours quotidiens\" sans grand progrès, a ajouté le site.\n\nPlus tard dans la journée, Donald Trump a annulé son projet de passer le week-end dans son complexe de golf du New Jersey et a dit qu'il ne se rendrait pas au mariage de son fils aux Bahamas, préférant rester à Washington en raison de ce qu'il a qualifié de \"circonstances liées au gouvernement et à (son) amour pour les Etats-Unis d'Amérique\".\n\n\"Je pense qu'il est important pour moi de rester à Washington, à la Maison Blanche, pendant cette période importante\", a-t-il écrit sur son réseau Truth Social.\n\nVendredi également, la chaîne saoudienne Al Arabiya a indiqué sur les réseaux sociaux que la version finale d'un éventuel accord entre les Etats-Unis et l'Iran, négocié avec la médiation du Pakistan, devrait être annoncée dans les prochaines heures.\n\nLes principales dispositions du projet prévoient un cessez-le-feu immédiat, total et inconditionnel sur tous les fronts, un engagement mutuel à ne pas prendre pour cible les infrastructures militaires, civiles ou économiques, ainsi que la fin des opérations militaires et de la guerre médiatique, a-t-elle indiqué, citant des sources.\n\nSelon certaines informations, des délégations qatarie et pakistanaise se seraient rendues à Téhéran vendredi afin de tenter de contribuer à mettre fin au conflit entre les Etats-Unis et l'Iran. Fin",
+      "image_urls": [],
+      "page_image_embeddings_file": "",
+      "page_image_embedding_urls": [],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "trump recent activities",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "Trump évalue les options militaires alors que l'incertitude plane sur les négociations avec l'Iran\n\nWASHINGTON, 22 mai (Xinhua) -- L'administration Trump se prépare à lancer une nouvelle série de frappes militaires contre l'Iran malgré les efforts diplomatiques en cours, ont rapporté vendredi des médias américains, citant des sources directement informées de ces préparatifs."
+            },
+            {
+              "chunk_id": 1,
+              "text": "Le président américain Donald Trump a reçu vendredi les hauts responsables de la sécurité nationale afin de discuter de la marche à suivre dans le conflit avec l'Iran, mais la réunion s'est terminée sans qu'aucune décision n'ait été prise quant à la suite des événements, a déclaré à la chaîne CNN une source proche de la réunion."
+            },
+            {
+              "chunk_id": 2,
+              "text": "Selon le site d'information Axios, qui cite vendredi des sources ayant directement parlé au président, M. Trump envisagerait sérieusement de lancer de nouvelles frappes contre l'Iran, à moins d'une avancée de dernière minute dans les négociations."
+            },
+            {
+              "chunk_id": 3,
+              "text": "On indiquait de source proche de M. Trump que le président avait évoqué la possibilité d'une dernière opération militaire majeure \"décisive\", à l'issue de laquelle il pourrait proclamer la victoire et mettre fin à la guerre, mais rien n'indique qu'il ait pris une décision définitive, selon Axios."
+            },
+            {
+              "chunk_id": 4,
+              "text": "Un responsable américain informé des efforts diplomatiques a qualifié les négociations de \"pénibles\", les projets d'accord \"faisant l'objet d'allers-retours quotidiens\" sans grand progrès, a ajouté le site."
+            },
+            {
+              "chunk_id": 5,
+              "text": "Plus tard dans la journée, Donald Trump a annulé son projet de passer le week-end dans son complexe de golf du New Jersey et a dit qu'il ne se rendrait pas au mariage de son fils aux Bahamas, préférant rester à Washington en raison de ce qu'il a qualifié de \"circonstances liées au gouvernement et à (son) amour pour les Etats-Unis d'Amérique\"."
+            },
+            {
+              "chunk_id": 6,
+              "text": "\"Je pense qu'il est important pour moi de rester à Washington, à la Maison Blanche, pendant cette période importante\", a-t-il écrit sur son réseau Truth Social."
+            },
+            {
+              "chunk_id": 7,
+              "text": "Vendredi également, la chaîne saoudienne Al Arabiya a indiqué sur les réseaux sociaux que la version finale d'un éventuel accord entre les Etats-Unis et l'Iran, négocié avec la médiation du Pakistan, devrait être annoncée dans les prochaines heures."
+            },
+            {
+              "chunk_id": 8,
+              "text": "Les principales dispositions du projet prévoient un cessez-le-feu immédiat, total et inconditionnel sur tous les fronts, un engagement mutuel à ne pas prendre pour cible les infrastructures militaires, civiles ou économiques, ainsi que la fin des opérations militaires et de la guerre médiatique, a-t-elle indiqué, citant des sources."
+            },
+            {
+              "chunk_id": 9,
+              "text": "Selon certaines informations, des délégations qatarie et pakistanaise se seraient rendues à Téhéran vendredi afin de tenter de contribuer à mettre fin au conflit entre les Etats-Unis et l'Iran. Fin"
+            }
+          ],
+          "clip_text_embeddings_file": "docs/32e07c7dd37e096f/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/32e07c7dd37e096f/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://www.fx678.com/C/20260523/202605230359221120.html": {
+      "url": "https://www.fx678.com/C/20260523/202605230359221120.html",
+      "canonical_url": "https://www.fx678.com/C/20260523/202605230359221120.html",
+      "name": "特朗普对股市的近期表现予以赞赏。 我目前无法获取实时股市动态及相关表态的完整背景信息，以上内容仅基于给定文本进行同义表述调整，具体相关官方表述请以权威媒体的公开报道为准。_外汇动态报道",
+      "site_name": "汇通财经",
+      "display_url": "https://www.fx678.com/C/20260523/202605230359221120.html",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "empty_content",
+      "web_fetch_quality_score": 0.0,
+      "date_published": "2026-05-23T03:59:22+08:00",
+      "date_last_crawled": "2026-05-23T03:59:22Z",
+      "full_content": "汇通财经APP讯——特朗普对股市的近期表现予以赞赏。\n我目前无法获取实时股市动态及相关表态的完整背景信息,以上内容仅基于给定文本进行同义表述调整,具体相关官方表述请以权威媒体的公开报道为准。",
+      "image_urls": [
+        "https://www.fx678.com/images/yhtpc.png",
+        "https://www.fx678.com/images/windows.png",
+        "https://www.fx678.com/images/default.jpg"
+      ],
+      "page_image_embeddings_file": "",
+      "page_image_embedding_urls": [],
+      "page_image_failed_urls": [
+        "https://www.fx678.com/images/yhtpc.png",
+        "https://www.fx678.com/images/windows.png",
+        "https://www.fx678.com/images/default.jpg"
+      ],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    },
+    "https://cryptonews.net/news/finance/32875073": {
+      "url": "https://cryptonews.net/news/finance/32875073/",
+      "canonical_url": "https://cryptonews.net/news/finance/32875073",
+      "name": "Trump discloses over 3,700 trades in first quarter, raising scrutiny",
+      "site_name": "Crypto News",
+      "display_url": "https://cryptonews.net/news/finance/32875073/",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.9996714285714287,
+      "date_published": "2026-05-18T01:36:03+08:00",
+      "date_last_crawled": "2026-05-18T01:36:03Z",
+      "full_content": "Trump discloses over 3,700 trades in first quarter, raising scrutiny\n\nA sitting president averaging roughly 40 trades per day is, to put it mildly, unusual. Donald Trump’s first-quarter financial disclosure reveals approximately 3,700 transactions, representing an estimated $220 million to $750 million in trading volume, a figure that has ethics watchdogs and market analysts reaching for their reading glasses.\n\nThe bulk of the activity centers on large-cap US equities, with a pronounced tilt toward the technology and semiconductor sectors. Nvidia, Broadcom, and Intel all appear as new positions, with multiple transactions exceeding $1 million each. At the same time, the disclosure shows major reductions in holdings of Amazon, Meta, and Microsoft through transactions ranging from $5 million to $25 million apiece.\n\nThat kind of rotation isn’t inherently suspicious. Plenty of sophisticated investors have been making similar moves. But plenty of sophisticated investors don’t also set tariff policy, negotiate trade deals with chip-manufacturing nations, or sign executive orders that can move semiconductor stocks by double digits in a single session.\n\nOne transaction stands out in particular. A $1 million to $5 million stake in Dell Technologies was initiated on February 10, prior to a presidential endorsement of the company. The timing raises the kind of questions that congressional ethics committees were theoretically designed to investigate.\n\nWhether the trades were executed by Trump personally or by advisers managing his portfolio, the disclosure doesn’t fully clarify. The filing references “President Trump or his advisers” as the decision-makers, a construction that provides just enough ambiguity to be deeply unhelpful.\n\nThe president has direct influence over export controls, tariffs on imported chips, and the allocation of CHIPS Act funding. Taking new positions in Nvidia, Broadcom, and Intel while simultaneously holding the policy levers that determine those companies’ regulatory environment is, at minimum, optically catastrophic.\n\nMembers of Congress have faced similar scrutiny for years, most notably during the controversy around stock trades by lawmakers who sat on committees overseeing the industries they were investing in. The STOCK Act of 2012 was supposed to address this by requiring timely disclosure of congressional trades. But the presidency operates under different, and in many ways looser, ethical guidelines when it comes to personal financial activity.\n\nThe sheer volume of transactions makes oversight practically difficult, too. Reviewing 3,700 trades for potential conflicts requires cross-referencing each transaction’s timing against policy announcements, executive orders, regulatory actions, and even informal presidential statements that might have moved specific stocks.\n\nThe scale of the trading, potentially up to $750 million in a single quarter, also means the transactions themselves could have market impact, particularly in less liquid names or during concentrated buying periods. A presidential disclosure showing new multi-million-dollar positions in specific companies functions as a de facto endorsement, regardless of whether it was intended as one.",
+      "image_urls": [
+        "https://cnews24.ru/uploads/a80/a8038c453fead8661cba9b139ddd3a6894ef0663.jpeg"
+      ],
+      "page_image_embeddings_file": "docs/d886f825da5569b4/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://cnews24.ru/uploads/a80/a8038c453fead8661cba9b139ddd3a6894ef0663.jpeg"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "trump recent activities",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "Trump discloses over 3,700 trades in first quarter, raising scrutiny"
+            },
+            {
+              "chunk_id": 1,
+              "text": "A sitting president averaging roughly 40 trades per day is, to put it mildly, unusual. Donald Trump’s first-quarter financial disclosure reveals approximately 3,700 transactions, representing an estimated $220 million to $750 million in trading volume, a figure that has ethics watchdogs and market analysts reaching for their reading glasses."
+            },
+            {
+              "chunk_id": 2,
+              "text": "The bulk of the activity centers on large-cap US equities, with a pronounced tilt toward the technology and semiconductor sectors. Nvidia, Broadcom, and Intel all appear as new positions, with multiple transactions exceeding $1 million each."
+            },
+            {
+              "chunk_id": 3,
+              "text": "At the same time, the disclosure shows major reductions in holdings of Amazon, Meta, and Microsoft through transactions ranging from $5 million to $25 million apiece."
+            },
+            {
+              "chunk_id": 4,
+              "text": "That kind of rotation isn’t inherently suspicious. Plenty of sophisticated investors have been making similar moves. But plenty of sophisticated investors don’t also set tariff policy, negotiate trade deals with chip-manufacturing nations, or sign executive orders that can move semiconductor stocks by double digits in a single session."
+            },
+            {
+              "chunk_id": 5,
+              "text": "One transaction stands out in particular. A $1 million to $5 million stake in Dell Technologies was initiated on February 10, prior to a presidential endorsement of the company. The timing raises the kind of questions that congressional ethics committees were theoretically designed to investigate."
+            },
+            {
+              "chunk_id": 6,
+              "text": "Whether the trades were executed by Trump personally or by advisers managing his portfolio, the disclosure doesn’t fully clarify. The filing references “President Trump or his advisers” as the decision-makers, a construction that provides just enough ambiguity to be deeply unhelpful."
+            },
+            {
+              "chunk_id": 7,
+              "text": "The president has direct influence over export controls, tariffs on imported chips, and the allocation of CHIPS Act funding. Taking new positions in Nvidia, Broadcom, and Intel while simultaneously holding the policy levers that determine those companies’ regulatory environment is, at minimum, optically catastrophic."
+            },
+            {
+              "chunk_id": 8,
+              "text": "Members of Congress have faced similar scrutiny for years, most notably during the controversy around stock trades by lawmakers who sat on committees overseeing the industries they were investing in. The STOCK Act of 2012 was supposed to address this by requiring timely disclosure of congressional trades."
+            },
+            {
+              "chunk_id": 9,
+              "text": "But the presidency operates under different, and in many ways looser, ethical guidelines when it comes to personal financial activity."
+            },
+            {
+              "chunk_id": 10,
+              "text": "The sheer volume of transactions makes oversight practically difficult, too. Reviewing 3,700 trades for potential conflicts requires cross-referencing each transaction’s timing against policy announcements, executive orders, regulatory actions, and even informal presidential statements that might have moved specific stocks."
+            },
+            {
+              "chunk_id": 11,
+              "text": "The scale of the trading, potentially up to $750 million in a single quarter, also means the transactions themselves could have market impact, particularly in less liquid names or during concentrated buying periods. A presidential disclosure showing new multi-million-dollar positions in specific companies functions as a de facto endorsement, regardless of whether it was intended as one."
+            }
+          ],
+          "clip_text_embeddings_file": "docs/d886f825da5569b4/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/d886f825da5569b4/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://focus.scol.com.cn/ygtx/202605/83258851.html": {
+      "url": "https://focus.scol.com.cn/ygtx/202605/83258851.html",
+      "canonical_url": "https://focus.scol.com.cn/ygtx/202605/83258851.html",
+      "name": "特朗普一季度进行了3600多次股票买卖丨夜观天下·漫话 缅怀！袁隆平逝世五周年，禾下乘凉梦，自有后来人 《寻味100处》成都特辑的第2集上线 《寻味100处》被我们请到四川了！ min甜，树莓在龙泉山试种成功了！ 要做熊猫玩偶界的“爱马仕”，山东小镇工厂凭啥造出最真的假熊猫？",
+      "site_name": "四川在线天下频道",
+      "display_url": "https://focus.scol.com.cn/ygtx/202605/83258851.html",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "short_content",
+      "web_fetch_quality_score": 0.1177,
+      "date_published": "2026-05-22T17:23:06+08:00",
+      "date_last_crawled": "2026-05-22T17:23:06Z",
+      "full_content": "报告显示,美国总统特朗普今年第一季度进行了3600多次股票买卖,其中包括许多直接受其决策影响的公司的股票。(新华社)漫画:黄琪\n王桃",
+      "image_urls": [
+        "https://imgcdn.scol.com.cn/media/2026/05/22/181759944744.jpg",
+        "https://imgcdn.scol.com.cn/media/2026/05/22/181800206967.jpg",
+        "https://focus.scol.com.cn/images/2013scol.jpg"
+      ],
+      "page_image_embeddings_file": "docs/d1b34469faa78d64/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://imgcdn.scol.com.cn/media/2026/05/22/181759944744.jpg",
+        "https://imgcdn.scol.com.cn/media/2026/05/22/181800206967.jpg",
+        "https://focus.scol.com.cn/images/2013scol.jpg"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    },
+    "https://news.qq.com/rain/a/20260522A05OTM00": {
+      "url": "https://news.qq.com/rain/a/20260522A05OTM00",
+      "canonical_url": "https://news.qq.com/rain/a/20260522A05OTM00",
+      "name": "白宫里的“高频交易员”：特朗普的交易流水，藏着多少不能明说的逻辑？_腾讯新闻",
+      "site_name": "腾讯网",
+      "display_url": "https://news.qq.com/rain/a/20260522A05OTM00",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 1.0,
+      "date_published": "2026-05-22T11:20:46+08:00",
+      "date_last_crawled": "2026-05-22T11:20:46Z",
+      "full_content": "白宫里的“高频交易员”：特朗普的交易流水，藏着多少不能明说的逻辑？\n\n最近，特朗普公布了自己2026年一季度的金融交易记录。短短90天，3711笔交易——平均每天要做超过40笔。很多人都在惊叹，这位史上最忙的美国总统，除了要应付各路记者的刁钻提问，在社交平台上指点江山，以及每周固定几场高尔夫之外，竟还能以如此高频调整自己的投资组合，精力属实惊人。\n\n一个尤其值得注意的对比是：2025年上任后的头六个月，特朗普大约只做了690笔交易，整个2025年加起来不到1500次。而2026年刚过一个季度，交易次数就超过2025年全年的两倍。最自然的推论是，今年以来的地缘政治变化太快，行情自然多变。但有趣的是，今年地缘风险的急速放大，究竟拜谁所赐，实在相当难猜。\n\n对于这份交易记录，官方给出的声明是这样的：“Neither President Trump, his family, nor The Trump Organization plays any role in selecting, directing, or approving specific investments. They receive no advance notice of trading activity and provide no input regarding investment decisions or portfolio management.” 大意是，总统及其家人，以及相关组织，都没有参与投资决策，也从未被提前告知任何交易活动。\n\n我们姑且假设这份声明是真诚的，总统确实不参与选股，但有一句话极其耐人寻味——“没有被提前告知”。对普通人来说，想做内幕交易，得先听到风声，提前埋伏进去。可凡事总有例外，而特朗普就是这个世界上最大的例外：他完全可以先进场，再画线。不必提前获得消息，因为他自己就是那个制造消息的人。\n\n《华尔街日报》的分析显示，这样的案例并不少。这里只举两个。一个关于 英伟达 。一季度特朗普买入了175万美元的英伟达股票，其中仅在1月6日一天就买进50万美元。短短一周后，白宫宣布同意英伟达向中国出售H200芯片，明显抬了英伟达一手。虽然最终中国没有接盘H200，画线失败，但买入一周就出利好，这个巧合未免过于刻意。另一个更直白：2月10日，特朗普买入价值100万至500万美元的戴尔电脑股票，一周后他在佐治亚州发表讲话，大力称赞迈克尔·戴尔夫妇对国家的重大贡献，并鼓励现场人群赶紧去买一台戴尔电脑。是不是非常特朗普。\n\n但我今天聊这件事，并不是为了取笑他，而是想提供几个不同的观察角度，看看这些交易背后真正值得思考的东西。\n\n视角一：华尔街在意的，是这能赚钱吗？\n\n第一个观察来自华尔街的资深交易员。 他们对特朗普滥用职权做交易这件事并不愤怒，只是好奇：像这样频繁操作，真的能赚钱吗？\n\n这个视角本身就说明很多问题。不愤怒，是因为在华尔街，特权从来就是用来变现的。每一家投行，每一家对冲基金，都有自己的特权获取故事，能全身而退的人被视为强者。在那里，道德往往被看作弱者的盾牌，结果才是唯一的审判。关于这一点，以后可以专门展开。\n\n而他们之所以好奇盈亏，是因为特朗普团队的披露并不提供具体点位和日内操作细节，外人只能看个大概。可即便粗略观察，每天40笔交易，除非是基于算法的量化交易，否则几乎必然以亏损收场。看看英伟达的操作：绿蓝色上三角是买入，橘黄色下三角是卖出，整体呈现的格局是“买在震荡时，卖在下山处”。 甲骨文 和微软的操作同样谈不上高明。即使贵为总统，手中握着最领先的信息资源，面对资本市场时如此随意操作，依然难免尴尬。\n\n这里可以引出的一个更普遍的教训是：过度交易是投资大忌。一天40笔当然是过度，但更切实的衡量标准应该是——如果你每天忍不住盯盘，时常因内心澎湃就想操作一下，总是在没有预案的情况下做激情交易，那就已经陷入了过度交易。对于绝大多数普通投资者，这一点尤其值得警惕。\n\n视角二：重仓科技，避开能源的逻辑\n\n再看他交易记录的结构。 特朗普金额较大的交易，几乎全部集中在英伟达、博通、微软、苹果、波音、甲骨文这样的高科技大票上，而与他关系一直亲厚的传统能源公司，几乎完全缺席。要知道，今年头三个月，白宫连续主导了对 委内瑞拉 的斩首行动和对伊朗的全面进攻，按理说油价暴涨的确定性非常高。为什么最终形成的交易组合是一只跛脚鸭，只押注科技？\n\n两个原因值得深思。首先，披露范围有限。根据《政府道德法》（ EIGA ），总统本人、配偶和受抚养子女必须披露财务情况，但已经成年、不再受抚养的子女完全不在披露之列。而恰恰是小唐纳德、埃里克这样的成年儿女，正在运营特朗普集团的生意与投资，他们完全可以通过期货市场或海外衍生品市场，从原油交易中获取巨额利益，并且绕开披露。特朗普自己的账户，根本没必要再买传统能源股票。\n\n其次，美国当前股市的主线在科技，流动性也在此聚集。一旦有政策利好，科技股弹性更强。总统以自有资金买入科技股，与“制造业回流”、“AI竞赛”等政策倾向恰好一致，算得上“知行合一”，还能引导更多资本投入美国科技资产。但如果你以为他真的重仓科技，那就太天真了。我们在去年末的一期深度分析里算过一笔账：特朗普上任一年内，赚了大约26亿美元，而这次披露的股票交易记录总计不超过7.5亿美元。这些公开的股票持仓，并非他真正的财富重心。他更大的财富，隐藏在他最钟爱的地产，以及由家族年轻一代操控的数字货币市场里。而当下美国的金融监管，对非标准资产，尤其是加密货币，基本无能为力。\n\n美国对高层政客的金融监管，说到底是一套建立在“政治羞耻心”之上的荣誉系统，而它偏偏对总统和副总统约束极少。美国联邦法典严格禁止行政部门官员参与会影响其个人财务利益的事务，但同时明确规定，该禁令不适用于总统和副总统。也就是说，这二位几乎完全自由，只能靠自身的道德和判断来约束自己。2026年1月，特朗普接受《纽约时报》采访，被问及他的权力是否存在任何限制时，他回答：“有，只有一样东西——我自己的道德，我自己的判断。这是唯一能阻止我的东西。”他还补了一句：“我不需要国际法，也无意伤害他人。”\n\n这就是特朗普，一个完全没有打算接受“政治羞耻”约束的总统。对财富的渴望太多，对自我的设限太少，于是便出现了今天这幅景象：每天交易40次，发帖100条，拉手风琴若干次，并坚称没有人比他更了解这个世界。\n\n最后，从更宏观的视角来收束。 华尔街的特权变现不是新闻，国会山股神佩洛西已在神坛上呼风唤雨数十年。那么，特朗普这次高频交易事件，还有什么额外的讨论价值？\n\n有，而且很大。以前的政客们，更多是提前知晓某项法案大概会通过，然后买入相关股票或期权。他们还算是市场的信息接收者，只是领先于其他人。但现在这位，可不仅仅是信息接收者，他是信息发布者，甚至，他就是信息本身。他乐此不疲地不断发出信息，不断画出K线，也在不断扭曲市场价格的形成机制。特朗普给市场带来的破坏性，是巨大的。\n\n更进一步，以前的政客搞内幕交易时，还多少带着羞耻心，操作更为隐蔽，不太会形成庞大的联盟。但特朗普完全是抱着“共同富裕”的姿态来的，不只自己一个家族，还有一帮富豪兄弟。这会导致两个明显的结果：一方面，市场被操纵得更厉害，局内人攫取极高利益，普通人能分到一点残羹冷炙都算幸运；另一方面，这些利益集团对资本市场的依赖将进一步加深，使得美股越来越变成一个“跌不得”的市场，这背后潜藏的系统性风险，经不起深思。\n\n百年华尔街所构筑的信用，核心护城河本是所谓的“法治与程序正义”。全球资本，包括主权基金和大型机构，愿意给美国科技股那么高的估值溢价，本质上是相信这套规矩还在。但今天，这个本该正义的底层逻辑，正在被一个庞大的利益集团公开操纵和扭曲。这意味着，美国的信用以及附着其上的溢价，或许将在未来几年迎来一轮痛苦的重新估值。对交易者来说，这将是值得长期观察的结构性变量。\n\n我们观察这场闹剧，起点固然是觉得荒诞有趣，但没必要跟着外媒的节奏去单纯谴责或嘲笑。总统的道德问题，说到底还是美国人自己该操心的事。对我们而言，更值得思考的是：权力被毫无顾忌地资本化，究竟会带来什么。在这点上，今天的美国提供了一个绝佳的标本。",
+      "image_urls": [
+        "https://inews.gtimg.com/om_ls/O9Z9tuWxlYrHixCxvElJpFVxgiamBRXQ0S27xYPe0ayx4AA_640330/0",
+        "https://inews.gtimg.com/news_ls/OXvVprlO_y03X6d_A926XzfZL4W7_aLiA_YEyNelr_EZ4AA_200200/0"
+      ],
+      "page_image_embeddings_file": "docs/1942ff5396efc7ac/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://inews.gtimg.com/om_ls/O9Z9tuWxlYrHixCxvElJpFVxgiamBRXQ0S27xYPe0ayx4AA_640330/0",
+        "https://inews.gtimg.com/news_ls/OXvVprlO_y03X6d_A926XzfZL4W7_aLiA_YEyNelr_EZ4AA_200200/0"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "Trump recent activities 2026",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "白宫里的“高频交易员”：特朗普的交易流水，藏着多少不能明说的逻辑？\n\n最近，特朗普公布了自己2026年一季度的金融交易记录。短短90天，3711笔交易——平均每天要做超过40笔。很多人都在惊叹，这位史上最忙的美国总统，除了要应付各路记者的刁钻提问，在社交平台上指点江山，以及每周固定几场高尔夫之外，竟还能以如此高频调整自己的投资组合，精力属实惊人。\n\n一个尤其值得注意的对比是：2025年上任后的头六个月，特朗普大约只做了690笔交易，整个2025年加起来不到1500次。而2026年刚过一个季度，交易次数就超过2025年全年的两倍。最自然的推论是，今年以来的地缘政治变化太快，行情自然多变。但有趣的是，今年地缘风险的急速放大，究竟拜谁所赐，实在相当难猜。"
+            },
+            {
+              "chunk_id": 1,
+              "text": "对于这份交易记录，官方给出的声明是这样的：“Neither President Trump, his family, nor The Trump Organization plays any role in selecting, directing, or approving specific investments. They receive no advance notice of trading activity and provide no input regarding investment decisions or portfolio management.” 大意是，总统及其家人，以及相关组织，都没有参与投资决策，也从未被提前告知任何交易活动。"
+            },
+            {
+              "chunk_id": 2,
+              "text": "我们姑且假设这份声明是真诚的，总统确实不参与选股，但有一句话极其耐人寻味——“没有被提前告知”。对普通人来说，想做内幕交易，得先听到风声，提前埋伏进去。可凡事总有例外，而特朗普就是这个世界上最大的例外：他完全可以先进场，再画线。不必提前获得消息，因为他自己就是那个制造消息的人。\n\n《华尔街日报》的分析显示，这样的案例并不少。这里只举两个。一个关于 英伟达 。一季度特朗普买入了175万美元的英伟达股票，其中仅在1月6日一天就买进50万美元。短短一周后，白宫宣布同意英伟达向中国出售H200芯片，明显抬了英伟达一手。虽然最终中国没有接盘H200，画线失败，但买入一周就出利好，这个巧合未免过于刻意。另一个更直白：2月10日，特朗普买入价值100万至500万美元的戴尔电脑股票，一周后他在佐治亚州发表讲话，大力称赞迈克尔·戴尔夫妇对国家的重大贡献，并鼓励现场人群赶紧去买一台戴尔电脑。是不是非常特朗普。"
+            },
+            {
+              "chunk_id": 3,
+              "text": "但我今天聊这件事，并不是为了取笑他，而是想提供几个不同的观察角度，看看这些交易背后真正值得思考的东西。\n\n视角一：华尔街在意的，是这能赚钱吗？\n\n第一个观察来自华尔街的资深交易员。 他们对特朗普滥用职权做交易这件事并不愤怒，只是好奇：像这样频繁操作，真的能赚钱吗？\n\n这个视角本身就说明很多问题。不愤怒，是因为在华尔街，特权从来就是用来变现的。每一家投行，每一家对冲基金，都有自己的特权获取故事，能全身而退的人被视为强者。在那里，道德往往被看作弱者的盾牌，结果才是唯一的审判。关于这一点，以后可以专门展开。"
+            },
+            {
+              "chunk_id": 4,
+              "text": "而他们之所以好奇盈亏，是因为特朗普团队的披露并不提供具体点位和日内操作细节，外人只能看个大概。可即便粗略观察，每天40笔交易，除非是基于算法的量化交易，否则几乎必然以亏损收场。看看英伟达的操作：绿蓝色上三角是买入，橘黄色下三角是卖出，整体呈现的格局是“买在震荡时，卖在下山处”。 甲骨文 和微软的操作同样谈不上高明。即使贵为总统，手中握着最领先的信息资源，面对资本市场时如此随意操作，依然难免尴尬。\n\n这里可以引出的一个更普遍的教训是：过度交易是投资大忌。一天40笔当然是过度，但更切实的衡量标准应该是——如果你每天忍不住盯盘，时常因内心澎湃就想操作一下，总是在没有预案的情况下做激情交易，那就已经陷入了过度交易。对于绝大多数普通投资者，这一点尤其值得警惕。\n\n视角二：重仓科技，避开能源的逻辑"
+            },
+            {
+              "chunk_id": 5,
+              "text": "再看他交易记录的结构。 特朗普金额较大的交易，几乎全部集中在英伟达、博通、微软、苹果、波音、甲骨文这样的高科技大票上，而与他关系一直亲厚的传统能源公司，几乎完全缺席。要知道，今年头三个月，白宫连续主导了对 委内瑞拉 的斩首行动和对伊朗的全面进攻，按理说油价暴涨的确定性非常高。为什么最终形成的交易组合是一只跛脚鸭，只押注科技？\n\n两个原因值得深思。首先，披露范围有限。根据《政府道德法》（ EIGA ），总统本人、配偶和受抚养子女必须披露财务情况，但已经成年、不再受抚养的子女完全不在披露之列。而恰恰是小唐纳德、埃里克这样的成年儿女，正在运营特朗普集团的生意与投资，他们完全可以通过期货市场或海外衍生品市场，从原油交易中获取巨额利益，并且绕开披露。特朗普自己的账户，根本没必要再买传统能源股票。"
+            },
+            {
+              "chunk_id": 6,
+              "text": "其次，美国当前股市的主线在科技，流动性也在此聚集。一旦有政策利好，科技股弹性更强。总统以自有资金买入科技股，与“制造业回流”、“AI竞赛”等政策倾向恰好一致，算得上“知行合一”，还能引导更多资本投入美国科技资产。但如果你以为他真的重仓科技，那就太天真了。我们在去年末的一期深度分析里算过一笔账：特朗普上任一年内，赚了大约26亿美元，而这次披露的股票交易记录总计不超过7.5亿美元。这些公开的股票持仓，并非他真正的财富重心。他更大的财富，隐藏在他最钟爱的地产，以及由家族年轻一代操控的数字货币市场里。而当下美国的金融监管，对非标准资产，尤其是加密货币，基本无能为力。"
+            },
+            {
+              "chunk_id": 7,
+              "text": "美国对高层政客的金融监管，说到底是一套建立在“政治羞耻心”之上的荣誉系统，而它偏偏对总统和副总统约束极少。美国联邦法典严格禁止行政部门官员参与会影响其个人财务利益的事务，但同时明确规定，该禁令不适用于总统和副总统。也就是说，这二位几乎完全自由，只能靠自身的道德和判断来约束自己。2026年1月，特朗普接受《纽约时报》采访，被问及他的权力是否存在任何限制时，他回答：“有，只有一样东西——我自己的道德，我自己的判断。这是唯一能阻止我的东西。”他还补了一句：“我不需要国际法，也无意伤害他人。”\n\n这就是特朗普，一个完全没有打算接受“政治羞耻”约束的总统。对财富的渴望太多，对自我的设限太少，于是便出现了今天这幅景象：每天交易40次，发帖100条，拉手风琴若干次，并坚称没有人比他更了解这个世界。"
+            },
+            {
+              "chunk_id": 8,
+              "text": "最后，从更宏观的视角来收束。 华尔街的特权变现不是新闻，国会山股神佩洛西已在神坛上呼风唤雨数十年。那么，特朗普这次高频交易事件，还有什么额外的讨论价值？\n\n有，而且很大。以前的政客们，更多是提前知晓某项法案大概会通过，然后买入相关股票或期权。他们还算是市场的信息接收者，只是领先于其他人。但现在这位，可不仅仅是信息接收者，他是信息发布者，甚至，他就是信息本身。他乐此不疲地不断发出信息，不断画出K线，也在不断扭曲市场价格的形成机制。特朗普给市场带来的破坏性，是巨大的。"
+            },
+            {
+              "chunk_id": 9,
+              "text": "更进一步，以前的政客搞内幕交易时，还多少带着羞耻心，操作更为隐蔽，不太会形成庞大的联盟。但特朗普完全是抱着“共同富裕”的姿态来的，不只自己一个家族，还有一帮富豪兄弟。这会导致两个明显的结果：一方面，市场被操纵得更厉害，局内人攫取极高利益，普通人能分到一点残羹冷炙都算幸运；另一方面，这些利益集团对资本市场的依赖将进一步加深，使得美股越来越变成一个“跌不得”的市场，这背后潜藏的系统性风险，经不起深思。\n\n百年华尔街所构筑的信用，核心护城河本是所谓的“法治与程序正义”。全球资本，包括主权基金和大型机构，愿意给美国科技股那么高的估值溢价，本质上是相信这套规矩还在。但今天，这个本该正义的底层逻辑，正在被一个庞大的利益集团公开操纵和扭曲。这意味着，美国的信用以及附着其上的溢价，或许将在未来几年迎来一轮痛苦的重新估值。对交易者来说，这将是值得长期观察的结构性变量。"
+            },
+            {
+              "chunk_id": 10,
+              "text": "我们观察这场闹剧，起点固然是觉得荒诞有趣，但没必要跟着外媒的节奏去单纯谴责或嘲笑。总统的道德问题，说到底还是美国人自己该操心的事。对我们而言，更值得思考的是：权力被毫无顾忌地资本化，究竟会带来什么。在这点上，今天的美国提供了一个绝佳的标本。"
+            }
+          ],
+          "clip_text_embeddings_file": "docs/1942ff5396efc7ac/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/1942ff5396efc7ac/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://finance.sina.com.cn/7x24/2026-05-18/doc-inhyfsvf8543186.shtml": {
+      "url": "https://finance.sina.com.cn/7x24/2026-05-18/doc-inhyfsvf8543186.shtml",
+      "canonical_url": "https://finance.sina.com.cn/7x24/2026-05-18/doc-inhyfsvf8543186.shtml",
+      "name": "特朗普及其幕僚2026年Q1交易超3700笔,总额数千万美元_7x24小时财经新闻_新浪网",
+      "site_name": "新浪财经",
+      "display_url": "https://finance.sina.com.cn/7x24/2026-05-18/doc-inhyfsvf8543186.shtml",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "short_content",
+      "web_fetch_quality_score": 0.16473571428571426,
+      "date_published": "2026-05-18T01:09:22+08:00",
+      "date_last_crawled": "2026-05-18T01:09:22Z",
+      "full_content": "最新财务披露文件显示,特朗普及其幕僚在2026年第一季度完成超3700笔交易,交易总额达数千万美元,涉及多家与其执政阵营存在关联的企业。\n文件披露,其高频交易覆盖英伟达、微软、波音、甲骨文、开市客、亚马逊、Meta、英特尔、奈飞等大型企业,日均交易超40笔。\n此番披露再度引发外界对利益冲突问题的担忧,原因是特朗普仍持有庞大商业资产版图,且未将个人资产交由无记名信托托管。\n老布什、比尔・克林顿等历任美国总统均设立过无记名信托隔离资产,奥巴马与拜登在任期间则彻底杜绝个人股票交易行为。",
+      "image_urls": [],
+      "page_image_embeddings_file": "",
+      "page_image_embedding_urls": [],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    },
+    "https://www.jqman.com/chip/456872.html": {
+      "url": "https://www.jqman.com/chip/456872.html",
+      "canonical_url": "https://www.jqman.com/chip/456872.html",
+      "name": "特朗普,买入英伟达、苹果、英特尔 - 芯片 - JQman",
+      "site_name": "www.jqman.com",
+      "display_url": "https://www.jqman.com/chip/456872.html",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "request_failed",
+      "web_fetch_quality_score": 0.0,
+      "date_published": "2026-05-21T11:21:57+08:00",
+      "date_last_crawled": "2026-05-21T11:21:57Z",
+      "full_content": "特朗普2026年前三个月进行超3700笔证券交易,重点投资AI与芯片公司,如英伟达、英特尔等,同时减持微软、Meta等科技巨头。其投资重心转向科技股和AI产业链。\n编译|江宇编辑|心缘智东西5月16日报道,5月14日,美国政府道德办公室(OGE)公布了特朗普最新提交的两份278-T定期财务披露文件,首次曝光了其在2026年前三个月的大规模证券交易情况。英伟达、博通、AMD、甲骨文、Palantir、英特尔等AI与芯片公司,以及苹果、戴尔等科技硬件公司,成为其投资的重点方向;微软、Meta、亚马逊等科技巨头则出现了大额减持记录。其中,英伟达和英特尔相关交易尤为密集,披露文件中分别出现15笔和6笔相关交易。戴尔则在2月新增了一笔价值100万至500万美元(约合人民币680.9万至3404.9万元)的仓位,而数月后特朗普又在公开场合高调称赞戴尔硬件产品。文件显示,仅2026年1月至3月期间,特朗普名下账户就累计进行了超过3700笔证券交易,涉及金额约2.2亿至7.5亿美元(约合人民币14.9亿至51亿元)。由于美国联邦财务披露制度仅要求申报交易金额区间,而非具体成交金额,因此外界目前无法得知其真实交易规模。其中,大量交易集中于美国科技巨头、AI产业链公司、军工企业以及金融机构相关股票。这也是特朗普重返白宫后,首次出现如此大规模的个股交易披露。相比此前主要配置市政债券和企业债券,其投资重心明显开始转向美国大型科技股和AI产业链。特朗普集团回应称,相关资产均由第三方金融机构通过“全权委托账户”自动管理,特朗普本人、家族及特朗普集团均不参与具体投资决策,也不会提前获知交易信息。一、转向科技股,特朗普大举加仓AI产业链过去一年里,特朗普公开披露的大部分交易主要集中于市政债券和企业债券,但最新文件显示,其资金开始大量流向美国科技巨头以及AI相关企业。披露文件中,英伟达、博通、Synopsy",
+      "image_urls": [
+        "https://www.jqman.com/uploads/20260516/02cbffd15299f4347bbaf4b6fba7636e.jpg",
+        "https://www.jqman.com/uploads/20260516/88bfe0c71d48198e4ad79c70337637a4.jpg",
+        "https://www.jqman.com/uploads/20260516/32d78f9e76326b458782b80dc722fd2b.jpg"
+      ],
+      "page_image_embeddings_file": "",
+      "page_image_embedding_urls": [],
+      "page_image_failed_urls": [
+        "https://www.jqman.com/uploads/20260516/02cbffd15299f4347bbaf4b6fba7636e.jpg",
+        "https://www.jqman.com/uploads/20260516/88bfe0c71d48198e4ad79c70337637a4.jpg",
+        "https://www.jqman.com/uploads/20260516/32d78f9e76326b458782b80dc722fd2b.jpg"
+      ],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    },
+    "http://www.china.org.cn/2026-05/19/content_118501978.shtml": {
+      "url": "http://www.china.org.cn/2026-05/19/content_118501978.shtml",
+      "canonical_url": "http://www.china.org.cn/2026-05/19/content_118501978.shtml",
+      "name": "Towards a constructive China-US relationship of strategically stability",
+      "site_name": "China Daily",
+      "display_url": "http://www.china.org.cn/2026-05/19/content_118501978.shtml",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 1.0,
+      "date_published": "2026-05-19T00:00:00+08:00",
+      "date_last_crawled": "2026-05-19T00:00:00Z",
+      "full_content": "Towards a constructive China-US relationship of strategically stability\n\nU.S. President Donald Trump's China visit on May 13-15, 2026 was a resounding success and marks a milestone in the world's most important bilateral relationship. As Chinese President Xi Jinping said, 2026 will be a \"historic, landmark year\" that opens up a new chapter in China-U.S. relations. The two leaders have agreed on a new vision of building a constructive China-U.S. relationship of strategic stability. It will be a far more significant step forward to ensure a lasting, fundamentally constructive relationship between the world's two most important countries, and thus anchor the world with lasting stability.\n\nAs the ballast supporting the bilateral relationship, China and the United States have achieved positive outcomes in their latest round of economic and trade consultations, with both sides agreeing to advance pragmatic cooperation and maintain the hard-won momentum in bilateral ties, said the Chinese Ministry of Commerce (MOFCOM) on May 16.\n\nAccording to MOFCOM, the two sides have reached a preliminary consensus in several areas. Both sides agreed to continue implementing the outcomes reached in previous consultations and formed a positive consensus on relevant tariff arrangements.\n\nChina and the U.S. also agreed to establish a board of trade and a board of investment to address respective concerns in trade and investment. Through the board of trade, the two sides will discuss tariff reductions on certain products and, in principle, agreed to lower tariffs on products of mutual concern on an equivalent scale, said a ministry spokesperson in a statement.\n\nIn addition, the two sides agreed to substantially advance the resolution of some non-tariff barriers and market access issues involving agricultural products, while expanding two-way trade through reciprocal tariff reduction arrangements.\n\nThey also reached arrangements on China's procurement of aircraft from the U.S. and arrangements for the U.S. to ensure the supply of aircraft engines and parts to China, with both sides agreeing to continue cooperation in related sectors.\n\nThe spokesperson added that both sides are still in consultation over details of the outcomes, and their economic and trade teams will work to finalize and implement the outcomes as soon as possible in line with the consensus reached by the two heads of state, injecting more certainty and stability into China-U.S. economic cooperation and the global economy.\n\nThe key tone for the new relationship is constructive. Despite major differences, both sides will address differences and competition in a constructive, or mutual benefit-oriented way, thus marking a major step forward from the previous guardrail of \"non-conflict and non-confrontation.\"\n\nThe constructive relationship is for stability. A stable relationship is not only essential for both China and the U.S. but also a vital stake in world peace and development.\n\nThe constructive relationship of strategic stability means long-termism, not something temporary. The strategy guides all the policies and actions for years to come.\n\nOver the past decades, especially over the past 10 years, Washington has regarded China as a strategic competitor or rival. The latest White House National Security Report released in December 2025 defined China as a structural challenge to the American economy and national security. Now, constructiveness prevails as the vision of the constructive China-U.S. relationship of strategic stability has been agreed upon by the two leaders.\n\nThe new relationship includes four elements: a positive stability with cooperation as the mainstay; a sound stability with moderate competition; a constant stability with manageable differences; and an enduring stability with promises of peace.\n\nUndoubtedly, a constructive, strategic and stable business relationship is also the ballast for this new relationship between China and the United States.\n\nFirst, positive stability with cooperation as the mainstay. The key orientation of the China-U.S. trade relationship must be switched to cooperation instead of confrontation. In fact, China-U.S. trade has been mutually beneficial for decades, with the two-way trade volume hitting $688.3 billion in 2024, 275 times that in 1979 when the diplomatic tie was established. The two-way trade created millions of jobs in both countries, and the mutual investment created considerable jobs in the host country and considerable profits for the investors. However, due to the unilateral protectionist trade policy in Washington, especially the unilateral tariff, the bilateral trade has suffered seriously. According to China Customs data, the China-U.S. two-way trade volume fell by 18.7 percent in 2025 and a further 10.4 percent y-o-y during the first four months of 2026. The pressing task facing both sides is to anchor the bilateral trade on a key-tone of enhancing cooperation and push a rebound in the trade volume. The China-U.S. business talk at Seoul Airport on May 13, prior to President Trump's Beijing visit, resulted in generally balanced results for both sides and thus laid a sound foundation for the meeting between the two leaders.\n\nBesides the trade cooperation and rebound, the new emphasis should be an energetic push for a mutual investment rebound. All the CEOs of the 17 world business leaders, including Tim Cook of Apple, Elon Musk of Tesla and Jensen Huang of Nvidia, praised the warm welcome and support by President Xi Jinping and the Chinese government and reaffirmed their will to invest and grow in China. China, on its part, not only keeps its door wide open, but also invites the U.S. business leaders to participate in depth in China's reform and opening up. Over the past decades, the U.S. multilateral giants have in fact participated in and contributed to China's economic growth. They have contributed tremendous experiences and suggestions on the banking, insurance, stock and bond trading laws, thus promoting China's reform in the relevant legal system to meet WTO standards. At the point of a new development, driven by new productive forces and AI technology, the world leading companies will also help China, and in turn, enjoy greater business opportunities for themselves.\n\nSecond, the healthy and stable competition within proper limits. Competition should be permitted and even encouraged. But the competition should follow rules, either multilateral trade rules or rules agreed upon bilaterally. Either side should not impose unilateral tariffs or other restrictions on technology and products, such as a ban on IC supply, or imports.\n\nThirdly, constant stability with manageable differences. Differences should be managed on an equal, mutual respect and mutual benefit basis. China and the U.S. have enough experiences of success in this regard. The 13 rounds of trade consultation during 2018-2020, and the eight rounds of trade talks during 2025-2026 all resulted in agreements. A good delivery of Trump's China visit is the establishment of a board of trade and a board of investment, as an effective mechanism.\n\nFourth, lasting stability with expectable peace. A lasting peace should be ensured by solid cooperation, rules-based competition and difference management, which will bring tremendous, tangible benefits to both China and the U.S. China's rejuvenation and MAGA could be complementary, thus anchoring the bilateral relationship on a sustainable, peaceful ballast.\n\nThe chance for both China and the U.S. to create a better future is coming now. With joint, persistent efforts by both governments and business communities, the chance will be turned into reality.",
+      "image_urls": [
+        "https://images.china.cn/images1/en/2024news/img/fb.jpg",
+        "https://images.china.cn/images1/en/2024news/img/x1.jpg",
+        "https://images.china.cn/images1/en/2024news/img/faceBook.png"
+      ],
+      "page_image_embeddings_file": "docs/90ab45fe64d4fc7d/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://images.china.cn/images1/en/2024news/img/fb.jpg",
+        "https://images.china.cn/images1/en/2024news/img/x1.jpg",
+        "https://images.china.cn/images1/en/2024news/img/faceBook.png"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "Trump recent activities 2026",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "Towards a constructive China-US relationship of strategically stability"
+            },
+            {
+              "chunk_id": 1,
+              "text": "U.S. President Donald Trump's China visit on May 13-15, 2026 was a resounding success and marks a milestone in the world's most important bilateral relationship. As Chinese President Xi Jinping said, 2026 will be a \"historic, landmark year\" that opens up a new chapter in China-U.S. relations. The two leaders have agreed on a new vision of building a constructive China-U.S."
+            },
+            {
+              "chunk_id": 2,
+              "text": "relationship of strategic stability. It will be a far more significant step forward to ensure a lasting, fundamentally constructive relationship between the world's two most important countries, and thus anchor the world with lasting stability."
+            },
+            {
+              "chunk_id": 3,
+              "text": "As the ballast supporting the bilateral relationship, China and the United States have achieved positive outcomes in their latest round of economic and trade consultations, with both sides agreeing to advance pragmatic cooperation and maintain the hard-won momentum in bilateral ties, said the Chinese Ministry of Commerce (MOFCOM) on May 16."
+            },
+            {
+              "chunk_id": 4,
+              "text": "According to MOFCOM, the two sides have reached a preliminary consensus in several areas. Both sides agreed to continue implementing the outcomes reached in previous consultations and formed a positive consensus on relevant tariff arrangements."
+            },
+            {
+              "chunk_id": 5,
+              "text": "China and the U.S. also agreed to establish a board of trade and a board of investment to address respective concerns in trade and investment. Through the board of trade, the two sides will discuss tariff reductions on certain products and, in principle, agreed to lower tariffs on products of mutual concern on an equivalent scale, said a ministry spokesperson in a statement."
+            },
+            {
+              "chunk_id": 6,
+              "text": "In addition, the two sides agreed to substantially advance the resolution of some non-tariff barriers and market access issues involving agricultural products, while expanding two-way trade through reciprocal tariff reduction arrangements."
+            },
+            {
+              "chunk_id": 7,
+              "text": "They also reached arrangements on China's procurement of aircraft from the U.S. and arrangements for the U.S. to ensure the supply of aircraft engines and parts to China, with both sides agreeing to continue cooperation in related sectors."
+            },
+            {
+              "chunk_id": 8,
+              "text": "The spokesperson added that both sides are still in consultation over details of the outcomes, and their economic and trade teams will work to finalize and implement the outcomes as soon as possible in line with the consensus reached by the two heads of state, injecting more certainty and stability into China-U.S. economic cooperation and the global economy."
+            },
+            {
+              "chunk_id": 9,
+              "text": "The key tone for the new relationship is constructive. Despite major differences, both sides will address differences and competition in a constructive, or mutual benefit-oriented way, thus marking a major step forward from the previous guardrail of \"non-conflict and non-confrontation.\""
+            },
+            {
+              "chunk_id": 10,
+              "text": "The constructive relationship is for stability. A stable relationship is not only essential for both China and the U.S. but also a vital stake in world peace and development.\n\nThe constructive relationship of strategic stability means long-termism, not something temporary. The strategy guides all the policies and actions for years to come."
+            },
+            {
+              "chunk_id": 11,
+              "text": "Over the past decades, especially over the past 10 years, Washington has regarded China as a strategic competitor or rival. The latest White House National Security Report released in December 2025 defined China as a structural challenge to the American economy and national security. Now, constructiveness prevails as the vision of the constructive China-U.S."
+            },
+            {
+              "chunk_id": 12,
+              "text": "relationship of strategic stability has been agreed upon by the two leaders."
+            },
+            {
+              "chunk_id": 13,
+              "text": "The new relationship includes four elements: a positive stability with cooperation as the mainstay; a sound stability with moderate competition; a constant stability with manageable differences; and an enduring stability with promises of peace.\n\nUndoubtedly, a constructive, strategic and stable business relationship is also the ballast for this new relationship between China and the United States."
+            },
+            {
+              "chunk_id": 14,
+              "text": "First, positive stability with cooperation as the mainstay. The key orientation of the China-U.S. trade relationship must be switched to cooperation instead of confrontation. In fact, China-U.S. trade has been mutually beneficial for decades, with the two-way trade volume hitting $688.3 billion in 2024, 275 times that in 1979 when the diplomatic tie was established."
+            },
+            {
+              "chunk_id": 15,
+              "text": "The two-way trade created millions of jobs in both countries, and the mutual investment created considerable jobs in the host country and considerable profits for the investors. However, due to the unilateral protectionist trade policy in Washington, especially the unilateral tariff, the bilateral trade has suffered seriously. According to China Customs data, the China-U.S."
+            },
+            {
+              "chunk_id": 16,
+              "text": "two-way trade volume fell by 18.7 percent in 2025 and a further 10.4 percent y-o-y during the first four months of 2026. The pressing task facing both sides is to anchor the bilateral trade on a key-tone of enhancing cooperation and push a rebound in the trade volume. The China-U.S."
+            },
+            {
+              "chunk_id": 17,
+              "text": "business talk at Seoul Airport on May 13, prior to President Trump's Beijing visit, resulted in generally balanced results for both sides and thus laid a sound foundation for the meeting between the two leaders."
+            },
+            {
+              "chunk_id": 18,
+              "text": "Besides the trade cooperation and rebound, the new emphasis should be an energetic push for a mutual investment rebound. All the CEOs of the 17 world business leaders, including Tim Cook of Apple, Elon Musk of Tesla and Jensen Huang of Nvidia, praised the warm welcome and support by President Xi Jinping and the Chinese government and reaffirmed their will to invest and grow in China."
+            },
+            {
+              "chunk_id": 19,
+              "text": "China, on its part, not only keeps its door wide open, but also invites the U.S. business leaders to participate in depth in China's reform and opening up. Over the past decades, the U.S. multilateral giants have in fact participated in and contributed to China's economic growth."
+            },
+            {
+              "chunk_id": 20,
+              "text": "They have contributed tremendous experiences and suggestions on the banking, insurance, stock and bond trading laws, thus promoting China's reform in the relevant legal system to meet WTO standards. At the point of a new development, driven by new productive forces and AI technology, the world leading companies will also help China, and in turn, enjoy greater business opportunities for themselves."
+            },
+            {
+              "chunk_id": 21,
+              "text": "Second, the healthy and stable competition within proper limits. Competition should be permitted and even encouraged. But the competition should follow rules, either multilateral trade rules or rules agreed upon bilaterally. Either side should not impose unilateral tariffs or other restrictions on technology and products, such as a ban on IC supply, or imports."
+            },
+            {
+              "chunk_id": 22,
+              "text": "Thirdly, constant stability with manageable differences. Differences should be managed on an equal, mutual respect and mutual benefit basis. China and the U.S. have enough experiences of success in this regard. The 13 rounds of trade consultation during 2018-2020, and the eight rounds of trade talks during 2025-2026 all resulted in agreements."
+            },
+            {
+              "chunk_id": 23,
+              "text": "A good delivery of Trump's China visit is the establishment of a board of trade and a board of investment, as an effective mechanism."
+            },
+            {
+              "chunk_id": 24,
+              "text": "Fourth, lasting stability with expectable peace. A lasting peace should be ensured by solid cooperation, rules-based competition and difference management, which will bring tremendous, tangible benefits to both China and the U.S. China's rejuvenation and MAGA could be complementary, thus anchoring the bilateral relationship on a sustainable, peaceful ballast."
+            },
+            {
+              "chunk_id": 25,
+              "text": "The chance for both China and the U.S. to create a better future is coming now. With joint, persistent efforts by both governments and business communities, the chance will be turned into reality."
+            }
+          ],
+          "clip_text_embeddings_file": "docs/90ab45fe64d4fc7d/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/90ab45fe64d4fc7d/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://www.infox.ru/news/251/355555-tramp-hocet-narastit-obem-dobyci-iskopaemyh-i-proizvodstva-oruzia": {
+      "url": "https://www.infox.ru/news/251/355555-tramp-hocet-narastit-obem-dobyci-iskopaemyh-i-proizvodstva-oruzia",
+      "canonical_url": "https://www.infox.ru/news/251/355555-tramp-hocet-narastit-obem-dobyci-iskopaemyh-i-proizvodstva-oruzia",
+      "name": "Трамп хочет нарастить объем добычи ископаемых и производства оружия",
+      "site_name": "Infox.ru",
+      "display_url": "https://www.infox.ru/news/251/355555-tramp-hocet-narastit-obem-dobyci-iskopaemyh-i-proizvodstva-oruzia",
+      "content_source": "web_page",
+      "web_fetch_status": "success",
+      "web_fetch_quality_score": 0.5545500000000001,
+      "date_published": "2026-05-19T20:46:43+08:00",
+      "date_last_crawled": "2026-05-19T20:46:43Z",
+      "full_content": "Трамп хочет нарастить объем добычи ископаемых и производства оружия\n\nПрезидент США Дональд Трамп планирует добиться ускорения добычи стратегически важных полезных ископаемых и увеличения объемов производства оружия.\n\nДля реализации своих намерений Трамп намерен активировать особые полномочия, что позволит ему сократить процедуры согласования финансирования с Конгрессом. На сегодняшний день Закон о производстве для нужд обороны ограничивает возможности президента, требуя его согласия для проектов стоимостью свыше 50 миллионов долларов. Трамп стремится отменить эти ограничения, пишет Reuters.\n\nВ марте текущего года республиканец уже принимал аналогичные меры для того, чтобы активизировать добычу минералов на территории США, которые используются в производстве потребительских товаров, компьютерных микросхем, робототехники и современного вооружения.\n\nВ апреле Трамп подписал указ, касающийся улучшения добычи минеральных ресурсов на дне океана.\n\nРанее Соединенные Штаты и Украина подписали соглашение в сфере полезных ископаемых, что позволит обеим странам более эффективно сотрудничать в разработке и эксплуатации месторождений, особенно тех, которые обладают потенциальными стратегическими ресурсами. Это сотрудничество также направлено на уменьшение зависимости от импорта и укрепление энергетической безопасности обеих стран.",
+      "image_urls": [
+        "https://www.infox.ru/photo/b71/480/b71480a84f82b2c6dfb18cc8607238e8asdasdasd683fea1620aae1.37559082-650x433-b71480a84f82b2c6dfb18cc8607238e8.jpg",
+        "https://www.infox.ru/img/show_menu.png",
+        "https://www.infox.ru/photo/c71/c3f/c71c3f36699339542e6e441f7c156e12asdasdasd6a10584b9b7d03.43120482-240x135-c71c3f36699339542e6e441f7c156e12.jpg"
+      ],
+      "page_image_embeddings_file": "docs/24666623d936b5b2/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://www.infox.ru/photo/b71/480/b71480a84f82b2c6dfb18cc8607238e8asdasdasd683fea1620aae1.37559082-650x433-b71480a84f82b2c6dfb18cc8607238e8.jpg",
+        "https://www.infox.ru/img/show_menu.png",
+        "https://www.infox.ru/photo/c71/c3f/c71c3f36699339542e6e441f7c156e12asdasdasd6a10584b9b7d03.43120482-240x135-c71c3f36699339542e6e441f7c156e12.jpg"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "Trump recent activities 2026",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "Трамп хочет нарастить объем добычи ископаемых и производства оружия\n\nПрезидент США Дональд Трамп планирует добиться ускорения добычи стратегически важных полезных ископаемых и увеличения объемов производства оружия."
+            },
+            {
+              "chunk_id": 1,
+              "text": "Для реализации своих намерений Трамп намерен активировать особые полномочия, что позволит ему сократить процедуры согласования финансирования с Конгрессом. На сегодняшний день Закон о производстве для нужд обороны ограничивает возможности президента, требуя его согласия для проектов стоимостью свыше 50 миллионов долларов. Трамп стремится отменить эти ограничения, пишет Reuters."
+            },
+            {
+              "chunk_id": 2,
+              "text": "В марте текущего года республиканец уже принимал аналогичные меры для того, чтобы активизировать добычу минералов на территории США, которые используются в производстве потребительских товаров, компьютерных микросхем, робототехники и современного вооружения.\n\nВ апреле Трамп подписал указ, касающийся улучшения добычи минеральных ресурсов на дне океана."
+            },
+            {
+              "chunk_id": 3,
+              "text": "Ранее Соединенные Штаты и Украина подписали соглашение в сфере полезных ископаемых, что позволит обеим странам более эффективно сотрудничать в разработке и эксплуатации месторождений, особенно тех, которые обладают потенциальными стратегическими ресурсами. Это сотрудничество также направлено на уменьшение зависимости от импорта и укрепление энергетической безопасности обеих стран."
+            }
+          ],
+          "clip_text_embeddings_file": "docs/24666623d936b5b2/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/24666623d936b5b2/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://www.36kr.com/p/3811287664795137": {
+      "url": "https://www.36kr.com/p/3811287664795137",
+      "canonical_url": "https://www.36kr.com/p/3811287664795137",
+      "name": "特朗普，买入英伟达、苹果、英特尔-36氪",
+      "site_name": "36氪",
+      "display_url": "https://www.36kr.com/p/3811287664795137",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "short_content",
+      "web_fetch_quality_score": 0.2113357142857143,
+      "date_published": "2026-05-18T19:21:00+08:00",
+      "date_last_crawled": "2026-05-18T19:21:00Z",
+      "full_content": "5月14日,美国政府道德办公室(OGE)公布了特朗普最新提交的两份278-T定期财务披露文件,首次曝光了其在2026年前三个月的大规模证券交易情况。\n英伟达、博通、AMD、甲骨文、Palantir、英特尔等AI与芯片公司,以及苹果、戴尔等科技硬件公司,成为其投资的重点方向;微软、Meta、亚马逊等科技巨头则出现了大额减持记录。\n其中,英伟达和英特尔相关交易尤为密集,披露文件中分别出现15笔和6笔相关交易。戴尔则在2月新增了一笔价值100万至500万美元(约合人民币680.9万至3404.9万元)的仓位,而数月后特朗普又在公开场合高调称赞戴尔硬件产品。\n文件显示,仅2026年1月至3月期间,特朗普名下账户就累计进行了超过3700笔证券交易,涉及金额约2.2亿至7.5亿美元(约合人民币14.9亿至51亿元)。\n由于美国联邦财务披露制度仅要求申报交易金额区间,而非具体成交金额,因此外界目前无法得知其真实交易规模。\n其中,大量交易集中于美国科技巨头、AI产业链公司、军工企业以及金融机构相关股票。\n这也是特朗普重返白宫后,首次出现如此大规模的个股交易披露。相比此前主要配置市政债券和企业债券,其投资重心明显开始转向美国大型科技股和AI产业链。\n特朗普集团回应称,相关资产均由第三方金融机构通过“全权委托账户”自动管理,特朗普本人、家族及特朗普集团均不参与具体投资决策,也不会提前获知交易信息。\n01.转向科技股,特朗普大举加仓AI产业链\n过去一年里,特朗普公开披露的大部分交易主要集中于市政债券和企业债券,但最新文件显示,其资金开始大量流向美国科技巨头以及AI相关企业。\n披露文件中,英伟达、博通、Synopsys、Cadence、AMD、德州仪器、甲骨文、ServiceNow、Adobe、Workday等公司均出现百万美元级别交易。\n其中,英伟达相关交易高达15笔,覆盖整个2026年第一季",
+      "image_urls": [
+        "https://img.36krcdn.com/hsossms/20260516/v2_2c75d7fd7fb7467a9edaf7c3f6e4c688@000000_oswg24005oswg1000oswg73_img_000?x-oss-process=image/format,jpg/interlace,1",
+        "https://img.36krcdn.com/hsossms/20260516/v2_5012462318a644489c6e2092b1fdc723@000000_oswg179754oswg1000oswg904_img_000?x-oss-process=image/format,jpg/interlace,1",
+        "https://img.36krcdn.com/hsossms/20260516/v2_2e3f94971b4f4abda503f908f23fd931@000000_oswg407357oswg1000oswg438_img_000?x-oss-process=image/format,jpg/interlace,1"
+      ],
+      "page_image_embeddings_file": "docs/3831e4fc1c028781/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://img.36krcdn.com/hsossms/20260516/v2_2c75d7fd7fb7467a9edaf7c3f6e4c688@000000_oswg24005oswg1000oswg73_img_000?x-oss-process=image/format,jpg/interlace,1",
+        "https://img.36krcdn.com/hsossms/20260516/v2_5012462318a644489c6e2092b1fdc723@000000_oswg179754oswg1000oswg904_img_000?x-oss-process=image/format,jpg/interlace,1",
+        "https://img.36krcdn.com/hsossms/20260516/v2_2e3f94971b4f4abda503f908f23fd931@000000_oswg407357oswg1000oswg438_img_000?x-oss-process=image/format,jpg/interlace,1"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {
+        "q=61d37520716a7876|size=400": {
+          "question": "Trump recent activities 2026",
+          "chunk_size": 400,
+          "chunks": [
+            {
+              "chunk_id": 0,
+              "text": "5月14日,美国政府道德办公室(OGE)公布了特朗普最新提交的两份278-T定期财务披露文件,首次曝光了其在2026年前三个月的大规模证券交易情况。\n\n英伟达、博通、AMD、甲骨文、Palantir、英特尔等AI与芯片公司,以及苹果、戴尔等科技硬件公司,成为其投资的重点方向;微软、Meta、亚马逊等科技巨头则出现了大额减持记录。\n\n其中,英伟达和英特尔相关交易尤为密集,披露文件中分别出现15笔和6笔相关交易。戴尔则在2月新增了一笔价值100万至500万美元(约合人民币680.9万至3404.9万元)的仓位,而数月后特朗普又在公开场合高调称赞戴尔硬件产品。\n\n文件显示,仅2026年1月至3月期间,特朗普名下账户就累计进行了超过3700笔证券交易,涉及金额约2.2亿至7.5亿美元(约合人民币14.9亿至51亿元)。"
+            },
+            {
+              "chunk_id": 1,
+              "text": "由于美国联邦财务披露制度仅要求申报交易金额区间,而非具体成交金额,因此外界目前无法得知其真实交易规模。\n\n其中,大量交易集中于美国科技巨头、AI产业链公司、军工企业以及金融机构相关股票。\n\n这也是特朗普重返白宫后,首次出现如此大规模的个股交易披露。相比此前主要配置市政债券和企业债券,其投资重心明显开始转向美国大型科技股和AI产业链。\n\n特朗普集团回应称,相关资产均由第三方金融机构通过“全权委托账户”自动管理,特朗普本人、家族及特朗普集团均不参与具体投资决策,也不会提前获知交易信息。\n\n01.转向科技股,特朗普大举加仓AI产业链\n\n过去一年里,特朗普公开披露的大部分交易主要集中于市政债券和企业债券,但最新文件显示,其资金开始大量流向美国科技巨头以及AI相关企业。"
+            },
+            {
+              "chunk_id": 2,
+              "text": "披露文件中,英伟达、博通、Synopsys、Cadence、AMD、德州仪器、甲骨文、ServiceNow、Adobe、Workday等公司均出现百万美元级别交易。\n\n其中,英伟达相关交易高达15笔,覆盖整个2026年第一季"
+            }
+          ],
+          "clip_text_embeddings_file": "docs/3831e4fc1c028781/chunk_profiles/q_61d37520716a7876_size_400/clip_text_embeddings.npy",
+          "text_retrieval_chunk_embeddings_file": "docs/3831e4fc1c028781/chunk_profiles/q_61d37520716a7876_size_400/text_retrieval_chunk_embeddings.npy"
+        }
+      }
+    },
+    "https://sichuan.scol.com.cn/spsc/202605/83258850.html": {
+      "url": "https://sichuan.scol.com.cn/spsc/202605/83258850.html",
+      "canonical_url": "https://sichuan.scol.com.cn/spsc/202605/83258850.html",
+      "name": "特朗普一季度进行了3600多次股票买卖丨夜观天下·漫话 缅怀！袁隆平逝世五周年，禾下乘凉梦，自有后来人 《寻味100处》成都特辑的第2集上线 《寻味100处》被我们请到四川了！ min甜，树莓在龙泉山试种成功了！ 要做熊猫玩偶界的“爱马仕”，山东小镇工厂凭啥造出最真的假熊猫？",
+      "site_name": "四川在线四川频道",
+      "display_url": "https://sichuan.scol.com.cn/spsc/202605/83258850.html",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "short_content",
+      "web_fetch_quality_score": 0.1177,
+      "date_published": "2026-05-22T17:22:47+08:00",
+      "date_last_crawled": "2026-05-22T17:22:47Z",
+      "full_content": "报告显示,美国总统特朗普今年第一季度进行了3600多次股票买卖,其中包括许多直接受其决策影响的公司的股票。(新华社)\n漫画:黄琪\n王桃",
+      "image_urls": [
+        "https://imgcdn.scol.com.cn/media/2026/05/22/211530067800.jpg",
+        "https://sichuan.scol.com.cn/images/2013scol.jpg"
+      ],
+      "page_image_embeddings_file": "docs/10d5c733fd4df34c/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://imgcdn.scol.com.cn/media/2026/05/22/211530067800.jpg",
+        "https://sichuan.scol.com.cn/images/2013scol.jpg"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    },
+    "https://www.fx678.com/C/20260523/202605230136411129.html": {
+      "url": "https://www.fx678.com/C/20260523/202605230136411129.html",
+      "canonical_url": "https://www.fx678.com/C/20260523/202605230136411129.html",
+      "name": "特朗普会在5月23日到24日前往白宫出席行政工作会议。_外汇动态报道",
+      "site_name": "汇通财经",
+      "display_url": "https://www.fx678.com/C/20260523/202605230136411129.html",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "empty_content",
+      "web_fetch_quality_score": 0.0,
+      "date_published": "2026-05-23T01:36:41+08:00",
+      "date_last_crawled": "2026-05-23T01:36:41Z",
+      "full_content": "2026-05-23\n01:36:41\n汇通财经APP讯——特朗普会在5月23日到24日前往白宫出席行政工作会议。",
+      "image_urls": [
+        "https://www.fx678.com/images/yhtpc.png",
+        "https://www.fx678.com/images/windows.png",
+        "https://www.fx678.com/images/default.jpg"
+      ],
+      "page_image_embeddings_file": "",
+      "page_image_embedding_urls": [],
+      "page_image_failed_urls": [
+        "https://www.fx678.com/images/yhtpc.png",
+        "https://www.fx678.com/images/windows.png",
+        "https://www.fx678.com/images/default.jpg"
+      ],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    },
+    "https://www.muni.cz/en/admissions/bachelors-and-masters-studies/open-days/may-2026-past": {
+      "url": "https://www.muni.cz/en/admissions/bachelors-and-masters-studies/open-days/may-2026-past",
+      "canonical_url": "https://www.muni.cz/en/admissions/bachelors-and-masters-studies/open-days/may-2026-past",
+      "name": "Open Days | Masaryk University | MUNI",
+      "site_name": "Konference státní správy a neziskových organizací",
+      "display_url": "https://www.muni.cz/en/admissions/bachelors-and-masters-studies/open-days/may-2026-past",
+      "content_source": "bocha_summary_fallback",
+      "web_fetch_status": "short_content",
+      "web_fetch_quality_score": 0.08278571428571428,
+      "date_published": "2026-05-16T23:06:21+08:00",
+      "date_last_crawled": "2026-05-16T23:06:21Z",
+      "full_content": "May\n2026\n—\npast\nevents\nNo\npast\nevent\ntook\nplace\nthis\nmonth.",
+      "image_urls": [
+        "https://cdn.muni.cz/media/3128009/dsc_1382_fb.jpg?upscale=false&width=1200"
+      ],
+      "page_image_embeddings_file": "docs/56bc8bacf99bd9e3/page_image_embeddings.npy",
+      "page_image_embedding_urls": [
+        "https://cdn.muni.cz/media/3128009/dsc_1382_fb.jpg?upscale=false&width=1200"
+      ],
+      "page_image_failed_urls": [],
+      "page_image_embeddings_ready": true,
+      "chunk_profiles": {}
+    }
+  }
+}

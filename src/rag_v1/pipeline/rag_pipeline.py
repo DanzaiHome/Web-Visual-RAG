@@ -4,6 +4,8 @@ from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Union
 from urllib.parse import urlsplit
 
+import numpy as np
+
 from rag_v1.config import IMAGE_MATCH_THRESHOLD, WEB_FETCH_CONFIG
 from rag_v1.pipeline.rag_requirement import should_use_rag
 from rag_v1.pipeline.recall_session_cache import RecallSessionCache
@@ -703,12 +705,16 @@ def _extend_chunk_candidates(
             for item in (chunk_profile.get("chunks") or [])
             if str(item.get("text") or "").strip()
         ]
-        clip_payload = chunk_profile.get("clip_text_embeddings") or []
-        if clip_payload:
-            cached_clip_text_embeddings = clip_payload
-        text_payload = chunk_profile.get("text_retrieval_chunk_embeddings") or []
-        if text_payload:
-            cached_text_retrieval_chunk_embeddings = text_payload
+        clip_payload = chunk_profile.get("clip_text_embeddings")
+        if clip_payload is not None:
+            clip_array = np.asarray(clip_payload, dtype=np.float32)
+            if clip_array.size > 0:
+                cached_clip_text_embeddings = clip_array
+        text_payload = chunk_profile.get("text_retrieval_chunk_embeddings")
+        if text_payload is not None:
+            text_array = np.asarray(text_payload, dtype=np.float32)
+            if text_array.size > 0:
+                cached_text_retrieval_chunk_embeddings = text_array
 
     if timing is not None:
         with timing.scope("retrieve.chunk_extractor_init", label=f"ChunkExtractor[{doc_index}]"):
