@@ -15,12 +15,16 @@ dependencies = [
     "torch>=2.2",
     "transformers>=4.40,<5",
     "sentence-transformers>=3.0,<6",
+    "python-multipart>=0.0.29,<1",
+    "uvicorn[standard]>=0.48,<1",
+    "fastapi>=0.136,<1",
 ]
 
 [project.scripts]
 rag-pipeline = "rag_v1.apps.pipeline:main"
 rag-clip-server = "rag_v1.apps.clip_server:main"
 rag-text-retrieval-server = "rag_v1.apps.text_retrieval_server:main"
+rag-web-api = "rag_v1.apps.web_api:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

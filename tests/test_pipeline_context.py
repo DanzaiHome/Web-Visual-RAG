@@ -62,7 +62,31 @@ class PipelineContextTests(unittest.TestCase):
             context,
         )
         self.assertIn("Image match: matched, score=0.220, decision=low_similarity, images=1", context)
-        self.assertIn("Fetched body chunk used as RAG evidence.", context)
+        self.assertIn("[Doc 1] Evidence Block", context)
+        self.assertIn("Citation Rules:", context)
+        self.assertIn("Use these exact ids when citing claims in the final answer", context)
+        self.assertIn("Evidence text: Fetched body chunk used as RAG evidence.", context)
+
+    def test_aggregate_context_can_continue_source_numbering(self) -> None:
+        context = aggregate_context(
+            query="follow-up query",
+            source_start_index=3,
+            retrieved_docs=[
+                {
+                    "url": "https://example.com/follow-up",
+                    "canonical_url": "https://example.com/follow-up",
+                    "name": "Follow-up Story",
+                    "score": 0.5,
+                    "chunk_id": 0,
+                    "content": "Follow-up evidence should not reuse earlier Doc ids.",
+                    "content_source": "web_page",
+                    "web_fetch_status": "success",
+                }
+            ],
+        )
+
+        self.assertIn("[Doc 3] Evidence Block", context)
+        self.assertNotIn("[Doc 1] Evidence Block", context)
 
     def test_aggregate_context_labels_summary_fallback(self) -> None:
         context = aggregate_context(

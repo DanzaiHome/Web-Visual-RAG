@@ -119,12 +119,12 @@ class ChunkExtractorTests(unittest.TestCase):
         self.assertIn("中文网页正文", "".join(extractor.chunks))
 
     def test_retrieve_text_chunks_falls_back_to_lexical_scores(self) -> None:
-        original_get_similarity_model = ChunkExtractor._get_similarity_model
+        original_get_text_retrieval_client = ChunkExtractor._get_text_retrieval_client
 
         def raise_missing_dependency(cls):
             raise RuntimeError("missing sentence-transformers")
 
-        ChunkExtractor._get_similarity_model = classmethod(raise_missing_dependency)
+        ChunkExtractor._get_text_retrieval_client = classmethod(raise_missing_dependency)
         try:
             extractor = ChunkExtractor(
                 document=(
@@ -138,7 +138,7 @@ class ChunkExtractorTests(unittest.TestCase):
 
             chunks = extractor.retrieve_text_chunks(top_n=1)
         finally:
-            ChunkExtractor._get_similarity_model = original_get_similarity_model
+            ChunkExtractor._get_text_retrieval_client = original_get_text_retrieval_client
 
         self.assertEqual(len(chunks), 1)
         self.assertIn("Lakers latest completed game final score", chunks[0]["text"])

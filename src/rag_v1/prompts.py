@@ -6,7 +6,15 @@ You are about to be given the user's question, the retrieved web context and vis
 Use the web context if it is helpful.
 You should identify the user's requirements based on the question first. If the image or some images are completely unrelated to the questions, please ignore them. Avoid forcibly associating unrelated images with the issue.
 
-Evidence and temporal verification rules:
+Citation and evidence grounding rules:
+1. Retrieved evidence is organized as source blocks named [Doc 1], [Doc 2], etc.
+2. Every factual claim that depends on retrieved web evidence must include one or more citations in square brackets, for example: [Doc 1] or [Doc 1][Doc 3].
+3. A citation may only be used when that document actually supports the claim. Do not cite a source for a fact that is absent from that source.
+4. If no [Doc n] source supports a requested fact, say "无法从证据确定" for that fact instead of guessing. If answering in English, say "The evidence does not determine this."
+5. Do not invent document ids, URLs, dates, names, scores, or quotations. Use only the documents present in the retrieved context.
+6. If the retrieved context contains no [Doc n] blocks, answer from the image/question only and do not invent citations.
+
+Temporal verification rules:
 1. First identify the visual entity, then identify the target entity asked about. Use evidence only if it actually refers to that target entity.
 2. If the question asks for a latest, most recent, current, today/yesterday, recent factual value, final score, result, latest release, current price, current schedule, or similar time-sensitive fact, do not assume the top-ranked document or the only related result is the latest/current event.
 3. For latest/current questions, check whether the evidence contains:
@@ -18,7 +26,7 @@ Evidence and temporal verification rules:
 6. Use the pipeline current time, when provided, to reason about whether a scheduled event may have already occurred. If the context contains a later scheduled/preview event for the target entity that is before the pipeline current time, but no final score/result for that later event, do not fall back to an older completed result as the "latest"; say the latest result cannot be confirmed from the evidence.
 7. For sports scores/results, prefer evidence that explicitly says final score, result, completed game, box score, schedule result, or an official/statistical source page. Do not treat a single old-looking score as the most recent game unless the evidence proves it. Do not use a document with an older event date as support for the current latest event.
 8. If the context gives a relevant fact value but does not prove it is the latest/current one, answer conservatively: state the value found and say that the evidence is insufficient to confirm it is the latest/current result. If the only support for recency is page metadata, say that it appears relevant but is not independently confirmed as the latest/current event.
-9. If answering with a score, price, count, date, or other numeric fact, briefly mention the supporting document title or source.
+9. If answering with a score, price, count, date, or other numeric fact, briefly mention the supporting document title or source and include its [Doc n] citation.
 
 The user question is:
 "{question}"
@@ -26,7 +34,7 @@ The user question is:
 The retrieved context is:
 {context}
 
-Please answer the question directly. If the evidence is insufficient, say so explicitly instead of over-claiming.
+Please answer the question directly. Keep the answer concise, but attach [Doc n] citations to all evidence-backed claims. If the evidence is insufficient, say so explicitly instead of over-claiming.
 """
 
     web_prompt_en = '''You are building a web search query for a visual RAG pipeline.
@@ -68,7 +76,7 @@ You should construct the query for web retrieval based on the following requirem
         - freshness/completion words such as latest, most recent, last, current, today, yesterday, completed, final score, result, official, or source-specific equivalents,
         - structured result page terms when useful, such as schedule, results, box score, standings, price, quote, market data, releases, official site, ESPN, NBA.com, Flashscore, Reuters, SEC filing, product page, or other relevant data-source terms.
 
-        For current/latest factoid questions, the query must include at least one recency/completion term and at least one result-page/source term. For sports final-score questions, include the team/player entity plus latest/last, completed, final score, schedule, results, box score, or equivalent Chinese terms such as 最近一场, 已结束, 正式比赛, 最终比分, 赛程, 结果. Do not generate a vague query like "latest game score" when the user needs the most recent completed event.
+        For current/latest factoid questions, the query must include at least one recency/completion term and at least one result-page/source term. For sports final-score questions, include the team/player entity plus query terms like latest completed game final score schedule results, or latest/last, completed, final score, schedule, results, box score, or equivalent Chinese terms such as 最近一场, 已结束, 正式比赛, 最终比分, 赛程, 结果. For current price questions, include query terms like current stock price quote market data official. Do not generate a vague query like "latest game score" when the user needs the most recent completed event.
 
     ** 4. Construct query: **
         Based on the information you get above, construct the query.

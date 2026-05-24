@@ -220,9 +220,17 @@ def call_api(
                     if attempt < max_attempts - 1:
                         time.sleep(min(2 ** attempt, 4))
                         continue
-                    response.raise_for_status()
 
-                response.raise_for_status()
+                if response.status_code >= 400:
+                    response_text = response.text.strip()
+                    if len(response_text) > 1200:
+                        response_text = response_text[:1200] + "..."
+                    last_error = RuntimeError(
+                        "Chat API request failed: "
+                        f"status={response.status_code}, body={response_text}"
+                    )
+                    break
+
                 return _extract_text_from_response(response.json())
             except (requests.Timeout, requests.ConnectionError, requests.HTTPError) as exc:
                 last_error = exc

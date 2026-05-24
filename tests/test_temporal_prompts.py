@@ -32,6 +32,13 @@ class TemporalPromptTests(unittest.TestCase):
         self.assertIn("single old-looking score", prompt)
         self.assertIn("insufficient to confirm it is the latest/current result", prompt)
 
+    def test_answer_prompt_requires_doc_citations_for_retrieved_facts(self) -> None:
+        prompt = prompts.answer_prompt_en
+
+        self.assertIn("Every factual claim that depends on retrieved web evidence", prompt)
+        self.assertIn("[Doc 1] or [Doc 1][Doc 3]", prompt)
+        self.assertIn("无法从证据确定", prompt)
+        self.assertIn("Do not invent document ids", prompt)
 
 if __name__ == "__main__":
     unittest.main()

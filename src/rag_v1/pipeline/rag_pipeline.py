@@ -987,6 +987,7 @@ def aggregate_context(
     query: str,
     retrieved_docs: Sequence[Dict[str, object]],
     current_time: Optional[str] = None,
+    source_start_index: int = 1,
 ) -> str:
     timing = get_active_timing()
     if timing is None:
@@ -994,12 +995,14 @@ def aggregate_context(
             query=query,
             retrieved_docs=retrieved_docs,
             current_time=current_time,
+            source_start_index=source_start_index,
         )
     with timing.scope("aggregate_context", label="aggregate_context"):
         return _aggregate_context_impl(
             query=query,
             retrieved_docs=retrieved_docs,
             current_time=current_time,
+            source_start_index=source_start_index,
         )
 
 
@@ -1007,6 +1010,7 @@ def _aggregate_context_impl(
     query: str,
     retrieved_docs: Sequence[Dict[str, object]],
     current_time: Optional[str],
+    source_start_index: int,
 ) -> str:
     sections: List[str] = []
 
@@ -1018,13 +1022,20 @@ def _aggregate_context_impl(
 
     if retrieved_docs:
         sections.append(
+            "Citation Rules:\n"
+            "Each evidence block below has a stable source id such as [Doc 1]. "
+            "Use these exact ids when citing claims in the final answer. "
+            "If no listed [Doc n] supports a requested fact, state that the evidence is insufficient."
+        )
+        sections.append(
             "Temporal Note:\n"
             "Document date fields below are page/search metadata. For latest/current questions, "
             "verify event dates and completed/current status from titles or content."
         )
         grouped_docs = _group_retrieved_docs(retrieved_docs)
         doc_blocks = []
-        for index, item in enumerate(grouped_docs, start=1):
+        safe_start_index = max(1, int(source_start_index or 1))
+        for index, item in enumerate(grouped_docs, start=safe_start_index):
             title = str(item.get("name") or "").strip()
             site_name = str(item.get("site_name") or item.get("display_url") or "").strip()
             published = str(item.get("date_published") or "").strip()
@@ -1033,7 +1044,7 @@ def _aggregate_context_impl(
             image_match = _format_image_match(item)
             evidence_source = _format_evidence_source(item)
 
-            lines = [f"[Doc {index}] URL: {item['url']}"]
+            lines = [f"[Doc {index}] Evidence Block", f"URL: {item['url']}"]
             if title:
                 lines.append(f"Title: {title}")
             if site_name:
@@ -1059,9 +1070,9 @@ def _aggregate_context_impl(
             contents = [chunk["content"] for chunk in chunks if str(chunk.get("content", "")).strip()]
             if contents:
                 if len(contents) == 1:
-                    lines.append(f"Content: {contents[0]}")
+                    lines.append(f"Evidence text: {contents[0]}")
                 else:
-                    lines.append("Content:")
+                    lines.append("Evidence text:")
                     for chunk_index, content in enumerate(contents, start=1):
                         lines.append(f"- Chunk {chunk_index}: {content}")
             doc_blocks.append("\n".join(lines))
@@ -1213,6 +1224,7 @@ def _answer_with_rag_impl(
         session_cache=session_cache,
     )
     context = aggregate_context(query=query, retrieved_docs=retrieved_docs, current_time=current_time)
+    next_doc_index = len(_group_retrieved_docs(retrieved_docs)) + 1
     if debug:
         print(f"\nInitial context:\n{context}\n")
 
@@ -1302,12 +1314,15 @@ def _answer_with_rag_impl(
             query=addition,
             retrieved_docs=additional_docs,
             current_time=current_time,
+            source_start_index=next_doc_index,
         )
         if debug:
             print(f"Additional context:\n{additional_context}\n")
 
         if additional_context:
             context = f"{context}\n\n{additional_context}".strip() if context else additional_context
+            if additional_docs:
+                next_doc_index += len(_group_retrieved_docs(additional_docs))
             if debug:
                 print(f"Updated context after iteration {iteration}:\n{context}\n")
         else:

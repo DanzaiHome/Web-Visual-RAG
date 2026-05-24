@@ -1,5 +1,32 @@
 # RAG V2
 
+## 2025.5.24 update mhc - RAG v3
+- 增加.env.example，并修改启动服务时读取配置的设置，现在实现从.env中便可直接读取项目各配置，便于调试运行。
+- Readme 补充终止服务和检查服务运行的指令。
+- 强化最终回答规则：所有依赖检索证据的事实必须带 [Doc n]；不允许编造 Doc id；证据不支持时明确说“无法从证据确定”。
+- 把 context 格式改成明确的 Citation Rules + [Doc n] Evidence Block + Evidence text，让模型更容易稳定引用来源。
+- 修复补充检索循环中的 Doc 编号重复问题：后续检索会从已有编号继续，例如初始有 [Doc 1]、[Doc 2]，下一轮从 [Doc 3] 开始。
+- 增加/更新了测试，覆盖 evidence block、Doc 编号延续、answer prompt 强制引用规则。
+- 修复两个原本导致全量测试失败的问题：过期的 chunk 测试 monkeypatch，以及本地 WebPageFetcher 测试被环境代理拦截的问题。
+
+实现 FastAPI 后端 + Vite/React 前端界面，浏览器可以上传图片、输入问题，后端保存临时图片后调用现有 answer_with_rag，再把模型最终回复返回到页面展示。
+  - FastAPI 后端：CV-project/src/rag_v1/apps/web_api.py
+      - POST /api/ask：接收 question 和 images
+      - 临时保存上传图片到 .tmp_uploads/web_ui
+      - 调用 answer_with_rag(...)
+      - 返回 answer / elapsed_seconds / image_count
+      - 请求完成后自动清理临时图片
+  - React 前端：frontend/
+      - 图片选择与预览
+      - 问题输入
+      - 可调检索参数：topK、候选网页数、chunk 大小、补充检索轮数、多模态召回
+      - loading、错误提示、最终回复展示
+  - 依赖配置：
+      - CV-project/requirements.txt 增加 fastapi、uvicorn[standard]、python-multipart
+      - CV-project/pyproject.toml 增加同样依赖和 rag-web-api 入口
+      - frontend/package.json 配置 Vite/React/TypeScript/lucide
+  - README 已补充 Web 前端启动说明：CV-project/README.md
+
 ## 2026.5.6 update xzh
 
 这次更新重点把系统从“搜索摘要 RAG”推进到“网页证据 RAG”：
@@ -96,6 +123,25 @@ rag-text-retrieval-server > "./logs/text-retrieval.log" 2>&1 &
 rag-pipeline --question "What new policies did this person announce recently?" --images pictures/trump.jpg --use-multimodal > "./logs/qa.log" 2>&1 &
 ```
 
+检查当前服务是否运行
+```
+ps -ef | grep -E 'rag-clip-server|rag-text-retrieval-server' | grep -v grep
+```
+
+终止服务
+```
+  pkill -f '/root/miniconda3/envs/cvpj/bin/rag-clip-server'
+  pkill -f '/root/miniconda3/envs/cvpj/bin/rag-text-retrieval-server'
+```
+
+确保存在API key
+```
+  export DASHSCOPE_API_KEY="你的真实 DashScope API Key"
+  export CHAT_API_KEY="$DASHSCOPE_API_KEY"
+  export BOCHA_API_KEY="你的真实 Bocha API Key"
+```
+
+
 ### 兼容旧方式
 
 根目录仍保留了轻量兼容入口，因此以下命令仍可使用：
@@ -191,6 +237,73 @@ rag-pipeline \
     --simple-time \
     > "./logs/qa.log" 2>&1 &
 ```
+
+
+## Web 前端界面
+
+本项目新增 FastAPI + Vite/React 的轻量前端，用于在浏览器上传图片、输入问题并查看 `answer_with_rag` 的最终回复。
+
+### 1. 准备依赖
+
+Python 后端依赖安装到环境：
+
+```bash
+pip install -r requirements.txt
+```
+
+Node 前端依赖安装在 `frontend/`：
+
+```bash
+cd CV-project/frontend
+npm install
+```
+
+### 2. 启动基础 RAG 服务
+
+Web UI 仍复用原有 pipeline，因此需要先启动 CLIP 和文本检索服务：
+
+```bash
+cd CV-project
+rag-clip-server > ./logs/clip-server.log 2>&1 &
+rag-text-retrieval-server > ./logs/text-retrieval.log 2>&1 &
+```
+
+确保环境变量已经配置：
+
+```bash
+export DASHSCOPE_API_KEY="你的 DashScope API Key"
+export CHAT_API_KEY="$DASHSCOPE_API_KEY"
+export BOCHA_API_KEY="你的 Bocha API Key"
+```
+
+### 3. 启动 Web 后端
+
+```bash
+cd CV-project
+python -m uvicorn rag_v1.apps.web_api:app --host 127.0.0.1 --port 8010
+```
+
+健康检查：
+
+```bash
+curl --noproxy '*' http://127.0.0.1:8010/health
+```
+
+### 4. 启动前端页面
+
+```bash
+cd CV-project/frontend
+npm run dev 【本地模式】
+// npm run serve:ports 【服务器开发者模式】
+```
+
+浏览器打开：
+
+```text
+http://127.0.0.1:5173
+```
+
+前端开发服务器会把 `/api` 请求代理到 `http://127.0.0.1:8010`。
 
 ## 导入与开发说明
 

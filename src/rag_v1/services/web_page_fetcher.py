@@ -966,7 +966,11 @@ class WebPageFetcher:
         max_bytes: Optional[int] = None,
         min_text_chars: Optional[int] = None,
     ) -> None:
-        self.session = session or requests.Session()
+        if session is None:
+            self.session = requests.Session()
+            self.session.trust_env = False
+        else:
+            self.session = session
         self.timeout = timeout or WEB_FETCH_CONFIG.timeout
         self.max_retries = WEB_FETCH_CONFIG.max_retries if max_retries is None else max_retries
         self.cache_ttl_seconds = (
