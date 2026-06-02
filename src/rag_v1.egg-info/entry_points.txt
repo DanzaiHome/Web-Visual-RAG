@@ -1,0 +1,5 @@
+[console_scripts]
+rag-clip-server = rag_v1.apps.clip_server:main
+rag-pipeline = rag_v1.apps.pipeline:main
+rag-text-retrieval-server = rag_v1.apps.text_retrieval_server:main
+rag-web-api = rag_v1.apps.web_api:main

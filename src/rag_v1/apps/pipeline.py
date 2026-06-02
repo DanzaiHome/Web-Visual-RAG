@@ -1,0 +1,269 @@
+import argparse
+import time
+from pathlib import Path
+from typing import Sequence
+
+from rag_v1.config import PROJECT_ROOT
+from rag_v1.pipeline.rag_pipeline import answer_with_rag
+from rag_v1.timing import TimingStats, set_active_timing
+
+
+def _timing_metric(timing: TimingStats, *keys: str) -> float:
+    return sum(timing.get_duration(key) for key in keys)
+
+
+def _timing_count(timing: TimingStats, *keys: str) -> int:
+    return sum(timing.get_count(key) for key in keys)
+
+
+def _print_simple_timing(timing: TimingStats, total_elapsed: float) -> None:
+    chat_api_time = timing.get_duration("chat_api")
+    search_api_time = timing.get_duration("web_search_api")
+    api_time = chat_api_time + search_api_time
+    chat_api_count = timing.get_count("chat_api")
+    search_api_count = timing.get_count("web_search_api")
+    clip_server_time = timing.get_duration("clip_server")
+    clip_server_count = timing.get_count("clip_server")
+    sentence_transformer_time = _timing_metric(
+        timing,
+        "text_retrieval",
+        "text_retrieval_server",
+    )
+    sentence_transformer_count = _timing_count(
+        timing,
+        "text_retrieval",
+        "text_retrieval_server",
+    )
+    web_page_fetch_time = timing.get_duration("web_page_fetch")
+    web_page_fetch_count = timing.get_count("web_page_fetch")
+    page_image_download_time = timing.get_duration("session_cache.page_image_download")
+    page_image_download_count = timing.get_count("session_cache.page_image_download")
+    cache_io_time = timing.get_duration("session_cache.flush_io")
+    cache_io_count = timing.get_count("session_cache.flush_io")
+    accounted_time = (
+        api_time
+        + clip_server_time
+        + sentence_transformer_time
+        + web_page_fetch_time
+        + page_image_download_time
+        + cache_io_time
+    )
+    other_time = max(0.0, total_elapsed - accounted_time)
+
+    print("------------------------")
+    print("Timing:")
+    print(f"Total time: {total_elapsed:.3f}s")
+    print(f"API: {api_time:.3f}s ({chat_api_count + search_api_count} calls)")
+    print(f"Search API: {search_api_time:.3f}s ({search_api_count} calls)")
+    print(f"Chat API: {chat_api_time:.3f}s ({chat_api_count} calls)")
+    print(f"CLIP: {clip_server_time:.3f}s ({clip_server_count} calls)")
+    print(
+        f"Sentence Transformer: {sentence_transformer_time:.3f}s "
+        f"({sentence_transformer_count} calls)"
+    )
+    print(f"Web page fetch: {web_page_fetch_time:.3f}s ({web_page_fetch_count} calls)")
+    print(
+        f"Page image download: {page_image_download_time:.3f}s "
+        f"({page_image_download_count} batches)"
+    )
+    print(f"Cache I/O: {cache_io_time:.3f}s ({cache_io_count} writes)")
+    print(f"Other: {other_time:.3f}s")
+
+
+def _print_detailed_timing(timing: TimingStats, total_elapsed: float) -> None:
+    chat_api_time = timing.get_duration("chat_api")
+    web_search_api_time = timing.get_duration("web_search_api")
+    api_time = chat_api_time + web_search_api_time
+    clip_server_time = timing.get_duration("clip_server")
+    web_page_fetch_time = timing.get_duration("web_page_fetch")
+    page_image_download_time = timing.get_duration("session_cache.page_image_download")
+    text_retrieval_time = _timing_metric(
+        timing,
+        "text_retrieval",
+        "text_retrieval_server",
+    )
+    text_retrieval_count = _timing_count(
+        timing,
+        "text_retrieval",
+        "text_retrieval_server",
+    )
+    accounted_time = (
+        api_time
+        + clip_server_time
+        + web_page_fetch_time
+        + page_image_download_time
+        + text_retrieval_time
+    )
+    other_time = max(0.0, total_elapsed - accounted_time)
+
+    print("------------------------")
+    print("Timing:")
+    print(f"Total: {total_elapsed:.3f}s")
+    print(f"API: {api_time:.3f}s")
+    print(
+        "API breakdown: "
+        f"chat={chat_api_time:.3f}s ({timing.get_count('chat_api')} calls), "
+        f"web_search={web_search_api_time:.3f}s ({timing.get_count('web_search_api')} calls)"
+    )
+    print(
+        f"CLIP server: {clip_server_time:.3f}s "
+        f"({timing.get_count('clip_server')} calls)"
+    )
+    print(
+        f"Web page fetch: {web_page_fetch_time:.3f}s "
+        f"({timing.get_count('web_page_fetch')} calls)"
+    )
+    print(
+        f"Page image download: {page_image_download_time:.3f}s "
+        f"({timing.get_count('session_cache.page_image_download')} batches)"
+    )
+    print(
+        f"Text retrieval: {text_retrieval_time:.3f}s "
+        f"({text_retrieval_count} calls)"
+    )
+    print(f"Other: {other_time:.3f}s")
+    for line in timing.report_lines(total_elapsed=total_elapsed):
+        print(line)
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="rag-pipeline",
+        description="Run the visual web RAG pipeline with a question and input images.",
+    )
+    parser.add_argument(
+        "--question",
+        required=True,
+        help="Question to answer with multimodal RAG.",
+    )
+    parser.add_argument(
+        "--images",
+        nargs="+",
+        required=True,
+        help="One or more local image paths.",
+    )
+    parser.add_argument("--top-k", type=int, default=5, help="Number of final chunks to keep.")
+    parser.add_argument(
+        "--candidate-k",
+        type=int,
+        default=10,
+        help="Number of web search candidates to fetch before reranking.",
+    )
+    parser.add_argument(
+        "--top-n-images",
+        type=int,
+        default=3,
+        help="Number of page images to keep per search result.",
+    )
+    parser.add_argument(
+        "--chunk-size",
+        type=int,
+        default=400,
+        help="Chunk size used during document splitting.",
+    )
+    parser.add_argument(
+        "--chunks-per-doc",
+        type=int,
+        default=3,
+        help="Maximum number of retrieved chunks per document.",
+    )
+    parser.add_argument(
+        "--use-multimodal",
+        action="store_true",
+        help="Enable multimodal chunk retrieval instead of text-only retrieval.",
+    )
+    parser.add_argument(
+        "--no-RAG",
+        "--no-rag",
+        dest="no_rag",
+        action="store_true",
+        help="Disable web RAG and answer directly with a single VL model call.",
+    )
+    parser.add_argument(
+        "--debug",
+        action="store_true",
+        help="Print detailed debug output.",
+    )
+    parser.add_argument(
+        "--max-sufficiency-iterations",
+        type=int,
+        default=3,
+        help="Maximum number of sufficiency-check / additional-retrieval iterations.",
+    )
+    parser.add_argument(
+        "--time",
+        action="store_true",
+        help="Print timing statistics for the full run, API calls, and CLIP server calls.",
+    )
+    parser.add_argument(
+        "--simple-time",
+        action="store_true",
+        help="When used with --time, print only a compact timing summary.",
+    )
+    return parser
+
+
+def _resolve_image_path(image: str) -> Path:
+    image_path = Path(image).expanduser()
+    candidates = [image_path]
+    if not image_path.is_absolute():
+        candidates.append(PROJECT_ROOT / image_path)
+
+    for candidate in candidates:
+        resolved_path = candidate.resolve()
+        if resolved_path.exists():
+            return resolved_path
+
+    return image_path.resolve()
+
+
+def _resolve_image_paths(images: Sequence[str]) -> list[Path]:
+    resolved_paths = [_resolve_image_path(image) for image in images]
+    missing_paths = [str(path) for path in resolved_paths if not path.exists()]
+    if missing_paths:
+        missing_display = ", ".join(missing_paths)
+        raise FileNotFoundError(f"Image file(s) not found: {missing_display}")
+    return resolved_paths
+
+
+def main() -> None:
+    parser = build_parser()
+    args = parser.parse_args()
+    try:
+        image_paths = _resolve_image_paths(args.images)
+    except FileNotFoundError as exc:
+        parser.error(str(exc))
+    if args.max_sufficiency_iterations < 0:
+        parser.error("--max-sufficiency-iterations must be >= 0")
+    if args.simple_time and not args.time:
+        parser.error("--simple-time requires --time")
+    timing = TimingStats() if args.time else None
+    set_active_timing(timing)
+    total_start_time = time.perf_counter()
+    try:
+        response = answer_with_rag(
+            img_paths=image_paths,
+            question=args.question,
+            top_k=args.top_k,
+            candidate_k=args.candidate_k,
+            top_n_images=args.top_n_images,
+            chunk_size=args.chunk_size,
+            chunks_per_doc=args.chunks_per_doc,
+            use_multimodal=args.use_multimodal,
+            no_rag=args.no_rag,
+            debug=args.debug,
+            max_sufficiency_iterations=args.max_sufficiency_iterations,
+        )
+    finally:
+        total_elapsed = time.perf_counter() - total_start_time
+        set_active_timing(None)
+    print(f"------------------------\nFinal response:\n{response}")
+    if timing is not None:
+        if args.simple_time:
+            _print_simple_timing(timing=timing, total_elapsed=total_elapsed)
+        else:
+            _print_detailed_timing(timing=timing, total_elapsed=total_elapsed)
+
+
+if __name__ == "__main__":
+    main()
