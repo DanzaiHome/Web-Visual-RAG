@@ -23,8 +23,24 @@ def _get_bool_env(name: str, default: bool) -> bool:
 @dataclass(frozen=True)
 class BochaConfig:
     api_key: str = os.getenv("BOCHA_API_KEY", "sk-XXX")
-    api_url: str = os.getenv("BOCHA_API_URL", "https://api.bocha.cn/v1/web-search")
+    api_url: str = os.getenv("BOCHA_API_URL", "https://api.bochaai.com/v1/web-search")
     timeout: int = _get_int_env("BOCHA_TIMEOUT", 20)
+
+
+@dataclass(frozen=True)
+class SerpApiConfig:
+    api_key: str = os.getenv("SERPAPI_API_KEY", "secret_api_key")
+    api_url: str = os.getenv("SERPAPI_API_URL", "https://serpapi.com/search.json")
+    timeout: int = _get_int_env("SERPAPI_TIMEOUT", 20)
+    engine: str = os.getenv("SERPAPI_ENGINE", "google")
+    google_domain: str = os.getenv("SERPAPI_GOOGLE_DOMAIN", "google.com")
+    gl: str = os.getenv("SERPAPI_GL", "us")
+    hl: str = os.getenv("SERPAPI_HL", "en")
+    location: str = os.getenv("SERPAPI_LOCATION", "")
+    no_cache: bool = _get_bool_env("SERPAPI_NO_CACHE", False)
+
+
+WEB_SEARCH_PROVIDER = os.getenv("WEB_SEARCH_PROVIDER", "serpapi").strip().lower() or "serpapi"
 
 
 @dataclass(frozen=True)
@@ -113,6 +129,7 @@ class WebFetchConfig:
 
 
 BOCHA_CONFIG = BochaConfig()
+SERPAPI_CONFIG = SerpApiConfig()
 CHAT_API_CONFIG = ChatAPIConfig()
 CLIP_SERVER_CONFIG = ClipServerConfig()
 TEXT_RETRIEVAL_SERVER_CONFIG = TextRetrievalServerConfig()

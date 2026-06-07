@@ -1,7 +1,7 @@
 from datetime import datetime
 from difflib import SequenceMatcher
 from pathlib import Path
-from typing import Dict, List, Optional, Sequence, Union
+from typing import Any, Dict, List, Optional, Sequence, Union
 from urllib.parse import urlsplit
 
 import numpy as np
@@ -16,12 +16,25 @@ from rag_v1.services.vl_router import (
     answer_question_no_rag,
     choose_search_freshness,
     extract_sufficiency_json,
-    generate_search_query,
+    generate_entity_candidates,
+    generate_search_queries,
     judge_context_sufficiency,
 )
 from rag_v1.services.web_page_fetcher import canonicalize_url
 from rag_v1.services.web_search import WebSearcher
 from rag_v1.timing import get_active_timing
+
+
+_LAST_RAG_TRACE: Dict[str, Any] = {}
+
+
+def get_last_rag_trace() -> Dict[str, Any]:
+    return dict(_LAST_RAG_TRACE)
+
+
+def _set_last_rag_trace(trace: Optional[Dict[str, Any]]) -> None:
+    global _LAST_RAG_TRACE
+    _LAST_RAG_TRACE = dict(trace or {})
 
 
 def _canonical_url(url: object) -> str:
@@ -422,6 +435,7 @@ def retrieve_web_context(
     chunk_size: int = 400,
     chunks_per_doc: int = 3,
     use_multimodal: bool = False,
+    multimodal_text_weight: float = 0.5,
     debug: bool = False,
     current_time: Optional[str] = None,
     session_cache: Optional[RecallSessionCache] = None,
@@ -438,6 +452,7 @@ def retrieve_web_context(
             chunk_size=chunk_size,
             chunks_per_doc=chunks_per_doc,
             use_multimodal=use_multimodal,
+            multimodal_text_weight=multimodal_text_weight,
             debug=debug,
             current_time=current_time,
             session_cache=session_cache,
@@ -454,6 +469,7 @@ def retrieve_web_context(
             chunk_size=chunk_size,
             chunks_per_doc=chunks_per_doc,
             use_multimodal=use_multimodal,
+            multimodal_text_weight=multimodal_text_weight,
             debug=debug,
             current_time=current_time,
             session_cache=session_cache,
@@ -470,6 +486,7 @@ def _retrieve_web_context_impl(
     chunk_size: int,
     chunks_per_doc: int,
     use_multimodal: bool,
+    multimodal_text_weight: float,
     debug: bool,
     current_time: Optional[str],
     session_cache: Optional[RecallSessionCache],
@@ -619,6 +636,7 @@ def _retrieve_web_context_impl(
                     chunk_size=chunk_size,
                     chunks_per_doc=chunks_per_doc,
                     use_multimodal=use_multimodal,
+                    multimodal_text_weight=multimodal_text_weight,
                     session_cache=session_cache,
                     prompt_image_embeddings=prompt_image_embeddings,
                     cached_query_text_embedding=cached_query_text_embedding,
@@ -633,6 +651,7 @@ def _retrieve_web_context_impl(
                 chunk_size=chunk_size,
                 chunks_per_doc=chunks_per_doc,
                 use_multimodal=use_multimodal,
+                multimodal_text_weight=multimodal_text_weight,
                 session_cache=session_cache,
                 prompt_image_embeddings=prompt_image_embeddings,
                 cached_query_text_embedding=cached_query_text_embedding,
@@ -674,6 +693,7 @@ def _extend_chunk_candidates(
     chunk_size: int,
     chunks_per_doc: int,
     use_multimodal: bool,
+    multimodal_text_weight: float,
     session_cache: Optional[RecallSessionCache],
     prompt_image_embeddings: Optional[object],
     cached_query_text_embedding: Optional[object],
@@ -755,6 +775,7 @@ def _extend_chunk_candidates(
             ):
                 chunk_results = extractor.retrieve_multimodal_chunks(
                     top_n=chunks_per_doc,
+                    a=multimodal_text_weight,
                     prompt_image_embeddings=prompt_image_embeddings,
                     chunk_clip_text_embeddings=cached_clip_text_embeddings,
                     query_text_embedding=cached_query_text_embedding,
@@ -763,6 +784,7 @@ def _extend_chunk_candidates(
         else:
             chunk_results = extractor.retrieve_multimodal_chunks(
                 top_n=chunks_per_doc,
+                a=multimodal_text_weight,
                 prompt_image_embeddings=prompt_image_embeddings,
                 chunk_clip_text_embeddings=cached_clip_text_embeddings,
                 query_text_embedding=cached_query_text_embedding,
@@ -945,6 +967,22 @@ def _group_retrieved_docs(
     return grouped_docs
 
 
+def _context_doc_urls(retrieved_docs: Sequence[Dict[str, object]]) -> List[str]:
+    urls: List[str] = []
+    seen = set()
+
+    for item in _group_retrieved_docs(retrieved_docs):
+        url = str(item.get("url") or "").strip()
+        canonical_url = _canonical_url(item.get("canonical_url") or url)
+        normalized_url = canonical_url or url
+        if not normalized_url or normalized_url in seen:
+            continue
+        seen.add(normalized_url)
+        urls.append(normalized_url)
+
+    return urls
+
+
 def _chunk_sort_key(chunk: Dict[str, object]) -> tuple[int, float]:
     try:
         chunk_id = int(chunk.get("chunk_id"))
@@ -976,8 +1014,8 @@ def _format_evidence_source(item: Dict[str, object]) -> str:
 
     if "fallback" in content_source:
         if fetch_status:
-            return f"Bocha summary fallback, fetch_status={fetch_status}"
-        return "Bocha summary fallback"
+            return f"Search-result snippet fallback, fetch_status={fetch_status}"
+        return "Search-result snippet fallback"
 
     return content_source
 
@@ -1024,7 +1062,6 @@ def _aggregate_context_impl(
             "Citation Rules:\n"
             "Each evidence block below has a stable source id such as [Doc 1]. "
             "Use these exact ids when citing claims in the final answer. "
-            "If no listed [Doc n] supports a requested fact, state that the evidence is insufficient."
         )
         sections.append(
             "Temporal Note:\n"
@@ -1089,6 +1126,7 @@ def answer_with_rag(
     chunk_size: int = 400,
     chunks_per_doc: int = 3,
     use_multimodal: bool = False,
+    multimodal_text_weight: float = 0.5,
     no_rag: bool = False,
     debug: bool = False,
     max_sufficiency_iterations: int = 3,
@@ -1104,6 +1142,7 @@ def answer_with_rag(
             chunk_size=chunk_size,
             chunks_per_doc=chunks_per_doc,
             use_multimodal=use_multimodal,
+            multimodal_text_weight=multimodal_text_weight,
             no_rag=no_rag,
             debug=debug,
             max_sufficiency_iterations=max_sufficiency_iterations,
@@ -1118,6 +1157,7 @@ def answer_with_rag(
             chunk_size=chunk_size,
             chunks_per_doc=chunks_per_doc,
             use_multimodal=use_multimodal,
+            multimodal_text_weight=multimodal_text_weight,
             no_rag=no_rag,
             debug=debug,
             max_sufficiency_iterations=max_sufficiency_iterations,
@@ -1133,25 +1173,38 @@ def _answer_with_rag_impl(
     chunk_size: int,
     chunks_per_doc: int,
     use_multimodal: bool,
+    multimodal_text_weight: float,
     no_rag: bool,
     debug: bool,
     max_sufficiency_iterations: int,
 ) -> str:
+    trace: Dict[str, Any] = {
+        "query_rounds": [],
+        "final_context_urls": [],
+    }
+    _set_last_rag_trace(trace)
     timing = get_active_timing()
     if no_rag:
         print("Step 1/1: Answering without web RAG (--no-RAG)...")
+        trace["mode"] = "no_rag_forced"
         if timing is not None:
             with timing.scope("pipeline.answer_without_rag", label="answer_question_no_rag"):
-                return answer_question_no_rag(
+                answer = answer_question_no_rag(
                     img_paths=img_paths,
                     question=question,
                     debug=debug,
                 )
-        return answer_question_no_rag(
+                trace["answer"] = answer
+                _set_last_rag_trace(trace)
+                return answer
+        answer = answer_question_no_rag(
             img_paths=img_paths,
             question=question,
             debug=debug,
         )
+        trace["answer"] = answer
+        _set_last_rag_trace(trace)
+        return answer
 
     if timing is not None:
         with timing.scope("pipeline.rag_decision", label="should_use_rag"):
@@ -1168,18 +1221,29 @@ def _answer_with_rag_impl(
         )
     if not rag_decision.use_rag:
         print("Step 1/1: Answering without web RAG...")
+        trace["mode"] = "no_rag_routed"
+        trace["rag_decision_reason"] = rag_decision.reason
         if timing is not None:
             with timing.scope("pipeline.answer_without_rag", label="answer_question_no_rag(routed)"):
-                return answer_question_no_rag(
+                answer = answer_question_no_rag(
                     img_paths=img_paths,
                     question=question,
                     debug=debug,
                 )
-        return answer_question_no_rag(
+                trace["answer"] = answer
+                _set_last_rag_trace(trace)
+                return answer
+        answer = answer_question_no_rag(
             img_paths=img_paths,
             question=question,
             debug=debug,
         )
+        trace["answer"] = answer
+        _set_last_rag_trace(trace)
+        return answer
+
+    trace["mode"] = "rag"
+    trace["rag_decision_reason"] = rag_decision.reason
 
     if timing is not None:
         with timing.scope("pipeline.create_session_cache", label="RecallSessionCache.create"):
@@ -1216,30 +1280,74 @@ def _answer_with_rag_impl(
 
     print("Step 1/4: Generating initial search query...")
     if timing is not None:
-        with timing.scope("pipeline.generate_search_query", label="generate_search_query"):
-            query = generate_search_query(img_paths=img_paths, question=question)
+        with timing.scope("pipeline.generate_entity_candidates", label="generate_entity_candidates"):
+            entity_candidates = generate_entity_candidates(
+                img_paths=img_paths,
+                question=question,
+                debug=debug,
+            )
     else:
-        query = generate_search_query(img_paths=img_paths, question=question)
+        entity_candidates = generate_entity_candidates(
+            img_paths=img_paths,
+            question=question,
+            debug=debug,
+        )
+    trace["entity_candidates"] = list(entity_candidates)
+    if timing is not None:
+        with timing.scope("pipeline.generate_search_query", label="generate_search_queries"):
+            queries = generate_search_queries(
+                img_paths=img_paths,
+                question=question,
+                debug=debug,
+                entity_candidates=entity_candidates,
+            )
+    else:
+        queries = generate_search_queries(
+            img_paths=img_paths,
+            question=question,
+            debug=debug,
+            entity_candidates=entity_candidates,
+        )
+    query = queries[0] if queries else ""
     if debug:
-        print(f"\nquery:\n{query}\n")
+        print(f"\nqueries:\n{queries}\n")
+    trace["query_rounds"].append(
+        {
+            "stage": "initial",
+            "iteration": 0,
+            "queries": list(queries),
+        }
+    )
 
     current_time = datetime.now().astimezone().isoformat(timespec="seconds")
     print("Step 2/4: Retrieving initial web context...")
-    retrieved_docs = retrieve_web_context(
-        img_paths=img_paths,
-        question=question,
-        query=query,
-        top_k=top_k,
-        candidate_k=candidate_k,
-        top_n_images=top_n_images,
-        chunk_size=chunk_size,
-        chunks_per_doc=chunks_per_doc,
-        use_multimodal=use_multimodal,
-        debug=debug,
+    retrieved_docs: List[Dict[str, object]] = []
+    initial_queries = queries or ([query] if query else [])
+    for initial_query in initial_queries:
+        retrieved_docs.extend(
+            retrieve_web_context(
+                img_paths=img_paths,
+                question=question,
+                query=initial_query,
+                top_k=top_k,
+                candidate_k=candidate_k,
+                top_n_images=top_n_images,
+                chunk_size=chunk_size,
+                chunks_per_doc=chunks_per_doc,
+                use_multimodal=use_multimodal,
+                multimodal_text_weight=multimodal_text_weight,
+                debug=debug,
+                current_time=current_time,
+                session_cache=session_cache,
+            )
+        )
+    query_block = "\n".join(initial_queries) if initial_queries else query
+    context = aggregate_context(
+        query=query_block,
+        retrieved_docs=retrieved_docs,
         current_time=current_time,
-        session_cache=session_cache,
     )
-    context = aggregate_context(query=query, retrieved_docs=retrieved_docs, current_time=current_time)
+    trace["final_context_urls"] = _context_doc_urls(retrieved_docs)
     next_doc_index = len(_group_retrieved_docs(retrieved_docs)) + 1
     if debug:
         print(f"\nInitial context:\n{context}\n")
@@ -1247,6 +1355,7 @@ def _answer_with_rag_impl(
     consecutive_parse_failures = 0
     iteration = 0
     exhausted_sufficiency_iterations = False
+    tried_queries: List[str] = list(dict.fromkeys(initial_queries))
 
     while iteration < max_sufficiency_iterations:
         iteration += 1
@@ -1261,6 +1370,8 @@ def _answer_with_rag_impl(
                     question=question,
                     context=context,
                     debug=debug,
+                    entity_candidates=entity_candidates,
+                    previous_queries=tried_queries,
                 )
                 if debug:
                     print(f"Sufficiency raw response:\n{raw_judgement}\n")
@@ -1276,6 +1387,8 @@ def _answer_with_rag_impl(
                 question=question,
                 context=context,
                 debug=debug,
+                entity_candidates=entity_candidates,
+                previous_queries=tried_queries,
             )
             if debug:
                 print(f"Sufficiency raw response:\n{raw_judgement}\n")
@@ -1302,13 +1415,40 @@ def _answer_with_rag_impl(
             )
 
         if judgement == "YES":
+            trace["query_rounds"].append(
+                {
+                    "stage": "sufficiency",
+                    "iteration": iteration,
+                    "queries": [],
+                    "judgement": judgement,
+                }
+            )
             print("Context is sufficient.")
             break
 
         if not addition:
+            trace["query_rounds"].append(
+                {
+                    "stage": "sufficiency",
+                    "iteration": iteration,
+                    "queries": [],
+                    "judgement": judgement,
+                }
+            )
             print("Sufficiency returned no usable additional query. Proceeding to final answer.")
             break
 
+        trace["query_rounds"].append(
+            {
+                "stage": "sufficiency",
+                "iteration": iteration,
+                "queries": [addition],
+                "judgement": judgement,
+            }
+        )
+        normalized_addition = " ".join(str(addition or "").strip().split())
+        if normalized_addition and normalized_addition not in tried_queries:
+            tried_queries.append(normalized_addition)
         print("Context is insufficient. Running additional retrieval...")
         if debug:
             print(f"Running additional retrieval with query:\n{addition}\n")
@@ -1322,6 +1462,7 @@ def _answer_with_rag_impl(
             chunk_size=chunk_size,
             chunks_per_doc=chunks_per_doc,
             use_multimodal=use_multimodal,
+            multimodal_text_weight=multimodal_text_weight,
             debug=debug,
             current_time=current_time,
             session_cache=session_cache,
@@ -1338,6 +1479,14 @@ def _answer_with_rag_impl(
         if additional_context:
             context = f"{context}\n\n{additional_context}".strip() if context else additional_context
             if additional_docs:
+                trace["final_context_urls"] = list(
+                    dict.fromkeys(
+                        [
+                            *trace.get("final_context_urls", []),
+                            *_context_doc_urls(additional_docs),
+                        ]
+                    )
+                )
                 next_doc_index += len(_group_retrieved_docs(additional_docs))
             if debug:
                 print(f"Updated context after iteration {iteration}:\n{context}\n")
@@ -1358,15 +1507,21 @@ def _answer_with_rag_impl(
     print("Step 4/4: Generating final answer...")
     if timing is not None:
         with timing.scope("pipeline.answer_question", label="answer_question(final)"):
-            return answer_question(
+            answer = answer_question(
                 img_paths=img_paths,
                 question=question,
                 context=context,
                 debug=debug,
             )
-    return answer_question(
+            trace["answer"] = answer
+            _set_last_rag_trace(trace)
+            return answer
+    answer = answer_question(
         img_paths=img_paths,
         question=question,
         context=context,
         debug=debug,
     )
+    trace["answer"] = answer
+    _set_last_rag_trace(trace)
+    return answer

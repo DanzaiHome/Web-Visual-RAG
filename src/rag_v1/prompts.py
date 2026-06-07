@@ -1,32 +1,26 @@
 class Prompts:
     answer_prompt_en = """You are answering the user's visual question.
 
-You are about to be given the user's question, the retrieved web context and visual inputs. You need to answer the question based on the context and visual inputs.
-
-Use the web context if it is helpful.
-You should identify the user's requirements based on the question first. If the image or some images are completely unrelated to the questions, please ignore them. Avoid forcibly associating unrelated images with the issue.
+You are about to be given the user's question, the retrieved web context and visual inputs. You need to answer the question based on the evidence and visual inputs.
 
 Citation and evidence grounding rules:
 1. Retrieved evidence is organized as source blocks named [Doc 1], [Doc 2], etc.
 2. Every factual claim that depends on retrieved web evidence must include one or more citations in square brackets, for example: [Doc 1] or [Doc 1][Doc 3].
 3. A citation may only be used when that document actually supports the claim. Do not cite a source for a fact that is absent from that source.
-4. If no [Doc n] source supports a requested fact, say "无法从证据确定" for that fact instead of guessing. If answering in English, say "The evidence does not determine this."
-5. Do not invent document ids, URLs, dates, names, scores, or quotations. Use only the documents present in the retrieved context.
-6. If the retrieved context contains no [Doc n] blocks, answer from the image/question only and do not invent citations.
+4. Do not invent document ids, URLs, dates, names, scores, or quotations. Use only the documents present in the retrieved context.
+5. If the retrieved context contains no [Doc n] blocks, answer from the image/question only and do not invent citations.
 
 Temporal verification rules:
 1. First identify the visual entity, then identify the target entity asked about. Use evidence only if it actually refers to that target entity.
-2. If the question asks for a latest, most recent, current, today/yesterday, recent factual value, final score, result, latest release, current price, current schedule, or similar time-sensitive fact, do not assume the top-ranked document or the only related result is the latest/current event.
-3. For latest/current questions, check whether the evidence contains:
+2. For latest/current questions, check whether the evidence contains:
    - the target entity,
    - the requested fact value,
    - an event date/time or other clear wording that proves the event is the latest/current/completed one.
-4. Distinguish page metadata from event time. A document's Published, Last crawled, or date-like URL field is page/search metadata, not necessarily the date of the game, release, price quote, or event. Do not cite page metadata as proof that an event is the latest/current one.
-5. When multiple candidate events or results are present, compare event dates from titles/content and use the most recent completed/occurred event, not merely the freshest webpage.
-6. Use the pipeline current time, when provided, to reason about whether a scheduled event may have already occurred. If the context contains a later scheduled/preview event for the target entity that is before the pipeline current time, but no final score/result for that later event, do not fall back to an older completed result as the "latest"; say the latest result cannot be confirmed from the evidence.
-7. For sports scores/results, prefer evidence that explicitly says final score, result, completed game, box score, schedule result, or an official/statistical source page. Do not treat a single old-looking score as the most recent game unless the evidence proves it. Do not use a document with an older event date as support for the current latest event.
-8. If the context gives a relevant fact value but does not prove it is the latest/current one, answer conservatively: state the value found and say that the evidence is insufficient to confirm it is the latest/current result. If the only support for recency is page metadata, say that it appears relevant but is not independently confirmed as the latest/current event.
-9. If answering with a score, price, count, date, or other numeric fact, briefly mention the supporting document title or source and include its [Doc n] citation.
+3. Distinguish page metadata from event time. A document's Published, Last crawled, or date-like URL field is page/search metadata, not necessarily the date of the game, release, price quote, or event. Do not cite page metadata as proof that an event is the latest/current one.
+4. When multiple candidate events or results are present, compare event dates from titles/content and use the most recent completed/occurred event, not merely the freshest webpage.
+5. Use the pipeline current time, when provided, to reason about whether a scheduled event may have already occurred. If the context contains a later scheduled/preview event for the target entity that is before the pipeline current time, but no final score/result for that later event, do not fall back to an older completed result as the "latest"; say the latest result cannot be confirmed from the evidence.
+6. For sports scores/results, prefer evidence that explicitly says final score, result, completed game, box score, schedule result, or an official/statistical source page. Do not treat a single old-looking score as the most recent game unless the evidence proves it. Do not use a document with an older event date as support for the current latest event.
+7. If answering with a score, price, count, date, or other numeric fact, briefly mention the supporting document title or source and include its [Doc n] citation.
 
 The user question is:
 "{question}"
@@ -34,7 +28,7 @@ The user question is:
 The retrieved context is:
 {context}
 
-Please answer the question directly. Keep the answer concise, but attach [Doc n] citations to all evidence-backed claims. If the evidence is insufficient, say so explicitly instead of over-claiming.
+Please answer the question directly. Keep the answer concise, but attach [Doc n] citations to all evidence-backed claims.
 """
 
     no_rag_prompt_en = """You are answering the user's visual question.
@@ -43,10 +37,48 @@ You are about to be given the user's question and visual inputs. Answer directly
 
 You should identify the user's requirements based on the question first. If the image or some images are completely unrelated to the question, please ignore them. Avoid forcibly associating unrelated images with the issue.
 
-If the question asks for a latest, most recent, current, today/yesterday, recent factual value, final score, result, latest release, current price, current schedule, or similar time-sensitive fact, answer conservatively. If you cannot reliably determine the latest/current fact from the visual inputs and your own knowledge, say that you cannot confirm it from the provided information.
+If the question asks for a latest, most recent, current, today/yesterday, recent factual value, final score, result, latest release, current price, current schedule, or similar time-sensitive fact, answer conservatively.
 
 The user question is:
 "{question}"
+"""
+
+    entity_candidates_prompt_en = """You are extracting likely entity candidates for a visual web RAG pipeline.
+
+You are about to be given the user's question and one or more images.
+
+The user question is:
+"{question}"
+
+**Task:**
+1. Infer the most likely visual entity or entities that are relevant to the question.
+2. Focus on companies, products, teams, landmarks, artworks, books, songs, games, events, awards, or other named entities that would help web retrieval.
+3. Prefer candidates that are most useful for answering the specific relation asked in the question. For example, if the question asks about an award, winning song, company, country, role, or collection, choose candidates that best anchor that relation in search.
+4. If the image is only weakly relevant, you may rely more on the user question.
+5. For each candidate, identify the most important missing slot that future retrieval should fill, such as award_name, winning_song, company_name, represented_country, product_line, game_title, or event_result.
+6. Do not answer the user's question directly.
+
+**Output requirements:**
+- Return JSON only.
+- Use exactly this schema:
+{{
+  "candidates": [
+    {{
+      "name": "...",
+      "type": "...",
+      "aliases": ["..."],
+      "confidence": 0.0,
+      "reason": "...",
+      "missing_slot": "..."
+    }}
+  ]
+}}
+- Return at most 3 candidates.
+- "confidence" must be a number between 0 and 1.
+- "aliases" may be empty.
+- "missing_slot" should be a short snake_case label describing the most important fact still needed for that candidate.
+- If candidate identity is uncertain, prefer a stable retrieval anchor over a flashy but weak guess.
+- If you are highly uncertain, still return your best candidates rather than an empty list.
 """
 
     web_prompt_en = '''You are building a web search query for a visual RAG pipeline.
@@ -64,35 +96,58 @@ You should construct the query for web retrieval based on the following requirem
 
 ## Content requirements:
 
-    1. The user's question has the highest priority. The generated query should be relevant to the user's question, and the search results should be helpful in answering the question.
-    2. The query should be directly searchable by the browser. Therefore, it should be concise, composed of keywords, not complete sentences, and avoid unnecessary punctuation.
+    1. The query should be directly searchable by the browser. Therefore, it should be concise, composed of keywords, not complete sentences, and avoid unnecessary punctuation.
+    2. The information used in the query must be something you are certain of or mentioned in the user question.
     3. Do not answer the question directly.
-    4. Do not add any explanations, quotes, numbering, or multiple options.
 
 ## Construction guidelines:
 
     ** 1. Understand the question:**
-        Identify the user's requirements based on the question. If the user's question is very simple, or a question about basic common sense, or if the user explicitly asks you not to refer to the image or images, you can directly construct the query based on the user's question and skip the following steps.
+        Identify the user's requirements based on the question.
 
     ** 2. Understanding the image or images:**
-        Identify the parts of the image that are relevant or helpful to the user's question. If the content of some images is completely unrelated to the user's question, or if some images are too unclear to interpret, prioritize constructing the query based on the user's question alone, ignoring any irrelevant or unrecognizable elements in the image.
-
-        If the user's question is closely related to the image or images, the query should include the most visible entities, OCR text if any, landmarks, brands, materials, or domain terms that help retrieval.
-
-    ** 3. Handle current/latest factoid questions:**
-        If the question asks for a recent, latest, current, today/yesterday, last, most recent, final score, result, latest release, current price, current schedule, or similar time-sensitive factual value, build a query aimed at proving the current/latest fact instead of finding any related article.
-
-        The query should include:
-        - the target entity identified from the image and question,
-        - the event or fact type being requested,
-        - freshness/completion words such as latest, most recent, last, current, today, yesterday, completed, final score, result, official, or source-specific equivalents,
-        - structured result page terms when useful, such as schedule, results, box score, standings, price, quote, market data, releases, official site, ESPN, NBA.com, Flashscore, Reuters, SEC filing, product page, or other relevant data-source terms.
-
-        For current/latest factoid questions, the query must include at least one recency/completion term and at least one result-page/source term. For sports final-score questions, include the team/player entity plus query terms like latest completed game final score schedule results, or latest/last, completed, final score, schedule, results, box score, or equivalent Chinese terms such as 最近一场, 已结束, 正式比赛, 最终比分, 赛程, 结果. For current price questions, include query terms like current stock price quote market data official. Do not generate a vague query like "latest game score" when the user needs the most recent completed event.
-
-    ** 4. Construct query: **
-        Based on the information you get above, construct the query.
+        Identify the parts of the image that are relevant or helpful to the user's question.
+        
+    ** 3. Construct query:**
+        You must ensure that the information you use to construct your query is trustworthy. Prioritize using reliable information such as events, awards, competitions and years to construct queries. If the image involves a person, do not assume their name or recognize them unless they are extremely famous (such as a national president).
 '''
+
+    entity_guided_web_prompt_en = '''You are building a web search query for a visual RAG pipeline.
+
+You are about to be given the user's question, one or more images, and a small list of likely entity candidates extracted from the image.
+
+The user question is:
+"{question}"
+
+Entity candidates:
+{entity_candidates}
+
+You should construct the query for web retrieval based on the following requirements:
+
+## Overall data format requirements:
+
+    You should output only a single line search query.
+
+## Content requirements:
+
+    1. The search results should be helpful in answering the question.
+    2. Use the entity candidates as retrieval hints. Prefer the most plausible candidate, but if the top candidates are visually close, you may include 1-2 strong aliases or alternatives in the same query.
+    3. The query should be concise, composed of keywords, not complete sentences, and avoid unnecessary punctuation.
+    4. Do not answer the question directly.
+    5. Do not add any explanations, quotes, numbering, or multiple options.
+
+## Construction guidelines:
+
+    ** 1. Choose the retrieval anchor: **
+        Decide which candidate entity is most useful as the anchor for search. If the question is about a company, award or eventkeep the entity and the requested relation close together in the query.
+
+    ** 2. Handle ambiguity carefully: **
+        If image recognition is uncertain, include the strongest candidate plus one short alias or alternative name that would help search engines find the right entity. Do not include a long list of guesses.
+
+    ** 3. Construct query: **
+        Based on the information above, construct one search query.
+        
+The generated search query:'''
 
     freshness_prompt_en = """You are choosing a web-search freshness parameter for a visual RAG pipeline. This parameter controls the time range for the network search.
 
@@ -105,26 +160,42 @@ The generated search query is:
 Current time:
 {current_time}
 
-Selection guidance:
-1. If the user explicitly specifies a time range, strictly follow the user's requirements.
-2. Use "oneDay" for breaking news, live events, today/yesterday, current prices, current schedules, or very time-sensitive facts.
-3. If the original user question asks for a latest/current/recent factual value, prefer a fresh range even if the generated query is broad. Use "oneDay" for current prices, latest scores/results, today's data, yesterday's data, current schedules, or latest completed events that can change daily.
-4. Use "oneWeek" for recent events, newly released products, recent announcements, latest releases, most recent completed games/events, or questions likely to change within days when "oneDay" may be too narrow.
-5. For "most recent game", "last completed match", "latest final score", or similar completed-event questions, use the original user question and current time to choose "oneDay" or "oneWeek"; do not choose a broad range only because the query contains stable entity names.
-6. Use "oneMonth" for recent but not daily-changing topics.
-7. Use "oneYear" for topics where information from the past year is enough and older content may be stale.
-8. Use "noLimit" for stable topics such as landmarks, historical facts, general explanations, definitions, or timeless visual identification.
-9. Return only one of: oneDay, oneWeek, oneMonth, oneYear, noLimit.
+Task:
+Choose the freshness window that is most likely to retrieve the best evidence for answering the question.
+
+Think about:
+1. How quickly the target fact is likely to change.
+2. Whether the user needs the newest available result or just a recent enough one.
+3. Whether a narrow freshness filter might accidentally hide the best evidence.
+4. Whether the question is about a completed event, an ongoing situation, a product release, a recent award, or a stable fact.
+
+Guidance:
+1. If the user explicitly gives a time range, follow it as closely as possible.
+2. Use "oneDay" when the fact is extremely time-sensitive and usually changes within hours or from day to day.
+   Examples: breaking news, live events, today's result, yesterday's score, current price, current schedule.
+3. Use "oneWeek" when the question is recent and freshness matters, but the best evidence may come from the last several days rather than only the last day.
+   Examples: latest completed game, recent award winner, newly announced release, recent product launch, recent official statement.
+4. Use "oneMonth" when the user wants something recent/current-ish, but the fact does not usually change every day and a slightly wider search improves recall.
+   Examples: recent appointments, recent releases, seasonal awards, recent event outcomes, currently promoted products.
+5. Use "oneYear" when the answer is tied to a specific recent year, season, edition, or award cycle, and older evidence is likely stale but same-year evidence is useful.
+6. Use "noLimit" for stable, historical, background, or identification questions where older sources may still be valid.
+7. Do not mechanically choose a narrow window just because the query contains words like "latest", "winner", "official", or a year.
+8. For completed-event questions, prefer the smallest window that is still likely to contain the final reliable evidence. If you are unsure between "oneDay" and "oneWeek", prefer "oneWeek". If you are unsure between "oneWeek" and "oneMonth", prefer "oneWeek" for clearly recent events and "oneMonth" otherwise.
+9. For yearly awards, festivals, sports seasons, and contests, consider whether same-year evidence may appear across multiple days or weeks. Do not over-narrow the filter if that would likely miss the official result page.
+10. Return only one of: oneDay, oneWeek, oneMonth, oneYear, noLimit.
 """
 
     sufficiency_prompt_en = '''You are helping with a visual RAG QA progress.
 
-You are about to be given the user's question, the user's visual input (image or images), and the retrieved context we have so far.
+You are about to be given the user's question, the user's visual input (image or images), a short list of entity candidates extracted from the image, and the retrieved context we have so far.
 
 You need to judge whether the retrieved context is sufficient to answer the user the question.
 
 User question:
 {question}
+
+Entity candidates:
+{entity_candidates}
 
 Retrieved context:
 {context}
@@ -147,10 +218,23 @@ You should generate output based on the following steps:
 
     If the user's question is closely related to some images, refer to the retrieved context to see if you have enough information to understand the images clearly. If yes for all related images, output the JSON object whose "judgement" is "True" and skip all the steps afterwards.
 
-** 3. Construct addition:**
-    If you can not understand some of the related images, generate a single-line web browser query to fetch the information you lack, and put the query you generate in the JSON output.
+** 3. Identify the answer slot and the best retrieval anchor:**
+    Determine the final fact slot that the question asks for, such as award_name, winning_song, company_name, represented_country, product_line, game_title, event_result, or role_title.
+    Review the entity candidates and decide which candidate is the best retrieval anchor for filling that slot.
+    If one candidate is clearly the most plausible, stay with that candidate unless the retrieved context strongly proves it is wrong.
+    Do not drift to a different award, category, entity, or sub-question just because it appears in the current context.
 
-    Try to fetch all the lack information you need with one query. If you can not fetch everything with one query, ONLY put one query in the output, do not put all of them in the output.
+** 4. Judge sufficiency by slot completion, not by topical overlap:**
+    Return "YES" only when the current context is sufficient to fill the exact answer slot asked in the question for the correct target entity or event.
+
+** 5. Construct addition:**
+    If the context is insufficient, generate a single-line web browser query that targets the missing slot for the best candidate.
+    The new query must NOT repeat or trivially paraphrase any previously tried query listed below:
+    {previous_queries}
+    
+    If earlier queries already searched the same anchor + slot combination, change the query by adding a more specific target such as the exact category, winning work, official source, organization, or event-specific wording.
+
+    Try to fetch the most important missing information with one targeted query.
 '''
 
     wikipedia_prompt_en = """You are building a Wikipedia search query for a visual RAG pipeline.

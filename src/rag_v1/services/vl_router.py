@@ -13,43 +13,13 @@ from rag_v1.timing import get_active_timing
 
 
 PROMPT_QUERY = prompts.web_prompt_en
+PROMPT_ENTITY_CANDIDATES = prompts.entity_candidates_prompt_en
+PROMPT_ENTITY_GUIDED_QUERY = prompts.entity_guided_web_prompt_en
 PROMPT_ANSWER = prompts.answer_prompt_en
 PROMPT_NO_RAG_ANSWER = prompts.no_rag_prompt_en
 PROMPT_FRESHNESS = prompts.freshness_prompt_en
 PROMPT_SUFFICIENCY = prompts.sufficiency_prompt_en
 VALID_FRESHNESS_VALUES = {"oneDay", "oneWeek", "oneMonth", "oneYear", "noLimit"}
-CURRENT_FACTOID_TERMS = (
-    "最近",
-    "最新",
-    "当前",
-    "今日",
-    "今天",
-    "昨天",
-    "最近一场",
-    "最终比分",
-    "得分",
-    "last",
-    "latest",
-    "most recent",
-    "current",
-    "today",
-    "yesterday",
-    "final score",
-    "result",
-)
-SPORT_RESULT_TERMS = (
-    "比分",
-    "得分",
-    "比赛",
-    "正式比赛",
-    "final score",
-    "score",
-    "result",
-    "game",
-    "match",
-)
-PRICE_TERMS = ("价格", "股价", "报价", "price", "stock", "quote")
-RELEASE_TERMS = ("发布", "发行", "release", "released", "launch")
 
 oai_config = {
     "apikey": CHAT_API_CONFIG.api_key,
@@ -64,66 +34,210 @@ oai_config = {
 api_session = requests.Session()
 
 
-def _contains_any(text: str, terms: Sequence[str]) -> bool:
-    lowered = text.lower()
-    return any(term.lower() in lowered for term in terms)
+def _iter_json_objects(response_text: str) -> List[Dict[str, object]]:
+    decoder = json.JSONDecoder()
+    objects: List[Dict[str, object]] = []
+    for match in re.finditer(r"\{", response_text):
+        try:
+            payload, _ = decoder.raw_decode(response_text[match.start():])
+        except json.JSONDecodeError:
+            continue
+        if isinstance(payload, dict):
+            objects.append(payload)
+    return objects
 
 
-def _query_contains_cjk(query: str) -> bool:
-    return any("\u4e00" <= char <= "\u9fff" for char in query)
+def _normalize_candidate_text(value: object) -> str:
+    return str(value or "").strip()
 
 
-def _append_missing_terms(query: str, terms: Sequence[str]) -> str:
-    augmented = query.strip()
-    lowered = augmented.lower()
-    missing_terms = [term for term in terms if term.lower() not in lowered]
-    if missing_terms:
-        augmented = f"{augmented} {' '.join(missing_terms)}".strip()
-    return augmented
+def extract_entity_candidates(response_text: str, max_candidates: int = 3) -> List[Dict[str, object]]:
+    for payload in _iter_json_objects(response_text):
+        raw_candidates = payload.get("candidates")
+        if not isinstance(raw_candidates, list):
+            continue
+
+        candidates: List[Dict[str, object]] = []
+        for item in raw_candidates:
+            if not isinstance(item, dict):
+                continue
+
+            name = _normalize_candidate_text(item.get("name"))
+            if not name:
+                continue
+
+            aliases: List[str] = []
+            raw_aliases = item.get("aliases")
+            if isinstance(raw_aliases, list):
+                for alias in raw_aliases:
+                    normalized_alias = _normalize_candidate_text(alias)
+                    if (
+                        normalized_alias
+                        and normalized_alias.lower() != name.lower()
+                        and normalized_alias not in aliases
+                    ):
+                        aliases.append(normalized_alias)
+
+            try:
+                confidence = float(item.get("confidence", 0.0))
+            except (TypeError, ValueError):
+                confidence = 0.0
+
+            candidates.append(
+                {
+                    "name": name,
+                    "type": _normalize_candidate_text(item.get("type")),
+                    "aliases": aliases,
+                    "confidence": max(0.0, min(1.0, confidence)),
+                    "reason": _normalize_candidate_text(item.get("reason")),
+                    "missing_slot": _normalize_candidate_text(item.get("missing_slot")),
+                }
+            )
+
+        if candidates:
+            candidates.sort(
+                key=lambda candidate: (
+                    float(candidate.get("confidence") or 0.0),
+                    len(str(candidate.get("name") or "")),
+                ),
+                reverse=True,
+            )
+            return candidates[:max_candidates]
+
+    return []
 
 
-def _normalize_query_spacing(query: str) -> str:
-    if _query_contains_cjk(query) and not re.search(r"[A-Za-z]", query):
-        return re.sub(r"(?<=[\u4e00-\u9fff])\s+(?=[\u4e00-\u9fff])", "", query)
-    return query
+def _format_entity_candidates_for_prompt(candidates: Sequence[Dict[str, object]]) -> str:
+    if not candidates:
+        return "- none"
+
+    lines: List[str] = []
+    for index, candidate in enumerate(candidates, start=1):
+        name = str(candidate.get("name") or "").strip()
+        entity_type = str(candidate.get("type") or "").strip() or "unknown"
+        confidence = float(candidate.get("confidence") or 0.0)
+        aliases = [
+            str(alias).strip()
+            for alias in (candidate.get("aliases") or [])
+            if str(alias).strip()
+        ]
+        reason = str(candidate.get("reason") or "").strip()
+        missing_slot = str(candidate.get("missing_slot") or "").strip()
+
+        line = f"- Candidate {index}: name={name}; type={entity_type}; confidence={confidence:.2f}"
+        if aliases:
+            line += f"; aliases={', '.join(aliases[:3])}"
+        if reason:
+            line += f"; reason={reason}"
+        if missing_slot:
+            line += f"; missing_slot={missing_slot}"
+        lines.append(line)
+    return "\n".join(lines)
 
 
-def _augment_current_factoid_query(query: str, question: str) -> str:
-    stripped_query = query.strip()
-    if not stripped_query:
-        return stripped_query
+def _format_previous_queries_for_prompt(previous_queries: Sequence[str]) -> str:
+    normalized_queries = [
+        " ".join(str(query or "").strip().split())
+        for query in previous_queries
+        if " ".join(str(query or "").strip().split())
+    ]
+    if not normalized_queries:
+        return "- none"
+    return "\n".join(f"- {query}" for query in normalized_queries)
 
-    combined_text = f"{question} {stripped_query}"
-    if not _contains_any(combined_text, CURRENT_FACTOID_TERMS):
-        return stripped_query
 
-    use_chinese_terms = _query_contains_cjk(stripped_query)
-    if _contains_any(combined_text, SPORT_RESULT_TERMS):
-        terms = (
-            ("最近一场", "已结束", "最终比分", "赛程", "结果", "战报")
-            if use_chinese_terms
-            else ("latest", "completed", "final score", "schedule", "results", "box score")
+def _dedupe_queries(queries: Sequence[str], max_queries: int = 3) -> List[str]:
+    deduped: List[str] = []
+    seen = set()
+    for query in queries:
+        normalized = " ".join(str(query or "").strip().split())
+        if not normalized:
+            continue
+        signature = normalized.lower()
+        if signature in seen:
+            continue
+        seen.add(signature)
+        deduped.append(normalized)
+        if len(deduped) >= max_queries:
+            break
+    return deduped
+
+
+def _candidate_variants(candidate: Dict[str, object]) -> List[Dict[str, object]]:
+    variants = [candidate]
+    aliases = [
+        str(alias).strip()
+        for alias in (candidate.get("aliases") or [])
+        if str(alias).strip()
+    ]
+    for alias in aliases[:1]:
+        variants.append(
+            {
+                "name": alias,
+                "type": candidate.get("type", ""),
+                "aliases": [],
+                "confidence": candidate.get("confidence", 0.0),
+                "reason": candidate.get("reason", ""),
+            }
         )
-        return _normalize_query_spacing(_append_missing_terms(stripped_query, terms))
+    return variants
 
-    if _contains_any(combined_text, PRICE_TERMS):
-        terms = (
-            ("当前", "价格", "官方", "行情", "报价")
-            if use_chinese_terms
-            else ("current", "price", "quote", "market data", "official")
+
+def generate_entity_candidates(
+    img_paths: Sequence[Union[str, Path]],
+    question: str,
+    debug: bool = False,
+) -> List[Dict[str, object]]:
+    if not img_paths:
+        return []
+
+    prompt = PROMPT_ENTITY_CANDIDATES.format(question=question)
+    response_text = call_api(prompt=prompt, img_paths=img_paths, temperature=0.0)
+    candidates = extract_entity_candidates(response_text)
+    if debug:
+        print(f"-----------------------------------\nEntity candidates raw response:\n{response_text}")
+        print(f"Parsed entity candidates:\n{json.dumps(candidates, ensure_ascii=False, indent=2)}")
+    return candidates
+
+
+def generate_search_queries(
+    img_paths: Sequence[Union[str, Path]],
+    question: str,
+    debug: bool = False,
+    max_queries: int = 3,
+    entity_candidates: Optional[Sequence[Dict[str, object]]] = None,
+) -> List[str]:
+    candidates = list(entity_candidates) if entity_candidates is not None else generate_entity_candidates(
+        img_paths=img_paths,
+        question=question,
+        debug=debug,
+    )
+
+    candidate_queries: List[str] = []
+    if candidates:
+        for candidate in candidates[:max_queries]:
+            focused_candidates = _candidate_variants(candidate)
+            focused_prompt = PROMPT_ENTITY_GUIDED_QUERY.format(
+                question=question,
+                entity_candidates=_format_entity_candidates_for_prompt(focused_candidates),
+            )
+            candidate_queries.append(
+                call_api(prompt=focused_prompt, img_paths=img_paths, temperature=0.1)
+            )
+
+    if not candidate_queries:
+        candidate_queries.append(
+            call_api(
+                prompt=PROMPT_QUERY.format(question=question),
+                img_paths=img_paths,
+                temperature=0.1,
+            )
         )
-        return _normalize_query_spacing(_append_missing_terms(stripped_query, terms))
 
-    if _contains_any(combined_text, RELEASE_TERMS):
-        terms = (
-            ("最新", "发布", "官方", "日期")
-            if use_chinese_terms
-            else ("latest", "release", "official", "date")
-        )
-        return _normalize_query_spacing(_append_missing_terms(stripped_query, terms))
-
-    terms = ("最新", "官方") if use_chinese_terms else ("latest", "official")
-    return _normalize_query_spacing(_append_missing_terms(stripped_query, terms))
+    queries = _dedupe_queries(candidate_queries, max_queries=max_queries)
+    if debug:
+        print(f"Generated search queries:\n{json.dumps(queries, ensure_ascii=False, indent=2)}")
+    return queries
 
 
 def _encode_image(image_path: Union[str, Path]) -> str:
@@ -250,10 +364,17 @@ def call_api(
 def generate_search_query(
     img_paths: Sequence[Union[str, Path]],
     question: str,
+    debug: bool = False,
+    entity_candidates: Optional[Sequence[Dict[str, object]]] = None,
 ) -> str:
-    prompt = PROMPT_QUERY.format(question=question)
-    query = call_api(prompt=prompt, img_paths=img_paths, temperature=0.1)
-    return _augment_current_factoid_query(query=query, question=question)
+    queries = generate_search_queries(
+        img_paths=img_paths,
+        question=question,
+        debug=debug,
+        max_queries=1,
+        entity_candidates=entity_candidates,
+    )
+    return queries[0] if queries else ""
 
 
 def choose_search_freshness(
@@ -348,9 +469,13 @@ def judge_context_sufficiency(
     question: str,
     context: str,
     debug: bool = False,
+    entity_candidates: Optional[Sequence[Dict[str, object]]] = None,
+    previous_queries: Optional[Sequence[str]] = None,
 ) -> str:
     prompt = PROMPT_SUFFICIENCY.format(
         question=question,
+        entity_candidates=_format_entity_candidates_for_prompt(entity_candidates or []),
+        previous_queries=_format_previous_queries_for_prompt(previous_queries or []),
         context=context,
     )
     if debug:

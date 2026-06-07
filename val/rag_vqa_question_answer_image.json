@@ -1,0 +1,212 @@
+[
+  {
+    "question": "Which award did the person in the image win at the 2026 Cannes Film Festival?",
+    "answer": "Palme d'Or",
+    "image": "vqa/1.jpg"
+  },
+  {
+    "question": "Which country did the singer in the image represent when winning the 2026 Eurovision Song Contest?",
+    "answer": "Bulgaria",
+    "image": "vqa/2.jpg"
+  },
+  {
+    "question": "Who was the 2025–26 NBA regular season MVP?",
+    "answer": "Shai Gilgeous-Alexander",
+    "image": "vqa/3.jpg"
+  },
+  {
+    "question": "Which major award did the player in the image win in the 2025–26 NBA season?",
+    "answer": "Defensive Player of the Year",
+    "image": "vqa/4.jpg"
+  },
+  {
+    "question": "What honor did the player in the image receive in the 2026 NBA Western Conference Finals?",
+    "answer": "MVP",
+    "image": "vqa/5.jpg"
+  },
+  {
+    "question": "At which music awards did the person in the image receive the Songwriter of the Year honor in 2026?",
+    "answer": "Ivor Novello Awards",
+    "image": "vqa/6.jpg"
+  },
+  {
+    "question": "Which Apple collection released in May 2026 does the watch in the image belong to?",
+    "answer": "Pride Collection",
+    "image": "vqa/7.jpg"
+  },
+  {
+    "question": "Which eyewear brands did Google partner with for the smart glasses in the image?",
+    "answer": "Gentle Monster and Warby Parker",
+    "image": "vqa/8.jpg"
+  },
+  {
+    "question": "Which song earned the person in the image the Best Contemporary Song award at the 2026 Ivor Novello Awards?",
+    "answer": "I Stand on the Line",
+    "image": "vqa/9.jpg"
+  },
+  {
+    "question": "What is the name of the game in the image that won Best Game at the 2026 BAFTA Games Awards?",
+    "answer": "Clair Obscur: Expedition 33",
+    "image": "vqa/10.jpg"
+  },
+  {
+    "question": "Which Pulitzer Prize category did the book in the image win in 2026?",
+    "answer": "Pulitzer Prize for Fiction",
+    "image": "vqa/11.jpg"
+  },
+  {
+    "question": "Which company released the product in the image during COMPUTEX 2026?",
+    "answer": "NVIDIA",
+    "image": "vqa/12.jpg"
+  },
+  {
+    "question": "Which company is the person in the image currently the CEO of?",
+    "answer": "Microsoft",
+    "image": "vqa/13.jpg"
+  },
+  {
+    "question": "The person in the image is the founder and CEO of which company?",
+    "answer": "NVIDIA",
+    "image": "vqa/14.jpg"
+  },
+  {
+    "question": "Which award did the person in the image win in the 2026 UEFA Champions League final?",
+    "answer": "Player of the Match",
+    "image": "vqa/15.jpg"
+  },
+  {
+    "question": "Which company released the supercar in the image?",
+    "answer": "Audi",
+    "image": "vqa/16.jpg"
+  },
+  {
+    "question": "Which company launched the compact electric vehicle in the image?",
+    "answer": "Honda",
+    "image": "vqa/17.jpg"
+  },
+  {
+    "question": "Which company showcased the design study car in the image?",
+    "answer": "BMW Group",
+    "image": "vqa/18.jpg"
+  },
+  {
+    "question": "Which company released the new headphones in the image in 2026?",
+    "answer": "Sony",
+    "image": "vqa/19.jpg"
+  },
+  {
+    "question": "Which company released the clip-on headphones in the image in 2026?",
+    "answer": "Shokz",
+    "image": "vqa/20.jpg"
+  },
+  {
+    "question": "Which company launched the product in the image?",
+    "answer": "Nintendo",
+    "image": "vqa/21.jpg"
+  },
+  {
+    "question": "Which company does the game console in the image belong to?",
+    "answer": "Sony",
+    "image": "vqa/22.jpg"
+  },
+  {
+    "question": "Which city is the building in the image located in?",
+    "answer": "Paris",
+    "image": "vqa/23.jpg"
+  },
+  {
+    "question": "Which country is the statue in the image located in?",
+    "answer": "United States",
+    "image": "vqa/24.jpg"
+  },
+  {
+    "question": "Which country is the building in the image located in?",
+    "answer": "India",
+    "image": "vqa/25.jpg"
+  },
+  {
+    "question": "Who is the artist of the painting in the image?",
+    "answer": "Leonardo da Vinci",
+    "image": "vqa/26.jpg"
+  },
+  {
+    "question": "Who is the artist of the painting in the image?",
+    "answer": "Vincent van Gogh",
+    "image": "vqa/27.jpg"
+  },
+  {
+    "question": "Which country does the animal in the image mainly live in?",
+    "answer": "Australia",
+    "image": "vqa/28.jpg"
+  },
+  {
+    "question": "Why does the building in the image lean?",
+    "answer": "Mainly because its foundation is not deep enough and the soil underneath is soft and uneven.",
+    "image": "vqa/29.jpg"
+  },
+  {
+    "question": "What is the name of the Solar System planet in the image known for its prominent rings?",
+    "answer": "Saturn",
+    "image": "vqa/30.jpg"
+  },
+  {
+    "question": "What kind of human information is mainly carried by the double-helix structure in the image?",
+    "answer": "Genetic information",
+    "image": "vqa/31.jpg"
+  },
+  {
+    "question": "Which person is the medal in the image named after?",
+    "answer": "Alfred Nobel",
+    "image": "vqa/32.jpg"
+  },
+  {
+    "question": "What fruit is on the table in the image?",
+    "answer": "Apple",
+    "image": "vqa/33.jpg"
+  },
+  {
+    "question": "What color is the cat in the image?",
+    "answer": "Orange",
+    "image": "vqa/34.jpg"
+  },
+  {
+    "question": "How many dogs are in the image?",
+    "answer": "Six",
+    "image": "vqa/35.jpg"
+  },
+  {
+    "question": "What color is the traffic light in the image?",
+    "answer": "Red",
+    "image": "vqa/36.jpg"
+  },
+  {
+    "question": "What vehicle is the person in the image using?",
+    "answer": "Bicycle",
+    "image": "vqa/37.jpg"
+  },
+  {
+    "question": "What drink is in the cup in the image?",
+    "answer": "Coffee",
+    "image": "vqa/38.jpg"
+  },
+  {
+    "question": "What is the girl holding in the image?",
+    "answer": "A book",
+    "image": "vqa/39.jpg"
+  },
+  {
+    "question": "What sport is the child playing in the image?",
+    "answer": "Soccer",
+    "image": "vqa/40.jpg"
+  },
+  {
+    "question": "What food is on the plate in the image?",
+    "answer": "Pizza",
+    "image": "vqa/41.jpg"
+  },
+  {
+    "question": "What animal is on the bed in the image?",
+    "answer": "Dog",
+    "image": "vqa/42.jpg"
+  }
+]

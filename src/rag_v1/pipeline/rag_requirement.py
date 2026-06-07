@@ -408,6 +408,7 @@ def route_with_sufficiency_prompt(
 ) -> RouteResult:
     prompt = prompts.sufficiency_prompt_en.format(
         question=question or "",
+        entity_candidates="- none",
         context=SUFFICIENCY_ROUTER_CONTEXT,
     )
 
@@ -485,8 +486,7 @@ def _direct_answer_context(reason: str, extra_note: Optional[str] = None) -> str
     lines = [
         "No external web retrieval was performed.",
         reason.strip(),
-        "Answer using the visual inputs and the user question only.",
-        "If the image alone is insufficient, say so explicitly instead of guessing.",
+        "Answer using the visual inputs and the user question only."
     ]
     if extra_note:
         lines.append(extra_note.strip())

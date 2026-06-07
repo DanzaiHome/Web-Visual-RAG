@@ -3,6 +3,7 @@ import io
 import unittest
 
 from rag_v1.pipeline.rag_pipeline import (
+    _context_doc_urls,
     _evidence_score_breakdown,
     _select_diverse_chunks,
     aggregate_context,
@@ -97,13 +98,13 @@ class PipelineContextTests(unittest.TestCase):
                     "score": 0.2,
                     "chunk_id": 0,
                     "content": "Summary fallback chunk.",
-                    "content_source": "bocha_summary_fallback",
+                    "content_source": "search_result_snippet_fallback",
                     "web_fetch_status": "http_error",
                 }
             ],
         )
 
-        self.assertIn("Evidence source: Bocha summary fallback, fetch_status=http_error", context)
+        self.assertIn("Evidence source: Search-result snippet fallback, fetch_status=http_error", context)
 
     def test_aggregate_context_marks_page_dates_as_metadata(self) -> None:
         context = aggregate_context(
@@ -137,7 +138,7 @@ class PipelineContextTests(unittest.TestCase):
     def test_quality_evidence_filter_rescues_web_body_when_only_weak_fallback_survives(self) -> None:
         weak_fallback = {
             "url": "https://example.com/dynamic",
-            "content_source": "bocha_summary_fallback",
+            "content_source": "search_result_snippet_fallback",
             "web_fetch_status": "empty_content",
             "image_match_status": "no_images",
             "full_content": "Search summary only.",
@@ -164,7 +165,7 @@ class PipelineContextTests(unittest.TestCase):
     def test_quality_evidence_filter_keeps_matched_fallback_when_no_web_body_exists(self) -> None:
         matched_fallback = {
             "url": "https://example.com/snippet",
-            "content_source": "bocha_summary_fallback",
+            "content_source": "search_result_snippet_fallback",
             "web_fetch_status": "http_error",
             "image_match_status": "matched",
             "full_content": "A useful matched search summary. " * 20,
@@ -176,7 +177,6 @@ class PipelineContextTests(unittest.TestCase):
         )
 
         self.assertEqual(selected, [matched_fallback])
-
     def test_evidence_score_breakdown_rewards_quality_source_freshness_and_strong_image(self) -> None:
         doc = {
             "url": "https://www.whitehouse.gov/briefing-room/statements-releases/fact-sheet",
@@ -212,6 +212,36 @@ class PipelineContextTests(unittest.TestCase):
             "https://b.example.com/story",
         ])
 
+    def test_context_doc_urls_returns_unique_grouped_urls(self) -> None:
+        urls = _context_doc_urls(
+            [
+                {
+                    "url": "https://example.com/story?utm_source=search",
+                    "canonical_url": "https://example.com/story",
+                    "chunk_id": 0,
+                    "content": "First chunk.",
+                },
+                {
+                    "url": "https://example.com/story#section",
+                    "canonical_url": "https://example.com/story",
+                    "chunk_id": 1,
+                    "content": "Second chunk.",
+                },
+                {
+                    "url": "https://example.com/other",
+                    "chunk_id": 0,
+                    "content": "Other chunk.",
+                },
+            ]
+        )
+
+        self.assertEqual(
+            urls,
+            [
+                "https://example.com/story",
+                "https://example.com/other",
+            ],
+        )
 
 if __name__ == "__main__":
     unittest.main()

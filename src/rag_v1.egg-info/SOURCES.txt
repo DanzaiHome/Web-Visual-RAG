@@ -26,13 +26,17 @@ src/rag_v1/pipeline/recall_session_cache.py
 src/rag_v1/retrieval/__init__.py
 src/rag_v1/retrieval/chunk_extractor.py
 src/rag_v1/services/__init__.py
+src/rag_v1/services/bocha_reranker.py
 src/rag_v1/services/clip_server.py
 src/rag_v1/services/image_checker.py
 src/rag_v1/services/text_retrieval_server.py
 src/rag_v1/services/vl_router.py
 src/rag_v1/services/web_page_fetcher.py
 src/rag_v1/services/web_search.py
+tests/test_bocha_reranker.py
 tests/test_chunk_extractor.py
+tests/test_entity_query_generation.py
+tests/test_eval_baseline.py
 tests/test_image_checker.py
 tests/test_no_rag_mode.py
 tests/test_pipeline_context.py

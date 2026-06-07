@@ -131,7 +131,7 @@ class WebPageFetcherTests(unittest.TestCase):
         self.assertEqual(CountingHandler.request_count, 1)
         self.assertEqual(first.content_hash, second.content_hash)
 
-    def test_web_search_uses_fetched_body_before_bocha_summary(self) -> None:
+    def test_web_search_uses_fetched_body_before_search_snippet(self) -> None:
         full_text = (
             "This is a fetched webpage body with real article evidence. "
             "It is intentionally longer than the search summary so the RAG "
@@ -159,32 +159,16 @@ class WebPageFetcherTests(unittest.TestCase):
         searcher = WebSearcher(api_key="test")
         searcher.page_fetcher = FakeFetcher()
         searcher.search_engine = lambda **kwargs: {
-            "data": {
-                "webPages": {
-                    "value": [
-                        {
-                            "id": "1",
-                            "name": "Bocha Title",
-                            "url": "https://example.com/story?utm_source=x",
-                            "summary": "Short Bocha summary.",
-                            "snippet": "Short snippet.",
-                            "siteName": "",
-                        }
-                    ]
-                },
-                "images": {
-                    "value": [
-                        {
-                            "hostPageUrl": "https://example.com/story?utm_source=x",
-                            "contentUrl": "https://example.com/static/app.js",
-                        },
-                        {
-                            "hostPageUrl": "https://example.com/story?utm_source=x",
-                            "contentUrl": "https://example.com/gallery/photo.jpg",
-                        },
-                    ]
-                },
-            }
+            "organic_results": [
+                {
+                    "position": 1,
+                    "title": "SerpApi Title",
+                    "link": "https://example.com/story?utm_source=x",
+                    "snippet": "Short snippet.",
+                    "source": "",
+                    "thumbnail": "https://example.com/gallery/photo.jpg",
+                }
+            ]
         }
 
         docs = searcher.search("query", candidate_k=1, fetch_pages=True)
@@ -193,12 +177,71 @@ class WebPageFetcherTests(unittest.TestCase):
         self.assertEqual(docs[0]["content_source"], "web_page")
         self.assertEqual(docs[0]["name"], "Fetched Article")
         self.assertIn("real article evidence", docs[0]["full_content"])
-        self.assertEqual(docs[0]["summary"], "Short Bocha summary.")
+        self.assertEqual(docs[0]["summary"], "Short snippet.")
         self.assertEqual(docs[0]["web_fetch_quality_score"], 0.8)
         self.assertEqual(
             docs[0]["image_urls"],
             ["https://example.com/gallery/photo.jpg", "https://example.com/hero.jpg"],
         )
+
+    def test_web_search_supports_bocha_provider(self) -> None:
+        searcher = WebSearcher(api_key="test", provider="bocha")
+        searcher.search_engine = lambda **kwargs: {
+            "data": {
+                "webPages": {
+                    "value": [
+                        {
+                            "id": "1",
+                            "name": "Bocha Title",
+                            "url": "https://example.com/story?utm_source=x",
+                            "summary": "Bocha summary.",
+                            "snippet": "Bocha snippet.",
+                            "displayUrl": "example.com/story",
+                            "siteName": "Example",
+                        }
+                    ]
+                },
+                "images": {
+                    "value": [
+                        {
+                            "hostPageUrl": "https://example.com/story?utm_source=x",
+                            "contentUrl": "https://example.com/gallery/photo.jpg",
+                        }
+                    ]
+                },
+            }
+        }
+
+        docs = searcher.search("query", candidate_k=1, fetch_pages=False)
+
+        self.assertEqual(len(docs), 1)
+        self.assertEqual(docs[0]["name"], "Bocha Title")
+        self.assertEqual(docs[0]["content_source"], "bocha_summary")
+        self.assertEqual(docs[0]["summary"], "Bocha summary.")
+        self.assertEqual(docs[0]["image_urls"], ["https://example.com/gallery/photo.jpg"])
+
+    def test_serpapi_no_results_error_is_treated_as_empty_results(self) -> None:
+        class FakeResponse:
+            status_code = 200
+
+            @staticmethod
+            def json() -> dict:
+                return {
+                    "error": "Google hasn't returned any results for this query."
+                }
+
+        searcher = WebSearcher(api_key="test")
+        searcher.session = type(
+            "FakeSession",
+            (),
+            {
+                "get": staticmethod(lambda *args, **kwargs: FakeResponse()),
+            },
+        )()
+
+        result = searcher.search_engine("query", count=1)
+
+        self.assertEqual(result, {"organic_results": []})
 
 
 if __name__ == "__main__":
