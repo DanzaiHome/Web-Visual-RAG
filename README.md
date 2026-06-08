@@ -89,7 +89,7 @@ CV-project/
 │   └── prompts.py             # Prompt templates
 ├── frontend/                  # Vite + React web interface
 ├── tests/                     # Unit tests
-├── tests/                     # Benchmarks and validation
+├── val/                       # Benchmarks and validation
 ├── models/                    # Local model cache
 ├── cache/                     # Session-level retrieval cache
 ├── .cache/                    # Webpage fetch cache
