@@ -33,7 +33,7 @@ An image-grounded web retrieval and question answering system for visual, time-s
     - [Text Retrieval Server](#text-retrieval-server)
     - [Webpage Fetching and Caching](#webpage-fetching-and-caching)
     - [Evidence Ranking](#evidence-ranking)
-  - [X. Testing](#x-testing)
+  - [X. Evaluation](#x-evaluation)
   - [Acknowledgements](#acknowledgements)
 
 ## II. Overview
@@ -44,7 +44,7 @@ This repository contains our Computer Vision course project on theme 5: **Visual
 
 Compared with a plain image QA pipeline or a snippet-only web search baseline, this project emphasizes:
 
-- **Image-aware search formulation**: a visual language model (VLM) generates a retrieval-oriented search query from the user image(s) and question.
+- **Image-aware entity-based search formulation**: a visual language model (VLM) generates a retrieval-oriented search query from the user image(s) and question, foucsing on useful entities based on the question and image(s).
 - **Freshness-aware retrieval**: a separate freshness selection step is introduced to solve time-sensitive questions.
 - **Real webpage fetching**: search results are expanded into full webpage bodies, titles, metadata, and page images.
 - **Quality-aware evidence selection**: the system scores webpages by content quality, listing-page risk, image match, source reliability, and freshness.
@@ -59,20 +59,21 @@ The high-level pipeline is:
 
 1. **Input**: receive one or more images and a question.
 2. **RAG routing**: determine whether the question should use web retrieval or can be answered directly without RAG.
-3. **Query generation**: if RAG is necessary, use a VLM to generate a web search query.
-4. **Freshness selection**: choose a retrieval freshness range for current or recent questions.
-5. **Web search**: retrieve candidate URLs from the search API.
-6. **Webpage fetching**: fetch real webpage bodies, page images, and metadata.
-7. **Evidence construction**:
+3. **Entity extraction**: if RAG is necessary, use a VLM to extract some candidate entities relative to the question.
+4. **Query generation**: based on the information above, VLM generates web search query or quries.
+5. **Freshness selection**: choose a retrieval freshness range for current or recent questions.
+6. **Web search**: retrieve candidate URLs from the search API.
+7. **Webpage fetching**: fetch real webpage bodies, page images, and metadata.
+8. **Evidence construction**:
    - canonical URL deduplication
    - near-duplicate document suppression
    - page-image matching with CLIP
    - chunk extraction
    - multimodal retrieval
    - multi-signal evidence scoring
-8. **Context aggregation**: organize selected evidence into structured `[Doc n]` blocks.
-9. **Sufficiency check**: decide whether the current evidence is enough; if not, issue an additional retrieval query.
-10. **Answer generation**: produce a grounded answer with citations.
+9. **Context aggregation**: organize selected evidence into structured `[Doc n]` blocks.
+10. **Sufficiency check**: decide whether the current evidence is enough; if not, issue an additional retrieval query.
+11. **Answer generation**: produce a grounded answer with citations.
 
 ## V. Project Structure
 
@@ -88,8 +89,7 @@ CV-project/
 │   └── prompts.py             # Prompt templates
 ├── frontend/                  # Vite + React web interface
 ├── tests/                     # Unit tests
-├── docs/                      # Notes and handoff documents
-├── pictures/                  # Example images
+├── tests/                     # Benchmarks and validation
 ├── models/                    # Local model cache
 ├── cache/                     # Session-level retrieval cache
 ├── .cache/                    # Webpage fetch cache
@@ -337,24 +337,21 @@ Important variables include:
 
 - `IMAGE_MATCH_THRESHOLD`
 
-## X. Testing
+## X. Evaluation
 
-Run the test suite from the repository root:
-
+You can check our validation traces and results in `val/example_results`.
+We run the following commands to get the results displayed in our report.
 ```bash
-pytest
+python val/eval_baseline.py --mode no_rag --trails 1 --model-id qwen3-vl-8b-instruct
+
+python val/eval_baseline.py --mode no_rag --trails 1 --model-id qwen3-vl-plus-2025-12-19
+
+python val/eval_baseline.py --mode full_rag --trails 1 --multimodal-text-weight 0.7 --model-id qwen3-vl-8b-instruct --web-search-provider bocha
+
+python val/eval_baseline.py --mode full_rag --trails 1 --multimodal-text-weight 0.7 --model-id qwen3-vl-30b-a3b-instruct --web-search-provider bocha
+
+python val/eval_baseline.py --mode full_rag --trails 1 --multimodal-text-weight 0.7 --model-id qwen3-vl-235b-a22b-thinking --web-search-provider bocha
 ```
-
-The tests cover key behaviors including:
-
-- webpage fetching and caching
-- canonical URL deduplication
-- chunk extraction
-- temporal prompt behavior
-- image matching
-- no-RAG routing
-- context aggregation and citation formatting
-- session cache behavior
 
 ## Acknowledgements
 

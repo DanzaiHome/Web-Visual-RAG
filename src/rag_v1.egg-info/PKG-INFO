@@ -129,7 +129,7 @@ It requires:
 - Node.js for the frontend
 - API access for:
   - a chat / VLM endpoint compatible with OpenAI Chat Completions
-  - the Bocha web search API
+  - a web search API: `bocha` or `serpapi`
 
 ## VII. Installation & Quick Start
 
@@ -144,7 +144,8 @@ cp .env.example .env
 At minimum, you need:
 
 - `DASHSCOPE_API_KEY` or `CHAT_API_KEY`
-- `BOCHA_API_KEY`
+- `WEB_SEARCH_PROVIDER`
+- the matching provider key: `BOCHA_API_KEY` or `SERPAPI_API_KEY`
 
 The project loads `.env` automatically when importing `rag_v1`.
 
@@ -306,9 +307,19 @@ Important variables include:
 
 ### Web Search
 
+- `WEB_SEARCH_PROVIDER`
 - `BOCHA_API_KEY`
 - `BOCHA_API_URL`
 - `BOCHA_TIMEOUT`
+- `SERPAPI_API_KEY`
+- `SERPAPI_API_URL`
+- `SERPAPI_TIMEOUT`
+- `SERPAPI_ENGINE`
+- `SERPAPI_GOOGLE_DOMAIN`
+- `SERPAPI_GL`
+- `SERPAPI_HL`
+- `SERPAPI_LOCATION`
+- `SERPAPI_NO_CACHE`
 
 ### CLIP Server
 

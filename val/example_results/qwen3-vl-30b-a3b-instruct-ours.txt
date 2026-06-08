@@ -1,0 +1,40 @@
+========================================================================
+Baseline Evaluation Report
+========================================================================
+Mode: full_rag
+Model ID: qwen3-vl-30b-a3b-instruct
+Dataset: /remote-home1/xzhe/projects/new-CV-project/CV-project/val/rag_vqa_question_answer_image.json
+Evaluation Time: 2026-06-08T10:49:00+08:00
+Evaluated Samples: 42
+Output JSON: /remote-home1/xzhe/projects/new-CV-project/CV-project/val/results/eval_baseline_full_rag_20260608T104900.json
+Output Text Report: /remote-home1/xzhe/projects/new-CV-project/CV-project/val/results/eval_baseline_full_rag_20260608T104900.txt
+Judge Model: qwen3.6-flash
+
+Evaluation Configuration
+------------------------------------------------------------------------
+top_k=5
+candidate_k=10
+top_n_images=3
+chunk_size=400
+chunks_per_doc=3
+max_sufficiency_iterations=3
+web_search_provider=bocha
+use_multimodal=True
+multimodal_text_weight=0.7
+trails=1
+offset=0
+limit=all
+
+Summary Metrics
+------------------------------------------------------------------------
+Group                Count    Judge Acc    Avg Latency
+------------------------------------------------------------------------
+overall                 42       85.71%      47.062s
+dynamic_web_qa          22       77.27%      48.034s
+static_vqa              20       95.00%      45.992s
+------------------------------------------------------------------------
+Metric Notes
+------------------------------------------------------------------------
+Judge Acc: binary accuracy from a model-based correctness judge.
+The judge model is fixed to qwen3.6-flash and returns only CORRECT or INCORRECT.
+========================================================================

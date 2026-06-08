@@ -50,7 +50,7 @@ You are about to be given the user's question and one or more images.
 The user question is:
 "{question}"
 
-**Task:**
+## Task:
 1. Infer the most likely visual entity or entities that are relevant to the question.
 2. Focus on companies, products, teams, landmarks, artworks, books, songs, games, events, awards, or other named entities that would help web retrieval.
 3. Prefer candidates that are most useful for answering the specific relation asked in the question. For example, if the question asks about an award, winning song, company, country, role, or collection, choose candidates that best anchor that relation in search.
@@ -58,7 +58,7 @@ The user question is:
 5. For each candidate, identify the most important missing slot that future retrieval should fill, such as award_name, winning_song, company_name, represented_country, product_line, game_title, or event_result.
 6. Do not answer the user's question directly.
 
-**Output requirements:**
+## Output requirements:
 - Return JSON only.
 - Use exactly this schema:
 {{
@@ -96,8 +96,8 @@ You should construct the query for web retrieval based on the following requirem
 
 ## Content requirements:
 
-    1. The query should be directly searchable by the browser. Therefore, it should be concise, composed of keywords, not complete sentences, and avoid unnecessary punctuation.
-    2. The information used in the query must be something you are certain of or mentioned in the user question.
+    1. The query should be directly searchable by the browser. It should be concise, composed of keywords, not complete sentences, and avoid unnecessary punctuation.
+    2. The information used in the query must be something you are certain of or clearly mentioned in the user question.
     3. Do not answer the question directly.
 
 ## Construction guidelines:
@@ -106,10 +106,10 @@ You should construct the query for web retrieval based on the following requirem
         Identify the user's requirements based on the question.
 
     ** 2. Understanding the image or images:**
-        Identify the parts of the image that are relevant or helpful to the user's question.
+        Identify the parts of the image that are easy to recognize and relevant or helpful to the user's question.
         
     ** 3. Construct query:**
-        You must ensure that the information you use to construct your query is trustworthy. Prioritize using reliable information such as events, awards, competitions and years to construct queries. If the image involves a person, do not assume their name or recognize them unless they are extremely famous (such as a national president).
+        You must ensure that the information used to construct the query is trustworthy. Prioritize using reliable information such as events, awards and competitions to construct queries. If the image involves a person, do not assume their name or recognize them unless they are extremely famous (such as a national president).
 '''
 
     entity_guided_web_prompt_en = '''You are building a web search query for a visual RAG pipeline.
@@ -170,19 +170,11 @@ Think about:
 4. Whether the question is about a completed event, an ongoing situation, a product release, a recent award, or a stable fact.
 
 Guidance:
-1. If the user explicitly gives a time range, follow it as closely as possible.
-2. Use "oneDay" when the fact is extremely time-sensitive and usually changes within hours or from day to day.
-   Examples: breaking news, live events, today's result, yesterday's score, current price, current schedule.
-3. Use "oneWeek" when the question is recent and freshness matters, but the best evidence may come from the last several days rather than only the last day.
-   Examples: latest completed game, recent award winner, newly announced release, recent product launch, recent official statement.
-4. Use "oneMonth" when the user wants something recent/current-ish, but the fact does not usually change every day and a slightly wider search improves recall.
-   Examples: recent appointments, recent releases, seasonal awards, recent event outcomes, currently promoted products.
-5. Use "oneYear" when the answer is tied to a specific recent year, season, edition, or award cycle, and older evidence is likely stale but same-year evidence is useful.
-6. Use "noLimit" for stable, historical, background, or identification questions where older sources may still be valid.
-7. Do not mechanically choose a narrow window just because the query contains words like "latest", "winner", "official", or a year.
-8. For completed-event questions, prefer the smallest window that is still likely to contain the final reliable evidence. If you are unsure between "oneDay" and "oneWeek", prefer "oneWeek". If you are unsure between "oneWeek" and "oneMonth", prefer "oneWeek" for clearly recent events and "oneMonth" otherwise.
-9. For yearly awards, festivals, sports seasons, and contests, consider whether same-year evidence may appear across multiple days or weeks. Do not over-narrow the filter if that would likely miss the official result page.
-10. Return only one of: oneDay, oneWeek, oneMonth, oneYear, noLimit.
+1. Return only one of: oneDay, oneWeek, oneMonth, oneYear, noLimit.
+2. If the user explicitly gives a time range, follow it as closely as possible.
+3. You should use a longer freshness that surely covers the events mentioned by users.
+4. If the user explictly asks for events in days / weeks / months, use corresponding freshness. Otherwise, prefer longer fresnhess instead.
+5. Do not overnarrow the freshness.
 """
 
     sufficiency_prompt_en = '''You are helping with a visual RAG QA progress.
@@ -236,22 +228,5 @@ You should generate output based on the following steps:
 
     Try to fetch the most important missing information with one targeted query.
 '''
-
-    wikipedia_prompt_en = """You are building a Wikipedia search query for a visual RAG pipeline.
-
-Look at the image or images and the user question, then produce one concise wikipedia search query.
-
-The user question is:
-"{question}"
-
-Your query should meet the following requirements:
-1. Your query should not be too complex, otherwise Wikipedia will not be able to match it.
-2. If some of the images are completely unrelated to the user's question, please ignore them. Generate the query based solely on the text if all images are completely unrelated to the user's quesiton.
-3. If you are unsure what the object in the image is, you don't need to provide a very precise query; instead, provide a general query.
-4. Do not answer the question directly.
-5. Do not add explanations, quotes, numbering, or multiple options.
-6. Return only the search query.
-"""
-
 
 prompts = Prompts()

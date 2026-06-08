@@ -16,3 +16,5 @@ frontend/dist/
 .codex
 val/results/*
 !val/results/.gitkeep
+
+memo.md

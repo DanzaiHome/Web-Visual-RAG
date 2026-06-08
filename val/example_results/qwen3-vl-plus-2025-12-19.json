@@ -1,0 +1,1475 @@
+{
+  "mode": "no_rag",
+  "model_id": "qwen3-vl-plus-2025-12-19",
+  "dataset": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/rag_vqa_question_answer_image.json",
+  "evaluated_at": "2026-06-08T10:39:52+08:00",
+  "judge_model": "qwen3.6-flash",
+  "args": {
+    "dataset": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/rag_vqa_question_answer_image.json",
+    "mode": "no_rag",
+    "model_id": "qwen3-vl-plus-2025-12-19",
+    "top_k": 5,
+    "candidate_k": 10,
+    "top_n_images": 3,
+    "chunk_size": 400,
+    "chunks_per_doc": 3,
+    "max_sufficiency_iterations": 3,
+    "multimodal_text_weight": 0.5,
+    "use_multimodal": true,
+    "limit": 0,
+    "offset": 0,
+    "trails": 1,
+    "output": "",
+    "output_dir": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/results",
+    "debug": false,
+    "web_search_provider": "serpapi"
+  },
+  "summary": {
+    "overall": {
+      "count": 42,
+      "judge_accuracy": 0.6666666666666666,
+      "avg_latency_seconds": 4.211046400967808
+    },
+    "dynamic_web_qa": {
+      "count": 22,
+      "judge_accuracy": 0.36363636363636365,
+      "avg_latency_seconds": 6.097178803333505
+    },
+    "static_vqa": {
+      "count": 20,
+      "judge_accuracy": 1.0,
+      "avg_latency_seconds": 2.136300758365542
+    }
+  },
+  "report_text": "========================================================================\nBaseline Evaluation Report\n========================================================================\nMode: no_rag\nModel ID: qwen3-vl-plus-2025-12-19\nDataset: /remote-home1/xzhe/projects/new-CV-project/CV-project/val/rag_vqa_question_answer_image.json\nEvaluation Time: 2026-06-08T10:39:52+08:00\nEvaluated Samples: 42\nOutput JSON: /remote-home1/xzhe/projects/new-CV-project/CV-project/val/results/eval_baseline_no_rag_20260608T103952.json\nOutput Text Report: /remote-home1/xzhe/projects/new-CV-project/CV-project/val/results/eval_baseline_no_rag_20260608T103952.txt\nJudge Model: qwen3.6-flash\n\nEvaluation Configuration\n------------------------------------------------------------------------\ntop_k=5\ncandidate_k=10\ntop_n_images=3\nchunk_size=400\nchunks_per_doc=3\nmax_sufficiency_iterations=3\nweb_search_provider=serpapi\nuse_multimodal=True\nmultimodal_text_weight=0.5\ntrails=1\noffset=0\nlimit=all\n\nSummary Metrics\n------------------------------------------------------------------------\nGroup                Count    Judge Acc    Avg Latency\n------------------------------------------------------------------------\noverall                 42       66.67%       4.211s\ndynamic_web_qa          22       36.36%       6.097s\nstatic_vqa              20      100.00%       2.136s\n------------------------------------------------------------------------\nMetric Notes\n------------------------------------------------------------------------\nJudge Acc: binary accuracy from a model-based correctness judge.\nThe judge model is fixed to qwen3.6-flash and returns only CORRECT or INCORRECT.\n========================================================================",
+  "results": [
+    {
+      "index": 1,
+      "group": "dynamic_web_qa",
+      "question": "Which award did the person in the image win at the 2026 Cannes Film Festival?",
+      "gold_answer": "Palme d'Or",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/1.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "avg_latency_seconds": 6.247206134721637,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The 2026 Cannes Film Festival has not yet occurred (as of 2024), so no awards have been given for that edition. Therefore, the person in the image—Russian director **Kirill Serebrennikov**—has not won any award at the 2026 Cannes Film Festival, because it hasn’t taken place.\n\nAdditionally, the photo appears to be from a past Cannes edition (likely 2018 or 2019, when Serebrennikov attended with *Leto* or *Petty Theft*), but no award was won by him at Cannes to date. His film *Leto* (2018) premiered in Un Certain Regard but did not win a prize.\n\nSo the correct answer is: **None — the 2026 Cannes Film Festival has not happened yet.**",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": false,
+          "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+          "latency_seconds": 6.247206134721637,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The 2026 Cannes Film Festival has not yet occurred (as of 2024), so no awards have been given for that edition. Therefore, the person in the image—Russian director **Kirill Serebrennikov**—has not won any award at the 2026 Cannes Film Festival, because it hasn’t taken place.\n\nAdditionally, the photo appears to be from a past Cannes edition (likely 2018 or 2019, when Serebrennikov attended with *Leto* or *Petty Theft*), but no award was won by him at Cannes to date. His film *Leto* (2018) premiered in Un Certain Regard but did not win a prize.\n\nSo the correct answer is: **None — the 2026 Cannes Film Festival has not happened yet.**",
+      "judge_correct": false,
+      "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 2,
+      "group": "dynamic_web_qa",
+      "question": "Which country did the singer in the image represent when winning the 2026 Eurovision Song Contest?",
+      "gold_answer": "Bulgaria",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/2.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "avg_latency_seconds": 7.556224667467177,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The 2026 Eurovision Song Contest has not yet taken place (as of 2024), so no winner has been determined. Therefore, the singer in the image could not have won the 2026 contest.\n\nAdditionally, the image shows **Rosalía**, the Spanish singer, at an event (likely related to Eurovision 2023 or another occasion—note the “EBU” and “Vienna” logos, suggesting a past Eurovision-related press event). Rosalía did **not** compete in Eurovision; she performed during the 2023 Grand Final as an interval act (representing Spain culturally, but not as a contestant).\n\nSince the 2026 contest is future-dated and no winner exists yet, the premise of the question is invalid.\n\n**Answer:** No country was represented by this singer in the 2026 Eurovision Song Contest because the contest has not occurred, and the singer (Rosalía) did not compete in Eurovision.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": false,
+          "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+          "latency_seconds": 7.556224667467177,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The 2026 Eurovision Song Contest has not yet taken place (as of 2024), so no winner has been determined. Therefore, the singer in the image could not have won the 2026 contest.\n\nAdditionally, the image shows **Rosalía**, the Spanish singer, at an event (likely related to Eurovision 2023 or another occasion—note the “EBU” and “Vienna” logos, suggesting a past Eurovision-related press event). Rosalía did **not** compete in Eurovision; she performed during the 2023 Grand Final as an interval act (representing Spain culturally, but not as a contestant).\n\nSince the 2026 contest is future-dated and no winner exists yet, the premise of the question is invalid.\n\n**Answer:** No country was represented by this singer in the 2026 Eurovision Song Contest because the contest has not occurred, and the singer (Rosalía) did not compete in Eurovision.",
+      "judge_correct": false,
+      "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 3,
+      "group": "dynamic_web_qa",
+      "question": "Who was the 2025–26 NBA regular season MVP?",
+      "gold_answer": "Shai Gilgeous-Alexander",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/3.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "avg_latency_seconds": 5.997868538834155,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The 2025–26 NBA regular season has not yet occurred (as of 2024), so there is no MVP for that season. The most recent completed NBA season is 2023–24, whose MVP was Nikola Jokić (Denver Nuggets). The image shows Ja Morant (Memphis Grizzlies) and Shai Gilgeous-Alexander (Oklahoma City Thunder) in action—both are top players, but neither is the 2025–26 MVP, as that season hasn’t happened.\n\nAnswer: **The 2025–26 NBA regular season MVP has not been awarded, as the season has not taken place yet.**",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": false,
+          "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+          "latency_seconds": 5.997868538834155,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The 2025–26 NBA regular season has not yet occurred (as of 2024), so there is no MVP for that season. The most recent completed NBA season is 2023–24, whose MVP was Nikola Jokić (Denver Nuggets). The image shows Ja Morant (Memphis Grizzlies) and Shai Gilgeous-Alexander (Oklahoma City Thunder) in action—both are top players, but neither is the 2025–26 MVP, as that season hasn’t happened.\n\nAnswer: **The 2025–26 NBA regular season MVP has not been awarded, as the season has not taken place yet.**",
+      "judge_correct": false,
+      "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 4,
+      "group": "dynamic_web_qa",
+      "question": "Which major award did the player in the image win in the 2025–26 NBA season?",
+      "gold_answer": "Defensive Player of the Year",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/4.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "avg_latency_seconds": 9.557556505315006,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The image shows a basketball player (wearing jersey #1) taking a shot during a game, but **no major NBA award was awarded in the 2025–26 NBA season yet**, as that season has not occurred.\n\nAs of now (2024), the most recent completed NBA season is 2023–24. The 2024–25 season is upcoming (starting October 2024), and the 2025–26 season is still over a year away.\n\nAdditionally, the player in the image appears to be **Victor Wembanyama** (San Antonio Spurs, #1), based on his height, uniform, and context (e.g., the “KIA” sponsorship, arena setup resembling OKC Thunder home games — possibly an All-Star or exhibition setting). However, even if it is him, he has not won any major NBA award *in the 2025–26 season*, because that season hasn’t happened.\n\nTherefore:  \n**No major NBA award was won in the 2025–26 NBA season — the season has not taken place.**\n\nIf the question intended to ask about a past season (e.g., 2023–24), Wembanyama won the **NBA Rookie of the Year Award** in 2023–24. But per the wording (“2025–26”), the correct answer is that no such award exists yet.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": false,
+          "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+          "latency_seconds": 9.557556505315006,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The image shows a basketball player (wearing jersey #1) taking a shot during a game, but **no major NBA award was awarded in the 2025–26 NBA season yet**, as that season has not occurred.\n\nAs of now (2024), the most recent completed NBA season is 2023–24. The 2024–25 season is upcoming (starting October 2024), and the 2025–26 season is still over a year away.\n\nAdditionally, the player in the image appears to be **Victor Wembanyama** (San Antonio Spurs, #1), based on his height, uniform, and context (e.g., the “KIA” sponsorship, arena setup resembling OKC Thunder home games — possibly an All-Star or exhibition setting). However, even if it is him, he has not won any major NBA award *in the 2025–26 season*, because that season hasn’t happened.\n\nTherefore:  \n**No major NBA award was won in the 2025–26 NBA season — the season has not taken place.**\n\nIf the question intended to ask about a past season (e.g., 2023–24), Wembanyama won the **NBA Rookie of the Year Award** in 2023–24. But per the wording (“2025–26”), the correct answer is that no such award exists yet.",
+      "judge_correct": false,
+      "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 5,
+      "group": "dynamic_web_qa",
+      "question": "What honor did the player in the image receive in the 2026 NBA Western Conference Finals?",
+      "gold_answer": "MVP",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/5.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "avg_latency_seconds": 6.779688403010368,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The image shows Victor Wembanyama of the San Antonio Spurs, but as of now (2024), the **2026 NBA Western Conference Finals have not occurred**, and no honors from that future event can be known or confirmed.\n\nAdditionally, the NBA season structure means the 2026 Western Conference Finals would take place in **June 2026** — well in the future — and no official results, awards, or honors for that series exist yet.\n\nTherefore, the question is based on a hypothetical or erroneous premise. There is **no honor awarded yet** for the 2026 NBA Western Conference Finals, as it has not happened.\n\n(Also note: The image appears to be from the 2023–24 or 2024–25 season; Wembanyama was rookie of the year in 2024, but that is unrelated to a 2026 playoff series.)",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": false,
+          "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+          "latency_seconds": 6.779688403010368,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The image shows Victor Wembanyama of the San Antonio Spurs, but as of now (2024), the **2026 NBA Western Conference Finals have not occurred**, and no honors from that future event can be known or confirmed.\n\nAdditionally, the NBA season structure means the 2026 Western Conference Finals would take place in **June 2026** — well in the future — and no official results, awards, or honors for that series exist yet.\n\nTherefore, the question is based on a hypothetical or erroneous premise. There is **no honor awarded yet** for the 2026 NBA Western Conference Finals, as it has not happened.\n\n(Also note: The image appears to be from the 2023–24 or 2024–25 season; Wembanyama was rookie of the year in 2024, but that is unrelated to a 2026 playoff series.)",
+      "judge_correct": false,
+      "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 6,
+      "group": "dynamic_web_qa",
+      "question": "At which music awards did the person in the image receive the Songwriter of the Year honor in 2026?",
+      "gold_answer": "Ivor Novello Awards",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/6.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "avg_latency_seconds": 6.090003772638738,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The image shows a young man (likely a musician), but there is no information in the image indicating which music awards he won, nor any confirmation that he received “Songwriter of the Year” in 2026.\n\nMoreover, as of now (2024), the year 2026 has not occurred, so no music awards for 2026 have taken place yet. Therefore, it is impossible for anyone to have received an award in 2026 at this time.\n\nThus, the premise of the question is factually invalid — no such award could have been given in 2026 yet.\n\nAnswer: **No music awards have been held in 2026 yet, so no one could have received Songwriter of the Year in 2026.**",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": false,
+          "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+          "latency_seconds": 6.090003772638738,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The image shows a young man (likely a musician), but there is no information in the image indicating which music awards he won, nor any confirmation that he received “Songwriter of the Year” in 2026.\n\nMoreover, as of now (2024), the year 2026 has not occurred, so no music awards for 2026 have taken place yet. Therefore, it is impossible for anyone to have received an award in 2026 at this time.\n\nThus, the premise of the question is factually invalid — no such award could have been given in 2026 yet.\n\nAnswer: **No music awards have been held in 2026 yet, so no one could have received Songwriter of the Year in 2026.**",
+      "judge_correct": false,
+      "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 7,
+      "group": "dynamic_web_qa",
+      "question": "Which Apple collection released in May 2026 does the watch in the image belong to?",
+      "gold_answer": "Pride Collection",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/7.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 10.082524829544127,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The watch in the image features a rainbow-colored woven band and a vibrant, multicolored radial watch face—design elements strongly associated with Apple’s **Pride Collection**.\n\nApple typically releases its Pride-themed bands and watch faces in **May or early June**, ahead of Pride Month (June), and the collection is usually tied to the current year’s hardware (e.g., compatible with Apple Watch Series 9, Ultra 2, etc.).\n\nHowever, **as of now (2024), Apple has not released any products for May 2026**, and no official information exists about a 2026 Pride Collection. The image appears to be a conceptual or promotional render—possibly from a past year (e.g., 2023 or 2024 Pride Collection) or a speculative design.\n\nSince the question asks specifically about a collection *released in May 2026*, and no such release has occurred or been announced, **the premise is currently invalid**.\n\nBut based *solely on visual evidence*, the watch belongs to the **Apple Pride Collection**—the only Apple collection that uses this distinctive rainbow woven band and colorful radial face design.\n\nSo, assuming the question intends to identify the *type* of collection (not a future unreleased one), the answer is:\n\n**Pride Collection**\n\n⚠️ Note: There is no verified Apple collection released in May 2026 yet; 2026 has not occurred. If this is a hypothetical or test question, the visual cues point unequivocally to the Pride Collection.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 10.082524829544127,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The watch in the image features a rainbow-colored woven band and a vibrant, multicolored radial watch face—design elements strongly associated with Apple’s **Pride Collection**.\n\nApple typically releases its Pride-themed bands and watch faces in **May or early June**, ahead of Pride Month (June), and the collection is usually tied to the current year’s hardware (e.g., compatible with Apple Watch Series 9, Ultra 2, etc.).\n\nHowever, **as of now (2024), Apple has not released any products for May 2026**, and no official information exists about a 2026 Pride Collection. The image appears to be a conceptual or promotional render—possibly from a past year (e.g., 2023 or 2024 Pride Collection) or a speculative design.\n\nSince the question asks specifically about a collection *released in May 2026*, and no such release has occurred or been announced, **the premise is currently invalid**.\n\nBut based *solely on visual evidence*, the watch belongs to the **Apple Pride Collection**—the only Apple collection that uses this distinctive rainbow woven band and colorful radial face design.\n\nSo, assuming the question intends to identify the *type* of collection (not a future unreleased one), the answer is:\n\n**Pride Collection**\n\n⚠️ Note: There is no verified Apple collection released in May 2026 yet; 2026 has not occurred. If this is a hypothetical or test question, the visual cues point unequivocally to the Pride Collection.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 8,
+      "group": "dynamic_web_qa",
+      "question": "Which eyewear brands did Google partner with for the smart glasses in the image?",
+      "gold_answer": "Gentle Monster and Warby Parker",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/8.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "avg_latency_seconds": 15.305399567820132,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The smart glasses shown in the image are the **Google Glass Enterprise Edition 2**, which was manufactured by **Google** itself and not co-branded with a traditional eyewear brand. However, Google partnered with **Luxottica** (now part of EssilorLuxottica) to design and produce the frame for the **original Google Glass (Explorer Edition)** — but that model had a distinct, more futuristic frame.\n\nThe glasses in the image have the characteristic thick black frame, dual cameras (one on each side), and a small display module on the right temple — matching the **Google Glass Enterprise Edition 2**, released in 2019. For this edition, Google collaborated with **Ray-Ban’s parent company, Luxottica**, to develop the *frame design*, though it was not branded as Ray-Ban or any other consumer eyewear brand. The EE2 frames were custom-made for enterprise use and not sold under a third-party eyewear brand.\n\nImportantly, Google’s later consumer-focused smart glasses — the **Google Glass XE** (Explorer) and **Enterprise Editions** — did not carry external eyewear brand logos. The first *consumer* smart glasses co-branded with an eyewear maker were the **Ray-Ban Stories** (2021), developed jointly by **Google and Ray-Ban (EssilorLuxottica)** — but those look very different (resembling classic Wayfarers, with no visible camera modules on the temples like in the image).\n\n✅ Based on the visual evidence — especially the dual front-facing cameras, thick frame, and display module placement — the glasses in the image are **Google Glass Enterprise Edition 2**, and while Google worked with **Luxottica** on frame design and manufacturing, no external eyewear brand is visibly or officially co-branded on this model.\n\nSo, strictly speaking:  \n**No eyewear brand is partnered/branded on the smart glasses shown** — they are Google-branded enterprise devices.  \nBut the manufacturing/design partner was **Luxottica**.\n\nIf the question expects named brands (e.g., for consumer models), the answer would be *none visible here* — this is not a Ray-Ban Stories or similar co-branded product.\n\nFinal answer:  \n**Google did not partner with a consumer eyewear brand for the specific smart glasses shown; they are Google Glass Enterprise Edition 2, designed in collaboration with Luxottica but not branded under any eyewear label.**",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": false,
+          "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+          "latency_seconds": 15.305399567820132,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The smart glasses shown in the image are the **Google Glass Enterprise Edition 2**, which was manufactured by **Google** itself and not co-branded with a traditional eyewear brand. However, Google partnered with **Luxottica** (now part of EssilorLuxottica) to design and produce the frame for the **original Google Glass (Explorer Edition)** — but that model had a distinct, more futuristic frame.\n\nThe glasses in the image have the characteristic thick black frame, dual cameras (one on each side), and a small display module on the right temple — matching the **Google Glass Enterprise Edition 2**, released in 2019. For this edition, Google collaborated with **Ray-Ban’s parent company, Luxottica**, to develop the *frame design*, though it was not branded as Ray-Ban or any other consumer eyewear brand. The EE2 frames were custom-made for enterprise use and not sold under a third-party eyewear brand.\n\nImportantly, Google’s later consumer-focused smart glasses — the **Google Glass XE** (Explorer) and **Enterprise Editions** — did not carry external eyewear brand logos. The first *consumer* smart glasses co-branded with an eyewear maker were the **Ray-Ban Stories** (2021), developed jointly by **Google and Ray-Ban (EssilorLuxottica)** — but those look very different (resembling classic Wayfarers, with no visible camera modules on the temples like in the image).\n\n✅ Based on the visual evidence — especially the dual front-facing cameras, thick frame, and display module placement — the glasses in the image are **Google Glass Enterprise Edition 2**, and while Google worked with **Luxottica** on frame design and manufacturing, no external eyewear brand is visibly or officially co-branded on this model.\n\nSo, strictly speaking:  \n**No eyewear brand is partnered/branded on the smart glasses shown** — they are Google-branded enterprise devices.  \nBut the manufacturing/design partner was **Luxottica**.\n\nIf the question expects named brands (e.g., for consumer models), the answer would be *none visible here* — this is not a Ray-Ban Stories or similar co-branded product.\n\nFinal answer:  \n**Google did not partner with a consumer eyewear brand for the specific smart glasses shown; they are Google Glass Enterprise Edition 2, designed in collaboration with Luxottica but not branded under any eyewear label.**",
+      "judge_correct": false,
+      "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 9,
+      "group": "dynamic_web_qa",
+      "question": "Which song earned the person in the image the Best Contemporary Song award at the 2026 Ivor Novello Awards?",
+      "gold_answer": "I Stand on the Line",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/9.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "avg_latency_seconds": 5.465460021980107,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The image shows Sam Ryder, a British singer-songwriter. However, the **2026 Ivor Novello Awards have not yet taken place** (as of 2024), so no awards for 2026 have been announced or conferred.\n\nTherefore, **no song has yet earned anyone the Best Contemporary Song award at the 2026 Ivor Novello Awards**, including Sam Ryder.\n\nIf the question intended to refer to a *past* year (e.g., 2023 or 2024), please clarify — but based on the wording (“2026”), the event is future-dated and no such award exists yet.\n\nAnswer: **None — the 2026 Ivor Novello Awards have not occurred.**",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": false,
+          "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+          "latency_seconds": 5.465460021980107,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The image shows Sam Ryder, a British singer-songwriter. However, the **2026 Ivor Novello Awards have not yet taken place** (as of 2024), so no awards for 2026 have been announced or conferred.\n\nTherefore, **no song has yet earned anyone the Best Contemporary Song award at the 2026 Ivor Novello Awards**, including Sam Ryder.\n\nIf the question intended to refer to a *past* year (e.g., 2023 or 2024), please clarify — but based on the wording (“2026”), the event is future-dated and no such award exists yet.\n\nAnswer: **None — the 2026 Ivor Novello Awards have not occurred.**",
+      "judge_correct": false,
+      "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 10,
+      "group": "dynamic_web_qa",
+      "question": "What is the name of the game in the image that won Best Game at the 2026 BAFTA Games Awards?",
+      "gold_answer": "Clair Obscur: Expedition 33",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/10.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "avg_latency_seconds": 7.416349642910063,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The image shows gameplay from *Final Fantasy XVI*, specifically a turn-based combat scene with the “Aim”, “Items”, “Skills”, and “Attack” menu options visible — consistent with the game’s Active Time Lore (ATL) battle system.\n\nHowever, the **2026 BAFTA Games Awards have not yet occurred** (as of 2024), so no game has won “Best Game” at the 2026 ceremony. The most recent BAFTA Games Awards were held in **2024**, where *Baldur’s Gate 3* won Best Game.\n\nSince the question asks about a future event (2026), and no official results exist yet, **there is no valid answer** — the award hasn’t been given.\n\nAdditionally, while the image appears to be from *Final Fantasy XVI* (released June 2023), it won several awards in 2024 (e.g., Best Music, Technical Achievement at BAFTA 2024), but **not Best Game**, which went to *Baldur’s Gate 3*.\n\n✅ Final answer: **No game has won Best Game at the 2026 BAFTA Games Awards yet, as the ceremony has not taken place.**",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": false,
+          "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+          "latency_seconds": 7.416349642910063,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The image shows gameplay from *Final Fantasy XVI*, specifically a turn-based combat scene with the “Aim”, “Items”, “Skills”, and “Attack” menu options visible — consistent with the game’s Active Time Lore (ATL) battle system.\n\nHowever, the **2026 BAFTA Games Awards have not yet occurred** (as of 2024), so no game has won “Best Game” at the 2026 ceremony. The most recent BAFTA Games Awards were held in **2024**, where *Baldur’s Gate 3* won Best Game.\n\nSince the question asks about a future event (2026), and no official results exist yet, **there is no valid answer** — the award hasn’t been given.\n\nAdditionally, while the image appears to be from *Final Fantasy XVI* (released June 2023), it won several awards in 2024 (e.g., Best Music, Technical Achievement at BAFTA 2024), but **not Best Game**, which went to *Baldur’s Gate 3*.\n\n✅ Final answer: **No game has won Best Game at the 2026 BAFTA Games Awards yet, as the ceremony has not taken place.**",
+      "judge_correct": false,
+      "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 11,
+      "group": "dynamic_web_qa",
+      "question": "Which Pulitzer Prize category did the book in the image win in 2026?",
+      "gold_answer": "Pulitzer Prize for Fiction",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/11.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "avg_latency_seconds": 7.701947899535298,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The book shown is *Angel Down* by Daniel Kraus, and it is labeled as “Book 5” in a series. However, as of now (2024), **no Pulitzer Prizes have been awarded for 2026**, since 2026 has not yet occurred. The Pulitzer Prizes are awarded annually in April for works published in the previous calendar year (e.g., the 2024 prizes were awarded in April 2024 for works from 2023).\n\nAdditionally, *Angel Down* does not appear to be a real published book as of 2024 — Daniel Kraus is known for works like *The Death and Life of Zebulon Finch* and *Whalefall* (2024), but there is no verified record of a book titled *Angel Down* released by him, nor any indication it has won or will win a Pulitzer.\n\nTherefore, the question contains a factual impossibility: **the 2026 Pulitzer Prize has not been awarded**, and the book in the image does not correspond to a known Pulitzer-winning work.\n\nAnswer: **None — the 2026 Pulitzer Prizes have not yet been awarded, and the book shown is not a verified Pulitzer winner.**",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": false,
+          "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+          "latency_seconds": 7.701947899535298,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The book shown is *Angel Down* by Daniel Kraus, and it is labeled as “Book 5” in a series. However, as of now (2024), **no Pulitzer Prizes have been awarded for 2026**, since 2026 has not yet occurred. The Pulitzer Prizes are awarded annually in April for works published in the previous calendar year (e.g., the 2024 prizes were awarded in April 2024 for works from 2023).\n\nAdditionally, *Angel Down* does not appear to be a real published book as of 2024 — Daniel Kraus is known for works like *The Death and Life of Zebulon Finch* and *Whalefall* (2024), but there is no verified record of a book titled *Angel Down* released by him, nor any indication it has won or will win a Pulitzer.\n\nTherefore, the question contains a factual impossibility: **the 2026 Pulitzer Prize has not been awarded**, and the book in the image does not correspond to a known Pulitzer-winning work.\n\nAnswer: **None — the 2026 Pulitzer Prizes have not yet been awarded, and the book shown is not a verified Pulitzer winner.**",
+      "judge_correct": false,
+      "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 12,
+      "group": "dynamic_web_qa",
+      "question": "Which company released the product in the image during COMPUTEX 2026?",
+      "gold_answer": "NVIDIA",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/12.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "avg_latency_seconds": 7.625517466105521,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The image shows a laptop with the text “RTX SPARK” above it. However, **COMPUTEX 2026 has not occurred yet** (as of 2024), and “RTX SPARK” is not a known product released by NVIDIA or any major vendor as of current public knowledge. The branding “RTX” is trademarked by **NVIDIA**, but no official product named “RTX SPARK” has been announced for COMPUTEX 2026 — which is in the future.\n\nAdditionally, the image appears to be a conceptual or speculative render, not an official product announcement.\n\nSince COMPUTEX 2026 hasn’t happened and no such product has been officially released, **no company has released this product during COMPUTEX 2026** — because that event hasn’t taken place.\n\nIf the question assumes a hypothetical or fictional scenario, the branding suggests **NVIDIA** (due to “RTX”), but strictly factually: **the product shown has not been released, and COMPUTEX 2026 has not occurred**.\n\nTherefore, the correct answer is:  \n**None — COMPUTEX 2026 has not yet occurred, and no such product has been officially released.**",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": false,
+          "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+          "latency_seconds": 7.625517466105521,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The image shows a laptop with the text “RTX SPARK” above it. However, **COMPUTEX 2026 has not occurred yet** (as of 2024), and “RTX SPARK” is not a known product released by NVIDIA or any major vendor as of current public knowledge. The branding “RTX” is trademarked by **NVIDIA**, but no official product named “RTX SPARK” has been announced for COMPUTEX 2026 — which is in the future.\n\nAdditionally, the image appears to be a conceptual or speculative render, not an official product announcement.\n\nSince COMPUTEX 2026 hasn’t happened and no such product has been officially released, **no company has released this product during COMPUTEX 2026** — because that event hasn’t taken place.\n\nIf the question assumes a hypothetical or fictional scenario, the branding suggests **NVIDIA** (due to “RTX”), but strictly factually: **the product shown has not been released, and COMPUTEX 2026 has not occurred**.\n\nTherefore, the correct answer is:  \n**None — COMPUTEX 2026 has not yet occurred, and no such product has been officially released.**",
+      "judge_correct": false,
+      "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 13,
+      "group": "dynamic_web_qa",
+      "question": "Which company is the person in the image currently the CEO of?",
+      "gold_answer": "Microsoft",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/13.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 1.4626659266650677,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The person in the image is Satya Nadella, and he is currently the CEO of Microsoft. The Microsoft logo (four-colored squares) in the background confirms the context.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 1.4626659266650677,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The person in the image is Satya Nadella, and he is currently the CEO of Microsoft. The Microsoft logo (four-colored squares) in the background confirms the context.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 14,
+      "group": "dynamic_web_qa",
+      "question": "The person in the image is the founder and CEO of which company?",
+      "gold_answer": "NVIDIA",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/14.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 2.4055573055520654,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The person in the image is Jensen Huang, the founder and CEO of **NVIDIA**.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 2.4055573055520654,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The person in the image is Jensen Huang, the founder and CEO of **NVIDIA**.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 15,
+      "group": "dynamic_web_qa",
+      "question": "Which award did the person in the image win in the 2026 UEFA Champions League final?",
+      "gold_answer": "Player of the Match",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/15.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "avg_latency_seconds": 7.684462270699441,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The image shows a football player (wearing Paris Saint-Germain’s 2023–24 kit, number 17), but the **2026 UEFA Champions League final has not yet occurred** — it is scheduled for **June 2026**, and no awards from that future event have been given.\n\nAdditionally, the UEFA Champions League does not award individual “awards” *in the final* per se; however, post-final honors like the **Man of the Match** or the season-long **UEFA Men’s Player of the Year** (or the **Champions League Final Man of the Match**) are possible. But since the 2026 final hasn’t happened, no such award exists yet.\n\nTherefore:  \n**No award has been won in the 2026 UEFA Champions League final, because the match has not taken place.**\n\nAlso, the person in the image cannot be confirmed to even participate in the 2026 final — future team lineups and tournament outcomes are unknown.\n\n✅ Final answer: **None — the 2026 UEFA Champions League final has not yet occurred.**",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": false,
+          "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+          "latency_seconds": 7.684462270699441,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The image shows a football player (wearing Paris Saint-Germain’s 2023–24 kit, number 17), but the **2026 UEFA Champions League final has not yet occurred** — it is scheduled for **June 2026**, and no awards from that future event have been given.\n\nAdditionally, the UEFA Champions League does not award individual “awards” *in the final* per se; however, post-final honors like the **Man of the Match** or the season-long **UEFA Men’s Player of the Year** (or the **Champions League Final Man of the Match**) are possible. But since the 2026 final hasn’t happened, no such award exists yet.\n\nTherefore:  \n**No award has been won in the 2026 UEFA Champions League final, because the match has not taken place.**\n\nAlso, the person in the image cannot be confirmed to even participate in the 2026 final — future team lineups and tournament outcomes are unknown.\n\n✅ Final answer: **None — the 2026 UEFA Champions League final has not yet occurred.**",
+      "judge_correct": false,
+      "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 16,
+      "group": "dynamic_web_qa",
+      "question": "Which company released the supercar in the image?",
+      "gold_answer": "Audi",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/16.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 4.301965330727398,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The supercar in the image is the **Audi R10 TDI Concept**, released by **Audi**. It was unveiled in 2006 as a concept car showcasing Audi’s diesel-powered Le Mans racing technology adapted for a road-going supercar. The design features the signature Audi single-frame grille, LED lighting, and a mid-engine layout — consistent with Audi’s high-performance and motorsport heritage.\n\nNote: While the R10 TDI itself was a race car (Le Mans prototype), this image appears to be a conceptual or rendered interpretation (possibly from a video game or design study) inspired by Audi’s R10 and later R8/R10-derived concepts. The branding and styling clearly point to **Audi** as the company.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 4.301965330727398,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The supercar in the image is the **Audi R10 TDI Concept**, released by **Audi**. It was unveiled in 2006 as a concept car showcasing Audi’s diesel-powered Le Mans racing technology adapted for a road-going supercar. The design features the signature Audi single-frame grille, LED lighting, and a mid-engine layout — consistent with Audi’s high-performance and motorsport heritage.\n\nNote: While the R10 TDI itself was a race car (Le Mans prototype), this image appears to be a conceptual or rendered interpretation (possibly from a video game or design study) inspired by Audi’s R10 and later R8/R10-derived concepts. The branding and styling clearly point to **Audi** as the company.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 17,
+      "group": "dynamic_web_qa",
+      "question": "Which company launched the compact electric vehicle in the image?",
+      "gold_answer": "Honda",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/17.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 2.637586873024702,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The compact electric vehicle in the image is the **Honda e**, launched by **Honda**. The distinctive Honda logo on the front grille and the vehicle’s design (including the round headlights, compact hatchback shape, and “e” badge) confirm it as the Honda e, which was introduced in 2020 for the European market and later in Japan.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 2.637586873024702,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The compact electric vehicle in the image is the **Honda e**, launched by **Honda**. The distinctive Honda logo on the front grille and the vehicle’s design (including the round headlights, compact hatchback shape, and “e” badge) confirm it as the Honda e, which was introduced in 2020 for the European market and later in Japan.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 18,
+      "group": "dynamic_web_qa",
+      "question": "Which company showcased the design study car in the image?",
+      "gold_answer": "BMW Group",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/18.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 2.8059495259076357,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The company that showcased the design study car in the image is **BMW**.\n\nThe vehicle shown is the **BMW Vision Neue Klasse**, a design study unveiled by BMW in 2023, representing the brand’s future electric vehicle architecture and design language. Key identifiers include the iconic BMW kidney grille (reimagined as a closed, illuminated surface), the Hofmeister kink, and the overall proportions and styling consistent with BMW’s recent concept cars.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 2.8059495259076357,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The company that showcased the design study car in the image is **BMW**.\n\nThe vehicle shown is the **BMW Vision Neue Klasse**, a design study unveiled by BMW in 2023, representing the brand’s future electric vehicle architecture and design language. Key identifiers include the iconic BMW kidney grille (reimagined as a closed, illuminated surface), the Hofmeister kink, and the overall proportions and styling consistent with BMW’s recent concept cars.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 19,
+      "group": "dynamic_web_qa",
+      "question": "Which company released the new headphones in the image in 2026?",
+      "gold_answer": "Sony",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/19.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "avg_latency_seconds": 4.264643264934421,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The headphones in the image are Sony-branded (the “SONY” logo is visible on the headband). However, as of now (2024), no headphones have been released in 2026—2026 is in the future. Therefore, no company has released *any* product in 2026 yet.\n\nSo, the correct answer is: **No company has released these or any headphones in 2026, because 2026 has not occurred yet.**\n\n(Note: The image appears to show the Sony WH-1000XM5 or a similar recent Sony model, which was released in 2022—not 2026.)",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": false,
+          "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+          "latency_seconds": 4.264643264934421,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The headphones in the image are Sony-branded (the “SONY” logo is visible on the headband). However, as of now (2024), no headphones have been released in 2026—2026 is in the future. Therefore, no company has released *any* product in 2026 yet.\n\nSo, the correct answer is: **No company has released these or any headphones in 2026, because 2026 has not occurred yet.**\n\n(Note: The image appears to show the Sony WH-1000XM5 or a similar recent Sony model, which was released in 2022—not 2026.)",
+      "judge_correct": false,
+      "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 20,
+      "group": "dynamic_web_qa",
+      "question": "Which company released the clip-on headphones in the image in 2026?",
+      "gold_answer": "Shokz",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/20.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 0,
+      "success_rate": 0.0,
+      "avg_latency_seconds": 8.98302833084017,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The image shows clip-on (ear-hook style) wireless earbuds with a charging case bearing the logo “Shokz”. Shokz is a well-known brand specializing in open-ear audio products, particularly bone conduction and clip-on headphones.\n\nHowever, **Shokz did not release any product in 2026**, because **2026 has not yet occurred** (as of 2024). The latest Shokz models as of 2024 include the OpenFit (released 2023) and OpenRun Pro (2022), but no official product has been released in 2026 — it’s still in the future.\n\nTherefore, **no company released the clip-on headphones in the image in 2026**, since 2026 is not yet here.\n\nIf the question implies a hypothetical or fictional context, that is not indicated. Based on real-world facts:  \n✅ The brand is **Shokz**.  \n❌ They did *not* release this (or any) product in 2026 — because 2026 hasn’t happened.\n\nAnswer: **No company released these headphones in 2026, as 2026 is in the future. The brand shown is Shokz, but the product depicted is likely from an earlier year (e.g., OpenFit or similar, released ~2023).**",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": false,
+          "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+          "latency_seconds": 8.98302833084017,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The image shows clip-on (ear-hook style) wireless earbuds with a charging case bearing the logo “Shokz”. Shokz is a well-known brand specializing in open-ear audio products, particularly bone conduction and clip-on headphones.\n\nHowever, **Shokz did not release any product in 2026**, because **2026 has not yet occurred** (as of 2024). The latest Shokz models as of 2024 include the OpenFit (released 2023) and OpenRun Pro (2022), but no official product has been released in 2026 — it’s still in the future.\n\nTherefore, **no company released the clip-on headphones in the image in 2026**, since 2026 is not yet here.\n\nIf the question implies a hypothetical or fictional context, that is not indicated. Based on real-world facts:  \n✅ The brand is **Shokz**.  \n❌ They did *not* release this (or any) product in 2026 — because 2026 hasn’t happened.\n\nAnswer: **No company released these headphones in 2026, as 2026 is in the future. The brand shown is Shokz, but the product depicted is likely from an earlier year (e.g., OpenFit or similar, released ~2023).**",
+      "judge_correct": false,
+      "judge_raw_response": "{\"verdict\":\"INCORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 21,
+      "group": "dynamic_web_qa",
+      "question": "Which company launched the product in the image?",
+      "gold_answer": "Nintendo",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/21.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 1.4158831257373095,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "Nintendo launched the product in the image, which is the Nintendo Switch console.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 1.4158831257373095,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "Nintendo launched the product in the image, which is the Nintendo Switch console.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 22,
+      "group": "dynamic_web_qa",
+      "question": "Which company does the game console in the image belong to?",
+      "gold_answer": "Sony",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/22.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 2.3504442693665624,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The game console in the image is the **PlayStation Portal**, which belongs to **Sony Interactive Entertainment** (a subsidiary of Sony Group Corporation).",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 2.3504442693665624,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The game console in the image is the **PlayStation Portal**, which belongs to **Sony Interactive Entertainment** (a subsidiary of Sony Group Corporation).",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 23,
+      "group": "static_vqa",
+      "question": "Which city is the building in the image located in?",
+      "gold_answer": "Paris",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/23.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 1.1748526394367218,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The building in the image is the Eiffel Tower, located in **Paris**, France.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 1.1748526394367218,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The building in the image is the Eiffel Tower, located in **Paris**, France.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 24,
+      "group": "static_vqa",
+      "question": "Which country is the statue in the image located in?",
+      "gold_answer": "United States",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/24.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 1.6630948893725872,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The statue in the image is the Statue of Liberty, which is located in the United States. Specifically, it stands on Liberty Island in New York Harbor, within the state of New York.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 1.6630948893725872,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The statue in the image is the Statue of Liberty, which is located in the United States. Specifically, it stands on Liberty Island in New York Harbor, within the state of New York.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 25,
+      "group": "static_vqa",
+      "question": "Which country is the building in the image located in?",
+      "gold_answer": "India",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/25.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 0.9941846709698439,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The building in the image is the Taj Mahal, located in **India**.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 0.9941846709698439,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The building in the image is the Taj Mahal, located in **India**.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 26,
+      "group": "static_vqa",
+      "question": "Who is the artist of the painting in the image?",
+      "gold_answer": "Leonardo da Vinci",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/26.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 2.763107062317431,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The artist of the painting in the image is Leonardo da Vinci. The painting is the *Mona Lisa*, one of the most famous works of art in the world, painted in the early 16th century (c. 1503–1519).",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 2.763107062317431,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The artist of the painting in the image is Leonardo da Vinci. The painting is the *Mona Lisa*, one of the most famous works of art in the world, painted in the early 16th century (c. 1503–1519).",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 27,
+      "group": "static_vqa",
+      "question": "Who is the artist of the painting in the image?",
+      "gold_answer": "Vincent van Gogh",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/27.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 1.8743176432326436,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The artist of the painting in the image is **Vincent van Gogh**. The work is *The Starry Night*, painted in 1889.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 1.8743176432326436,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The artist of the painting in the image is **Vincent van Gogh**. The work is *The Starry Night*, painted in 1889.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 28,
+      "group": "static_vqa",
+      "question": "Which country does the animal in the image mainly live in?",
+      "gold_answer": "Australia",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/28.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 1.3285097982734442,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The animal in the image is a kangaroo, which mainly lives in **Australia**.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 1.3285097982734442,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The animal in the image is a kangaroo, which mainly lives in **Australia**.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 29,
+      "group": "static_vqa",
+      "question": "Why does the building in the image lean?",
+      "gold_answer": "Mainly because its foundation is not deep enough and the soil underneath is soft and uneven.",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/29.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 6.874807716347277,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The building in the image that leans is the Leaning Tower of Pisa, located in Pisa, Italy. It leans because it was built on soft, unstable ground—specifically, a mixture of clay, sand, and shells—that could not properly support the weight of the structure. Construction began in 1173, and the tower started leaning during construction (around the time the third floor was being built) due to uneven settling of the foundation. Despite efforts to correct the tilt during later construction phases, the lean persisted and increased over centuries.\n\nIn the late 20th and early 21st centuries, major stabilization efforts were undertaken (e.g., soil extraction from beneath the raised side), successfully reducing the tilt slightly and ensuring its long-term stability. Today, the tower leans at about 3.9 degrees (as of recent measurements), down from a maximum of 5.5 degrees in 1990.\n\nSo, the lean is due to **foundation instability caused by weak subsoil**, not intentional design or structural failure after completion.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 6.874807716347277,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The building in the image that leans is the Leaning Tower of Pisa, located in Pisa, Italy. It leans because it was built on soft, unstable ground—specifically, a mixture of clay, sand, and shells—that could not properly support the weight of the structure. Construction began in 1173, and the tower started leaning during construction (around the time the third floor was being built) due to uneven settling of the foundation. Despite efforts to correct the tilt during later construction phases, the lean persisted and increased over centuries.\n\nIn the late 20th and early 21st centuries, major stabilization efforts were undertaken (e.g., soil extraction from beneath the raised side), successfully reducing the tilt slightly and ensuring its long-term stability. Today, the tower leans at about 3.9 degrees (as of recent measurements), down from a maximum of 5.5 degrees in 1990.\n\nSo, the lean is due to **foundation instability caused by weak subsoil**, not intentional design or structural failure after completion.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 30,
+      "group": "static_vqa",
+      "question": "What is the name of the Solar System planet in the image known for its prominent rings?",
+      "gold_answer": "Saturn",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/30.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 1.4491216205060482,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "Saturn",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 1.4491216205060482,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "Saturn",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 31,
+      "group": "static_vqa",
+      "question": "What kind of human information is mainly carried by the double-helix structure in the image?",
+      "gold_answer": "Genetic information",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/31.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 4.019378264434636,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The double-helix structure shown is a representation of **DNA (deoxyribonucleic acid)**, and the human information it mainly carries is **genetic information** — specifically, the instructions (genes) needed for the development, functioning, growth, and reproduction of humans.\n\nThe colored base pairs (A–T and C–G, as labeled in the legend) encode this information via their sequence. This sequence determines the amino acid sequences of proteins and regulates gene expression, thereby governing inherited traits and biological processes.\n\nSo, the answer is: **Genetic information (hereditary instructions encoded in the nucleotide sequence).**",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 4.019378264434636,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The double-helix structure shown is a representation of **DNA (deoxyribonucleic acid)**, and the human information it mainly carries is **genetic information** — specifically, the instructions (genes) needed for the development, functioning, growth, and reproduction of humans.\n\nThe colored base pairs (A–T and C–G, as labeled in the legend) encode this information via their sequence. This sequence determines the amino acid sequences of proteins and regulates gene expression, thereby governing inherited traits and biological processes.\n\nSo, the answer is: **Genetic information (hereditary instructions encoded in the nucleotide sequence).**",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 32,
+      "group": "static_vqa",
+      "question": "Which person is the medal in the image named after?",
+      "gold_answer": "Alfred Nobel",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/32.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 3.1176196141168475,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The medal in the image is the Nobel Prize medal, and it is named after **Alfred Nobel**, the Swedish chemist, engineer, inventor, and philanthropist who established the prizes through his will. The portrait on the obverse of the medal (as shown) is of Alfred Nobel, and his name “ALFR. NOBEL” is inscribed beside it.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 3.1176196141168475,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The medal in the image is the Nobel Prize medal, and it is named after **Alfred Nobel**, the Swedish chemist, engineer, inventor, and philanthropist who established the prizes through his will. The portrait on the obverse of the medal (as shown) is of Alfred Nobel, and his name “ALFR. NOBEL” is inscribed beside it.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 33,
+      "group": "static_vqa",
+      "question": "What fruit is on the table in the image?",
+      "gold_answer": "Apple",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/33.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 1.7246305653825402,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The fruit on the table in the image is an apple — specifically, a yellow apple (likely a variety such as Golden Delicious), identifiable by its round shape, smooth skin, and visible stem.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 1.7246305653825402,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The fruit on the table in the image is an apple — specifically, a yellow apple (likely a variety such as Golden Delicious), identifiable by its round shape, smooth skin, and visible stem.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 34,
+      "group": "static_vqa",
+      "question": "What color is the cat in the image?",
+      "gold_answer": "Orange",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/34.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 1.0258084097877145,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The cat in the image is orange (ginger).",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 1.0258084097877145,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The cat in the image is orange (ginger).",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 35,
+      "group": "static_vqa",
+      "question": "How many dogs are in the image?",
+      "gold_answer": "Six",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/35.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 1.6127468505874276,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "There are **six dogs** in the image. They are puppies peeking out from inside an open suitcase.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 1.6127468505874276,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "There are **six dogs** in the image. They are puppies peeking out from inside an open suitcase.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 36,
+      "group": "static_vqa",
+      "question": "What color is the traffic light in the image?",
+      "gold_answer": "Red",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/36.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 1.4652551282197237,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The traffic light in the image is red.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 1.4652551282197237,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The traffic light in the image is red.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 37,
+      "group": "static_vqa",
+      "question": "What vehicle is the person in the image using?",
+      "gold_answer": "Bicycle",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/37.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 0.8376705311238766,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The person in the image is using a bicycle.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 0.8376705311238766,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The person in the image is using a bicycle.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 38,
+      "group": "static_vqa",
+      "question": "What drink is in the cup in the image?",
+      "gold_answer": "Coffee",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/38.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 2.405396232381463,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The drink in the cup is a latte, identifiable by the creamy milk foam and the heart-shaped latte art on top. The cup is black, placed on a matching saucer, and sits on a marble table next to a napkin with “MAKORE” printed on it.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 2.405396232381463,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The drink in the cup is a latte, identifiable by the creamy milk foam and the heart-shaped latte art on top. The cup is black, placed on a matching saucer, and sits on a marble table next to a napkin with “MAKORE” printed on it.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 39,
+      "group": "static_vqa",
+      "question": "What is the girl holding in the image?",
+      "gold_answer": "A book",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/39.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 2.4137811735272408,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The girl is holding an open book with an orange cover.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 2.4137811735272408,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The girl is holding an open book with an orange cover.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 40,
+      "group": "static_vqa",
+      "question": "What sport is the child playing in the image?",
+      "gold_answer": "Soccer",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/40.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 1.9703807486221194,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The child is playing soccer (also known as football outside the U.S.). This is evident from the grass field, the soccer ball at the child’s feet, the players wearing jerseys and cleats, and the typical formation and action of a youth soccer match.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 1.9703807486221194,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The child is playing soccer (also known as football outside the U.S.). This is evident from the grass field, the soccer ball at the child’s feet, the players wearing jerseys and cleats, and the typical formation and action of a youth soccer match.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 41,
+      "group": "static_vqa",
+      "question": "What food is on the plate in the image?",
+      "gold_answer": "Pizza",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/41.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 2.207652984187007,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The food on the plate is a pizza, topped with melted cheese, what appears to be ground meat (possibly sausage or beef), green bell peppers, and possibly onions or mushrooms. It is served on a round wooden serving board, with a red bell pepper and a yellow bell pepper in the background.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 2.207652984187007,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The food on the plate is a pizza, topped with melted cheese, what appears to be ground meat (possibly sausage or beef), green bell peppers, and possibly onions or mushrooms. It is served on a round wooden serving board, with a red bell pepper and a yellow bell pepper in the background.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    },
+    {
+      "index": 42,
+      "group": "static_vqa",
+      "question": "What animal is on the bed in the image?",
+      "gold_answer": "Dog",
+      "image_path": "/remote-home1/xzhe/projects/new-CV-project/CV-project/val/vqa/42.jpg",
+      "mode": "no_rag",
+      "model_id": "qwen3-vl-plus-2025-12-19",
+      "judge_model": "qwen3.6-flash",
+      "trials": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_latency_seconds": 1.803698624484241,
+      "attempts": [
+        {
+          "trial_index": 1,
+          "prediction": "The animal on the bed in the image is a dog — specifically, a light-colored Labrador Retriever (or possibly a Golden Retriever or mixed breed with similar features), wearing a blue bandana.",
+          "model_id": "qwen3-vl-plus-2025-12-19",
+          "judge_model": "qwen3.6-flash",
+          "judge_correct": true,
+          "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+          "latency_seconds": 1.803698624484241,
+          "inference_trace": {
+            "mode": "no_rag",
+            "query_rounds": [],
+            "final_context_urls": []
+          }
+        }
+      ],
+      "prediction": "The animal on the bed in the image is a dog — specifically, a light-colored Labrador Retriever (or possibly a Golden Retriever or mixed breed with similar features), wearing a blue bandana.",
+      "judge_correct": true,
+      "judge_raw_response": "{\"verdict\":\"CORRECT\"}",
+      "query_rounds": []
+    }
+  ]
+}
