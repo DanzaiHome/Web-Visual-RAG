@@ -3,6 +3,7 @@ __pycache__/
 .cache/
 .test_tmp/
 logs/
+*.log
 models/
 *.egg-info/
 .env
