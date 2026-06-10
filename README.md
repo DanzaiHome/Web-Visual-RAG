@@ -346,9 +346,9 @@ python val/eval_baseline.py --mode no_rag --trails 1 --model-id qwen3-vl-8b-inst
 
 python val/eval_baseline.py --mode no_rag --trails 1 --model-id qwen3-vl-plus-2025-12-19
 
-python val/eval_baseline.py --mode full_rag --trails 1 --multimodal-text-weight 0.7 --model-id qwen3-vl-8b-instruct --web-search-provider bocha
+python val/eval_baseline.py --mode full_rag --model-id qwen3-vl-8b-instruct --top-k 10 --candidate-k 30 --top-n-images 3 --chunk-size 256 --chunks-per-doc 5 --use-multimodal --multimodal-text-weight 0.7 --web-search-provider bocha
 
-python val/eval_baseline.py --mode full_rag --trails 1 --multimodal-text-weight 0.7 --model-id qwen3-vl-30b-a3b-instruct --web-search-provider bocha
+python val/eval_baseline.py --mode route_router --model-id qwen3-vl-30b-a3b-instruct --top-k 10 --candidate-k 30 --top-n-images 3 --chunk-size 256 --chunks-per-doc 5 --use-multimodal --multimodal-text-weight 0.7 --web-search-provider bocha
 ```
 
 ## Acknowledgements
